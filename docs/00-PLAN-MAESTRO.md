@@ -1,6 +1,6 @@
-# 📋 Plan Maestro - Landing Page System
+# Plan Maestro - Landing Page System
 
-## 🎯 Visión del Proyecto
+## Visión del Proyecto
 
 Sistema de landing pages profesionales para pequeños negocios y profesionales en Chile, construido con React + TypeScript + Tailwind CSS.
 
@@ -12,7 +12,7 @@ Sistema de landing pages profesionales para pequeños negocios y profesionales e
 
 ---
 
-## 📂 Estructura del Plan
+## Estructura del Plan
 
 1. **[FASE 1: Auditoría y Limpieza](./01-FASE-1-AUDITORIA.md)**
 2. **[FASE 2: Optimización de Código](./02-FASE-2-OPTIMIZACION.md)**
@@ -21,7 +21,7 @@ Sistema de landing pages profesionales para pequeños negocios y profesionales e
 
 ---
 
-## 🎯 Objetivos Clave
+## Objetivos Clave
 
 ### Corto Plazo
 - ✅ Estabilizar el proyecto actual
@@ -42,11 +42,11 @@ Sistema de landing pages profesionales para pequeños negocios y profesionales e
 
 ---
 
-## 📊 Estado Actual del Proyecto
+## Estado Actual del Proyecto
 
 **Última actualización:** 2025-11-05
 
-### ✅ Completado
+### [COMPLETADO]
 - Configuración inicial de Vite + React + TypeScript
 - Instalación de dependencias (Radix UI, Lucide Icons, Tailwind CSS v3)
 - Corrección de imports incorrectos en componentes UI
@@ -54,16 +54,16 @@ Sistema de landing pages profesionales para pequeños negocios y profesionales e
 - Integración de todos los componentes principales
 - Página renderizando correctamente con estilos
 
-### ⏳ En Progreso
+### [EN PROGRESO]
 - Auditoría de componentes UI no utilizados
 - Limpieza de estructura de archivos
 
-### ❌ Pendiente
+### [PENDIENTE]
 - Todo lo demás del plan maestro
 
 ---
 
-## 🚀 Próximos Pasos Inmediatos
+## Próximos Pasos Inmediatos
 
 1. Inicializar repositorio Git
 2. Crear `.gitignore` apropiado
@@ -72,7 +72,7 @@ Sistema de landing pages profesionales para pequeños negocios y profesionales e
 
 ---
 
-## 📝 Notas Importantes
+## Notas Importantes
 
 - Este es un proyecto de **aprendizaje e investigación**
 - Prioridad: mantener el código **simple y entendible**

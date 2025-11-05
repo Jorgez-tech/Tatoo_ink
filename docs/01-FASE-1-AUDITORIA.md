@@ -1,6 +1,6 @@
-# 🔍 FASE 1: Auditoría y Limpieza
+# FASE 1: Auditoría y Limpieza
 
-**Estado:** ⏳ En Progreso  
+**Estado:** [EN PROGRESO]  
 **Fecha inicio:** 2025-11-05
 
 ---
@@ -10,7 +10,7 @@
 ### Componentes UI (shadcn/ui)
 **Total:** 47 archivos en `src/components/ui/`
 
-#### ✅ Componentes Utilizados (7)
+#### Componentes Utilizados (7)
 - [x] `button.tsx` - Navbar, Hero, Contact
 - [x] `card.tsx` - Services, Contact
 - [x] `input.tsx` - Contact
@@ -19,7 +19,7 @@
 - [x] `utils.ts` - Utilidad para clsx/tailwind-merge
 - [x] `use-mobile.ts` - Hook para detección móvil
 
-#### ❌ Componentes NO Utilizados (40)
+#### Componentes NO Utilizados (40)
 Pendiente de eliminar:
 - accordion.tsx
 - alert-dialog.tsx
@@ -134,18 +134,18 @@ src/
 ```
 
 **Eliminaciones:**
-- ❌ `App.css` - No se usa, estilos en globals.css
-- ❌ `assets/react.svg` - Logo de demo
-- ❌ `components/figma/` - Carpeta innecesaria
+- [ELIMINAR] `App.css` - No se usa, estilos en globals.css
+- [ELIMINAR] `assets/react.svg` - Logo de demo
+- [ELIMINAR] `components/figma/` - Carpeta innecesaria
 
 ---
 
 ## 1.3 Limpiar Estilos
 
 ### Archivos de Estilos Actuales
-1. **`index.css`** (5 líneas) - Imports Tailwind + globals.css ✅ MANTENER
-2. **`App.css`** (40 líneas) - CSS de demo Vite ❌ ELIMINAR
-3. **`globals.css`** (200+ líneas) - Variables CSS + Tailwind config ✅ MANTENER
+1. **`index.css`** (5 líneas) - Imports Tailwind + globals.css [MANTENER]
+2. **`App.css`** (40 líneas) - CSS de demo Vite [ELIMINAR]
+3. **`globals.css`** (200+ líneas) - Variables CSS + Tailwind config [MANTENER]
 
 ### Acciones
 - [x] Eliminar `App.css`
@@ -155,7 +155,7 @@ src/
 
 ---
 
-## 📊 Progreso Fase 1
+## Progreso Fase 1
 
 - [x] 1.1 Auditoría de componentes ✅
 - [ ] 1.2 Reorganización de carpetas ⏳

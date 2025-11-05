@@ -1,6 +1,6 @@
-# ⚙️ FASE 2: Optimización de Código
+# FASE 2: Optimización de Código
 
-**Estado:** ❌ Pendiente  
+**Estado:** [PENDIENTE]  
 **Fecha inicio:** TBD
 
 ---
@@ -184,7 +184,7 @@ export interface BusinessInfo {
 
 ---
 
-## 📊 Progreso Fase 2
+## Progreso Fase 2
 
 - [ ] 2.1 Componentes optimizados: 0/7
 - [ ] 2.2 Archivos de configuración: 0/4

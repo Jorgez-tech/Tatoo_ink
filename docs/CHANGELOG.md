@@ -1,4 +1,4 @@
-# 📝 Registro de Cambios
+# Registro de Cambios
 
 Todos los cambios notables del proyecto se documentarán en este archivo.
 
@@ -40,7 +40,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - Sistema de design tokens configurado
 - Página renderizando correctamente con todos los estilos aplicados
 
-### 🔧 Configuración Técnica
+### Configuración Técnica
 
 **Dependencias agregadas:**
 ```json
@@ -72,7 +72,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - `postcss.config.js` - PostCSS config
 - `src/components/ui/*.tsx` - Corrección de imports (47 archivos)
 
-### 📚 Documentación Creada
+### Documentación Creada
 
 - `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
 - `docs/01-FASE-1-AUDITORIA.md` - Plan de auditoría y limpieza
@@ -91,7 +91,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - Optimización de imágenes
 - Documentación de código (JSDoc)
 
-### 🐛 Problemas Conocidos
+### Problemas Conocidos
 
 - Componente `button.tsx` tiene warning de Fast Refresh (exporta componente + constante)
 - Muchos componentes UI instalados pero no utilizados (~40 archivos)
@@ -112,20 +112,20 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 ```markdown
 ## [YYYY-MM-DD] - Título del Cambio
 
-### ✅ Completado
+### [COMPLETADO]
 - Item 1
 - Item 2
 
-### 🔧 Modificaciones
+### Modificaciones
 - Archivo modificado 1
 - Archivo modificado 2
 
-### ⏳ Pendiente
+### [PENDIENTE]
 - Tarea pendiente 1
 
-### 🐛 Bugs Corregidos
+### Bugs Corregidos
 - Bug 1
 
-### 📝 Notas
+### Notas
 - Nota importante
 ```

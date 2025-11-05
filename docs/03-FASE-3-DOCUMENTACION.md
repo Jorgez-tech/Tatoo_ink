@@ -1,6 +1,6 @@
-# 📚 FASE 3: Documentación
+# FASE 3: Documentación
 
-**Estado:** ❌ Pendiente  
+**Estado:** [PENDIENTE]  
 **Fecha inicio:** TBD
 
 ---
@@ -195,7 +195,7 @@ Definiciones de tipos TypeScript
 
 ---
 
-## 📊 Progreso Fase 3
+## Progreso Fase 3
 
 - [ ] 3.1 JSDoc componentes: 0/14
 - [ ] 3.2.1 README.md: ❌

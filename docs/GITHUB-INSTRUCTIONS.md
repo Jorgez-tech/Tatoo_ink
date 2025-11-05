@@ -1,10 +1,12 @@
-# 📋 Instrucciones GitHub - Contexto del Proyecto
+# Instrucciones GitHub - Contexto del Proyecto
 
 Este documento sirve como referencia rápida cada vez que retomemos el trabajo en el proyecto.
 
+**NOTA:** Esta documentación no usa emoticones para mantener profesionalismo y compatibilidad con todos los sistemas.
+
 ---
 
-## 🎯 Contexto del Proyecto
+## Contexto del Proyecto
 
 ### Descripción
 Landing page profesional para estudio de tatuajes "Ink Studio", construida como **prototipo reutilizable** para futuros clientes en Chile.
@@ -23,7 +25,7 @@ Landing page profesional para estudio de tatuajes "Ink Studio", construida como 
 
 ---
 
-## 📂 Estructura de Documentación
+## Estructura de Documentación
 
 ```
 docs/
@@ -39,7 +41,7 @@ docs/
 
 ---
 
-## 🚀 Inicio Rápido al Retomar el Trabajo
+## Inicio Rápido al Retomar el Trabajo
 
 ### 1. Leer Estado Actual
 ```bash
@@ -68,7 +70,7 @@ Siempre actualizar al terminar una sesión de trabajo con:
 
 ---
 
-## 📝 Convenciones de Commits
+## Convenciones de Commits
 
 ### Formato
 ```
@@ -97,7 +99,7 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## 🔄 Workflow de Trabajo
+## Workflow de Trabajo
 
 ### Al Iniciar Sesión
 1. `git pull origin main`
@@ -123,33 +125,33 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## 📊 Estado por Fases
+## Estado por Fases
 
-### ✅ Fase 0: Configuración Inicial - COMPLETADA
+### Fase 0: Configuración Inicial - COMPLETADA
 - Vite + React + TypeScript configurado
 - Dependencias instaladas
 - Tailwind CSS v3 funcionando
 - Página renderizando correctamente
 
-### ⏳ Fase 1: Auditoría y Limpieza - EN PROGRESO (5%)
+### Fase 1: Auditoría y Limpieza - EN PROGRESO (5%)
 - [x] Auditoría de componentes UI
 - [ ] Eliminar 40 componentes no utilizados
 - [ ] Reorganizar estructura de carpetas
 - [ ] Optimizar estilos
 
-### ❌ Fase 2: Optimización - PENDIENTE
+### Fase 2: Optimización - PENDIENTE
 - Refactorizar 7 componentes principales
 - Crear archivos de configuración
 - Separar datos de presentación
 - Mejorar tipos TypeScript
 
-### ❌ Fase 3: Documentación - PENDIENTE
+### Fase 3: Documentación - PENDIENTE
 - JSDoc en componentes
 - README.md completo
 - Guía de customización
 - Documentación de estructura
 
-### ❌ Fase 4: Finalización - PENDIENTE
+### Fase 4: Finalización - PENDIENTE
 - Optimización de imágenes
 - Performance y SEO
 - Accesibilidad (WCAG AA)
@@ -157,7 +159,7 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## 🎯 Objetivos del Proyecto
+## Objetivos del Proyecto
 
 ### Corto Plazo (2-3 semanas)
 - Completar las 4 fases del plan
@@ -178,7 +180,7 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## 🐛 Problemas Conocidos y Soluciones
+## Problemas Conocidos y Soluciones
 
 ### 1. Componentes UI No Utilizados
 **Problema:** 40 componentes shadcn/ui instalados pero no usados  
@@ -206,7 +208,7 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## 📦 Dependencias Críticas
+## Dependencias Críticas
 
 ### Producción
 ```json
@@ -234,7 +236,7 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## 🔍 Comandos Útiles
+## Comandos Útiles
 
 ### Desarrollo
 ```bash
@@ -263,7 +265,7 @@ npm run build -- --analyze  # Analizar bundle (si está configurado)
 
 ---
 
-## 📞 Recursos y Referencias
+## Recursos y Referencias
 
 ### Documentación Oficial
 - [React 19 Docs](https://react.dev/)
@@ -280,7 +282,7 @@ npm run build -- --analyze  # Analizar bundle (si está configurado)
 
 ---
 
-## ✅ Checklist Pre-Commit
+## Checklist Pre-Commit
 
 Antes de cada commit importante, verificar:
 
@@ -293,7 +295,7 @@ Antes de cada commit importante, verificar:
 
 ---
 
-## 🎯 Próxima Sesión
+## Próxima Sesión
 
 **Tarea Principal:** Completar Fase 1.1 - Eliminar componentes UI no utilizados
 

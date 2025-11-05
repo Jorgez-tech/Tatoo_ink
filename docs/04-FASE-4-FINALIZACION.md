@@ -1,6 +1,6 @@
-# 🚀 FASE 4: Optimizaciones Finales
+# FASE 4: Optimizaciones Finales
 
-**Estado:** ❌ Pendiente  
+**Estado:** [PENDIENTE]  
 **Fecha inicio:** TBD
 
 ---
@@ -10,9 +10,9 @@
 ### Optimización de Imágenes
 
 **Estado actual:**
-- ❌ Todas las imágenes vienen de Unsplash (URLs externas)
-- ❌ Sin lazy loading
-- ❌ Sin optimización de tamaño
+- [PROBLEMA] Todas las imágenes vienen de Unsplash (URLs externas)
+- [PROBLEMA] Sin lazy loading
+- [PROBLEMA] Sin optimización de tamaño
 
 **Acciones:**
 - [ ] Descargar imágenes localmente
@@ -215,7 +215,7 @@ export const siteConfig = {
 
 ---
 
-## 📊 Progreso Fase 4
+## Progreso Fase 4
 
 - [ ] 4.1 Performance: 0/3 secciones
 - [ ] 4.2 Accesibilidad y SEO: 0/4 secciones
@@ -225,7 +225,7 @@ export const siteConfig = {
 
 ---
 
-## 🎯 Métricas de Éxito
+## Métricas de Éxito
 
 ### Performance
 - Lighthouse Performance Score: > 90

@@ -1,5 +1,5 @@
-import { Button } from "./ui/button";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Button } from "../ui/button";
+import { ImageWithFallback } from "../ui/ImageWithFallback";
 
 export function Hero() {
   return (
@@ -12,7 +12,7 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-black/70"></div>
       </div>
-      
+
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
         <h1 className="mb-6">Arte en tu Piel</h1>
         <p className="mb-8 max-w-2xl mx-auto text-gray-200">

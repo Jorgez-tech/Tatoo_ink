@@ -1,4 +1,4 @@
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "../ui/ImageWithFallback";
 import { Award, Clock, Heart } from "lucide-react";
 
 const stats = [

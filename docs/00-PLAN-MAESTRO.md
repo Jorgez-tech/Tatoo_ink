@@ -24,10 +24,10 @@ Sistema de landing pages profesionales para pequeños negocios y profesionales e
 ## Objetivos Clave
 
 ### Corto Plazo
-- ✅ Estabilizar el proyecto actual
-- ⏳ Limpiar código no utilizado
-- ⏳ Documentar estructura y decisiones
-- ⏳ Hacer código reutilizable
+-  [x] Estabilizar el proyecto actual
+-  [ ] Limpiar código no utilizado
+-  [ ] Documentar estructura y decisiones
+-  [ ] Hacer código reutilizable
 
 ### Mediano Plazo
 - Crear sistema de temas/configuración

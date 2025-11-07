@@ -1,37 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Palette, Sparkles, Users, Shield } from "lucide-react";
-
-const services = [
-  {
-    icon: Palette,
-    title: "Tatuajes Personalizados",
-    description: "Diseños únicos creados especialmente para ti. Trabajamos contigo para dar vida a tu visión."
-  },
-  {
-    icon: Sparkles,
-    title: "Cover-Up",
-    description: "Transformamos tatuajes antiguos en nuevas obras de arte que amarás."
-  },
-  {
-    icon: Users,
-    title: "Artistas Especializados",
-    description: "Equipo de profesionales con estilos diversos: realismo, tradicional, minimalista y más."
-  },
-  {
-    icon: Shield,
-    title: "Seguridad e Higiene",
-    description: "Máximos estándares de esterilización y materiales de primera calidad."
-  }
-];
+import { services } from "@/config/services";
+import { servicesContent } from "@/config/content";
 
 export function Services() {
   return (
     <section className="py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="mb-4">Nuestros Servicios</h2>
+          <h2 className="mb-4">{servicesContent.title}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Ofrecemos una experiencia completa de tatuaje con los más altos estándares de calidad y profesionalismo.
+            {servicesContent.description}
           </p>
         </div>
 

@@ -12,7 +12,13 @@ export default {
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)'
             },
-            colors: {},
+            colors: {
+                border: "var(--color-border)",
+                background: "var(--color-background)",
+                foreground: "var(--color-foreground)",
+                ring: "var(--color-ring)",
+                input: "var(--color-input)",
+            },
         },
     },
     plugins: [],

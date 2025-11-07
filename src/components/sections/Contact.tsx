@@ -3,34 +3,13 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useState } from "react";
-
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Ubicación",
-    value: "Calle Principal 123, Ciudad"
-  },
-  {
-    icon: Phone,
-    title: "Teléfono",
-    value: "+34 123 456 789"
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    value: "info@tattoostudio.com"
-  },
-  {
-    icon: Clock,
-    title: "Horario",
-    value: "Lun - Sáb: 10:00 - 20:00"
-  }
-];
+import { contactInfo } from "@/config/business-info";
+import { contactContent } from "@/config/content";
+import type { ContactFormData } from "@/types";
 
 export function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
@@ -40,7 +19,8 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Aquí iría la lógica para enviar el formulario
-    alert("Gracias por tu mensaje. Te contactaremos pronto!");
+    // Preparado para integración con backend ASP.NET Core
+    alert(contactContent.successMessage);
     setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
@@ -48,9 +28,9 @@ export function Contact() {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="mb-4">Contáctanos</h2>
+          <h2 className="mb-4">{contactContent.title}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            ¿Listo para tu próximo tatuaje? Envíanos un mensaje y te responderemos lo antes posible.
+            {contactContent.description}
           </p>
         </div>
 
@@ -58,30 +38,30 @@ export function Contact() {
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
-                <CardTitle>Envíanos un Mensaje</CardTitle>
+                <CardTitle>{contactContent.formTitle}</CardTitle>
                 <CardDescription>
-                  Completa el formulario y nos pondremos en contacto contigo para agendar una consulta.
+                  {contactContent.formDescription}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Nombre</Label>
+                      <Label htmlFor="name">{contactContent.formFields.name.label}</Label>
                       <Input
                         id="name"
-                        placeholder="Tu nombre"
+                        placeholder={contactContent.formFields.name.placeholder}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{contactContent.formFields.email.label}</Label>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="tu@email.com"
+                        placeholder={contactContent.formFields.email.placeholder}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         required
@@ -90,21 +70,21 @@ export function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Teléfono</Label>
+                    <Label htmlFor="phone">{contactContent.formFields.phone.label}</Label>
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+34 123 456 789"
+                      placeholder={contactContent.formFields.phone.placeholder}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Mensaje</Label>
+                    <Label htmlFor="message">{contactContent.formFields.message.label}</Label>
                     <Textarea
                       id="message"
-                      placeholder="Cuéntanos sobre tu idea de tatuaje..."
+                      placeholder={contactContent.formFields.message.placeholder}
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -113,7 +93,7 @@ export function Contact() {
                   </div>
 
                   <Button type="submit" className="w-full">
-                    Enviar Mensaje
+                    {contactContent.submitButton}
                   </Button>
                 </form>
               </CardContent>

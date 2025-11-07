@@ -4,24 +4,75 @@ import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { contactInfo } from "@/config/business-info";
 import { contactContent } from "@/config/content";
 import type { ContactFormData } from "@/types";
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export function Contact() {
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    // Preparado para integración con backend ASP.NET Core
-    alert(contactContent.successMessage);
-    setFormData({ name: "", email: "", phone: "", message: "" });
+  const onSubmit = async (data: ContactFormData) => {
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      // Importar funciones de API
+      const { USE_MOCK_API, mockApiCall, getApiUrl } = await import("@/config/api");
+
+      let response: Response;
+
+      if (USE_MOCK_API) {
+        // Modo mock para desarrollo sin backend
+        response = await mockApiCall("contact", data);
+      } else {
+        // Llamada real al backend ASP.NET Core
+        // El backend esperará un POST a /api/contact con el siguiente formato:
+        response = await fetch(getApiUrl("contact"), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+      }
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      setStatus("success");
+      reset();
+      
+      // Opcional: mostrar mensaje de éxito por unos segundos
+      setTimeout(() => {
+        setStatus("idle");
+      }, 3000);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Error al enviar el mensaje. Por favor, intenta nuevamente."
+      );
+    }
   };
 
   return (
@@ -44,17 +95,41 @@ export function Contact() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  {/* Mensaje de éxito */}
+                  {status === "success" && (
+                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                      {contactContent.successMessage}
+                    </div>
+                  )}
+
+                  {/* Mensaje de error */}
+                  {status === "error" && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                      {errorMessage || "Error al enviar el mensaje. Por favor, intenta nuevamente."}
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">{contactContent.formFields.name.label}</Label>
                       <Input
                         id="name"
                         placeholder={contactContent.formFields.name.placeholder}
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
+                        {...register("name", {
+                          required: "El nombre es obligatorio",
+                          minLength: {
+                            value: 2,
+                            message: "El nombre debe tener al menos 2 caracteres",
+                          },
+                        })}
+                        aria-invalid={errors.name ? "true" : "false"}
                       />
+                      {errors.name && (
+                        <p className="text-sm text-red-600" role="alert">
+                          {errors.name.message}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">{contactContent.formFields.email.label}</Label>
@@ -62,10 +137,20 @@ export function Contact() {
                         id="email"
                         type="email"
                         placeholder={contactContent.formFields.email.placeholder}
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
+                        {...register("email", {
+                          required: "El email es obligatorio",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: "Email inválido",
+                          },
+                        })}
+                        aria-invalid={errors.email ? "true" : "false"}
                       />
+                      {errors.email && (
+                        <p className="text-sm text-red-600" role="alert">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -75,9 +160,19 @@ export function Contact() {
                       id="phone"
                       type="tel"
                       placeholder={contactContent.formFields.phone.placeholder}
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      {...register("phone", {
+                        pattern: {
+                          value: /^[\d\s\-\+\(\)]+$/,
+                          message: "Formato de teléfono inválido",
+                        },
+                      })}
+                      aria-invalid={errors.phone ? "true" : "false"}
                     />
+                    {errors.phone && (
+                      <p className="text-sm text-red-600" role="alert">
+                        {errors.phone.message}
+                      </p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -86,14 +181,28 @@ export function Contact() {
                       id="message"
                       placeholder={contactContent.formFields.message.placeholder}
                       rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
+                      {...register("message", {
+                        required: "El mensaje es obligatorio",
+                        minLength: {
+                          value: 10,
+                          message: "El mensaje debe tener al menos 10 caracteres",
+                        },
+                      })}
+                      aria-invalid={errors.message ? "true" : "false"}
                     />
+                    {errors.message && (
+                      <p className="text-sm text-red-600" role="alert">
+                        {errors.message.message}
+                      </p>
+                    )}
                   </div>
 
-                  <Button type="submit" className="w-full">
-                    {contactContent.submitButton}
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={status === "loading"}
+                  >
+                    {status === "loading" ? "Enviando..." : contactContent.submitButton}
                   </Button>
                 </form>
               </CardContent>

@@ -1,23 +1,17 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
+import { menuItems, navbarCtaText } from "@/config/navigation";
+import { businessInfo } from "@/config/business-info";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const menuItems = [
-    { label: "Inicio", href: "#" },
-    { label: "Servicios", href: "#servicios" },
-    { label: "Galería", href: "#galeria" },
-    { label: "Nosotros", href: "#nosotros" },
-    { label: "Contacto", href: "#contacto" }
-  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="text-white">Ink Studio</div>
+          <div className="text-white">{businessInfo.name}</div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
@@ -31,7 +25,7 @@ export function Navbar() {
               </a>
             ))}
             <Button size="sm" className="bg-white text-black hover:bg-gray-200">
-              Reservar Cita
+              {navbarCtaText}
             </Button>
           </div>
 
@@ -59,7 +53,7 @@ export function Navbar() {
                 </a>
               ))}
               <Button size="sm" className="bg-white text-black hover:bg-gray-200 w-full">
-                Reservar Cita
+                {navbarCtaText}
               </Button>
             </div>
           </div>

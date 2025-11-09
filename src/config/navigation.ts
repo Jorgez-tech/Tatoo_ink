@@ -9,7 +9,7 @@ import type { MenuItem } from "@/types";
  * Items del menú principal
  */
 export const menuItems: MenuItem[] = [
-  { label: "Inicio", href: "#" },
+  { label: "Inicio", href: "#home" },
   { label: "Servicios", href: "#servicios" },
   { label: "Galería", href: "#galeria" },
   { label: "Nosotros", href: "#nosotros" },

@@ -76,16 +76,16 @@ export function Contact() {
   };
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="mb-4">{contactContent.title}</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 animate-fade-in-up">{contactContent.title}</h2>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto animate-fade-in-up animation-delay-100">
             {contactContent.description}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
@@ -162,7 +162,7 @@ export function Contact() {
                       placeholder={contactContent.formFields.phone.placeholder}
                       {...register("phone", {
                         pattern: {
-                          value: /^[\d\s\-\+\(\)]+$/,
+                          value: /^[\d\s\-+()]+$/,
                           message: "Formato de teléfono inválido",
                         },
                       })}

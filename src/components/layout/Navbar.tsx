@@ -3,9 +3,22 @@ import { Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { menuItems, navbarCtaText } from "@/config/navigation";
 import { businessInfo } from "@/config/business-info";
+import { useActiveSection } from "@/hooks/use-active-section";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const sectionIds = menuItems.map(item => item.href.replace('#', ''));
+  const activeSection = useActiveSection(sectionIds);
+
+  // Smooth scroll al hacer clic en enlaces
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
@@ -15,15 +28,23 @@ export function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {menuItems.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="text-white hover:text-gray-300 transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
+            {menuItems.map((item, index) => {
+              const isActive = activeSection === item.href.replace('#', '');
+              return (
+                <a
+                  key={index}
+                  href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
+                  className={`transition-colors ${
+                    isActive
+                      ? 'text-white font-semibold border-b-2 border-white'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
             <Button size="sm" className="bg-white text-black hover:bg-gray-200">
               {navbarCtaText}
             </Button>
@@ -42,16 +63,23 @@ export function Navbar() {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-white/10">
             <div className="flex flex-col gap-4">
-              {menuItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  className="text-white hover:text-gray-300 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+              {menuItems.map((item, index) => {
+                const isActive = activeSection === item.href.replace('#', '');
+                return (
+                  <a
+                    key={index}
+                    href={item.href}
+                    onClick={(e) => handleClick(e, item.href)}
+                    className={`transition-colors ${
+                      isActive
+                        ? 'text-white font-semibold'
+                        : 'text-gray-300 hover:text-white'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
               <Button size="sm" className="bg-white text-black hover:bg-gray-200 w-full">
                 {navbarCtaText}
               </Button>

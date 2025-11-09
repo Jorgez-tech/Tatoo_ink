@@ -1,5 +1,31 @@
 @custom-variant dark (&:is(.dark *));
 
+/**
+ * Root CSS Variables - Light Theme
+ * 
+ * Color System:
+ * - background: Main page background color
+ * - foreground: Main text color for body content
+ * - card: Background color for card components
+ * - card-foreground: Text color within cards
+ * - popover: Background for popover/tooltip components
+ * - popover-foreground: Text color in popovers
+ * - primary: Brand primary color (buttons, links, key elements)
+ * - primary-foreground: Text color on primary backgrounds
+ * - secondary: Secondary accent color for less prominent elements
+ * - secondary-foreground: Text on secondary backgrounds
+ * - muted: Subdued background color for less prominent areas
+ * - muted-foreground: Muted text color for secondary information
+ * - accent: Accent color for highlights and interactive states
+ * - accent-foreground: Text on accent backgrounds
+ * - destructive: Color for destructive/error actions
+ * - destructive-foreground: Text on destructive backgrounds
+ * - border: Default border color throughout the UI
+ * - input: Input field background (transparent by default)
+ * - input-background: Explicit background for input fields
+ * - ring: Focus ring color for accessibility
+ * - radius: Base border radius for rounded elements
+ */
 :root {
   --font-size: 16px;
   --background: #ffffff;
@@ -187,4 +213,56 @@
 
 html {
   font-size: var(--font-size);
+  scroll-behavior: smooth;
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Clases de utilidad para animaciones */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Delays para animaciones escalonadas */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-500 {
+  animation-delay: 0.5s;
 }

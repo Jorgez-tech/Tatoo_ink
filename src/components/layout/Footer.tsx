@@ -7,18 +7,18 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white py-12 px-4">
+    <footer className="bg-black text-white py-8 sm:py-10 md:py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div>
-            <h3 className="mb-4">{businessInfo.name}</h3>
-            <p className="text-gray-400">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{businessInfo.name}</h3>
+            <p className="text-sm sm:text-base text-gray-400">
               {footerContent.description}
             </p>
           </div>
 
           <div>
-            <h4 className="mb-4">{footerContent.quickLinksTitle}</h4>
+            <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{footerContent.quickLinksTitle}</h4>
             <ul className="space-y-2">
               {menuItems.filter(item => item.href !== "#").map((item, index) => (
                 <li key={index}>
@@ -31,8 +31,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4">{footerContent.socialTitle}</h4>
-            <div className="flex gap-4">
+            <h4 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{footerContent.socialTitle}</h4>
+            <div className="flex gap-3 sm:gap-4">
               {businessInfo.social.instagram && (
                 <a
                   href={businessInfo.social.instagram}
@@ -64,8 +64,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} {businessInfo.name}. Todos los derechos reservados.</p>
+        <div className="border-t border-gray-800 pt-6 sm:pt-8 text-center text-gray-400">
+          <p className="text-sm sm:text-base">&copy; {currentYear} {businessInfo.name}. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

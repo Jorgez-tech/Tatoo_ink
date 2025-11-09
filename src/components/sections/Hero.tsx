@@ -5,7 +5,7 @@ import { heroImage } from "@/config/images";
 
 export function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src={heroImage.src}
@@ -15,16 +15,18 @@ export function Hero() {
         <div className="absolute inset-0 bg-black/70"></div>
       </div>
 
-      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-        <h1 className="mb-6">{heroContent.title}</h1>
-        <p className="mb-8 max-w-2xl mx-auto text-gray-200">
+      <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in-up">
+          {heroContent.title}
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto text-gray-200 animate-fade-in-up animation-delay-200">
           {heroContent.description}
         </p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <Button size="lg" className="bg-white text-black hover:bg-gray-200">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in-up animation-delay-300">
+          <Button size="lg" className="bg-white text-black hover:bg-gray-200 w-full sm:w-auto">
             {heroContent.primaryButton}
           </Button>
-          <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+          <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 w-full sm:w-auto">
             {heroContent.secondaryButton}
           </Button>
         </div>

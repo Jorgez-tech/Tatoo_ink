@@ -38,6 +38,8 @@ export function About() {
                 src={aboutImage.src}
                 alt={aboutImage.alt}
                 className="w-full h-full object-cover"
+                decoding="async"
+                sizes="(min-width:1024px) 50vw, 100vw"
               />
             </div>
             <div className="hidden sm:block absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-32 h-32 sm:w-48 sm:h-48 bg-black rounded-lg -z-10"></div>

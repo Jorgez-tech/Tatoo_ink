@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { menuItems, navbarCtaText } from "@/config/navigation";
 import { businessInfo } from "@/config/business-info";
 import { useActiveSection } from "@/hooks/use-active-section";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +21,29 @@ export function Navbar() {
     }
   };
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
+    <nav 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+        scrolled 
+          ? "bg-black/95 backdrop-blur-md border-white/10" 
+          : "bg-black/80 backdrop-blur-sm border-transparent"
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="text-white">{businessInfo.name}</div>
@@ -60,7 +82,12 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && (
+        <div 
+          className={cn(
+            "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
+            isOpen ? "max-h-96 py-4 border-t border-white/10" : "max-h-0"
+          )}
+        >
           <div className="md:hidden py-4 border-t border-white/10">
             <div className="flex flex-col gap-4">
               {menuItems.map((item, index) => {
@@ -84,8 +111,7 @@ export function Navbar() {
                 {navbarCtaText}
               </Button>
             </div>
-          </div>
-        )}
+        </div>
       </div>
     </nav>
   );

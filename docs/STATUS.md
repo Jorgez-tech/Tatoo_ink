@@ -239,8 +239,10 @@ tatoo_ink.client/
 ## Notas de la Sesión Actual
 
 - Proyecto estable y funcionando correctamente
-- Necesita limpieza de código no utilizado
+- Navegación alineada (Inicio → #home) y scroll spy operativo
+- Pre-auditoría UI: `button`, `card`, `input`, `label`, `textarea`, `ImageWithFallback` están en uso en Hero/Services/Contact/Gallery
+- Pendiente: validar si la mención de “40 componentes UI no utilizados” en docs sigue vigente (parece desactualizado)
 - Buen candidato para sistema de plantillas reutilizables
-- Documentación completa creada para guiar el proceso
+- Documentación actualizada (STATUS/CHANGELOG)
 
-**Próximo hito:** Fase 1 completada (estimado: 2-3 sesiones)
+**Próximo hito:** Fase 1 completada (estimado: 1-2 sesiones)

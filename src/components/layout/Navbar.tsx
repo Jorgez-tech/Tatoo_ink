@@ -36,11 +36,11 @@ export function Navbar() {
   }, [scrolled]);
 
   return (
-    <nav 
+    <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
-        scrolled 
-          ? "bg-black/95 backdrop-blur-md border-white/10" 
+        scrolled
+          ? "bg-black/95 backdrop-blur-md border-white/10"
           : "bg-black/80 backdrop-blur-sm border-transparent"
       )}
     >
@@ -57,11 +57,10 @@ export function Navbar() {
                   key={index}
                   href={item.href}
                   onClick={(e) => handleClick(e, item.href)}
-                  className={`transition-colors ${
-                    isActive
+                  className={`transition-colors ${isActive
                       ? 'text-white font-semibold border-b-2 border-white'
                       : 'text-gray-300 hover:text-white'
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </a>
@@ -82,35 +81,33 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div 
+        <div
           className={cn(
             "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
             isOpen ? "max-h-96 py-4 border-t border-white/10" : "max-h-0"
           )}
         >
-          <div className="md:hidden py-4 border-t border-white/10">
-            <div className="flex flex-col gap-4">
-              {menuItems.map((item, index) => {
-                const isActive = activeSection === item.href.replace('#', '');
-                return (
-                  <a
-                    key={index}
-                    href={item.href}
-                    onClick={(e) => handleClick(e, item.href)}
-                    className={`transition-colors ${
-                      isActive
-                        ? 'text-white font-semibold'
-                        : 'text-gray-300 hover:text-white'
+          <div className="flex flex-col gap-4">
+            {menuItems.map((item, index) => {
+              const isActive = activeSection === item.href.replace('#', '');
+              return (
+                <a
+                  key={index}
+                  href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
+                  className={`transition-colors ${isActive
+                      ? 'text-white font-semibold'
+                      : 'text-gray-300 hover:text-white'
                     }`}
-                  >
-                    {item.label}
-                  </a>
-                );
-              })}
-              <Button size="sm" className="bg-white text-black hover:bg-gray-200 w-full">
-                {navbarCtaText}
-              </Button>
-            </div>
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+            <Button size="sm" className="bg-white text-black hover:bg-gray-200 w-full">
+              {navbarCtaText}
+            </Button>
+          </div>
         </div>
       </div>
     </nav>

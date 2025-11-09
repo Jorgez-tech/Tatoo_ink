@@ -13,7 +13,7 @@ export function Hero() {
           className="w-full h-full object-cover"
           loading="eager"
           decoding="async"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-black/70"></div>
       </div>

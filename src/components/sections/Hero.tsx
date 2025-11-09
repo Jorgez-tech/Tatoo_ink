@@ -11,6 +11,9 @@ export function Hero() {
           src={heroImage.src}
           alt={heroImage.alt}
           className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-black/70"></div>
       </div>

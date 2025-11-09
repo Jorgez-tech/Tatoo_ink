@@ -1,0 +1,15 @@
+{
+  "name": "Ink Studio",
+  "short_name": "InkStudio",
+  "display": "standalone",
+  "background_color": "#030213",
+  "theme_color": "#030213",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

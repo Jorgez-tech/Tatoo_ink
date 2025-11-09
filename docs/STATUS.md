@@ -67,12 +67,14 @@ Landing page profesional para estudio de tatuajes "Ink Studio", basada en diseñ
 
 ## Pendiente (60%)
 
-### Fase 2: Optimización de Código (40% restante)
-- [ ] Scroll spy en Navbar (destacar sección activa)
-- [ ] Mejorar animaciones de entrada
-- [ ] Lazy loading de imágenes
-- [ ] Optimizar responsive en todos los componentes
-- [ ] Agregar smooth scroll
+### Fase 2: Optimización de Código (en curso)
+- [x] Mejora LCP: Hero imagen `loading=eager` y `fetchpriority=high`
+- [x] CLS/Network: `decoding="async"` + `sizes` en Gallery y About
+- [x] SEO básico: metas OG/Twitter/description, `noscript`
+- [x] Perf: `dns-prefetch` y `preconnect` a images.unsplash.com
+- [ ] Manifest y favicons completos (parcial: manifest mínimo)
+- [ ] Medición Lighthouse y anotaciones
+- [ ] Ajustes finos de animaciones/CLS adicionales
 
 ### Fase 3: Documentación
 - [ ] JSDoc en componentes (0/7)

@@ -3,6 +3,18 @@ import { ImageWithFallback } from "../ui/ImageWithFallback";
 import { heroContent } from "@/config/content";
 import { heroImage } from "@/config/images";
 
+/**
+ * Sección principal de la landing con fondo a pantalla completa y CTA dobles.
+ *
+ * Renderiza una imagen hero con overlay oscuro, título destacado y botones de
+ * acción primario/secundario que reutilizan el contenido definido en configuración.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Hero />
+ * );
+ */
 export function Hero() {
   return (
     <section id="home" className="relative min-h-screen h-screen flex items-center justify-center overflow-hidden">

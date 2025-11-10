@@ -3,6 +3,19 @@ import { businessInfo } from "@/config/business-info";
 import { footerContent } from "@/config/content";
 import { menuItems } from "@/config/navigation";
 
+/**
+ * Pie de página con enlaces rápidos y redes sociales basadas en configuración.
+ *
+ * Calcula el año vigente dinámicamente, filtra items de navegación y muestra
+ * iconos sociales disponibles para garantizar accesibilidad y consistencia de
+ * marca.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Footer />
+ * );
+ */
 export function Footer() {
   const currentYear = new Date().getFullYear();
 

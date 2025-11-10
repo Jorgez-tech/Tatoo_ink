@@ -2,6 +2,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import { services } from "@/config/services";
 import { servicesContent } from "@/config/content";
 
+/**
+ * Sección que lista los servicios destacados del estudio con iconografía.
+ *
+ * Itera sobre la configuración de servicios para renderizar tarjetas uniformes
+ * con título, descripción y un ícono representativo dentro de una grilla
+ * responsive.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Services />
+ * );
+ */
 export function Services() {
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-gray-50">

@@ -6,6 +6,19 @@ import { businessInfo } from "@/config/business-info";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { cn } from "@/lib/utils";
 
+/**
+ * Barra de navegación fija con soporte responsive y resalte de sección activa.
+ *
+ * Gestiona el estado de apertura del menú móvil, sincroniza el scroll suave y
+ * aplica estilos dinámicos según la posición del scroll. En escritorio, muestra
+ * enlaces y CTA; en móviles, despliega un menú colapsable.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Navbar />
+ * );
+ */
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const sectionIds = menuItems.map(item => item.href.replace('#', ''));

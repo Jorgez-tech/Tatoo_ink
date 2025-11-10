@@ -34,6 +34,21 @@ const buttonVariants = cva(
   },
 );
 
+/**
+ * Botón estilizado con variantes y tamaños predefinidos mediante CVA.
+ *
+ * Permite renderizar distintos elementos a través de `asChild`, aplica clases
+ * utilitarias combinando `variant` y `size`, y propaga las props estándar de
+ * `<button>`.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Button variant="secondary" size="lg">
+ *     Agendar cita
+ *   </Button>
+ * );
+ */
 function Button({
   className,
   variant,
@@ -55,4 +70,4 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+export { Button };

@@ -9,8 +9,24 @@ import { contactInfo } from "@/config/business-info";
 import { contactContent } from "@/config/content";
 import type { ContactFormData } from "@/types";
 
+/**
+ * Estados posibles del formulario de contacto.
+ */
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+/**
+ * Sección de contacto con formulario validado y fallback sin backend.
+ *
+ * Utiliza react-hook-form para manejar validaciones, muestra tarjetas con datos
+ * de contacto del negocio y realiza envíos mediante API real o mock según
+ * configuración.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Contact />
+ * );
+ */
 export function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");

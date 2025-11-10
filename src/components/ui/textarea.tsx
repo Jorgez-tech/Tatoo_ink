@@ -2,6 +2,18 @@ import * as React from "react";
 
 import { cn } from "../../lib/utils";
 
+/**
+ * Campo de texto multilínea con estilos cohesivos y estados accesibles.
+ *
+ * Mantiene altura mínima, muestra indicador de carga mediante utilidades y
+ * propaga props estándar de `<textarea>` para integrarse con formularios.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Textarea rows={4} placeholder="Describe tu idea" />
+ * );
+ */
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
     <textarea

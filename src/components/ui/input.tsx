@@ -2,6 +2,18 @@ import * as React from "react";
 
 import { cn } from "../../lib/utils";
 
+/**
+ * Campo de texto base con estilos consistentes y estados accesibles.
+ *
+ * Aplica clases utilitarias para integrar con el tema, soporta modo archivo y
+ * propaga props estándar de `<input>` conservando compatibilidad con formularios.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Input type="email" placeholder="tu@correo.com" />
+ * );
+ */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

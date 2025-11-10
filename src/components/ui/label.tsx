@@ -5,6 +5,18 @@ import * as LabelPrimitive from "@radix-ui/react-label";
 
 import { cn } from "../../lib/utils";
 
+/**
+ * Etiqueta accesible basada en Radix UI con estilos consistentes.
+ *
+ * Propaga props estándar de `LabelPrimitive.Root`, soporta estado deshabilitado
+ * y asegura alineación con el diseño mediante utilidades `cn`.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Label htmlFor="email">Correo electrónico</Label>
+ * );
+ */
 function Label({
   className,
   ...props

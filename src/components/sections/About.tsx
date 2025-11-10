@@ -3,6 +3,19 @@ import { businessInfo } from "@/config/business-info";
 import { aboutContent } from "@/config/content";
 import { aboutImage } from "@/config/images";
 
+/**
+ * Sección "Sobre nosotros" que combina storytelling con métricas del negocio.
+ *
+ * Muestra texto configurable, estadísticas destacadas e imagen corporativa con
+ * decoración responsiva. Utiliza datos provenientes de la configuración de
+ * contenido y del negocio.
+ *
+ * @component
+ * @example
+ * return (
+ *   <About />
+ * );
+ */
 export function About() {
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-gray-50">

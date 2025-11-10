@@ -4,6 +4,19 @@ import { galleryImages } from "@/config/images";
 import { galleryContent } from "@/config/content";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
+/**
+ * Galería interactiva con lightbox, navegación por teclado y loader per image.
+ *
+ * Presenta una cuadrícula responsive de imágenes configurables; al seleccionar
+ * una imagen abre un modal con soporte para navegación circular mediante clics
+ * y teclas de flecha, así como cierre mediante backdrop o tecla Escape.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Gallery />
+ * );
+ */
 export function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 

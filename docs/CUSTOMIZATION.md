@@ -1,104 +1,356 @@
 # 🎨 Guía de Personalización
 
-## Configuración de Información del Negocio
+Esta guía te ayudará a adaptar la landing page de Ink Studio para un nuevo cliente o negocio.
 
-Actualiza `src/config/business-info.ts` para reflejar datos reales del estudio:
+## 📋 Tabla de Contenidos
+
+1. [Información del Negocio](#información-del-negocio)
+2. [Contenido de Secciones](#contenido-de-secciones)
+3. [Servicios](#servicios)
+4. [Imágenes](#imágenes)
+5. [Navegación](#navegación)
+6. [Colores y Estilos](#colores-y-estilos)
+7. [Backend](#backend)
+
+---
+
+## Información del Negocio
+
+**Archivo:** `src/config/business-info.ts`
 
 ```typescript
 export const businessInfo = {
-  name: "Ink Studio",
-  tagline: "Tinta que cuenta historias",
+  name: "Tu Negocio", // Nombre del negocio
+  tagline: "Tu Eslogan", // Eslogan corto
+  description: "Descripción...", // Descripción breve
+
   contact: {
-    address: "Av. Principal 123",
-    phone: "+54 11 5555-5555",
-    email: "contacto@inkstudio.com",
-    schedule: "Lunes a Sábado, 10:00 a 20:00"
+    address: "Dirección completa",
+    phone: "+56 9 1234 5678",
+    email: "contacto@tunegocio.cl",
+    hours: "Lun - Vie: 9:00 - 18:00",
   },
-  stats: [
-    /* ... */
-  ],
+
   social: {
-    instagram: "https://instagram.com/inkstudio",
-    facebook: "https://facebook.com/inkstudio",
-    twitter: "https://twitter.com/inkstudio"
-  }
+    instagram: "https://instagram.com/tunegocio",
+    facebook: "https://facebook.com/tunegocio",
+    twitter: "https://twitter.com/tunegocio",
+  },
+
+  stats: [
+    { icon: Users, value: "500+", label: "Clientes" },
+    { icon: Award, value: "10+", label: "Años" },
+    { icon: Star, value: "5.0", label: "Rating" },
+  ],
 };
 ```
 
-- Ajusta `name` y `tagline` para la identidad del cliente.
-- Actualiza `contact` con dirección, teléfono y correo válidos.
-- Personaliza `stats` con métricas reales: tatuajes realizados, años de experiencia, artistas, etc.
-- Deja en `undefined` o elimina las redes sociales no utilizadas.
+**Qué cambiar:**
+
+- Nombre y eslogan del negocio
+- Datos de contacto (dirección, teléfono, email, horarios)
+- Enlaces a redes sociales (dejar vacío `""` si no aplica)
+- Estadísticas destacadas (valores y etiquetas)
+
+---
 
 ## Contenido de Secciones
 
-Modifica `src/config/content.ts` para adaptar textos y mensajes:
+**Archivo:** `src/config/content.ts`
 
-- `heroContent`: título, descripción y textos de botones principales.
-- `servicesContent` y `services`: describen servicios o estilos de tatuajes.
-- `aboutContent`: narrativa del negocio y logros clave.
-- `galleryContent`: descripción de la galería y etiquetas de CTA.
-- `contactContent`: mensajes del formulario y textos de confirmación.
-
-Consejos:
-
-1. Mantén un tono consistente con la marca.
-2. Utiliza frases breves y orientadas a acción para CTAs.
-3. Valida que las traducciones o localizaciones mantengan el formato (por ejemplo, plantillas con interpolaciones o placeholders).
-
-## Imágenes y Recursos
-
-Actualiza `src/config/images.ts` para apuntar a nuevos assets:
+### Hero (Sección Principal)
 
 ```typescript
-export const heroImage = {
-  src: "/assets/hero-nuevo.jpg",
-  alt: "Artista tatuando a un cliente"
+export const heroContent = {
+  title: "Tu Título Principal",
+  description: "Descripción que capte la atención...",
+  primaryButton: "Acción Principal",
+  secondaryButton: "Acción Secundaria",
 };
 ```
 
-- Coloca las nuevas imágenes en `public/` o un CDN accesible.
-- Mantén descripciones `alt` claras para accesibilidad.
-- Para galerías, procura un mínimo de 6 imágenes para preservar la cuadrícula responsiva.
+### Services (Servicios)
 
-## Paleta de Colores y Estilos
+```typescript
+export const servicesContent = {
+  title: "Nuestros Servicios",
+  description: "Descripción de tus servicios...",
+};
+```
 
-Edita `src/styles/globals.css` o `tailwind.config.js` para ajustar colores primarios/secundarios:
+### Gallery (Galería)
+
+```typescript
+export const galleryContent = {
+  title: "Galería",
+  description: "Muestra tu trabajo...",
+};
+```
+
+### About (Sobre Nosotros)
+
+```typescript
+export const aboutContent = {
+  title: "Sobre Nosotros",
+  paragraphs: [
+    "Primer párrafo de tu historia...",
+    "Segundo párrafo con más detalles...",
+    "Tercer párrafo con tu propuesta de valor...",
+  ],
+};
+```
+
+### Contact (Contacto)
+
+```typescript
+export const contactContent = {
+  title: "Contáctanos",
+  description: "Estamos aquí para ayudarte...",
+  formTitle: "Envíanos un mensaje",
+  formDescription: "Responderemos pronto...",
+  formFields: {
+    name: { label: "Nombre", placeholder: "Tu nombre" },
+    email: { label: "Email", placeholder: "tu@email.com" },
+    phone: { label: "Teléfono", placeholder: "+56 9 1234 5678" },
+    message: { label: "Mensaje", placeholder: "Cuéntanos..." },
+  },
+  submitButton: "Enviar Mensaje",
+  successMessage: "¡Mensaje enviado con éxito!",
+};
+```
+
+### Footer
+
+```typescript
+export const footerContent = {
+  description: "Descripción breve para el footer...",
+  quickLinksTitle: "Enlaces Rápidos",
+  socialTitle: "Síguenos",
+};
+```
+
+---
+
+## Servicios
+
+**Archivo:** `src/config/services.ts`
+
+```typescript
+import { Palette, Sparkles, Heart, Shield } from "lucide-react";
+
+export const services = [
+  {
+    icon: Palette,
+    title: "Servicio 1",
+    description: "Descripción del servicio...",
+  },
+  {
+    icon: Sparkles,
+    title: "Servicio 2",
+    description: "Descripción del servicio...",
+  },
+  // Agrega más servicios según necesites
+];
+```
+
+**Iconos disponibles:** Busca en [Lucide Icons](https://lucide.dev/icons/) y actualiza los imports.
+
+---
+
+## Imágenes
+
+**Archivo:** `src/config/images.ts`
+
+```typescript
+export const heroImage = {
+  src: "https://images.unsplash.com/photo-...",
+  alt: "Descripción de la imagen hero",
+};
+
+export const aboutImage = {
+  src: "https://images.unsplash.com/photo-...",
+  alt: "Descripción de la imagen about",
+};
+
+export const galleryImages = [
+  { src: "url-imagen-1", alt: "Descripción 1" },
+  { src: "url-imagen-2", alt: "Descripción 2" },
+  // Agrega más imágenes
+];
+```
+
+**Recomendaciones:**
+
+- Usa imágenes de alta calidad (mínimo 1920x1080 para hero)
+- Optimiza las imágenes antes de subirlas
+- Considera usar un CDN o servicio de imágenes
+- Para producción, mueve las imágenes a `/public/images/`
+
+**Migrar a imágenes locales:**
+
+1. Coloca las imágenes en `/public/images/`
+2. Actualiza las rutas:
+   ```typescript
+   src: "/images/hero.jpg";
+   ```
+
+---
+
+## Navegación
+
+**Archivo:** `src/config/navigation.ts`
+
+```typescript
+export const menuItems = [
+  { label: "Inicio", href: "#home" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Galería", href: "#galeria" },
+  { label: "Nosotros", href: "#nosotros" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+export const navbarCtaText = "Reservar Cita";
+```
+
+**Importante:** Los `href` deben coincidir con los `id` de las secciones en los componentes.
+
+---
+
+## Colores y Estilos
+
+**Archivo:** `src/styles/globals.css`
+
+### Variables CSS
 
 ```css
 :root {
-  --background: #fff9f4;
-  --foreground: #1f1b18;
-  --primary: #b34700;
-  --primary-foreground: #fff;
+  /* Colores principales */
+  --primary: #030213; /* Color principal (negro) */
+  --secondary: #ececf0; /* Color secundario (gris claro) */
+
+  /* Colores de fondo */
+  --background: 0 0% 100%; /* Fondo blanco */
+  --foreground: 240 10% 3.9%; /* Texto principal */
+
+  /* Colores de acento */
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+
+  /* Bordes y separadores */
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
 }
 ```
 
-- Utiliza la misma nomenclatura de variables para conservar consistencia.
-- Ajusta sombras, gradientes y animaciones según la identidad visual.
+### Cambiar Colores
 
-## Navegación y Estructura
+**Ejemplo: Cambiar a tema azul**
 
-En `src/config/navigation.ts` modifica el menú principal y CTA:
+```css
+:root {
+  --primary: #1e40af; /* Azul oscuro */
+  --secondary: #dbeafe; /* Azul claro */
+}
+```
 
-- Reordena secciones según jerarquía deseada.
-- Cambia `navbarCtaText` por el texto del botón principal.
-- Asegúrate de que cada `href` coincida con las IDs definidas en componentes.
+### Tailwind Config
 
-## Formulario de Contacto
+**Archivo:** `tailwind.config.js`
 
-Define los estados y mensajes personalizados en `contactContent.formFields` y `contactContent.successMessage`:
+Para colores personalizados adicionales:
 
-- Cambia placeholders y labels acorde al idioma.
-- Ajusta mensajes de error/éxito para alinearse con el tono del cliente.
-- Si existe backend propio, actualiza `src/config/api.ts` con la URL real y desactiva `USE_MOCK_API`.
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          primary: "#1e40af",
+          secondary: "#dbeafe",
+        },
+      },
+    },
+  },
+};
+```
 
-## Checklist de Personalización
+---
 
-- [ ] Información del negocio actualizada
-- [ ] Textos y CTAs revisados
-- [ ] Navegación adaptada
-- [ ] Paleta de colores ajustada
-- [ ] Imágenes reemplazadas y optimizadas
-- [ ] Formulario conectado a la API correspondiente
-- [ ] Pruebas de accesibilidad básicas (contraste, textos alternativos)
+## Backend
+
+**Archivo:** `src/config/api.ts`
+
+### Modo Mock (Desarrollo sin backend)
+
+```typescript
+export const USE_MOCK_API = true;
+```
+
+### Modo Producción (Con backend ASP.NET Core)
+
+```typescript
+export const USE_MOCK_API = false;
+
+export const API_BASE_URL = "https://tu-api.com";
+// o para desarrollo local:
+// export const API_BASE_URL = "https://localhost:7001"
+```
+
+Ver `docs/BACKEND-INTEGRATION.md` para detalles completos de integración.
+
+---
+
+## 🚀 Checklist de Personalización
+
+Usa esta lista para asegurarte de personalizar todo:
+
+- [ ] Nombre del negocio en `business-info.ts`
+- [ ] Datos de contacto (dirección, teléfono, email)
+- [ ] Enlaces de redes sociales
+- [ ] Estadísticas destacadas
+- [ ] Título y descripción del Hero
+- [ ] Textos de todas las secciones
+- [ ] Lista de servicios con iconos
+- [ ] Imágenes (hero, about, galería)
+- [ ] Menú de navegación
+- [ ] Colores y estilos en `globals.css`
+- [ ] Configuración de API/backend
+- [ ] Título y favicon en `index.html`
+- [ ] Manifest en `public/site.webmanifest`
+
+---
+
+## 💡 Tips
+
+1. **Mantén la consistencia:** Usa el mismo tono de voz en todos los textos
+2. **Optimiza imágenes:** Comprime las imágenes antes de subirlas
+3. **Prueba responsive:** Verifica en móvil, tablet y desktop
+4. **Accesibilidad:** Asegúrate de que los textos alternativos sean descriptivos
+5. **SEO:** Actualiza meta tags en `index.html`
+
+---
+
+## 🆘 Problemas Comunes
+
+**Las imágenes no cargan:**
+
+- Verifica que las URLs sean correctas
+- Si usas imágenes locales, asegúrate de que estén en `/public/`
+
+**Los colores no cambian:**
+
+- Limpia la caché del navegador
+- Reinicia el servidor de desarrollo
+
+**El formulario no envía:**
+
+- Verifica la configuración en `api.ts`
+- Revisa la consola del navegador para errores
+
+---
+
+Para más ayuda, consulta:
+
+- `docs/STRUCTURE.md` - Arquitectura del proyecto
+- `docs/BACKEND-INTEGRATION.md` - Integración con backend

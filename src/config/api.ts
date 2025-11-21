@@ -40,6 +40,8 @@ export const mockApiCall = async (
   _endpoint: keyof typeof API_ENDPOINTS,
   _data: unknown
 ): Promise<Response> => {
+  void _endpoint;
+  void _data;
   // Simular delay de red
   await new Promise((resolve) => setTimeout(resolve, 1000));
 

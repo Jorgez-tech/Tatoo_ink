@@ -1,15 +1,22 @@
 {
-  "name": "Ink Studio",
+  "name": "Ink Studio - Arte en tu Piel",
   "short_name": "InkStudio",
+  "description": "Estudio de tatuajes profesional con más de 10 años de experiencia",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#030213",
   "theme_color": "#030213",
   "start_url": "/",
+  "scope": "/",
+  "lang": "es-CL",
   "icons": [
     {
       "src": "/vite.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["lifestyle", "business"],
+  "screenshots": []
 }

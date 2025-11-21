@@ -1,0 +1,10 @@
+# robots.txt para Ink Studio
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://inkstudio.cl/sitemap.xml
+
+# Crawl-delay (opcional, ajustar según necesidad)
+# Crawl-delay: 10

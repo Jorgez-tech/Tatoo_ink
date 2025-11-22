@@ -11,11 +11,13 @@ Este documento describe cómo integrar el frontend React con el backend ASP.NET 
 **Endpoint:** `POST /api/contact`
 
 **Headers:**
+
 ```
 Content-Type: application/json
 ```
 
 **Body:**
+
 ```json
 {
   "name": "string",
@@ -26,6 +28,7 @@ Content-Type: application/json
 ```
 
 **Ejemplo:**
+
 ```json
 {
   "name": "Juan Pérez",
@@ -38,6 +41,7 @@ Content-Type: application/json
 ### Response
 
 **Success (200):**
+
 ```json
 {
   "success": true,
@@ -46,6 +50,7 @@ Content-Type: application/json
 ```
 
 **Error (400/500):**
+
 ```json
 {
   "success": false,
@@ -65,23 +70,17 @@ Content-Type: application/json
 Crear archivo `.env` en la raíz del proyecto:
 
 ```env
-# Para desarrollo con backend
+# Desarrollo local
 VITE_API_BASE_URL=http://localhost:5000
-VITE_USE_MOCK_API=false
 
-# Para producción
-# VITE_API_BASE_URL=https://api.tudominio.com
-# VITE_USE_MOCK_API=false
+# Desarrollo local con HTTPS
+# VITE_API_BASE_URL=https://localhost:7001
+
+# Producción
+# VITE_API_BASE_URL=https://api.inkstudio.cl
 ```
 
-### Modo Mock (Desarrollo sin Backend)
-
-Si no hay backend disponible, el frontend usa modo mock automáticamente:
-
-```env
-# Dejar vacío o no definir VITE_API_BASE_URL
-VITE_USE_MOCK_API=true
-```
+**Nota:** Si no se define `VITE_API_BASE_URL`, el valor por defecto es `http://localhost:5000`
 
 ---
 
@@ -269,22 +268,27 @@ El frontend ya incluye validación, pero el backend también debe validar:
 ## 🚀 Pasos para Integración
 
 1. **Crear el endpoint en ASP.NET Core:**
+
    - Crear `ContactController`
    - Crear DTOs (`ContactRequestDto`, `ContactResponseDto`)
    - Implementar lógica de negocio (email, BD, etc.)
 
 2. **Configurar CORS:**
+
    - Permitir origen del frontend
    - Configurar en `Program.cs`
 
 3. **Configurar variables de entorno:**
+
    - Crear `.env` en el frontend
    - Configurar `VITE_API_BASE_URL`
 
 4. **Probar integración:**
-   - Probar con modo mock primero
-   - Probar con backend real
+
+   - Iniciar backend ASP.NET Core
+   - Iniciar frontend con `npm run dev`
    - Verificar CORS
+   - Probar formulario de contacto
 
 5. **Desplegar:**
    - Frontend: Vercel, Netlify, etc.
@@ -295,10 +299,10 @@ El frontend ya incluye validación, pero el backend también debe validar:
 
 ## 🔍 Testing
 
-### Frontend (Mock Mode)
+### Frontend
 
 ```bash
-# El formulario funcionará con modo mock
+# Asegurarse de que el backend esté corriendo
 npm run dev
 ```
 
@@ -320,12 +324,11 @@ curl -X POST http://localhost:5000/api/contact \
 
 ## 📝 Notas
 
-- El frontend ya está preparado para recibir errores de validación del backend
+- El frontend está preparado para recibir errores de validación del backend
 - Los mensajes de error se mostrarán automáticamente en el formulario
 - El formulario maneja estados de loading, success y error
-- El modo mock permite desarrollo frontend sin necesidad de backend
+- Requiere backend ASP.NET Core corriendo para funcionar
 
 ---
 
-**Última actualización:** 2025-01-27
-
+**Última actualización:** 2025-11-21

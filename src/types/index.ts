@@ -117,3 +117,16 @@ export interface ContactFormData {
   message: string;
 }
 
+/**
+ * Respuesta del backend al enviar el formulario de contacto.
+ *
+ * @property success Indica si la operación fue exitosa.
+ * @property message Mensaje descriptivo de la respuesta.
+ * @property errors Errores de validación por campo (opcional).
+ */
+export interface ContactResponse {
+  success: boolean;
+  message: string;
+  errors?: Record<string, string[]>;
+}
+

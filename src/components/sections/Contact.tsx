@@ -50,34 +50,32 @@ export function Contact() {
     setErrorMessage("");
 
     try {
-      // Importar funciones de API
-      const { USE_MOCK_API, mockApiCall, getApiUrl } = await import("@/config/api");
+      const { getApiUrl } = await import("@/config/api");
 
-      let response: Response;
+      // Llamada al backend ASP.NET Core
+      const response = await fetch(getApiUrl("contact"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-      if (USE_MOCK_API) {
-        // Modo mock para desarrollo sin backend
-        response = await mockApiCall("contact", data);
-      } else {
-        // Llamada real al backend ASP.NET Core
-        // El backend esperará un POST a /api/contact con el siguiente formato:
-        response = await fetch(getApiUrl("contact"), {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-      }
+      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
+        // Manejar errores de validación del backend
+        if (result.errors) {
+          const errorMessages = Object.values(result.errors).flat().join(", ");
+          throw new Error(errorMessages);
+        }
+        throw new Error(result.message || `Error ${response.status}: ${response.statusText}`);
       }
 
       setStatus("success");
       reset();
-      
-      // Opcional: mostrar mensaje de éxito por unos segundos
+
+      // Mostrar mensaje de éxito por 3 segundos
       setTimeout(() => {
         setStatus("idle");
       }, 3000);

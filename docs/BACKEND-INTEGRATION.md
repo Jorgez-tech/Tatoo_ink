@@ -4,6 +4,51 @@ Este documento describe cómo integrar el frontend React con el backend ASP.NET 
 
 ---
 
+## 🌐 Autenticación en Backend ASP.NET Core
+
+### Endpoints
+
+#### Registro de usuario
+- **POST** `/api/auth/register`
+- **Body:**
+```json
+{
+  "username": "string",
+  "email": "string",
+  "password": "string"
+}
+```
+- **Response:**
+```json
+{
+  "message": "Registro exitoso"
+}
+```
+- **Errores:**
+  - 409: El email ya está registrado
+  - 400: Datos inválidos
+
+#### Login de usuario
+- **POST** `/api/auth/login`
+- **Body:**
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+- **Response:**
+```json
+{
+  "token": "jwt-token"
+}
+```
+- **Errores:**
+  - 401: Credenciales inválidas
+  - 400: Datos inválidos
+
+---
+
 ## 📋 Endpoint de Contacto
 
 ### Request

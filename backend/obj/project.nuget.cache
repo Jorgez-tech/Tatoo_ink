@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "mf5YcUqXuZc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jzuta\\Enterprice_web_page\\tatoo_ink\\backend\\backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jzuta\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.11\\microsoft.aspnetcore.openapi.9.0.11.nupkg.sha512",
+    "C:\\Users\\jzuta\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

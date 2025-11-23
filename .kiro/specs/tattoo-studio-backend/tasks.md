@@ -1,6 +1,6 @@
 # Implementation Plan
 
-- [ ] 1. Configurar proyecto ASP.NET Core Web API
+- [x] 1. Configurar proyecto ASP.NET Core Web API
 
   - Crear nuevo proyecto con .NET 8.0
   - Configurar estructura de carpetas (Controllers, Services, Models, Data)

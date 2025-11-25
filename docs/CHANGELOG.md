@@ -484,3 +484,17 @@ Todos los componentes ahora incluyen:
 ### 🚀 Listo para Producción
 
 El proyecto está completamente funcional, optimizado, accesible y documentado. Las tareas pendientes son opcionales y pueden realizarse según necesidad.
+
+---
+
+## [2025-11-21] - Merge backend scaffolding a master
+
+### ✅ Hecho
+
+- feat(backend): scaffolding y configuración inicial en .NET 8.0
+- chore(backend): estructura de carpetas Controllers, Services, Validators, Migrations
+- feat(backend): modelos de datos y DTOs para contacto y autenticación
+- feat(backend): configuración de Entity Framework Core y migración inicial
+- feat(backend): validación con FluentValidation
+- chore(backend): exclusión de archivos innecesarios y limpieza
+- docs: actualiza STATUS tras verificación y merge exitoso

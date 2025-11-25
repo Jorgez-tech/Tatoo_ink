@@ -8,7 +8,7 @@
   - Configurar appsettings.json con secciones para ConnectionStrings, EmailSettings, CorsSettings
   - _Requirements: 7.1, 7.2, 7.3, 7.4_
 
-- [ ] 2. Implementar modelos de datos y DTOs
+- [x] 2. Implementar modelos de datos y DTOs
 
   - Crear entidad ContactMessage con todas las propiedades (Id, Name, Email, Phone, Message, WantsAppointment, CreatedAt, EmailSent, EmailSentAt)
   - Crear ContactRequestDto para recibir datos del frontend
@@ -16,7 +16,7 @@
   - Crear ServiceResult para comunicación entre capas
   - _Requirements: 1.1, 2.1, 2.2, 3.2, 3.3_
 
-- [ ] 3. Configurar Entity Framework Core y base de datos
+- [x] 3. Configurar Entity Framework Core y base de datos
 
   - Crear ApplicationDbContext con DbSet<ContactMessage>
   - Configurar entidad ContactMessage con Fluent API (longitudes máximas, índices, valores por defecto)
@@ -34,7 +34,7 @@
   - **Property 8: Timestamp recording**
   - **Validates: Requirements 3.3**
 
-- [ ] 4. Implementar validación con FluentValidation
+- [x] 4. Implementar validación con FluentValidation
 
   - Crear ContactRequestValidator con reglas para todos los campos
   - Validar Name: NotEmpty, MaxLength(100)
@@ -60,7 +60,7 @@
   - **Property 3: Invalid input rejection**
   - **Validates: Requirements 1.5, 8.1**
 
-- [ ] 5. Implementar servicio de correo electrónico
+- [x] 5. Implementar servicio de correo electrónico
 
   - Crear interfaz IEmailService con método SendContactNotificationAsync
   - Implementar SendGridEmailService usando SendGrid SDK
@@ -83,7 +83,7 @@
   - Probar manejo de errores de envío
   - Probar configuración de destinatario
 
-- [ ] 6. Implementar capa de lógica de negocio (ContactService)
+- [x] 6. Implementar capa de lógica de negocio (ContactService)
 
   - Crear interfaz IContactService con método ProcessContactMessageAsync
   - Implementar ContactService con inyección de ApplicationDbContext e IEmailService
@@ -131,7 +131,7 @@
   - Probar manejo de excepciones de email
   - Probar mapeo correcto de DTO a entidad
 
-- [ ] 7. Implementar controlador API (ContactController)
+- [x] 7. Implementar controlador API (ContactController)
 
   - Crear ContactController con inyección de IContactService
   - Implementar endpoint POST /api/contact

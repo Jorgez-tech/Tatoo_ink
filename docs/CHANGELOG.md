@@ -6,7 +6,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ## [2025-11-09] - Ajustes Fase 1 (Navegación y Metadatos)
 
-### ✅ Hecho
+### Hecho
 
 - fix(nav): "Inicio" → `#home` y se agrega `id="home"` en `Hero` para scroll y sección activa.
 - chore(html): `lang="es"` y `title="Ink Studio"` en `index.html`.
@@ -15,17 +15,17 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ## [2025-11-07] - Finalización de Fase 2: Optimización Completa
 
-### ✅ Completado
+### Completado
 
 #### Optimización Responsive
 
-- **Hero**: Tamaños de texto adaptativos (4xl→7xl), botones full-width en móvil, padding responsive
-- **Services**: Grid adaptativo (1→2→4 columnas), títulos escalables, espaciado optimizado
-- **Gallery**: Grid responsive (1→2→3 columnas), gaps adaptativos, lightbox optimizado
-- **About**: Orden de columnas invertido en móvil, imagen decorativa oculta en móvil, stats responsive
-- **Contact**: Formulario adaptativo, grid responsive, mensajes de error optimizados
-- **Footer**: Grid 1→2→3 columnas, tamaños de texto adaptativos, espaciado mejorado
-- **Navbar**: Ya optimizado con menú hamburguesa y scroll spy
+- Hero: Tamaños de texto adaptativos (4xl→7xl), botones full-width en móvil, padding responsive
+- Services: Grid adaptativo (1→2→4 columnas), títulos escalables, espaciado optimizado
+- Gallery: Grid responsive (1→2→3 columnas), gaps adaptativos, lightbox optimizado
+- About: Orden de columnas invertido en móvil, imagen decorativa oculta en móvil, stats responsive
+- Contact: Formulario adaptativo, grid responsive, mensajes de error optimizados
+- Footer: Grid 1→2→3 columnas, tamaños de texto adaptativos, espaciado mejorado
+- Navbar: Ya optimizado con menú hamburguesa y scroll spy
 
 #### Mejoras de Animaciones
 
@@ -33,13 +33,13 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - Delays escalonados para efectos visuales progresivos
 - Clases de animación integradas en todos los componentes
 
-### 📊 Progreso Actualizado
+### Progreso Actualizado
 
-- **Fase 2**: 90% → 100% (↑10%)
-- **Progreso Global**: 50% → 55% (↑5%)
-- **Estado**: Fase 2 COMPLETADA ✅
+- Fase 2: 90% → 100% (↑10%)
+- Progreso Global: 50% → 55% (↑5%)
+- Estado: Fase 2 COMPLETADA
 
-### 📝 Notas
+### Notas
 
 - Todos los componentes optimizados para móvil, tablet y desktop
 - Breakpoints: sm (640px), md (768px), lg (1024px)
@@ -50,27 +50,27 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ## [2025-11-07] - Optimizaciones de Fase 2 y Mejoras de UX
 
-### ✅ Completado
+### Completado
 
 #### Scroll Spy y Navegación
 
-- **Scroll spy en Navbar**: Implementado hook `use-active-section` para detectar sección activa
-- **Smooth scroll global**: Agregado `scroll-behavior: smooth` en HTML
-- **Navegación mejorada**: Enlaces destacados cuando la sección está activa
-- **Indicador visual**: Borde inferior blanco en sección activa (desktop) y texto en negrita (móvil)
+- Scroll spy en Navbar: Implementado hook `use-active-section` para detectar sección activa
+- Smooth scroll global: Agregado `scroll-behavior: smooth` en HTML
+- Navegación mejorada: Enlaces destacados cuando la sección está activa
+- Indicador visual: Borde inferior blanco en sección activa (desktop) y texto en negrita (móvil)
 
 #### Animaciones
 
-- **Animaciones de entrada**: Creadas animaciones `fadeIn` y `fadeInUp` con keyframes CSS
-- **Delays escalonados**: Clases de utilidad para delays de 100ms a 500ms
-- **Transiciones suaves**: Animaciones de 0.6s con ease-out
+- Animaciones de entrada: Creadas animaciones `fadeIn` y `fadeInUp` con keyframes CSS
+- Delays escalonados: Clases de utilidad para delays de 100ms a 500ms
+- Transiciones suaves: Animaciones de 0.6s con ease-out
 
 #### Lazy Loading
 
-- **Lazy loading de imágenes**: Implementado en `ImageWithFallback` con atributo `loading="lazy"`
-- **Placeholders animados**: Skeleton loader con `animate-pulse` mientras carga
-- **Transiciones de opacidad**: Fade-in suave cuando la imagen termina de cargar
-- **Estado de carga**: Manejo de estados loading/error/success
+- Lazy loading de imágenes: Implementado en `ImageWithFallback` con atributo `loading="lazy"`
+- Placeholders animados: Skeleton loader con `animate-pulse` mientras carga
+- Transiciones de opacidad: Fade-in suave cuando la imagen termina de cargar
+- Estado de carga: Manejo de estados loading/error/success
 
 #### Archivos Modificados
 
@@ -79,12 +79,12 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - `src/styles/globals.css` - Animaciones y smooth scroll global
 - `src/components/ui/ImageWithFallback.tsx` - Lazy loading y placeholders
 
-### 📊 Progreso Actualizado
+### Progreso Actualizado
 
-- **Fase 2**: 60% → 90% (↑30%)
-- **Progreso Global**: 40% → 50% (↑10%)
+- Fase 2: 60% → 90% (↑30%)
+- Progreso Global: 40% → 50% (↑10%)
 
-### 📝 Notas
+### Notas
 
 - Mejoras significativas en experiencia de usuario
 - Performance optimizado con lazy loading
@@ -95,31 +95,31 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ## [2025-11-07] - Verificación y Confirmación de Fase 1
 
-### ✅ Verificado
+### Verificado
 
 #### Estado de la Fase 1
 
-- **Fase 1 COMPLETADA al 100%**
+- Fase 1 COMPLETADA al 100%
 - Todos los componentes reorganizados correctamente:
-  - `components/layout/` - Navbar, Footer ✅
-  - `components/sections/` - Hero, Services, Gallery, About, Contact ✅
-  - `components/ui/` - Solo 6 componentes necesarios ✅
+  - `components/layout/` - Navbar, Footer
+  - `components/sections/` - Hero, Services, Gallery, About, Contact
+  - `components/ui/` - Solo 6 componentes necesarios
 - Archivos de configuración creados y funcionando:
-  - `config/business-info.ts` ✅
-  - `config/content.ts` ✅
-  - `config/images.ts` ✅
-  - `config/navigation.ts` ✅
-  - `config/services.ts` ✅
-  - `config/api.ts` ✅
-- Eliminación exitosa de 41 componentes UI no utilizados ✅
-- Estructura de carpetas limpia y organizada ✅
+  - `config/business-info.ts`
+  - `config/content.ts`
+  - `config/images.ts`
+  - `config/navigation.ts`
+  - `config/services.ts`
+  - `config/api.ts`
+- Eliminación exitosa de 41 componentes UI no utilizados
+- Estructura de carpetas limpia y organizada
 
 #### Documentación Actualizada
 
 - STATUS.md actualizado con fecha actual
 - CHANGELOG.md actualizado con verificación de Fase 1
 
-### 📝 Notas
+### Notas
 
 - Proyecto estable y funcionando correctamente
 - Fase 2 en progreso (60% completada)
@@ -130,22 +130,22 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ## [2025-11-05] - Configuración Inicial y Estabilización
 
-### ✅ Completado
+### Completado
 
 #### Configuración del Proyecto
 
 - Instalación de dependencias necesarias:
   - `lucide-react` - Librería de iconos
-  - Radix UI components - Componentes de UI accesibles
+  - Radix UI components - Componentes UI accesibles
   - `class-variance-authority` - Manejo de variantes de estilos
   - `clsx` + `tailwind-merge` - Utilidades CSS
   - Tailwind CSS v3.4.17 - Framework de estilos
 
 #### Corrección de Errores
 
-- **Imports incorrectos**: Todos los componentes UI tenían versiones hardcodeadas en imports (ej: `@radix-ui/react-label@2.1.2`)
+- Imports incorrectos: Todos los componentes UI tenían versiones hardcodeadas en imports (ej: `@radix-ui/react-label@2.1.2`)
   - Solución: Script automatizado para corregir ~47 archivos
-- **Configuración de Tailwind**: Inicialmente se instaló Tailwind v4 que causaba conflictos
+- Configuración de Tailwind: Inicialmente se instaló Tailwind v4 que causaba conflictos
   - Solución: Downgrade a v3.4.17 (versión estable)
   - Creación de `tailwind.config.js` y `postcss.config.js`
 
@@ -210,7 +210,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - `docs/04-FASE-4-FINALIZACION.md` - Plan de finalización
 - `docs/CHANGELOG.md` - Este archivo
 
-### ⏳ Pendiente
+### Pendiente
 
 - Inicialización de repositorio Git
 - Creación de `.gitignore`
@@ -227,7 +227,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 - Imágenes cargando desde URLs externas (Unsplash)
 - Formulario de contacto no funcional (sin backend)
 
-### 📝 Notas
+### Notas
 
 - El proyecto está basado en un diseño de Figma sin modificaciones
 - Es un prototipo/demo para futuros clientes
@@ -268,7 +268,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ## [2025-11-20] - Finalización de Fase 3: Documentación Completa
 
-### ✅ Completado
+### Completado
 
 #### JSDoc en Componentes
 
@@ -329,20 +329,20 @@ Todos los componentes ahora incluyen:
 - `docs/STATUS.md` - Progreso actualizado a 75%
 - `docs/CHANGELOG.md` - Este archivo
 
-### 📊 Progreso Actualizado
+### Progreso Actualizado
 
 - **Fase 3**: 0% → 100% (↑100%)
 - **Progreso Global**: 55% → 75% (↑20%)
-- **Estado**: Fase 3 COMPLETADA ✅
+- **Estado**: Fase 3 COMPLETADA
 
-### 📝 Notas
+### Notas
 
 - Todos los componentes tienen documentación JSDoc completa
 - Tres documentos principales creados (README, CUSTOMIZATION, STRUCTURE)
 - Proyecto completamente documentado y listo para nuevos desarrolladores
 - Listo para iniciar Fase 4 (Finalización)
 
-### 🎯 Próximos Pasos
+### Próximos Pasos
 
 - Fase 4: Optimización de imágenes
 - Fase 4: Performance optimization
@@ -353,7 +353,7 @@ Todos los componentes ahora incluyen:
 
 ## [2025-11-21] - Finalización de Fase 4: Performance, Accesibilidad y SEO
 
-### ✅ Completado
+### Completado
 
 #### Performance Optimization
 
@@ -437,13 +437,13 @@ Todos los componentes ahora incluyen:
 - `docs/04-FASE-4-FINALIZACION.md` - Actualizado
 - `docs/STATUS.md` - Progreso actualizado a 95%
 
-### 📊 Progreso Actualizado
+### Progreso Actualizado
 
 - **Fase 4**: 0% → 90% (↑90%)
 - **Progreso Global**: 75% → 95% (↑20%)
 - **Estado**: Fase 4 COMPLETADA (90%) ✅
 
-### 📈 Métricas Actuales
+### Métricas Actuales
 
 **Bundle Size:**
 
@@ -466,7 +466,7 @@ Todos los componentes ahora incluyen:
 - robots.txt: ✅
 - Manifest: ✅
 
-### 📝 Notas
+### Notas
 
 - Proyecto listo para producción al 95%
 - Bundle size excelente (80KB gzipped)
@@ -474,14 +474,14 @@ Todos los componentes ahora incluyen:
 - SEO optimizado
 - Documentación completa para deployment
 
-### 🎯 Tareas Opcionales Pendientes
+### Tareas Opcionales Pendientes
 
 - [ ] Migrar imágenes a local + WebP/AVIF
 - [ ] Auditoría Lighthouse completa
 - [ ] Structured data (JSON-LD)
 - [ ] Deploy a producción
 
-### 🚀 Listo para Producción
+### Listo para Producción
 
 El proyecto está completamente funcional, optimizado, accesible y documentado. Las tareas pendientes son opcionales y pueden realizarse según necesidad.
 
@@ -489,7 +489,7 @@ El proyecto está completamente funcional, optimizado, accesible y documentado. 
 
 ## [2025-11-21] - Merge backend scaffolding a master
 
-### ✅ Hecho
+### Hecho
 
 - feat(backend): scaffolding y configuración inicial en .NET 8.0
 - chore(backend): estructura de carpetas Controllers, Services, Validators, Migrations
@@ -498,3 +498,9 @@ El proyecto está completamente funcional, optimizado, accesible y documentado. 
 - feat(backend): validación con FluentValidation
 - chore(backend): exclusión de archivos innecesarios y limpieza
 - docs: actualiza STATUS tras verificación y merge exitoso
+
+---
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

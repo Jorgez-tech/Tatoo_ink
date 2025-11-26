@@ -28,44 +28,44 @@ Landing page profesional para estudio de tatuajes "Ink Studio", basada en diseñ
 
 ### Infraestructura
 
-- [x] Proyecto Vite + React + TypeScript configurado
-- [x] Tailwind CSS v3 instalado y funcionando
-- [x] Todas las dependencias instaladas
-- [x] Servidor de desarrollo corriendo sin errores
-- [x] PostCSS configurado correctamente
-- [x] Path aliases configurados (@/)
-- [x] Git inicializado con commits organizados
+- Proyecto Vite + React + TypeScript configurado
+- Tailwind CSS v3 instalado y funcionando
+- Todas las dependencias instaladas
+- Servidor de desarrollo corriendo sin errores
+- PostCSS configurado correctamente
+- Path aliases configurados (@/)
+- Git inicializado con commits organizados
 
 ### Fase 1: Auditoría y Limpieza (100%)
 
-- [x] Auditoría de componentes UI completada
-- [x] Eliminación de 41 componentes no utilizados
-- [x] Reorganización de estructura de carpetas
-- [x] Limpieza de archivos no utilizados
-- [x] Estructura .github/ con documentación
-- [x] Convención de commits en español
+- Auditoría de componentes UI completada
+- Eliminación de 41 componentes no utilizados
+- Reorganización de estructura de carpetas
+- Limpieza de archivos no utilizados
+- Estructura .github/ con documentación
+- Convención de commits en español
 
 ### Fase 2: Optimización de Código (100%)
 
-- [x] Archivos de configuración creados (business-info, content, images, navigation, services)
-- [x] Tipos TypeScript centralizados
-- [x] Todos los componentes refactorizados para usar configuración
-- [x] Validación de formulario con react-hook-form
-- [x] Preparación para backend ASP.NET Core
-- [x] Lightbox de Gallery mejorado (navegación, ESC, teclado)
-- [x] Scroll spy en Navbar (sección activa destacada)
-- [x] Animaciones mejoradas (fadeIn, fadeInUp con delays)
-- [x] Smooth scroll global implementado
-- [x] Lazy loading de imágenes con placeholders
-- [x] Responsive optimizado en todos los componentes (Hero, Services, Gallery, About, Contact, Footer)
+- Archivos de configuración creados (business-info, content, images, navigation, services)
+- Tipos TypeScript centralizados
+- Todos los componentes refactorizados para usar configuración
+- Validación de formulario con react-hook-form
+- Preparación para backend ASP.NET Core
+- Lightbox de Gallery mejorado (navegación, ESC, teclado)
+- Scroll spy en Navbar (sección activa destacada)
+- Animaciones mejoradas (fadeIn, fadeInUp con delays)
+- Smooth scroll global implementado
+- Lazy loading de imágenes con placeholders
+- Responsive optimizado en todos los componentes (Hero, Services, Gallery, About, Contact, Footer)
 
 ### Estilos
 
-- [x] Variables CSS configuradas (globals.css)
-- [x] Tailwind funcionando correctamente
-- [x] Design tokens implementados
-- [x] Responsive básico funcionando
-- [x] Configuración de colores personalizados corregida
+- Variables CSS configuradas (globals.css)
+- Tailwind funcionando correctamente
+- Design tokens implementados
+- Responsive básico funcionando
+- Configuración de colores personalizados corregida
 
 ---
 
@@ -79,11 +79,11 @@ No hay tareas pendientes. El proyecto está completo y listo para producción.
 
 ### Tareas Finales Opcionales
 
-1. [ ] Migrar imágenes a local + WebP/AVIF
-2. [ ] Auditoría Lighthouse completa
-3. [ ] Structured data (JSON-LD)
-4. [ ] Testing con usuarios reales
-5. [ ] Deploy a producción
+1. Migrar imágenes a local + WebP/AVIF
+2. Auditoría Lighthouse completa
+3. Structured data (JSON-LD)
+4. Testing con usuarios reales
+5. Deploy a producción
 
 ---
 
@@ -91,23 +91,23 @@ No hay tareas pendientes. El proyecto está completo y listo para producción.
 
 ### Tamaño del Proyecto
 
-- **Archivos TypeScript/JSX:** ~60 archivos
-- **Componentes UI:** 47 (40 no utilizados)
-- **Dependencias:** 26 packages
-- **Bundle Size:** ~2.5 MB (dev), TBD (production)
+- Archivos TypeScript/JSX: ~60 archivos
+- Componentes UI: 47 (40 no utilizados)
+- Dependencias: 26 packages
+- Bundle Size: ~2.5 MB (dev), TBD (production)
 
 ### Líneas de Código
 
-- **Componentes principales:** ~800 líneas
-- **Componentes UI:** ~4,000 líneas (mayoría no usada)
-- **Estilos:** ~250 líneas
+- Componentes principales: ~800 líneas
+- Componentes UI: ~4,000 líneas (mayoría no usada)
+- Estilos: ~250 líneas
 
 ### Calidad
 
-- **TypeScript:** [OK] Sin errores de compilación
-- **ESLint:** [WARNING] 1 warning (Fast Refresh en button.tsx)
-- **Tests:** [PENDIENTE] No implementados aún
-- **Lighthouse:** [PENDIENTE] Pendiente de medir
+- TypeScript: [OK] Sin errores de compilación
+- ESLint: [WARNING] 1 warning (Fast Refresh en button.tsx)
+- Tests: [PENDIENTE] No implementados aún
+- Lighthouse: [PENDIENTE] Pendiente de medir
 
 ---
 
@@ -119,9 +119,9 @@ Ninguno
 
 ### Importantes
 
-- **40 componentes UI no utilizados** - Inflan el proyecto innecesariamente
-- **Imágenes externas** - Dependencia de Unsplash, pueden fallar
-- **Formulario no funcional** - Sin backend para envío
+- 40 componentes UI no utilizados - Inflan el proyecto innecesariamente
+- Imágenes externas - Dependencia de Unsplash, pueden fallar
+- Formulario no funcional - Sin backend para envío
 
 ### Menores
 
@@ -236,3 +236,9 @@ tatoo_ink.client/
 - Documentación actualizada (STATUS/CHANGELOG)
 
 **Próximo hito:** Fase 1 completada (estimado: 1-2 sesiones)
+
+---
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

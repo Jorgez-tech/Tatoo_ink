@@ -1,8 +1,8 @@
-# 📁 Estructura del Proyecto
+# Estructura del Proyecto
 
 Documentación detallada de la arquitectura y organización del proyecto Ink Studio.
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 1. [Visión General](#visión-general)
 2. [Estructura de Carpetas](#estructura-de-carpetas)
@@ -332,7 +332,7 @@ export const galleryContent: {
 
 export const aboutContent: {
   title: string
-  paragraphs: string[]
+  paragraphs: string[]"
 }
 
 export const contactContent: {
@@ -627,7 +627,7 @@ Cierre: ESC/backdrop/botón X
 
 ---
 
-## 🔧 Configuración de Build
+## Configuración de Build
 
 ### Vite (vite.config.ts)
 
@@ -671,7 +671,7 @@ module.exports = {
 
 ---
 
-## 📦 Dependencias Principales
+## Dependencias Principales
 
 **Producción:**
 
@@ -691,7 +691,7 @@ module.exports = {
 
 ---
 
-## 🚀 Scripts
+## Scripts
 
 ```bash
 npm run dev      # Servidor de desarrollo
@@ -702,7 +702,7 @@ npm run lint     # Linting
 
 ---
 
-## 📝 Convenciones
+## Convenciones
 
 ### Nombres de Archivos
 
@@ -739,3 +739,7 @@ Para más información, consulta:
 - `docs/CUSTOMIZATION.md` - Guía de personalización
 - `docs/BACKEND-INTEGRATION.md` - Integración con backend
 - `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

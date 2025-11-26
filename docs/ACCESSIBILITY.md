@@ -1,18 +1,18 @@
-# ♿ Accesibilidad - Ink Studio
+# Accesibilidad - Ink Studio
 
 Documentación de las características de accesibilidad implementadas en el proyecto.
 
-## 📋 Estándares
+## Estándares
 
 Este proyecto cumple con:
 
-- **WCAG 2.1 Nivel AA** (Web Content Accessibility Guidelines)
-- **ARIA 1.2** (Accessible Rich Internet Applications)
-- **Semantic HTML5**
+- WCAG 2.1 Nivel AA (Web Content Accessibility Guidelines)
+- ARIA 1.2 (Accessible Rich Internet Applications)
+- Semantic HTML5
 
 ---
 
-## ✅ Características Implementadas
+## Características Implementadas
 
 ### 1. Contraste de Colores
 
@@ -193,7 +193,7 @@ useEffect(() => {
 
 ---
 
-## 🧪 Testing de Accesibilidad
+## Testing de Accesibilidad
 
 ### Herramientas Recomendadas
 
@@ -231,7 +231,7 @@ useEffect(() => {
 
 ---
 
-## 📊 Métricas Actuales
+## Métricas Actuales
 
 ### Lighthouse Score (Objetivo)
 
@@ -323,3 +323,7 @@ useEffect(() => {
 - Variables de color en `src/styles/globals.css`
 - Componentes UI accesibles en `src/components/ui/`
 - Utilidad `cn()` para combinar clases en `src/lib/utils.ts`
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

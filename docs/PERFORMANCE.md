@@ -1,31 +1,31 @@
-# ⚡ Performance - Ink Studio
+# Performance - Ink Studio
 
 Documentación de optimizaciones de rendimiento implementadas en el proyecto.
 
-## 📊 Métricas Objetivo
+## Métricas Objetivo
 
 ### Core Web Vitals
 
-- **LCP (Largest Contentful Paint):** < 2.5s ⚡
-- **FID (First Input Delay):** < 100ms ⚡
-- **CLS (Cumulative Layout Shift):** < 0.1 ⚡
+- LCP (Largest Contentful Paint): < 2.5s
+- FID (First Input Delay): < 100ms
+- CLS (Cumulative Layout Shift): < 0.1
 
 ### Lighthouse Scores
 
-- **Performance:** > 90
-- **Accessibility:** > 95
-- **Best Practices:** > 90
-- **SEO:** > 90
+- Performance: > 90
+- Accessibility: > 95
+- Best Practices: > 90
+- SEO: > 90
 
 ### Bundle Size
 
-- **JavaScript:** < 250KB (gzipped)
-- **CSS:** < 30KB (gzipped)
-- **Total:** < 500KB (gzipped)
+- JavaScript: < 250KB (gzipped)
+- CSS: < 30KB (gzipped)
+- Total: < 500KB (gzipped)
 
 ---
 
-## ✅ Optimizaciones Implementadas
+## Optimizaciones Implementadas
 
 ### 1. Optimización de Imágenes
 
@@ -189,7 +189,7 @@ useEffect(() => {
 
 ---
 
-## 🔍 Análisis de Bundle
+## Análisis de Bundle
 
 ### Dependencias Principales
 
@@ -220,7 +220,7 @@ useEffect(() => {
 
 ---
 
-## 📈 Métricas Actuales
+## Métricas Actuales
 
 ### Build Stats
 
@@ -271,7 +271,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 ---
 
-## 🚀 Optimizaciones Pendientes
+## Optimizaciones Pendientes
 
 ### Alta Prioridad
 
@@ -354,7 +354,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 ---
 
-## 🧪 Testing de Performance
+## Testing de Performance
 
 ### Herramientas
 
@@ -390,7 +390,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 ---
 
-## 📚 Recursos
+## Recursos
 
 ### Guías
 
@@ -407,7 +407,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 ---
 
-## 📝 Notas
+## Notas
 
 **Estado actual:** Excelente base de performance
 
@@ -422,3 +422,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 2. Ejecutar auditoría completa con Lighthouse
 3. Implementar mejoras según resultados
 4. Documentar métricas reales
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

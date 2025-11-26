@@ -1,8 +1,8 @@
-# 🎨 Ink Studio - Landing Page
+# Ink Studio - Landing Page
 
 Landing page profesional para estudio de tatuajes, construida con React + TypeScript + Tailwind CSS.
 
-## 🚀 Stack Tecnológico
+## Stack Tecnológico
 
 - **Framework:** React 19 + Vite
 - **Lenguaje:** TypeScript
@@ -11,18 +11,18 @@ Landing page profesional para estudio de tatuajes, construida con React + TypeSc
 - **Validación:** React Hook Form
 - **Iconos:** Lucide React
 
-## ✅ Requisitos Previos
+## Requisitos Previos
 
 - Node.js 18 LTS o superior
 - npm 9+ (instalado junto con Node)
 
-## 📦 Instalación
+## Instalación
 
 ```bash
 npm install
 ```
 
-## 🔧 Desarrollo
+## Desarrollo
 
 ```bash
 npm run dev
@@ -30,7 +30,7 @@ npm run dev
 
 Abre [http://localhost:5173](http://localhost:5173) para ver la aplicación en modo desarrollo.
 
-## 🏗️ Build y Deploy
+## Build y Deploy
 
 ```bash
 npm run build
@@ -39,7 +39,7 @@ npm run preview
 
 El directorio `dist/` contiene los artefactos listos para despliegue. En escenarios con backend ASP.NET Core, publica el contenido de `dist/` dentro de `wwwroot/` o configura proxy inverso según necesidades.
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 src/
@@ -63,7 +63,7 @@ src/
 
 Consulta `docs/STRUCTURE.md` para detalles completos.
 
-## 🎨 Personalización
+## Personalización
 
 Para adaptar esta landing a un nuevo cliente:
 
@@ -75,32 +75,36 @@ Para adaptar esta landing a un nuevo cliente:
 
 Ver `docs/CUSTOMIZATION.md` para guía detallada.
 
-## 🧩 Características
+## Características
 
-- ✅ Diseño responsive (móvil, tablet, desktop)
-- ✅ Navegación con scroll spy (sección activa destacada)
-- ✅ Smooth scroll global
-- ✅ Lazy loading de imágenes con placeholders
-- ✅ Lightbox interactivo con navegación por teclado
-- ✅ Formulario validado con React Hook Form
-- ✅ Animaciones fadeIn/fadeInUp
-- ✅ Preparado para backend ASP.NET Core
-- ✅ Modo mock para desarrollo sin backend
-- ✅ Componentes documentados con JSDoc
+- Diseño responsive (móvil, tablet, desktop)
+- Navegación con scroll spy (sección activa destacada)
+- Smooth scroll global
+- Lazy loading de imágenes con placeholders
+- Lightbox interactivo con navegación por teclado
+- Formulario validado con React Hook Form
+- Animaciones fadeIn/fadeInUp
+- Preparado para backend ASP.NET Core
+- Modo mock para desarrollo sin backend
+- Componentes documentados con JSDoc
 
-## 🤝 Contribución
+## Contribución
 
 1. Crea una rama feature desde `main` siguiendo el formato `feature/<nombre>`
 2. Usa commits convencionales (`feat:`, `fix:`, `docs:`, `refactor:`, etc.)
 3. Ejecuta `npm run build` antes de abrir un PR
 
-## 📚 Documentación
+## Documentación
 
 - `docs/STRUCTURE.md` - Arquitectura del proyecto
 - `docs/CUSTOMIZATION.md` - Guía de personalización
 - `docs/BACKEND-INTEGRATION.md` - Integración con ASP.NET Core
 - `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
 
-## 📝 Licencia
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+
+## Licencia
 
 Este proyecto es un prototipo/demo para uso interno y clientes.

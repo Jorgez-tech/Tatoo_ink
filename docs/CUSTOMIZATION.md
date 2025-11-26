@@ -1,16 +1,16 @@
-# 🎨 Guía de Personalización
+# Guía de Personalización
 
 Esta guía te ayudará a adaptar la landing page de Ink Studio para un nuevo cliente o negocio.
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
-1. [Información del Negocio](#información-del-negocio)
-2. [Contenido de Secciones](#contenido-de-secciones)
-3. [Servicios](#servicios)
-4. [Imágenes](#imágenes)
-5. [Navegación](#navegación)
-6. [Colores y Estilos](#colores-y-estilos)
-7. [Backend](#backend)
+1. Información del Negocio
+2. Contenido de Secciones
+3. Servicios
+4. Imágenes
+5. Navegación
+6. Colores y Estilos
+7. Backend
 
 ---
 
@@ -354,3 +354,9 @@ Para más ayuda, consulta:
 
 - `docs/STRUCTURE.md` - Arquitectura del proyecto
 - `docs/BACKEND-INTEGRATION.md` - Integración con backend
+
+---
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

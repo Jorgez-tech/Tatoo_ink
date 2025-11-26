@@ -2,7 +2,7 @@
 
 Este documento sirve como referencia rápida cada vez que retomemos el trabajo en el proyecto.
 
-**NOTA:** Esta documentación no usa emoticones para mantener profesionalismo y compatibilidad con todos los sistemas.
+**NOTA:** Esta documentación no usa emoticones para mantener profesionalismo y compatibilidad con todos los sistemas. Los emojis están prohibidos en todo el proyecto y documentación.
 
 ---
 

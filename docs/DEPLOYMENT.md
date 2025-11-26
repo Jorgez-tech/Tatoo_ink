@@ -1,8 +1,8 @@
-# 🚀 Guía de Deployment
+# Guía de Deployment
 
 Guía completa para desplegar Ink Studio en diferentes plataformas.
 
-## 📋 Pre-requisitos
+## Pre-requisitos
 
 Antes de desplegar, asegúrate de:
 
@@ -16,7 +16,7 @@ Antes de desplegar, asegúrate de:
 
 ---
 
-## 🌐 Opciones de Hosting
+## Opciones de Hosting
 
 ### 1. Vercel (Recomendado)
 
@@ -264,7 +264,7 @@ Antes de desplegar, asegúrate de:
 
 ---
 
-## 🔧 Configuración de Dominio
+## Configuración de Dominio
 
 ### DNS Records
 
@@ -284,7 +284,7 @@ CNAME   www     inkstudio.cl        3600
 
 ---
 
-## 🔐 Variables de Entorno
+## Variables de Entorno
 
 ### Desarrollo (.env.local)
 
@@ -304,7 +304,7 @@ VITE_USE_MOCK_API=false
 
 ---
 
-## 📊 Post-Deployment Checklist
+## Post-Deployment Checklist
 
 ### Funcionalidad
 
@@ -350,7 +350,7 @@ VITE_USE_MOCK_API=false
 
 ---
 
-## 🔄 CI/CD con GitHub Actions
+## CI/CD con GitHub Actions
 
 **Archivo:** `.github/workflows/deploy.yml`
 
@@ -393,7 +393,7 @@ jobs:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Problema: 404 en rutas
 
@@ -449,7 +449,7 @@ npm run build
 
 ---
 
-## 📚 Recursos
+## Recursos
 
 ### Hosting
 
@@ -469,7 +469,7 @@ npm run build
 
 ---
 
-## 📝 Notas
+## Notas
 
 **Recomendación:** Usar Vercel o Netlify para proyectos frontend-only.
 
@@ -480,3 +480,7 @@ npm run build
 - Vercel/Netlify: Gratis (hobby)
 - VPS básico: $5-10/mes
 - Dominio: $10-15/año
+
+## Prohibición de emojis
+
+**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

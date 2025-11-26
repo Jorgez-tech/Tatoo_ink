@@ -501,6 +501,25 @@ El proyecto está completamente funcional, optimizado, accesible y documentado. 
 
 ---
 
+## [2025-11-26] - Prohibición de emojis
+
+### Completado
+
+- Se realizó búsqueda exhaustiva de emojis en todo el proyecto y documentación
+- No se encontraron emojis presentes
+- Se agregó nota explícita de prohibición de emojis en README.md y STATUS.md
+
+### Modificaciones
+
+- README.md: Sección de prohibición de emojis
+- docs/STATUS.md: Nota sobre prohibición de emojis
+
+### Notas
+
+- Si se detecta algún emoji en el futuro, debe eliminarse y reportarse en STATUS.md
+
+---
+
 ## Prohibición de emojis
 
 **NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.

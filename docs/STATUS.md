@@ -241,4 +241,4 @@ tatoo_ink.client/
 
 ## Prohibición de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA IMPORTANTE:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII. Si encuentras algún emoji, elimínalo y reporta aquí.

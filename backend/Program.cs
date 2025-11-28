@@ -1,4 +1,5 @@
 using backend.Data;
+using backend.Middleware;
 using backend.Services;
 using backend.Validators;
 using FluentValidation;
@@ -36,6 +37,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Middleware de manejo global de excepciones
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

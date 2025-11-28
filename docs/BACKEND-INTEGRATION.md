@@ -1,10 +1,10 @@
-# Integración con Backend ASP.NET Core
+# Integracion con Backend ASP.NET Core
 
-Este documento describe cómo integrar el frontend React con el backend ASP.NET Core usando scaffolding.
+Este documento describe como integrar el frontend React con el backend ASP.NET Core usando scaffolding.
 
 ---
 
-## 🌐 Autenticación en Backend ASP.NET Core
+## Autenticacion en Backend ASP.NET Core
 
 ### Endpoints
 
@@ -25,8 +25,8 @@ Este documento describe cómo integrar el frontend React con el backend ASP.NET 
 }
 ```
 - **Errores:**
-  - 409: El email ya está registrado
-  - 400: Datos inválidos
+  - 409: El email ya esta registrado
+  - 400: Datos invalidos
 
 #### Login de usuario
 - **POST** `/api/auth/login`
@@ -44,12 +44,12 @@ Este documento describe cómo integrar el frontend React con el backend ASP.NET 
 }
 ```
 - **Errores:**
-  - 401: Credenciales inválidas
-  - 400: Datos inválidos
+  - 401: Credenciales invalidas
+  - 400: Datos invalidos
 
 ---
 
-## 📋 Endpoint de Contacto
+## Endpoint de Contacto
 
 ### Request
 
@@ -76,10 +76,10 @@ Content-Type: application/json
 
 ```json
 {
-  "name": "Juan Pérez",
+  "name": "Juan Perez",
   "email": "juan@example.com",
   "phone": "+56 9 1234 5678",
-  "message": "Me gustaría agendar una cita para un tatuaje."
+  "message": "Me gustaria agendar una cita para un tatuaje."
 }
 ```
 
@@ -108,11 +108,11 @@ Content-Type: application/json
 
 ---
 
-## 🔧 Configuración del Frontend
+## Configuracion del Frontend
 
 ### Variables de Entorno
 
-Crear archivo `.env` en la raíz del proyecto:
+Crear archivo `.env` en la raiz del proyecto:
 
 ```env
 # Desarrollo local
@@ -121,7 +121,7 @@ VITE_API_BASE_URL=http://localhost:5000
 # Desarrollo local con HTTPS
 # VITE_API_BASE_URL=https://localhost:7001
 
-# Producción
+# Produccion
 # VITE_API_BASE_URL=https://api.inkstudio.cl
 ```
 
@@ -129,7 +129,7 @@ VITE_API_BASE_URL=http://localhost:5000
 
 ---
 
-## 🏗️ Modelo de Datos para ASP.NET Core
+## Modelo de Datos para ASP.NET Core
 
 ### DTO (Data Transfer Object)
 
@@ -141,10 +141,10 @@ public class ContactRequestDto
     public string Name { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "El email es obligatorio")]
-    [EmailAddress(ErrorMessage = "Email inválido")]
+    [EmailAddress(ErrorMessage = "Email invalido")]
     public string Email { get; set; } = string.Empty;
 
-    [Phone(ErrorMessage = "Formato de teléfono inválido")]
+    [Phone(ErrorMessage = "Formato de telefono invalido")]
     public string? Phone { get; set; }
 
     [Required(ErrorMessage = "El mensaje es obligatorio")]
@@ -165,7 +165,7 @@ public class ContactResponseDto
 
 ---
 
-## 🎯 Controlador ASP.NET Core
+## Controlador ASP.NET Core
 
 ### Ejemplo de Controller
 
@@ -197,7 +197,7 @@ public class ContactController : ControllerBase
             return BadRequest(new ContactResponseDto
             {
                 Success = false,
-                Message = "Datos inválidos",
+                Message = "Datos invalidos",
                 Errors = ModelState
             });
         }
@@ -228,7 +228,7 @@ public class ContactController : ControllerBase
 
 ---
 
-## 🔐 CORS Configuration
+## CORS Configuration
 
 Para permitir requests desde el frontend, configurar CORS en `Program.cs`:
 
@@ -251,7 +251,7 @@ app.UseCors("AllowFrontend");
 
 ---
 
-## 📧 Servicio de Email (Opcional)
+## Servicio de Email (Opcional)
 
 Ejemplo de servicio para enviar emails:
 
@@ -272,7 +272,7 @@ public class EmailService : IEmailService
 
     public async Task SendContactEmailAsync(ContactRequestDto request)
     {
-        // Implementar lógica de envío de email
+        // Implementar logica de envio de email
         // Usar SMTP, SendGrid, Azure Communication Services, etc.
     }
 }
@@ -280,7 +280,7 @@ public class EmailService : IEmailService
 
 ---
 
-## 🗄️ Base de Datos (Opcional)
+## Base de Datos (Opcional)
 
 Si necesitas guardar los mensajes en una base de datos:
 
@@ -299,24 +299,24 @@ public class ContactMessage
 
 ---
 
-## ✅ Validación
+## Validacion
 
-El frontend ya incluye validación, pero el backend también debe validar:
+El frontend ya incluye validacion, pero el backend tambien debe validar:
 
-- **Nombre:** Requerido, mínimo 2 caracteres
-- **Email:** Requerido, formato válido
-- **Teléfono:** Opcional, formato válido
-- **Mensaje:** Requerido, mínimo 10 caracteres
+- **Nombre:** Requerido, minimo 2 caracteres
+- **Email:** Requerido, formato valido
+- **Telefono:** Opcional, formato valido
+- **Mensaje:** Requerido, minimo 10 caracteres
 
 ---
 
-## 🚀 Pasos para Integración
+## Pasos para Integracion
 
 1. **Crear el endpoint en ASP.NET Core:**
 
    - Crear `ContactController`
    - Crear DTOs (`ContactRequestDto`, `ContactResponseDto`)
-   - Implementar lógica de negocio (email, BD, etc.)
+   - Implementar logica de negocio (email, BD, etc.)
 
 2. **Configurar CORS:**
 
@@ -328,7 +328,7 @@ El frontend ya incluye validación, pero el backend también debe validar:
    - Crear `.env` en el frontend
    - Configurar `VITE_API_BASE_URL`
 
-4. **Probar integración:**
+4. **Probar integracion:**
 
    - Iniciar backend ASP.NET Core
    - Iniciar frontend con `npm run dev`
@@ -338,16 +338,16 @@ El frontend ya incluye validación, pero el backend también debe validar:
 5. **Desplegar:**
    - Frontend: Vercel, Netlify, etc.
    - Backend: Azure, AWS, etc.
-   - Actualizar `VITE_API_BASE_URL` en producción
+   - Actualizar `VITE_API_BASE_URL` en produccion
 
 ---
 
-## 🔍 Testing
+## Testing
 
 ### Frontend
 
 ```bash
-# Asegurarse de que el backend esté corriendo
+# Asegurarse de que el backend este corriendo
 npm run dev
 ```
 
@@ -367,13 +367,13 @@ curl -X POST http://localhost:5000/api/contact \
 
 ---
 
-## 📝 Notas
+## Notas
 
-- El frontend está preparado para recibir errores de validación del backend
-- Los mensajes de error se mostrarán automáticamente en el formulario
+- El frontend esta preparado para recibir errores de validacion del backend
+- Los mensajes de error se mostraran automaticamente en el formulario
 - El formulario maneja estados de loading, success y error
 - Requiere backend ASP.NET Core corriendo para funcionar
 
 ---
 
-**Última actualización:** 2025-11-21
+**Ultima actualizacion:** 2025-11-21

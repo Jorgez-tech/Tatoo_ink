@@ -1,8 +1,8 @@
 # Accesibilidad - Ink Studio
 
-Documentación de las características de accesibilidad implementadas en el proyecto.
+Documentacion de las caracteristicas de accesibilidad implementadas en el proyecto.
 
-## Estándares
+## Estandares
 
 Este proyecto cumple con:
 
@@ -12,43 +12,43 @@ Este proyecto cumple con:
 
 ---
 
-## Características Implementadas
+## Caracteristicas Implementadas
 
 ### 1. Contraste de Colores
 
-**Requisito WCAG AA:** Ratio mínimo de 4.5:1 para texto normal, 3:1 para texto grande.
+**Requisito WCAG AA:** Ratio minimo de 4.5:1 para texto normal, 3:1 para texto grande.
 
-**Implementación:**
+**Implementacion:**
 
-- Texto principal sobre fondo blanco: `#030213` sobre `#ffffff` = **16.8:1** ✅
-- Texto en botones primarios: `#ffffff` sobre `#030213` = **16.8:1** ✅
-- Texto muted: `#717182` sobre `#ffffff` = **5.2:1** ✅
+- Texto principal sobre fondo blanco: `#030213` sobre `#ffffff` = **16.8:1** [OK]
+- Texto en botones primarios: `#ffffff` sobre `#030213` = **16.8:1** [OK]
+- Texto muted: `#717182` sobre `#ffffff` = **5.2:1** [OK]
 - Enlaces hover: Suficiente contraste en todos los estados
 
-**Herramientas de verificación:**
+**Herramientas de verificacion:**
 
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - Chrome DevTools Lighthouse
 
-### 2. Navegación por Teclado
+### 2. Navegacion por Teclado
 
-**Implementación:**
+**Implementacion:**
 
-- ✅ Todos los elementos interactivos son accesibles con Tab
-- ✅ Orden de tabulación lógico (top-to-bottom, left-to-right)
-- ✅ Estados de focus visibles con `ring` de Tailwind
-- ✅ Lightbox de galería navegable con flechas y ESC
-- ✅ Menú móvil accesible con teclado
-- ✅ Formulario completamente navegable
+- [OK] Todos los elementos interactivos son accesibles con Tab
+- [OK] Orden de tabulacion logico (top-to-bottom, left-to-right)
+- [OK] Estados de focus visibles con `ring` de Tailwind
+- [OK] Lightbox de galeria navegable con flechas y ESC
+- [OK] Menu movil accesible con teclado
+- [OK] Formulario completamente navegable
 
 **Atajos de teclado:**
 
 - `Tab` / `Shift+Tab` - Navegar entre elementos
 - `Enter` / `Space` - Activar botones y enlaces
-- `Escape` - Cerrar lightbox y menú móvil
-- `Arrow Left/Right` - Navegar imágenes en lightbox
+- `Escape` - Cerrar lightbox y menu movil
+- `Arrow Left/Right` - Navegar imagenes en lightbox
 
-### 3. HTML Semántico
+### 3. HTML Semantico
 
 **Estructura:**
 
@@ -66,22 +66,22 @@ Este proyecto cumple con:
 </body>
 ```
 
-**Jerarquía de headings:**
+**Jerarquia de headings:**
 
-- `<h1>` - Título principal en Hero (único por página)
-- `<h2>` - Títulos de secciones
-- `<h3>` - Subtítulos dentro de secciones
-- `<h4>` - Títulos de tarjetas
+- `<h1>` - Titulo principal en Hero (unico por pagina)
+- `<h2>` - Titulos de secciones
+- `<h3>` - Subtitulos dentro de secciones
+- `<h4>` - Titulos de tarjetas
 
 ### 4. Formularios Accesibles
 
-**Implementación:**
+**Implementacion:**
 
-- ✅ Todos los inputs tienen `<label>` asociados con `htmlFor`
-- ✅ Mensajes de error con `role="alert"`
-- ✅ Estados de validación con `aria-invalid`
-- ✅ Placeholders descriptivos
-- ✅ Campos requeridos marcados correctamente
+- [OK] Todos los inputs tienen `<label>` asociados con `htmlFor`
+- [OK] Mensajes de error con `role="alert"`
+- [OK] Estados de validacion con `aria-invalid`
+- [OK] Placeholders descriptivos
+- [OK] Campos requeridos marcados correctamente
 
 **Ejemplo:**
 
@@ -98,15 +98,15 @@ Este proyecto cumple con:
 )}
 ```
 
-### 5. Imágenes
+### 5. Imagenes
 
-**Implementación:**
+**Implementacion:**
 
-- ✅ Todas las imágenes tienen atributo `alt` descriptivo
-- ✅ Imágenes decorativas con `alt=""` (ninguna actualmente)
-- ✅ Lazy loading para imágenes no críticas
-- ✅ Placeholders mientras cargan
-- ✅ Fallback en caso de error
+- [OK] Todas las imagenes tienen atributo `alt` descriptivo
+- [OK] Imagenes decorativas con `alt=""` (ninguna actualmente)
+- [OK] Lazy loading para imagenes no criticas
+- [OK] Placeholders mientras cargan
+- [OK] Fallback en caso de error
 
 **Ejemplos de alt text:**
 
@@ -116,7 +116,7 @@ alt = "Estudio de tatuajes profesional con ambiente moderno";
 
 // Gallery
 alt = "Tatuaje de estilo realista en brazo";
-alt = "Diseño geométrico en espalda";
+alt = "Diseno geometrico en espalda";
 
 // About
 alt = "Interior del estudio Ink Studio";
@@ -124,11 +124,11 @@ alt = "Interior del estudio Ink Studio";
 
 ### 6. ARIA Labels
 
-**Implementación:**
+**Implementacion:**
 
 ```tsx
-// Botones de navegación
-<button aria-label="Cerrar galería">
+// Botones de navegacion
+<button aria-label="Cerrar galeria">
   <X />
 </button>
 
@@ -144,12 +144,12 @@ alt = "Interior del estudio Ink Studio";
 
 ### 7. Estados de Focus
 
-**Implementación:**
+**Implementacion:**
 
-- ✅ Ring visible en todos los elementos interactivos
-- ✅ Color de ring: `oklch(0.708 0 0)` con suficiente contraste
-- ✅ Offset de 3px para mejor visibilidad
-- ✅ No se elimina el outline por defecto
+- [OK] Ring visible en todos los elementos interactivos
+- [OK] Color de ring: `oklch(0.708 0 0)` con suficiente contraste
+- [OK] Offset de 3px para mejor visibilidad
+- [OK] No se elimina el outline por defecto
 
 **CSS:**
 
@@ -160,12 +160,12 @@ alt = "Interior del estudio Ink Studio";
 }
 ```
 
-### 8. Prevención de Scroll
+### 8. Prevencion de Scroll
 
-**Implementación:**
+**Implementacion:**
 
-- ✅ Cuando el lightbox está abierto, se previene el scroll del body
-- ✅ Se restaura el scroll al cerrar
+- [OK] Cuando el lightbox esta abierto, se previene el scroll del body
+- [OK] Se restaura el scroll al cerrar
 
 ```tsx
 useEffect(() => {
@@ -180,7 +180,7 @@ useEffect(() => {
 
 ### 9. Noscript
 
-**Implementación:**
+**Implementacion:**
 
 ```html
 <noscript>
@@ -199,18 +199,18 @@ useEffect(() => {
 
 1. **Lighthouse (Chrome DevTools)**
 
-   - Auditoría automática de accesibilidad
+   - Auditoria automatica de accesibilidad
    - Objetivo: Score > 95
 
 2. **axe DevTools**
 
-   - Extensión de Chrome/Firefox
+   - Extension de Chrome/Firefox
    - Detecta problemas de accesibilidad
 
 3. **WAVE (Web Accessibility Evaluation Tool)**
 
    - https://wave.webaim.org/
-   - Análisis visual de problemas
+   - Analisis visual de problemas
 
 4. **Screen Readers**
    - **NVDA** (Windows) - Gratuito
@@ -225,13 +225,13 @@ useEffect(() => {
 - [ ] Probar con screen reader (NVDA o VoiceOver)
 - [ ] Verificar contraste de colores con herramientas
 - [ ] Probar formulario con validaciones
-- [ ] Verificar que las imágenes tienen alt text
+- [ ] Verificar que las imagenes tienen alt text
 - [ ] Probar lightbox con teclado
-- [ ] Verificar que el menú móvil es accesible
+- [ ] Verificar que el menu movil es accesible
 
 ---
 
-## Métricas Actuales
+## Metricas Actuales
 
 ### Lighthouse Score (Objetivo)
 
@@ -242,18 +242,18 @@ useEffect(() => {
 
 ### Problemas Conocidos
 
-**Ninguno crítico actualmente.**
+**Ninguno critico actualmente.**
 
 **Mejoras futuras:**
 
-- [ ] Agregar skip links para navegación rápida
+- [ ] Agregar skip links para navegacion rapida
 - [ ] Implementar modo de alto contraste
-- [ ] Agregar preferencias de animación reducida
+- [ ] Agregar preferencias de animacion reducida
 - [ ] Mejorar mensajes de screen reader en lightbox
 
 ---
 
-## 🔧 Configuración de Preferencias de Usuario
+## Configuracion de Preferencias de Usuario
 
 ### Respeto a Preferencias del Sistema
 
@@ -279,9 +279,9 @@ useEffect(() => {
 
 ---
 
-## 📚 Recursos
+## Recursos
 
-### Guías y Documentación
+### Guias y Documentacion
 
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [MDN Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
@@ -296,26 +296,26 @@ useEffect(() => {
 
 ---
 
-## 🎯 Próximos Pasos
+## Proximos Pasos
 
-1. [ ] Ejecutar auditoría completa con Lighthouse
+1. [ ] Ejecutar auditoria completa con Lighthouse
 2. [ ] Testing con screen readers
 3. [ ] Implementar skip links
 4. [ ] Agregar soporte para `prefers-reduced-motion`
 5. [ ] Documentar resultados de testing
-6. [ ] Crear guía de accesibilidad para futuros desarrolladores
+6. [ ] Crear guia de accesibilidad para futuros desarrolladores
 
 ---
 
-## 📝 Notas para Desarrolladores
+## Notas para Desarrolladores
 
 **Al agregar nuevos componentes:**
 
-1. Usar HTML semántico apropiado
-2. Asegurar navegación por teclado
+1. Usar HTML semantico apropiado
+2. Asegurar navegacion por teclado
 3. Agregar ARIA labels cuando sea necesario
 4. Verificar contraste de colores
-5. Incluir alt text en imágenes
+5. Incluir alt text en imagenes
 6. Probar con teclado y screen reader
 
 **Recursos del proyecto:**
@@ -324,6 +324,6 @@ useEffect(() => {
 - Componentes UI accesibles en `src/components/ui/`
 - Utilidad `cn()` para combinar clases en `src/lib/utils.ts`
 
-## Prohibición de emojis
+## Prohibicion de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.

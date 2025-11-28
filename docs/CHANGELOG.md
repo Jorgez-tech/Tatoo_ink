@@ -1,50 +1,50 @@
 # Registro de Cambios
 
-Todos los cambios notables del proyecto se documentarán en este archivo.
+Todos los cambios notables del proyecto se documentaran en este archivo.
 
 ---
 
-## [2025-11-09] - Ajustes Fase 1 (Navegación y Metadatos)
+## [2025-11-09] - Ajustes Fase 1 (Navegacion y Metadatos)
 
 ### Hecho
 
-- fix(nav): "Inicio" → `#home` y se agrega `id="home"` en `Hero` para scroll y sección activa.
+- fix(nav): "Inicio" -> `#home` y se agrega `id="home"` en `Hero` para scroll y seccion activa.
 - chore(html): `lang="es"` y `title="Ink Studio"` en `index.html`.
 
 ---
 
-## [2025-11-07] - Finalización de Fase 2: Optimización Completa
+## [2025-11-07] - Finalizacion de Fase 2: Optimizacion Completa
 
 ### Completado
 
-#### Optimización Responsive
+#### Optimizacion Responsive
 
-- Hero: Tamaños de texto adaptativos (4xl→7xl), botones full-width en móvil, padding responsive
-- Services: Grid adaptativo (1→2→4 columnas), títulos escalables, espaciado optimizado
-- Gallery: Grid responsive (1→2→3 columnas), gaps adaptativos, lightbox optimizado
-- About: Orden de columnas invertido en móvil, imagen decorativa oculta en móvil, stats responsive
+- Hero: Tamanos de texto adaptativos (4xl->7xl), botones full-width en movil, padding responsive
+- Services: Grid adaptativo (1->2->4 columnas), titulos escalables, espaciado optimizado
+- Gallery: Grid responsive (1->2->3 columnas), gaps adaptativos, lightbox optimizado
+- About: Orden de columnas invertido en movil, imagen decorativa oculta en movil, stats responsive
 - Contact: Formulario adaptativo, grid responsive, mensajes de error optimizados
-- Footer: Grid 1→2→3 columnas, tamaños de texto adaptativos, espaciado mejorado
-- Navbar: Ya optimizado con menú hamburguesa y scroll spy
+- Footer: Grid 1->2->3 columnas, tamanos de texto adaptativos, espaciado mejorado
+- Navbar: Ya optimizado con menu hamburguesa y scroll spy
 
 #### Mejoras de Animaciones
 
-- Animaciones `fadeInUp` aplicadas a títulos y contenido
+- Animaciones `fadeInUp` aplicadas a titulos y contenido
 - Delays escalonados para efectos visuales progresivos
-- Clases de animación integradas en todos los componentes
+- Clases de animacion integradas en todos los componentes
 
 ### Progreso Actualizado
 
-- Fase 2: 90% → 100% (↑10%)
-- Progreso Global: 50% → 55% (↑5%)
+- Fase 2: 90% -> 100% (+10%)
+- Progreso Global: 50% -> 55% (+5%)
 - Estado: Fase 2 COMPLETADA
 
 ### Notas
 
-- Todos los componentes optimizados para móvil, tablet y desktop
+- Todos los componentes optimizados para movil, tablet y desktop
 - Breakpoints: sm (640px), md (768px), lg (1024px)
 - Experiencia de usuario consistente en todos los dispositivos
-- Listo para iniciar Fase 3 (Documentación)
+- Listo para iniciar Fase 3 (Documentacion)
 
 ---
 
@@ -52,12 +52,12 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ### Completado
 
-#### Scroll Spy y Navegación
+#### Scroll Spy y Navegacion
 
-- Scroll spy en Navbar: Implementado hook `use-active-section` para detectar sección activa
+- Scroll spy en Navbar: Implementado hook `use-active-section` para detectar seccion activa
 - Smooth scroll global: Agregado `scroll-behavior: smooth` en HTML
-- Navegación mejorada: Enlaces destacados cuando la sección está activa
-- Indicador visual: Borde inferior blanco en sección activa (desktop) y texto en negrita (móvil)
+- Navegacion mejorada: Enlaces destacados cuando la seccion esta activa
+- Indicador visual: Borde inferior blanco en seccion activa (desktop) y texto en negrita (movil)
 
 #### Animaciones
 
@@ -67,7 +67,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 #### Lazy Loading
 
-- Lazy loading de imágenes: Implementado en `ImageWithFallback` con atributo `loading="lazy"`
+- Lazy loading de imagenes: Implementado en `ImageWithFallback` con atributo `loading="lazy"`
 - Placeholders animados: Skeleton loader con `animate-pulse` mientras carga
 - Transiciones de opacidad: Fade-in suave cuando la imagen termina de cargar
 - Estado de carga: Manejo de estados loading/error/success
@@ -81,19 +81,19 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ### Progreso Actualizado
 
-- Fase 2: 60% → 90% (↑30%)
-- Progreso Global: 40% → 50% (↑10%)
+- Fase 2: 60% -> 90% (+30%)
+- Progreso Global: 40% -> 50% (+10%)
 
 ### Notas
 
 - Mejoras significativas en experiencia de usuario
 - Performance optimizado con lazy loading
-- Navegación más intuitiva con scroll spy
+- Navegacion mas intuitiva con scroll spy
 - Listo para completar responsive optimization
 
 ---
 
-## [2025-11-07] - Verificación y Confirmación de Fase 1
+## [2025-11-07] - Verificacion y Confirmacion de Fase 1
 
 ### Verificado
 
@@ -104,20 +104,20 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
   - `components/layout/` - Navbar, Footer
   - `components/sections/` - Hero, Services, Gallery, About, Contact
   - `components/ui/` - Solo 6 componentes necesarios
-- Archivos de configuración creados y funcionando:
+- Archivos de configuracion creados y funcionando:
   - `config/business-info.ts`
   - `config/content.ts`
   - `config/images.ts`
   - `config/navigation.ts`
   - `config/services.ts`
   - `config/api.ts`
-- Eliminación exitosa de 41 componentes UI no utilizados
+- Eliminacion exitosa de 41 componentes UI no utilizados
 - Estructura de carpetas limpia y organizada
 
-#### Documentación Actualizada
+#### Documentacion Actualizada
 
 - STATUS.md actualizado con fecha actual
-- CHANGELOG.md actualizado con verificación de Fase 1
+- CHANGELOG.md actualizado con verificacion de Fase 1
 
 ### Notas
 
@@ -128,46 +128,46 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ---
 
-## [2025-11-05] - Configuración Inicial y Estabilización
+## [2025-11-05] - Configuracion Inicial y Estabilizacion
 
 ### Completado
 
-#### Configuración del Proyecto
+#### Configuracion del Proyecto
 
-- Instalación de dependencias necesarias:
-  - `lucide-react` - Librería de iconos
+- Instalacion de dependencias necesarias:
+  - `lucide-react` - Libreria de iconos
   - Radix UI components - Componentes UI accesibles
   - `class-variance-authority` - Manejo de variantes de estilos
   - `clsx` + `tailwind-merge` - Utilidades CSS
   - Tailwind CSS v3.4.17 - Framework de estilos
 
-#### Corrección de Errores
+#### Correccion de Errores
 
-- Imports incorrectos: Todos los componentes UI tenían versiones hardcodeadas en imports (ej: `@radix-ui/react-label@2.1.2`)
-  - Solución: Script automatizado para corregir ~47 archivos
-- Configuración de Tailwind: Inicialmente se instaló Tailwind v4 que causaba conflictos
-  - Solución: Downgrade a v3.4.17 (versión estable)
-  - Creación de `tailwind.config.js` y `postcss.config.js`
+- Imports incorrectos: Todos los componentes UI tenian versiones hardcodeadas en imports (ej: `@radix-ui/react-label@2.1.2`)
+  - Solucion: Script automatizado para corregir ~47 archivos
+- Configuracion de Tailwind: Inicialmente se instalo Tailwind v4 que causaba conflictos
+  - Solucion: Downgrade a v3.4.17 (version estable)
+  - Creacion de `tailwind.config.js` y `postcss.config.js`
 
-#### Integración de Componentes
+#### Integracion de Componentes
 
 - Todos los componentes principales integrados en `App.tsx`:
-  - Navbar (navegación responsive)
-  - Hero (sección principal con imagen)
+  - Navbar (navegacion responsive)
+  - Hero (seccion principal con imagen)
   - Services (tarjetas de servicios)
-  - Gallery (galería con lightbox)
-  - About (información del estudio)
+  - Gallery (galeria con lightbox)
+  - About (informacion del estudio)
   - Contact (formulario de contacto)
-  - Footer (pie de página)
+  - Footer (pie de pagina)
 
 #### Estilos
 
-- Configuración de Tailwind CSS funcional
+- Configuracion de Tailwind CSS funcional
 - Import de `globals.css` con variables CSS
 - Sistema de design tokens configurado
-- Página renderizando correctamente con todos los estilos aplicados
+- Pagina renderizando correctamente con todos los estilos aplicados
 
-### Configuración Técnica
+### Configuracion Tecnica
 
 **Dependencias agregadas:**
 
@@ -195,51 +195,51 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 **Archivos modificados:**
 
-- `src/index.css` - Configuración de Tailwind
-- `src/App.tsx` - Integración de componentes
-- `tailwind.config.js` - Configuración de Tailwind
+- `src/index.css` - Configuracion de Tailwind
+- `src/App.tsx` - Integracion de componentes
+- `tailwind.config.js` - Configuracion de Tailwind
 - `postcss.config.js` - PostCSS config
-- `src/components/ui/*.tsx` - Corrección de imports (47 archivos)
+- `src/components/ui/*.tsx` - Correccion de imports (47 archivos)
 
-### Documentación Creada
+### Documentacion Creada
 
 - `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
-- `docs/01-FASE-1-AUDITORIA.md` - Plan de auditoría y limpieza
-- `docs/02-FASE-2-OPTIMIZACION.md` - Plan de optimización
-- `docs/03-FASE-3-DOCUMENTACION.md` - Plan de documentación
-- `docs/04-FASE-4-FINALIZACION.md` - Plan de finalización
+- `docs/01-FASE-1-AUDITORIA.md` - Plan de auditoria y limpieza
+- `docs/02-FASE-2-OPTIMIZACION.md` - Plan de optimizacion
+- `docs/03-FASE-3-DOCUMENTACION.md` - Plan de documentacion
+- `docs/04-FASE-4-FINALIZACION.md` - Plan de finalizacion
 - `docs/CHANGELOG.md` - Este archivo
 
 ### Pendiente
 
-- Inicialización de repositorio Git
-- Creación de `.gitignore`
-- Auditoría y eliminación de componentes UI no utilizados
-- Reorganización de estructura de carpetas
-- Separación de datos y presentación
-- Optimización de imágenes
-- Documentación de código (JSDoc)
+- Inicializacion de repositorio Git
+- Creacion de `.gitignore`
+- Auditoria y eliminacion de componentes UI no utilizados
+- Reorganizacion de estructura de carpetas
+- Separacion de datos y presentacion
+- Optimizacion de imagenes
+- Documentacion de codigo (JSDoc)
 
 ### Problemas Conocidos
 
 - Componente `button.tsx` tiene warning de Fast Refresh (exporta componente + constante)
 - Muchos componentes UI instalados pero no utilizados (~40 archivos)
-- Imágenes cargando desde URLs externas (Unsplash)
+- Imagenes cargando desde URLs externas (Unsplash)
 - Formulario de contacto no funcional (sin backend)
 
 ### Notas
 
-- El proyecto está basado en un diseño de Figma sin modificaciones
+- El proyecto esta basado en un diseno de Figma sin modificaciones
 - Es un prototipo/demo para futuros clientes
 - Stack: React 19 + TypeScript + Vite + Tailwind CSS v3
 - Servidor de desarrollo corriendo en `http://localhost:5173/`
 
 ---
 
-## Template para Próximas Entradas
+## Template para Proximas Entradas
 
 ```markdown
-## [YYYY-MM-DD] - Título del Cambio
+## [YYYY-MM-DD] - Titulo del Cambio
 
 ### [COMPLETADO]
 
@@ -266,7 +266,7 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 ---
 
-## [2025-11-20] - Finalización de Fase 3: Documentación Completa
+## [2025-11-20] - Finalizacion de Fase 3: Documentacion Completa
 
 ### Completado
 
@@ -279,46 +279,46 @@ Todos los cambios notables del proyecto se documentarán en este archivo.
 
 Todos los componentes ahora incluyen:
 
-- Descripción funcional del componente
+- Descripcion funcional del componente
 - Ejemplos de uso con `@example`
-- Documentación de props y dependencias
-- Anotación `@component` para identificación
+- Documentacion de props y dependencias
+- Anotacion `@component` para identificacion
 
-#### Documentación del Proyecto
+#### Documentacion del Proyecto
 
-- **README.md**: Actualizado con información completa
+- **README.md**: Actualizado con informacion completa
 
-  - Stack tecnológico detallado
-  - Instrucciones de instalación y desarrollo
+  - Stack tecnologico detallado
+  - Instrucciones de instalacion y desarrollo
   - Estructura del proyecto
-  - Características destacadas
-  - Guía de personalización básica
-  - Enlaces a documentación relacionada
+  - Caracteristicas destacadas
+  - Guia de personalizacion basica
+  - Enlaces a documentacion relacionada
 
-- **CUSTOMIZATION.md**: Guía completa de personalización (NUEVO)
+- **CUSTOMIZATION.md**: Guia completa de personalizacion (NUEVO)
 
-  - Cómo cambiar información del negocio
-  - Personalización de contenido por sección
-  - Configuración de servicios
-  - Gestión de imágenes
-  - Personalización de navegación
+  - Como cambiar informacion del negocio
+  - Personalizacion de contenido por seccion
+  - Configuracion de servicios
+  - Gestion de imagenes
+  - Personalizacion de navegacion
   - Cambio de colores y estilos
-  - Configuración de backend
-  - Checklist de personalización
+  - Configuracion de backend
+  - Checklist de personalizacion
   - Tips y problemas comunes
 
 - **STRUCTURE.md**: Arquitectura detallada del proyecto (NUEVO)
-  - Visión general y principios de diseño
+  - Vision general y principios de diseno
   - Estructura completa de carpetas
-  - Documentación de cada componente
-  - Explicación de archivos de configuración
+  - Documentacion de cada componente
+  - Explicacion de archivos de configuracion
   - Hooks y utilidades
   - Sistema de estilos
   - Tipos TypeScript
   - Flujo de datos
-  - Configuración de build
+  - Configuracion de build
   - Dependencias principales
-  - Convenciones de código
+  - Convenciones de codigo
 
 #### Archivos Modificados
 
@@ -331,27 +331,27 @@ Todos los componentes ahora incluyen:
 
 ### Progreso Actualizado
 
-- **Fase 3**: 0% → 100% (↑100%)
-- **Progreso Global**: 55% → 75% (↑20%)
+- **Fase 3**: 0% -> 100% (+100%)
+- **Progreso Global**: 55% -> 75% (+20%)
 - **Estado**: Fase 3 COMPLETADA
 
 ### Notas
 
-- Todos los componentes tienen documentación JSDoc completa
+- Todos los componentes tienen documentacion JSDoc completa
 - Tres documentos principales creados (README, CUSTOMIZATION, STRUCTURE)
 - Proyecto completamente documentado y listo para nuevos desarrolladores
-- Listo para iniciar Fase 4 (Finalización)
+- Listo para iniciar Fase 4 (Finalizacion)
 
-### Próximos Pasos
+### Proximos Pasos
 
-- Fase 4: Optimización de imágenes
+- Fase 4: Optimizacion de imagenes
 - Fase 4: Performance optimization
 - Fase 4: Accesibilidad WCAG AA
 - Fase 4: SEO meta tags avanzados
 
 ---
 
-## [2025-11-21] - Finalización de Fase 4: Performance, Accesibilidad y SEO
+## [2025-11-21] - Finalizacion de Fase 4: Performance, Accesibilidad y SEO
 
 ### Completado
 
@@ -360,9 +360,9 @@ Todos los componentes ahora incluyen:
 - **Bundle size optimizado**: 80KB gzipped (JS + CSS)
   - JavaScript: 74.59 KB gzipped
   - CSS: 5.73 KB gzipped
-- **Lazy loading**: Implementado en todas las imágenes no críticas
+- **Lazy loading**: Implementado en todas las imagenes no criticas
 - **Hero image optimization**: `loading="eager"` + `fetchpriority="high"`
-- **DNS prefetch/preconnect**: Para imágenes de Unsplash
+- **DNS prefetch/preconnect**: Para imagenes de Unsplash
 - **Animaciones optimizadas**: GPU-accelerated con `transform` y `opacity`
 - **prefers-reduced-motion**: Respeto a preferencias de usuario
 - **IntersectionObserver**: Para scroll spy eficiente
@@ -370,16 +370,16 @@ Todos los componentes ahora incluyen:
 #### Accesibilidad (WCAG AA)
 
 - **Contraste de colores**: Todos los textos cumplen ratio 4.5:1
-  - Texto principal: 16.8:1 ✅
-  - Texto muted: 5.2:1 ✅
-- **Navegación por teclado**: Completa en todos los componentes
+  - Texto principal: 16.8:1 [OK]
+  - Texto muted: 5.2:1 [OK]
+- **Navegacion por teclado**: Completa en todos los componentes
 - **Estados de focus**: Visibles con ring de 3px
-- **HTML semántico**: `<nav>`, `<main>`, `<section>`, `<footer>`
-- **Jerarquía de headings**: Un solo `<h1>`, estructura lógica
+- **HTML semantico**: `<nav>`, `<main>`, `<section>`, `<footer>`
+- **Jerarquia de headings**: Un solo `<h1>`, estructura logica
 - **Formularios accesibles**: Labels asociados, aria-invalid, role="alert"
-- **ARIA labels**: En botones de iconos y navegación
-- **Alt text**: Descriptivo en todas las imágenes
-- **Lightbox accesible**: Navegación con teclado (flechas, ESC)
+- **ARIA labels**: En botones de iconos y navegacion
+- **Alt text**: Descriptivo en todas las imagenes
+- **Lightbox accesible**: Navegacion con teclado (flechas, ESC)
 - **prefers-reduced-motion**: Animaciones deshabilitadas si se prefiere
 
 #### SEO
@@ -393,32 +393,32 @@ Todos los componentes ahora incluyen:
   - og:type, og:url, og:title, og:description, og:image
   - og:locale, og:site_name
 - **Twitter Card**: summary_large_image configurado
-- **PWA/Manifest**: Mejorado con descripción, orientación, categorías
-- **Theme color**: #030213 para móviles
+- **PWA/Manifest**: Mejorado con descripcion, orientacion, categorias
+- **Theme color**: #030213 para moviles
 - **Canonical URL**: Configurado
 - **robots.txt**: Creado con sitemap reference
 - **Noscript**: Mensaje mejorado para usuarios sin JS
 
-#### Documentación
+#### Documentacion
 
-- **PERFORMANCE.md**: Guía completa de optimizaciones
-  - Métricas objetivo (Core Web Vitals)
+- **PERFORMANCE.md**: Guia completa de optimizaciones
+  - Metricas objetivo (Core Web Vitals)
   - Optimizaciones implementadas
-  - Análisis de bundle
+  - Analisis de bundle
   - Optimizaciones pendientes
   - Herramientas de testing
-- **ACCESSIBILITY.md**: Documentación de accesibilidad
-  - Estándares WCAG 2.1 AA
-  - Características implementadas
+- **ACCESSIBILITY.md**: Documentacion de accesibilidad
+  - Estandares WCAG 2.1 AA
+  - Caracteristicas implementadas
   - Contraste de colores verificado
-  - Navegación por teclado
-  - HTML semántico
+  - Navegacion por teclado
+  - HTML semantico
   - Formularios accesibles
   - ARIA labels
   - Testing checklist
-- **DEPLOYMENT.md**: Guía de deployment
-  - Múltiples opciones de hosting (Vercel, Netlify, GitHub Pages, Cloudflare, VPS)
-  - Configuración de dominio
+- **DEPLOYMENT.md**: Guia de deployment
+  - Multiples opciones de hosting (Vercel, Netlify, GitHub Pages, Cloudflare, VPS)
+  - Configuracion de dominio
   - Variables de entorno
   - CI/CD con GitHub Actions
   - Post-deployment checklist
@@ -439,51 +439,51 @@ Todos los componentes ahora incluyen:
 
 ### Progreso Actualizado
 
-- **Fase 4**: 0% → 90% (↑90%)
-- **Progreso Global**: 75% → 95% (↑20%)
-- **Estado**: Fase 4 COMPLETADA (90%) ✅
+- **Fase 4**: 0% -> 90% (+90%)
+- **Progreso Global**: 75% -> 95% (+20%)
+- **Estado**: Fase 4 COMPLETADA (90%) [OK]
 
-### Métricas Actuales
+### Metricas Actuales
 
 **Bundle Size:**
 
-- Total gzipped: ~80 KB ✅ (Excelente)
+- Total gzipped: ~80 KB [OK] (Excelente)
 - JavaScript: 74.59 KB
 - CSS: 5.73 KB
 
 **Accesibilidad:**
 
-- Contraste WCAG AA: ✅
-- Navegación por teclado: ✅
-- HTML semántico: ✅
-- ARIA labels: ✅
+- Contraste WCAG AA: [OK]
+- Navegacion por teclado: [OK]
+- HTML semantico: [OK]
+- ARIA labels: [OK]
 
 **SEO:**
 
-- Meta tags: ✅
-- Open Graph: ✅
-- Twitter Card: ✅
-- robots.txt: ✅
-- Manifest: ✅
+- Meta tags: [OK]
+- Open Graph: [OK]
+- Twitter Card: [OK]
+- robots.txt: [OK]
+- Manifest: [OK]
 
 ### Notas
 
-- Proyecto listo para producción al 95%
+- Proyecto listo para produccion al 95%
 - Bundle size excelente (80KB gzipped)
 - Accesibilidad WCAG AA completa
 - SEO optimizado
-- Documentación completa para deployment
+- Documentacion completa para deployment
 
 ### Tareas Opcionales Pendientes
 
-- [ ] Migrar imágenes a local + WebP/AVIF
-- [ ] Auditoría Lighthouse completa
+- [ ] Migrar imagenes a local + WebP/AVIF
+- [ ] Auditoria Lighthouse completa
 - [ ] Structured data (JSON-LD)
-- [ ] Deploy a producción
+- [ ] Deploy a produccion
 
-### Listo para Producción
+### Listo para Produccion
 
-El proyecto está completamente funcional, optimizado, accesible y documentado. Las tareas pendientes son opcionales y pueden realizarse según necesidad.
+El proyecto esta completamente funcional, optimizado, accesible y documentado. Las tareas pendientes son opcionales y pueden realizarse segun necesidad.
 
 ---
 
@@ -491,35 +491,35 @@ El proyecto está completamente funcional, optimizado, accesible y documentado. 
 
 ### Hecho
 
-- feat(backend): scaffolding y configuración inicial en .NET 8.0
+- feat(backend): scaffolding y configuracion inicial en .NET 8.0
 - chore(backend): estructura de carpetas Controllers, Services, Validators, Migrations
-- feat(backend): modelos de datos y DTOs para contacto y autenticación
-- feat(backend): configuración de Entity Framework Core y migración inicial
-- feat(backend): validación con FluentValidation
-- chore(backend): exclusión de archivos innecesarios y limpieza
-- docs: actualiza STATUS tras verificación y merge exitoso
+- feat(backend): modelos de datos y DTOs para contacto y autenticacion
+- feat(backend): configuracion de Entity Framework Core y migracion inicial
+- feat(backend): validacion con FluentValidation
+- chore(backend): exclusion de archivos innecesarios y limpieza
+- docs: actualiza STATUS tras verificacion y merge exitoso
 
 ---
 
-## [2025-11-26] - Prohibición de emojis
+## [2025-11-26] - Prohibicion de emojis
 
 ### Completado
 
-- Se realizó búsqueda exhaustiva de emojis en todo el proyecto y documentación
+- Se realizo busqueda exhaustiva de emojis en todo el proyecto y documentacion
 - No se encontraron emojis presentes
-- Se agregó nota explícita de prohibición de emojis en README.md y STATUS.md
+- Se agrego nota explicita de prohibicion de emojis en README.md y STATUS.md
 
 ### Modificaciones
 
-- README.md: Sección de prohibición de emojis
-- docs/STATUS.md: Nota sobre prohibición de emojis
+- README.md: Seccion de prohibicion de emojis
+- docs/STATUS.md: Nota sobre prohibicion de emojis
 
 ### Notas
 
-- Si se detecta algún emoji en el futuro, debe eliminarse y reportarse en STATUS.md
+- Si se detecta algun emoji en el futuro, debe eliminarse y reportarse en STATUS.md
 
 ---
 
-## Prohibición de emojis
+## Prohibicion de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.

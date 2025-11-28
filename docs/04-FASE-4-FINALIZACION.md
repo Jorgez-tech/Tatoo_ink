@@ -1,36 +1,36 @@
 # FASE 4: Optimizaciones Finales
 
-**Estado:** [PENDIENTE]  
+**Estado:** [PENDIENTE]
 **Fecha inicio:** TBD
 
 ---
 
 ## 4.1 Performance
 
-### Optimización de Imágenes
+### Optimizacion de Imagenes
 
 **Estado actual:**
 
-- [PROBLEMA] Todas las imágenes vienen de Unsplash (URLs externas)
+- [PROBLEMA] Todas las imagenes vienen de Unsplash (URLs externas)
 - [PROBLEMA] Sin lazy loading
-- [PROBLEMA] Sin optimización de tamaño
+- [PROBLEMA] Sin optimizacion de tamano
 
 **Acciones:**
 
-- [ ] Descargar imágenes localmente
+- [ ] Descargar imagenes localmente
 - [ ] Optimizar con herramientas (ImageOptim, Squoosh)
 - [ ] Convertir a WebP/AVIF
-- [ ] Generar múltiples tamaños (responsive)
+- [ ] Generar multiples tamanos (responsive)
 - [ ] Implementar lazy loading con `loading="lazy"`
 - [ ] Usar `<picture>` para diferentes formatos
 
 ### Code Splitting
 
-**Evaluación:**
+**Evaluacion:**
 
 - [ ] Analizar bundle size (`npm run build -- --analyze`)
 - [ ] Implementar code splitting si el bundle > 500KB
-- [ ] Lazy load de secciones no críticas (Gallery, About)
+- [ ] Lazy load de secciones no criticas (Gallery, About)
 
 ### Mediciones
 
@@ -64,7 +64,7 @@
   <title>Ink Studio - Arte en tu Piel | Tatuajes Profesionales</title>
   <meta
     name="description"
-    content="Estudio de tatuajes profesional con más de 10 años de experiencia. Diseños únicos y personalizados."
+    content="Estudio de tatuajes profesional con mas de 10 anos de experiencia. Disenos unicos y personalizados."
   />
   <meta
     name="keywords"
@@ -94,29 +94,29 @@
 
 **Checklist:**
 
-- [ ] Todas las imágenes tienen atributo `alt` descriptivo
+- [ ] Todas las imagenes tienen atributo `alt` descriptivo
 - [ ] Contraste de colores cumple WCAG AA (4.5:1)
-- [ ] Navegación por teclado funciona correctamente
+- [ ] Navegacion por teclado funciona correctamente
 - [ ] Formulario tiene labels asociados
 - [ ] Estados de focus visibles
-- [ ] Skip links para navegación
+- [ ] Skip links para navegacion
 - [ ] ARIA labels donde sea necesario
-- [ ] Estructura de headings semántica (h1 > h2 > h3)
+- [ ] Estructura de headings semantica (h1 > h2 > h3)
 
 ### Semantic HTML
 
 **Mejoras:**
 
 - [ ] Usar `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>` correctamente
-- [ ] Un solo `<h1>` por página (en Hero)
-- [ ] Estructura de headings lógica
+- [ ] Un solo `<h1>` por pagina (en Hero)
+- [ ] Estructura de headings logica
 - [ ] Links con texto descriptivo
 
 ---
 
 ## 4.3 Preparar para Futuros Clientes
 
-### Archivo de Configuración Central
+### Archivo de Configuracion Central
 
 **Archivo:** `src/config/site.config.ts`
 
@@ -127,7 +127,7 @@ import { images } from "./images";
 import { menuItems } from "./navigation";
 
 export const siteConfig = {
-  // Meta información
+  // Meta informacion
   meta: {
     title: "Ink Studio - Arte en tu Piel",
     description: "Estudio de tatuajes profesional...",
@@ -135,7 +135,7 @@ export const siteConfig = {
     ogImage: "/og-image.jpg",
   },
 
-  // Información del negocio
+  // Informacion del negocio
   business: businessInfo,
 
   // Contenido de secciones
@@ -145,10 +145,10 @@ export const siteConfig = {
     aboutStats,
   },
 
-  // Imágenes
+  // Imagenes
   images,
 
-  // Navegación
+  // Navegacion
   navigation: menuItems,
 
   // Tema
@@ -160,7 +160,7 @@ export const siteConfig = {
 };
 ```
 
-### Sistema de Temas Básico
+### Sistema de Temas Basico
 
 **Variables CSS configurables:**
 
@@ -171,7 +171,7 @@ export const siteConfig = {
   --color-primary: #030213;
   --color-secondary: #ececf0;
 
-  /* Tipografía */
+  /* Tipografia */
   --font-heading: "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 
@@ -184,16 +184,16 @@ export const siteConfig = {
 }
 ```
 
-### Guía Rápida de Adaptación
+### Guia Rapida de Adaptacion
 
 **Archivo:** `docs/QUICK-START.md`
 
 ```markdown
-# 🚀 Guía Rápida: Adaptar para Nuevo Cliente
+# Guia Rapida: Adaptar para Nuevo Cliente
 
 ## Pasos Esenciales (15 minutos)
 
-1. **Información Básica** (`src/config/business-info.ts`)
+1. **Informacion Basica** (`src/config/business-info.ts`)
 
    - Nombre del negocio
    - Datos de contacto
@@ -203,13 +203,13 @@ export const siteConfig = {
 
    - Textos del hero
    - Servicios ofrecidos
-   - Estadísticas
+   - Estadisticas
 
-3. **Imágenes** (`public/images/`)
+3. **Imagenes** (`public/images/`)
 
    - Logo
    - Hero background
-   - Galería
+   - Galeria
    - About
 
 4. **Colores** (`src/styles/globals.css`)
@@ -222,12 +222,12 @@ export const siteConfig = {
    - Description
    - Keywords
 
-## ✅ Checklist Pre-Deploy
+## [OK] Checklist Pre-Deploy
 
-- [ ] Información de contacto actualizada
-- [ ] Imágenes optimizadas y subidas
+- [ ] Informacion de contacto actualizada
+- [ ] Imagenes optimizadas y subidas
 - [ ] Colores de marca aplicados
-- [ ] Textos revisados (ortografía)
+- [ ] Textos revisados (ortografia)
 - [ ] Links de redes sociales verificados
 - [ ] Favicon actualizado
 - [ ] Meta tags SEO configurados
@@ -237,25 +237,25 @@ export const siteConfig = {
 
 ## Progreso Fase 4
 
-- [x] 4.1 Performance: 3/3 secciones ✅
+- [x] 4.1 Performance: 3/3 secciones [OK]
   - [x] Bundle optimization (80KB gzipped)
   - [x] Lazy loading implementado
   - [x] Animaciones optimizadas
   - [x] DNS prefetch/preconnect
-  - [x] Documentación creada (PERFORMANCE.md)
-- [x] 4.2 Accesibilidad y SEO: 4/4 secciones ✅
+  - [x] Documentacion creada (PERFORMANCE.md)
+- [x] 4.2 Accesibilidad y SEO: 4/4 secciones [OK]
   - [x] Meta tags completos (SEO, OG, Twitter)
   - [x] Contraste WCAG AA verificado
-  - [x] Navegación por teclado completa
-  - [x] HTML semántico
+  - [x] Navegacion por teclado completa
+  - [x] HTML semantico
   - [x] ARIA labels implementados
   - [x] robots.txt creado
   - [x] Manifest mejorado
   - [x] prefers-reduced-motion
-  - [x] Documentación creada (ACCESSIBILITY.md)
-- [x] 4.3 Deployment: 1/1 archivo ✅
-  - [x] Guía completa de deployment (DEPLOYMENT.md)
-  - [x] Múltiples opciones de hosting
+  - [x] Documentacion creada (ACCESSIBILITY.md)
+- [x] 4.3 Deployment: 1/1 archivo [OK]
+  - [x] Guia completa de deployment (DEPLOYMENT.md)
+  - [x] Multiples opciones de hosting
   - [x] CI/CD con GitHub Actions
   - [x] Troubleshooting
 
@@ -263,13 +263,13 @@ export const siteConfig = {
 
 **Pendiente:**
 
-- [ ] Migrar imágenes a local + WebP/AVIF
-- [ ] Auditoría Lighthouse completa
+- [ ] Migrar imagenes a local + WebP/AVIF
+- [ ] Auditoria Lighthouse completa
 - [ ] Structured data (JSON-LD)
 
 ---
 
-## Métricas de Éxito
+## Metricas de Exito
 
 ### Performance
 
@@ -281,12 +281,12 @@ export const siteConfig = {
 ### SEO
 
 - Meta tags completos
-- Estructura semántica correcta
+- Estructura semantica correcta
 - Sitemap.xml generado
 - robots.txt configurado
 
-### Reutilización
+### Reutilizacion
 
-- Tiempo de adaptación: < 30 minutos
+- Tiempo de adaptacion: < 30 minutos
 - Archivos a editar: < 10
-- Conocimientos requeridos: Básicos (editar JSON/TS)
+- Conocimientos requeridos: Basicos (editar JSON/TS)

@@ -1,18 +1,18 @@
-# Guía de Deployment
+# Guia de Deployment
 
-Guía completa para desplegar Ink Studio en diferentes plataformas.
+Guia completa para desplegar Ink Studio en diferentes plataformas.
 
 ## Pre-requisitos
 
-Antes de desplegar, asegúrate de:
+Antes de desplegar, asegurate de:
 
-- [ ] Todas las imágenes están optimizadas
+- [ ] Todas las imagenes estan optimizadas
 - [ ] Variables de entorno configuradas
 - [ ] Meta tags actualizados en `index.html`
 - [ ] `robots.txt` y `sitemap.xml` configurados
-- [ ] Build de producción funciona: `npm run build`
+- [ ] Build de produccion funciona: `npm run build`
 - [ ] No hay errores de TypeScript: `npm run build`
-- [ ] Lighthouse score > 90 en todas las categorías
+- [ ] Lighthouse score > 90 en todas las categorias
 
 ---
 
@@ -22,9 +22,9 @@ Antes de desplegar, asegúrate de:
 
 **Ventajas:**
 
-- Deploy automático desde Git
+- Deploy automatico desde Git
 - CDN global
-- HTTPS automático
+- HTTPS automatico
 - Preview deployments
 - Gratis para proyectos personales
 
@@ -48,7 +48,7 @@ Antes de desplegar, asegúrate de:
    vercel
    ```
 
-4. **Configuración (vercel.json)**
+4. **Configuracion (vercel.json)**
 
    ```json
    {
@@ -67,7 +67,7 @@ Antes de desplegar, asegúrate de:
 
 1. Push a GitHub
 2. Importar proyecto en Vercel
-3. Deploy automático en cada push
+3. Deploy automatico en cada push
 
 ---
 
@@ -100,7 +100,7 @@ Antes de desplegar, asegúrate de:
    netlify deploy --prod
    ```
 
-4. **Configuración (netlify.toml)**
+4. **Configuracion (netlify.toml)**
 
    ```toml
    [build]
@@ -121,7 +121,7 @@ Antes de desplegar, asegúrate de:
 
 - Gratis
 - Integrado con GitHub
-- Simple para proyectos estáticos
+- Simple para proyectos estaticos
 
 **Pasos:**
 
@@ -167,7 +167,7 @@ Antes de desplegar, asegúrate de:
 
 **Ventajas:**
 
-- CDN ultra-rápido
+- CDN ultra-rapido
 - Gratis ilimitado
 - Workers para funciones serverless
 
@@ -179,8 +179,8 @@ Antes de desplegar, asegúrate de:
    - Build command: `npm run build`
    - Output directory: `dist`
 
-2. **Deploy automático**
-   - Push a GitHub → Deploy automático
+2. **Deploy automatico**
+   - Push a GitHub -> Deploy automatico
 
 ---
 
@@ -188,7 +188,7 @@ Antes de desplegar, asegúrate de:
 
 **Para proyectos con backend ASP.NET Core**
 
-#### Opción A: Nginx + Static Files
+#### Opcion A: Nginx + Static Files
 
 1. **Build del proyecto**
 
@@ -233,7 +233,7 @@ Antes de desplegar, asegúrate de:
    sudo certbot --nginx -d inkstudio.cl -d www.inkstudio.cl
    ```
 
-#### Opción B: ASP.NET Core + wwwroot
+#### Opcion B: ASP.NET Core + wwwroot
 
 1. **Build del frontend**
 
@@ -264,7 +264,7 @@ Antes de desplegar, asegúrate de:
 
 ---
 
-## Configuración de Dominio
+## Configuracion de Dominio
 
 ### DNS Records
 
@@ -279,8 +279,8 @@ CNAME   www     inkstudio.cl        3600
 
 1. Dashboard > Settings > Domains
 2. Add custom domain: `inkstudio.cl`
-3. Configurar DNS según instrucciones
-4. Esperar propagación (hasta 48h)
+3. Configurar DNS segun instrucciones
+4. Esperar propagacion (hasta 48h)
 
 ---
 
@@ -293,7 +293,7 @@ VITE_API_URL=http://localhost:7001
 VITE_USE_MOCK_API=true
 ```
 
-### Producción
+### Produccion
 
 ```env
 VITE_API_URL=https://api.inkstudio.cl
@@ -308,13 +308,13 @@ VITE_USE_MOCK_API=false
 
 ### Funcionalidad
 
-- [ ] Página carga correctamente
+- [ ] Pagina carga correctamente
 - [ ] Todas las secciones visibles
-- [ ] Navegación funciona
-- [ ] Formulario envía datos
+- [ ] Navegacion funciona
+- [ ] Formulario envia datos
 - [ ] Lightbox funciona
-- [ ] Responsive en móvil/tablet/desktop
-- [ ] Imágenes cargan correctamente
+- [ ] Responsive en movil/tablet/desktop
+- [ ] Imagenes cargan correctamente
 
 ### SEO
 
@@ -332,13 +332,13 @@ VITE_USE_MOCK_API=false
 - [ ] LCP < 2.5s
 - [ ] FID < 100ms
 - [ ] CLS < 0.1
-- [ ] Imágenes optimizadas
+- [ ] Imagenes optimizadas
 - [ ] Gzip/Brotli habilitado
 
 ### Seguridad
 
 - [ ] HTTPS habilitado
-- [ ] SSL certificate válido
+- [ ] SSL certificate valido
 - [ ] Headers de seguridad configurados
 - [ ] CORS configurado (si hay backend)
 
@@ -397,7 +397,7 @@ jobs:
 
 ### Problema: 404 en rutas
 
-**Solución:** Configurar rewrites/redirects
+**Solucion:** Configurar rewrites/redirects
 
 **Vercel:**
 
@@ -416,9 +416,9 @@ jobs:
   status = 200
 ```
 
-### Problema: Imágenes no cargan
+### Problema: Imagenes no cargan
 
-**Solución:** Verificar rutas
+**Solucion:** Verificar rutas
 
 - Rutas absolutas: `/images/hero.jpg`
 - Rutas en `public/`: Accesibles directamente
@@ -426,19 +426,19 @@ jobs:
 
 ### Problema: Variables de entorno no funcionan
 
-**Solución:** Prefijo `VITE_`
+**Solucion:** Prefijo `VITE_`
 
 ```env
-# ❌ Incorrecto
+# Incorrecto
 API_URL=https://api.example.com
 
-# ✅ Correcto
+# Correcto
 VITE_API_URL=https://api.example.com
 ```
 
 ### Problema: Build falla
 
-**Solución:** Verificar errores
+**Solucion:** Verificar errores
 
 ```bash
 # Limpiar cache
@@ -471,16 +471,16 @@ npm run build
 
 ## Notas
 
-**Recomendación:** Usar Vercel o Netlify para proyectos frontend-only.
+**Recomendacion:** Usar Vercel o Netlify para proyectos frontend-only.
 
 **Para proyectos con backend:** Considerar VPS o servicios como Railway, Render, o Azure.
 
 **Costos estimados:**
 
 - Vercel/Netlify: Gratis (hobby)
-- VPS básico: $5-10/mes
-- Dominio: $10-15/año
+- VPS basico: $5-10/mes
+- Dominio: $10-15/ano
 
-## Prohibición de emojis
+## Prohibicion de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.

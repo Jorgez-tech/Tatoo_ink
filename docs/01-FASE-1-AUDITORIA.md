@@ -1,11 +1,11 @@
-# FASE 1: Auditoría y Limpieza
+# FASE 1: Auditoria y Limpieza
 
-**Estado:** [EN PROGRESO]  
+**Estado:** [EN PROGRESO]
 **Fecha inicio:** 2025-11-05
 
 ---
 
-## 1.1 Identificar y Eliminar Código No Utilizado
+## 1.1 Identificar y Eliminar Codigo No Utilizado
 
 ### Componentes UI (shadcn/ui)
 **Total:** 47 archivos en `src/components/ui/`
@@ -17,7 +17,7 @@
 - [x] `textarea.tsx` - Contact
 - [x] `label.tsx` - Contact
 - [x] `utils.ts` - Utilidad para clsx/tailwind-merge
-- [x] `use-mobile.ts` - Hook para detección móvil
+- [x] `use-mobile.ts` - Hook para deteccion movil
 
 #### Componentes NO Utilizados (40)
 Pendiente de eliminar:
@@ -63,7 +63,7 @@ Pendiente de eliminar:
 - toggle.tsx
 - tooltip.tsx
 
-**Ahorro estimado:** ~2.5 MB de código no utilizado
+**Ahorro estimado:** ~2.5 MB de codigo no utilizado
 
 ---
 
@@ -72,65 +72,65 @@ Pendiente de eliminar:
 ### Estructura Actual
 ```
 src/
-├── components/
-│   ├── About.tsx
-│   ├── Contact.tsx
-│   ├── Footer.tsx
-│   ├── Gallery.tsx
-│   ├── Hero.tsx
-│   ├── Navbar.tsx
-│   ├── Services.tsx
-│   ├── figma/
-│   │   └── ImageWithFallback.tsx
-│   └── ui/ (47 archivos)
-├── styles/
-│   └── globals.css
-├── assets/
-│   └── react.svg
-├── App.css (ELIMINAR)
-├── App.tsx
-├── index.css
-└── main.tsx
+|-- components/
+|   |-- About.tsx
+|   |-- Contact.tsx
+|   |-- Footer.tsx
+|   |-- Gallery.tsx
+|   |-- Hero.tsx
+|   |-- Navbar.tsx
+|   |-- Services.tsx
+|   |-- figma/
+|   |   +-- ImageWithFallback.tsx
+|   +-- ui/ (47 archivos)
+|-- styles/
+|   +-- globals.css
+|-- assets/
+|   +-- react.svg
+|-- App.css (ELIMINAR)
+|-- App.tsx
+|-- index.css
++-- main.tsx
 ```
 
 ### Estructura Propuesta
 ```
 src/
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
-│   ├── sections/
-│   │   ├── Hero.tsx
-│   │   ├── Services.tsx
-│   │   ├── Gallery.tsx
-│   │   ├── About.tsx
-│   │   └── Contact.tsx
-│   ├── ui/
-│   │   ├── Button.tsx (renombrado de button.tsx)
-│   │   ├── Card.tsx
-│   │   ├── Input.tsx
-│   │   ├── Textarea.tsx
-│   │   ├── Label.tsx
-│   │   └── ImageWithFallback.tsx (movido desde figma/)
-│   └── shared/
-│       └── (componentes reutilizables futuros)
-├── config/
-│   ├── business-info.ts (CREAR)
-│   ├── content.ts (CREAR)
-│   ├── images.ts (CREAR)
-│   └── navigation.ts (CREAR)
-├── hooks/
-│   └── use-mobile.ts (mover desde ui/)
-├── lib/
-│   └── utils.ts (mover desde ui/)
-├── styles/
-│   └── globals.css
-├── types/
-│   └── index.ts (CREAR)
-├── App.tsx
-├── index.css
-└── main.tsx
+|-- components/
+|   |-- layout/
+|   |   |-- Navbar.tsx
+|   |   +-- Footer.tsx
+|   |-- sections/
+|   |   |-- Hero.tsx
+|   |   |-- Services.tsx
+|   |   |-- Gallery.tsx
+|   |   |-- About.tsx
+|   |   +-- Contact.tsx
+|   |-- ui/
+|   |   |-- Button.tsx (renombrado de button.tsx)
+|   |   |-- Card.tsx
+|   |   |-- Input.tsx
+|   |   |-- Textarea.tsx
+|   |   |-- Label.tsx
+|   |   +-- ImageWithFallback.tsx (movido desde figma/)
+|   +-- shared/
+|       +-- (componentes reutilizables futuros)
+|-- config/
+|   |-- business-info.ts (CREAR)
+|   |-- content.ts (CREAR)
+|   |-- images.ts (CREAR)
+|   +-- navigation.ts (CREAR)
+|-- hooks/
+|   +-- use-mobile.ts (mover desde ui/)
+|-- lib/
+|   +-- utils.ts (mover desde ui/)
+|-- styles/
+|   +-- globals.css
+|-- types/
+|   +-- index.ts (CREAR)
+|-- App.tsx
+|-- index.css
++-- main.tsx
 ```
 
 **Eliminaciones:**
@@ -143,22 +143,22 @@ src/
 ## 1.3 Limpiar Estilos
 
 ### Archivos de Estilos Actuales
-1. **`index.css`** (5 líneas) - Imports Tailwind + globals.css [MANTENER]
-2. **`App.css`** (40 líneas) - CSS de demo Vite [ELIMINAR]
-3. **`globals.css`** (200+ líneas) - Variables CSS + Tailwind config [MANTENER]
+1. **`index.css`** (5 lineas) - Imports Tailwind + globals.css [MANTENER]
+2. **`App.css`** (40 lineas) - CSS de demo Vite [ELIMINAR]
+3. **`globals.css`** (200+ lineas) - Variables CSS + Tailwind config [MANTENER]
 
 ### Acciones
 - [x] Eliminar `App.css`
 - [x] Remover import de `App.css` en `App.tsx`
 - [ ] Documentar variables CSS en `globals.css`
-- [ ] Optimizar configuración de Tailwind
+- [ ] Optimizar configuracion de Tailwind
 
 ---
 
 ## Progreso Fase 1
 
-- [x] 1.1 Auditoría de componentes ✅
-- [ ] 1.2 Reorganización de carpetas ⏳
-- [ ] 1.3 Limpieza de estilos ⏳
+- [x] 1.1 Auditoria de componentes [OK]
+- [ ] 1.2 Reorganizacion de carpetas [PENDIENTE]
+- [ ] 1.3 Limpieza de estilos [PENDIENTE]
 
 **Siguiente:** Eliminar componentes UI no utilizados y reorganizar estructura

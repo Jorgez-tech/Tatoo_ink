@@ -141,9 +141,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AspNetCoreRateLimit": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[11.3.1, )"
+            },
+            "Ganss.XSS": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -165,11 +173,19 @@
             },
             "SendGrid": {
               "target": "Package",
-              "version": "[9.29.3, )"
+              "version": "[9.29.1, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[8.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

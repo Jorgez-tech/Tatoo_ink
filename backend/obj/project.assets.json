@@ -5206,7 +5206,7 @@
     {
       "code": "NU1101",
       "level": "Error",
-      "message": "Unable to find package Ganss.XSS. No packages exist with this id in source(s): Microsoft Visual Studio Offline Packages, nuget.org",
+      "message": "No se encuentra el paquete Ganss.XSS. No existe ningún paquete con este id. en los orígenes: Microsoft Visual Studio Offline Packages, nuget.org",
       "libraryId": "Ganss.XSS",
       "targetGraphs": [
         "net8.0"

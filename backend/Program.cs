@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.Middleware;
 using backend.Services;
+using backend.Utils;
 using backend.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -11,6 +12,9 @@ using AspNetCoreRateLimit;
 using Ganss.XSS;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Validar configuración antes de construir la app
+ConfigurationValidator.Validate(builder.Configuration);
 
 // Configurar Serilog
 builder.Host.UseSerilog((context, config) =>

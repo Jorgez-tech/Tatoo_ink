@@ -29,7 +29,7 @@ builder.Host.UseSerilog((context, config) =>
 
 // Configurar DbContext con cadena de conexión
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configurar FluentValidation
 builder.Services.AddFluentValidationAutoValidation();
@@ -49,6 +49,7 @@ else
 
 // Registrar servicio de contacto
 builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IGalleryService, GalleryService>();
 
 // Configuración de rate limiting
 builder.Services.AddMemoryCache();

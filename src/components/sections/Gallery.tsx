@@ -1,38 +1,47 @@
 import { ImageWithFallback } from "../ui/ImageWithFallback";
 import { useState, useEffect, useCallback } from "react";
-import { galleryImages } from "@/config/images";
 import { galleryContent } from "@/config/content";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Loader2 } from "lucide-react";
+import { galleryService } from "@/services/gallery";
+import type { GalleryImage } from "@/types";
 
-/**
- * Galería interactiva con lightbox, navegación por teclado y loader per image.
- *
- * Presenta una cuadrícula responsive de imágenes configurables; al seleccionar
- * una imagen abre un modal con soporte para navegación circular mediante clics
- * y teclas de flecha, así como cierre mediante backdrop o tecla Escape.
- *
- * @component
- * @example
- * return (
- *   <Gallery />
- * );
- */
 export function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const data = await galleryService.getAll();
+        setImages(data);
+      } catch (err) {
+        console.error("Failed to fetch gallery images:", err);
+        setError("No se pudieron cargar las imágenes. Por favor, intenta más tarde.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   const navigatePrevious = useCallback(() => {
     setSelectedImage((current) => {
       if (current === null) return null;
-      return current === 0 ? galleryImages.length - 1 : current - 1;
+      return current === 0 ? images.length - 1 : current - 1;
     });
-  }, []);
+  }, [images.length]);
 
   const navigateNext = useCallback(() => {
     setSelectedImage((current) => {
       if (current === null) return null;
-      return current === galleryImages.length - 1 ? 0 : current + 1;
+      return current === images.length - 1 ? 0 : current + 1;
     });
-  }, []);
+  }, [images.length]);
+
+  // ... (keep existing useEffects for keyboard navigation)
 
   // Cerrar lightbox con tecla ESC
   useEffect(() => {
@@ -44,7 +53,6 @@ export function Gallery() {
 
     if (selectedImage !== null) {
       document.addEventListener("keydown", handleEscape);
-      // Prevenir scroll del body cuando el lightbox está abierto
       document.body.style.overflow = "hidden";
     }
 
@@ -76,11 +84,26 @@ export function Gallery() {
   }, [selectedImage, navigatePrevious, navigateNext]);
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Solo cerrar si se hace click en el backdrop, no en la imagen
     if (e.target === e.currentTarget) {
       setSelectedImage(null);
     }
   };
+
+  if (loading) {
+    return (
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white min-h-[400px] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white text-center">
+        <p className="text-red-500">{error}</p>
+      </section>
+    );
+  }
 
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
@@ -93,7 +116,7 @@ export function Gallery() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {galleryImages.map((image, index) => (
+          {images.map((image, index) => (
             <div
               key={index}
               className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
@@ -128,7 +151,7 @@ export function Gallery() {
             </button>
 
             {/* Botón anterior */}
-            {galleryImages.length > 1 && (
+            {images.length > 1 && (
               <button
                 className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white hover:text-gray-300 transition-colors p-3 rounded-full hover:bg-white/10"
                 onClick={(e) => {
@@ -142,7 +165,7 @@ export function Gallery() {
             )}
 
             {/* Botón siguiente */}
-            {galleryImages.length > 1 && (
+            {images.length > 1 && (
               <button
                 className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white hover:text-gray-300 transition-colors p-3 rounded-full hover:bg-white/10"
                 onClick={(e) => {
@@ -156,17 +179,17 @@ export function Gallery() {
             )}
 
             {/* Contador de imágenes */}
-            {galleryImages.length > 1 && (
+            {images.length > 1 && (
               <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-white text-sm">
-                {selectedImage + 1} / {galleryImages.length}
+                {selectedImage + 1} / {images.length}
               </div>
             )}
 
             {/* Imagen */}
             <div className="relative max-w-full max-h-full">
               <ImageWithFallback
-                src={galleryImages[selectedImage].src}
-                alt={galleryImages[selectedImage].alt}
+                src={images[selectedImage].src}
+                alt={images[selectedImage].alt}
                 className="max-w-full max-h-[90vh] object-contain"
                 decoding="async"
                 sizes="100vw"

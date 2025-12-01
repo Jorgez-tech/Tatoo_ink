@@ -58,9 +58,9 @@
               "target": "Package",
               "version": "[11.3.1, )"
             },
-            "Ganss.XSS": {
+            "HtmlSanitizer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[9.0.889, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

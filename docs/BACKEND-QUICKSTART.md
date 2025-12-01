@@ -26,7 +26,7 @@ cp .env.example .env
 Edita `.env`:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=http://localhost:5177
 VITE_USE_MOCK_API=false
 ```
 
@@ -188,7 +188,7 @@ app.Run();
 dotnet run
 ```
 
-El backend estara disponible en `http://localhost:5000`
+El backend estara disponible en `http://localhost:5177`
 
 ### 6. Probar Integracion
 
@@ -207,7 +207,7 @@ Abre `http://localhost:5173` y prueba el formulario de contacto.
 ### Test con curl
 
 ```bash
-curl -X POST http://localhost:5000/api/contact \
+curl -X POST http://localhost:5177/api/contact \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test User",
@@ -219,7 +219,7 @@ curl -X POST http://localhost:5000/api/contact \
 
 ### Test con Swagger
 
-Abre `http://localhost:5000/swagger` y prueba el endpoint desde la UI.
+Abre `http://localhost:5177/swagger` y prueba el endpoint desde la UI.
 
 ---
 

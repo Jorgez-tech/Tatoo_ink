@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using AspNetCoreRateLimit;
-using Ganss.XSS;
+using Ganss.Xss;
 
 var builder = WebApplication.CreateBuilder(args);
 

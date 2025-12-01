@@ -289,7 +289,7 @@ CNAME   www     inkstudio.cl        3600
 ### Desarrollo (.env.local)
 
 ```env
-VITE_API_URL=http://localhost:7001
+VITE_API_URL=http://localhost:5177
 VITE_USE_MOCK_API=true
 ```
 

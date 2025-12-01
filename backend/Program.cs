@@ -10,11 +10,13 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using AspNetCoreRateLimit;
 using Ganss.Xss;
+using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Validar configuración antes de construir la app
-ConfigurationValidator.Validate(builder.Configuration);
+// ConfigurationValidator.Validate(builder.Configuration);
 
 // Configurar Serilog
 builder.Host.UseSerilog((context, config) =>

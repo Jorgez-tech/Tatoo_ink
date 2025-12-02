@@ -1,131 +1,333 @@
-# Backend - Tattoo Studio Contact API
+# Backend - Ink Studio API
 
-## 📋 Descripción
+Backend API RESTful para la landing page de Ink Studio, construido con ASP.NET Core .NET 8.0.
 
-Backend API RESTful para el sistema de contacto de un estudio de tatuajes. Permite a los clientes enviar mensajes de contacto y solicitar citas a través de un formulario web.
-
-## 🏗️ Arquitectura
-
-El sistema implementa una arquitectura en capas:
-
-- **Presentation Layer**: Controllers (API endpoints)
-- **Business Logic Layer**: Services (lógica de negocio)
-- **Data Access Layer**: DbContext/Repositories (acceso a datos)
-
-## 🛠️ Stack Tecnológico
-
-- **Framework**: ASP.NET Core 9.0
-- **ORM**: Entity Framework Core (pendiente de instalación)
-- **Database**: SQL Server
-- **Email**: SendGrid o SMTP
-- **Validation**: FluentValidation (pendiente de instalación)
-- **Logging**: Serilog (pendiente de instalación)
-
-## 📝 Estado del Proyecto
-
-### ✅ Completado
-
-- [x] Estructura base del proyecto
-- [x] Configuración inicial de ASP.NET Core
-- [x] Limpieza de módulos no relacionados con el spec
-
-### 🚧 Pendiente (según spec)
-
-- [ ] Modelos de datos (ContactMessage, DTOs)
-- [ ] Entity Framework Core y DbContext
-- [ ] FluentValidation
-- [ ] ContactController (POST /api/contact)
-- [ ] ContactService (lógica de negocio)
-- [ ] EmailService (SendGrid/SMTP)
-- [ ] Middleware de manejo de excepciones
-- [ ] Serilog para logging
-- [ ] CORS configuration
-- [ ] Rate limiting
-- [ ] Validación de payload size
-- [ ] Migraciones de base de datos
-
-## 📚 Documentación del Spec
-
-El spec completo del proyecto se encuentra en:
-
-- **Requirements**: `.kiro/specs/tattoo-studio-backend/requirements.md`
-- **Design**: `.kiro/specs/tattoo-studio-backend/design.md`
-- **Tasks**: `.kiro/specs/tattoo-studio-backend/tasks.md`
-
-## 🔄 Historial de Cambios
-
-### 2024-11-23 - Limpieza y Alineación con Spec
-
-**Cambios realizados:**
-
-- ❌ Eliminado módulo de autenticación (AuthController, AuthService, User model)
-- ❌ Removida dependencia `System.IdentityModel.Tokens.Jwt`
-- ✅ Limpiado Program.cs de referencias a autenticación
-- ✅ Proyecto alineado con spec de sistema de contacto
-- ✅ Backend listo para implementar funcionalidades del spec
-
-**Razón:**
-El proyecto original contenía un sistema de autenticación JWT que no estaba contemplado en el spec. Se eliminó para mantener el alcance enfocado únicamente en el sistema de contacto según lo definido en los requisitos.
-
-## 🚀 Próximos Pasos
-
-Para continuar con la implementación, seguir las tareas definidas en `.kiro/specs/tattoo-studio-backend/tasks.md`:
-
-1. **Tarea 1**: Configurar proyecto ASP.NET Core Web API
-
-   - Instalar paquetes NuGet necesarios
-   - Configurar appsettings.json
-
-2. **Tarea 2**: Implementar modelos de datos y DTOs
-
-3. **Tarea 3**: Configurar Entity Framework Core y base de datos
-
-... (continuar según el plan de implementación)
-
-## 📞 Endpoint Principal (Pendiente)
+## Arquitectura de Capas
 
 ```
-POST /api/contact
+Controllers (HTTP Layer)
+    |
+    v
+Services (Business Logic)
+    |
+    v
+Data (Persistence Layer)
+    |
+    v
+Database (SQLite/SQL Server)
 ```
 
-**Request Body:**
+### Responsabilidades
 
+- **Controllers:** Reciben requests HTTP, validan ModelState, retornan responses
+- **Services:** Implementan logica de negocio, orquestan operaciones, manejan errores
+- **Data (DbContext):** Acceso a datos con Entity Framework Core
+- **Validators:** Reglas de validacion con FluentValidation
+- **Middleware:** Manejo global de excepciones, logging, seguridad
+
+## Endpoints Disponibles
+
+### POST /api/contact
+
+Envia un mensaje de contacto y opcionalmente solicita una cita.
+
+**Request:**
 ```json
 {
-  "name": "string",
-  "email": "string",
-  "phone": "string",
-  "message": "string",
-  "wantsAppointment": boolean
+  "name": "Juan Perez",
+  "email": "juan@example.com",
+  "phone": "123456789",
+  "message": "Hola, quiero un tatuaje de dragon",
+  "wantsAppointment": true
 }
 ```
 
-**Response (200 OK):**
-
+**Response 200 OK:**
 ```json
 {
   "success": true,
-  "message": "Mensaje recibido correctamente"
+  "message": "Mensaje recibido correctamente. Nos pondremos en contacto contigo pronto.",
+  "id": 1
 }
 ```
 
-## ⚙️ Configuración Requerida (Pendiente)
+**Response 400 Bad Request:**
+```json
+{
+  "success": false,
+  "message": "Datos de entrada invalidos"
+}
+```
 
-El sistema requerirá las siguientes configuraciones en `appsettings.json`:
+**Response 500 Internal Server Error:**
+```json
+{
+  "success": false,
+  "message": "Ocurrio un error al procesar tu mensaje. Por favor, intenta nuevamente."
+}
+```
 
-- **ConnectionStrings**: Cadena de conexión a SQL Server
-- **EmailSettings**: Credenciales de SendGrid o SMTP
-- **CorsSettings**: Dominios permitidos para CORS
-- **StudioEmail**: Email del estudio para recibir notificaciones
+### GET /api/gallery (Futuro)
 
-## 🧪 Testing
+Obtiene imagenes de la galeria del estudio.
 
-El proyecto incluirá:
+## Configuracion de appsettings.json
 
-- **Unit Tests**: xUnit con Moq
-- **Property-Based Tests**: FsCheck (100+ iteraciones por propiedad)
-- **Integration Tests**: WebApplicationFactory con base de datos en memoria
+### Estructura Completa
 
-## 📄 Licencia
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=TattooStudioDb.db"
+  },
+  "EmailSettings": {
+    "Provider": "SendGrid",
+    "SendGridApiKey": "TU_API_KEY_DE_SENDGRID",
+    "SmtpServer": "smtp.gmail.com",
+    "SmtpPort": 587,
+    "SmtpUsername": "tu-email@gmail.com",
+    "SmtpPassword": "tu-password-de-aplicacion",
+    "StudioEmail": "studio@inkstudio.com",
+    "StudioName": "Ink Studio"
+  },
+  "CorsSettings": {
+    "AllowedOrigins": [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://tu-dominio.com"
+    ]
+  },
+  "RateLimiting": {
+    "MaxRequestsPerMinute": 10,
+    "EnableRateLimiting": true
+  },
+  "Security": {
+    "MaxPayloadSizeKB": 10
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      { "Name": "Console" },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs/log-.txt",
+          "rollingInterval": "Day"
+        }
+      }
+    ],
+    "Enrich": ["FromLogContext"],
+    "Properties": {
+      "Application": "TattooStudioBackend"
+    }
+  }
+}
+```
 
-[Definir licencia del proyecto]
+### Seccion por Seccion
+
+#### ConnectionStrings
+
+**Desarrollo (SQLite):**
+```json
+"DefaultConnection": "Data Source=TattooStudioDb.db"
+```
+
+**Produccion (SQL Server):**
+```json
+"DefaultConnection": "Server=tcp:tu-servidor.database.windows.net,1433;Initial Catalog=TattooStudioDb;Persist Security Info=False;User ID=tu-usuario;Password=tu-password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+```
+
+#### EmailSettings
+
+**Provider:** `"SendGrid"` o `"Smtp"`
+
+**SendGrid:**
+- Crear cuenta en [sendgrid.com](https://sendgrid.com/)
+- Obtener API Key desde Settings > API Keys
+- Configurar `SendGridApiKey`
+
+**SMTP (Gmail):**
+1. Habilitar autenticacion de 2 factores
+2. Generar password de aplicacion
+3. Configurar `SmtpServer`, `SmtpPort`, `SmtpUsername`, `SmtpPassword`
+
+#### CorsSettings
+
+Lista de origenes permitidos para CORS.
+
+**Desarrollo:** `http://localhost:5173`, `http://localhost:3000`  
+**Produccion:** URL de tu frontend desplegado
+
+#### RateLimiting
+
+- `MaxRequestsPerMinute`: Maximo de requests por IP (default: 10)
+- `EnableRateLimiting`: `true` para activar
+
+#### Security
+
+- `MaxPayloadSizeKB`: Tamano maximo de payload (default: 10 KB)
+
+## Comandos Utiles
+
+### Migraciones de Base de Datos
+
+```bash
+# Crear nueva migracion
+dotnet ef migrations add NombreDeMigracion --project backend
+
+# Aplicar migraciones
+dotnet ef database update --project backend
+
+# Eliminar ultima migracion
+dotnet ef migrations remove --project backend
+
+# Generar script SQL
+dotnet ef migrations script --project backend
+```
+
+### Ejecucion
+
+```bash
+# Ejecutar en desarrollo
+dotnet run --project backend
+
+# Ejecutar con watch (recarga automatica)
+dotnet watch run --project backend
+
+# Ejecutar en produccion
+dotnet run --project backend --configuration Release
+```
+
+### Pruebas
+
+```bash
+# Ejecutar todas las pruebas
+dotnet test backend.Tests/backend.Tests.csproj
+
+# Con detalles
+dotnet test backend.Tests/backend.Tests.csproj --verbosity normal
+
+# Con cobertura
+dotnet test backend.Tests/backend.Tests.csproj --collect:"XPlat Code Coverage"
+```
+
+### Build
+
+```bash
+# Build en desarrollo
+dotnet build backend/backend.csproj
+
+# Build en produccion
+dotnet build backend/backend.csproj --configuration Release
+
+# Publicar para despliegue
+dotnet publish backend/backend.csproj --configuration Release --output ./publish
+```
+
+## Dependencias Principales
+
+```xml
+AspNetCoreRateLimit 5.0.0
+FluentValidation.AspNetCore 11.3.1
+HtmlSanitizer 9.0.889
+Microsoft.EntityFrameworkCore 8.0.0
+Microsoft.EntityFrameworkCore.Sqlite 8.0.0
+SendGrid 9.29.1
+Serilog.AspNetCore 8.0.0
+Swashbuckle.AspNetCore 10.0.1
+```
+
+## Estructura de Archivos
+
+```
+backend/
+├── Controllers/
+│   ├── ContactController.cs       # POST /api/contact
+│   └── GalleryController.cs       # GET /api/gallery (futuro)
+├── Services/
+│   ├── IContactService.cs         # Interface del servicio de contacto
+│   ├── ContactService.cs          # Logica de negocio para contactos
+│   ├── IEmailService.cs           # Interface del servicio de email
+│   ├── SendGridEmailService.cs    # Implementacion con SendGrid
+│   ├── SmtpEmailService.cs        # Implementacion con SMTP
+│   ├── IGalleryService.cs         # Interface del servicio de galeria
+│   └── GalleryService.cs          # Logica de negocio para galeria
+├── Models/
+│   ├── ContactMessage.cs          # Entidad EF Core
+│   ├── ContactRequestDto.cs       # DTO para requests
+│   ├── ContactResponseDto.cs      # DTO para responses
+│   └── ServiceResult.cs           # Resultado de operaciones
+├── Data/
+│   ├── ApplicationDbContext.cs    # DbContext de EF Core
+│   └── DbInitializer.cs           # Inicializacion de DB
+├── Validators/
+│   └── ContactRequestValidator.cs # Reglas de FluentValidation
+├── Middleware/
+│   └── GlobalExceptionMiddleware.cs # Manejo de excepciones
+├── Utils/
+│   └── ConfigurationValidator.cs  # Validacion de configuracion
+├── Migrations/                     # Migraciones de EF Core
+├── appsettings.json               # Configuracion base
+├── appsettings.Development.json   # Configuracion de desarrollo
+├── appsettings.Production.json    # Configuracion de produccion
+├── Program.cs                     # Entry point y configuracion
+└── backend.csproj                 # Archivo de proyecto
+```
+
+## Seguridad Implementada
+
+- **Rate Limiting:** 10 requests/minuto por IP
+- **Payload Size Validation:** Maximo 10 KB
+- **HTML Sanitization:** Prevencion de XSS
+- **CORS:** Solo origenes configurados
+- **Input Validation:** FluentValidation en todos los DTOs
+- **Error Handling:** Mensajes genericos, detalles en logs
+- **HTTPS:** Forzado en produccion
+
+## Logging
+
+Logs estructurados con Serilog:
+- **Consola:** Desarrollo
+- **Archivo:** `logs/log-YYYY-MM-DD.txt` (rolling diario)
+- **Niveles:** Information, Warning, Error
+
+## Troubleshooting
+
+### Error: "No se encuentra la base de datos"
+```bash
+dotnet ef database update --project backend
+```
+
+### Error: "CORS policy blocked"
+Verificar que el origen del frontend este en `CorsSettings:AllowedOrigins`
+
+### Error: "Email failed to send"
+- Verificar credenciales en `EmailSettings`
+- Revisar logs en `logs/log-YYYY-MM-DD.txt`
+
+### Error: "Rate limit exceeded"
+Esperar 1 minuto o ajustar `RateLimiting:MaxRequestsPerMinute`
+
+## Documentacion Adicional
+
+- **Swagger UI:** `https://localhost:7000/swagger` (solo desarrollo)
+- **API Spec:** Ver `docs/NEXT-STEPS.md`
+- **Tests:** 39 pruebas unitarias en `backend.Tests/`
+
+---
+
+**Nota:** Para produccion, usar variables de entorno para valores sensibles (API keys, passwords).

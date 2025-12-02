@@ -1,0 +1,58 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=TattooStudioDb.db"
+  },
+  "EmailSettings": {
+    "Provider": "SendGrid",
+    "SendGridApiKey": "",
+    "SmtpServer": "smtp.gmail.com",
+    "SmtpPort": 587,
+    "SmtpUsername": "",
+    "SmtpPassword": "",
+    "StudioEmail": "studio@example.com",
+    "StudioName": "Ink Studio"
+  },
+  "CorsSettings": {
+    "AllowedOrigins": [
+      "http://localhost:5173",
+      "http://localhost:3000"
+    ]
+  },
+  "RateLimiting": {
+    "MaxRequestsPerMinute": 10,
+    "EnableRateLimiting": true
+  },
+  "Security": {
+    "MaxPayloadSizeKB": 10
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      { "Name": "Console" },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs/log-.txt",
+          "rollingInterval": "Day"
+        }
+      }
+    ],
+    "Enrich": ["FromLogContext"],
+    "Properties": {
+      "Application": "TattooStudioBackend"
+    }
+  }
+}

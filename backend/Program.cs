@@ -16,7 +16,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Validar configuración antes de construir la app
-// ConfigurationValidator.Validate(builder.Configuration);
+ConfigurationValidator.Validate(builder.Configuration);
 
 // Configurar Serilog
 builder.Host.UseSerilog((context, config) =>
@@ -103,6 +103,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
+app.UseCors(policy =>
+{
     var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
     policy.WithOrigins(allowedOrigins)
         .AllowAnyHeader()

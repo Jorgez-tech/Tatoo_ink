@@ -1,14 +1,14 @@
-# 📚 Documentación de GitHub
+#  Documentación de GitHub
 
 Este directorio contiene toda la documentación y configuración relacionada con el flujo de trabajo, convenciones y procesos del proyecto.
 
 ---
 
-## 📖 Documentos Disponibles
+##  Documentos Disponibles
 
 ### Para Modelos de Asistencia de Código
 
-- **[CONTEXT.md](./CONTEXT.md)** ⭐ **LEER PRIMERO**
+- **[CONTEXT.md](./CONTEXT.md)**  **LEER PRIMERO**
   - Contexto completo del proyecto
   - Estructura y convenciones
   - Estado actual y objetivos
@@ -44,7 +44,7 @@ Este directorio contiene toda la documentación y configuración relacionada con
 
 ---
 
-## 🚀 Inicio Rápido para Asistentes de IA
+##  Inicio Rápido para Asistentes de IA
 
 Si eres un modelo de asistencia de código, **empieza aquí**:
 
@@ -55,7 +55,7 @@ Si eres un modelo de asistencia de código, **empieza aquí**:
 
 ---
 
-## 📋 Checklist para Asistentes de IA
+##  Checklist para Asistentes de IA
 
 Antes de hacer cualquier cambio, asegúrate de:
 
@@ -69,7 +69,7 @@ Antes de hacer cualquier cambio, asegúrate de:
 
 ---
 
-## 🔗 Enlaces Útiles
+##  Enlaces Útiles
 
 ### Documentación del Proyecto
 - `docs/00-PLAN-MAESTRO.md` - Plan maestro del proyecto
@@ -83,7 +83,7 @@ Antes de hacer cualquier cambio, asegúrate de:
 
 ---
 
-## 📝 Notas
+##  Notas
 
 - Todos los commits deben seguir la convención en español
 - Siempre crear rama para cambios relevantes

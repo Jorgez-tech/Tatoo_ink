@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System;
 
 namespace backend.Tests
 {

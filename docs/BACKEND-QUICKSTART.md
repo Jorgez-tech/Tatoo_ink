@@ -1,10 +1,10 @@
-# 🚀 Backend Integration - Quick Start
+# Backend Integration - Quick Start
 
-Guía rápida para integrar el backend ASP.NET Core con el frontend React.
+Guia rapida para integrar el backend ASP.NET Core con el frontend React.
 
-## 📋 Checklist Pre-Integración
+## Checklist Pre-Integracion
 
-Antes de comenzar, asegúrate de tener:
+Antes de comenzar, asegurate de tener:
 
 - [ ] .NET 8.0 SDK instalado
 - [ ] Visual Studio 2022 o VS Code
@@ -13,7 +13,7 @@ Antes de comenzar, asegúrate de tener:
 
 ---
 
-## ⚡ Inicio Rápido (5 minutos)
+## Inicio Rapido (5 minutos)
 
 ### 1. Configurar Variables de Entorno
 
@@ -26,14 +26,14 @@ cp .env.example .env
 Edita `.env`:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=http://localhost:5177
 VITE_USE_MOCK_API=false
 ```
 
 ### 2. Crear Proyecto Backend
 
 ```bash
-# Crear solución y proyecto API
+# Crear solucion y proyecto API
 dotnet new webapi -n InkStudio.Api
 cd InkStudio.Api
 
@@ -58,10 +58,10 @@ public class ContactRequest
     public string Name { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "El email es obligatorio")]
-    [EmailAddress(ErrorMessage = "Email inválido")]
+    [EmailAddress(ErrorMessage = "Email invalido")]
     public string Email { get; set; } = string.Empty;
 
-    [Phone(ErrorMessage = "Formato de teléfono inválido")]
+    [Phone(ErrorMessage = "Formato de telefono invalido")]
     public string? Phone { get; set; }
 
     [Required(ErrorMessage = "El mensaje es obligatorio")]
@@ -103,13 +103,13 @@ public class ContactController : ControllerBase
             return BadRequest(new ContactResponse
             {
                 Success = false,
-                Message = "Datos inválidos"
+                Message = "Datos invalidos"
             });
         }
 
         try
         {
-            // TODO: Implementar lógica de negocio
+            // TODO: Implementar logica de negocio
             // - Enviar email
             // - Guardar en base de datos
             // - Notificar administrador
@@ -188,9 +188,9 @@ app.Run();
 dotnet run
 ```
 
-El backend estará disponible en `http://localhost:5000`
+El backend estara disponible en `http://localhost:5177`
 
-### 6. Probar Integración
+### 6. Probar Integracion
 
 En otra terminal, ejecuta el frontend:
 
@@ -202,12 +202,12 @@ Abre `http://localhost:5173` y prueba el formulario de contacto.
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test con curl
 
 ```bash
-curl -X POST http://localhost:5000/api/contact \
+curl -X POST http://localhost:5177/api/contact \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test User",
@@ -219,13 +219,13 @@ curl -X POST http://localhost:5000/api/contact \
 
 ### Test con Swagger
 
-Abre `http://localhost:5000/swagger` y prueba el endpoint desde la UI.
+Abre `http://localhost:5177/swagger` y prueba el endpoint desde la UI.
 
 ---
 
-## 📧 Agregar Envío de Emails (Opcional)
+## Agregar Envio de Emails (Opcional)
 
-### Opción 1: SMTP
+### Opcion 1: SMTP
 
 **appsettings.json:**
 
@@ -284,7 +284,7 @@ public class EmailService : IEmailService
                 <h2>Nuevo mensaje de contacto</h2>
                 <p><strong>Nombre:</strong> {request.Name}</p>
                 <p><strong>Email:</strong> {request.Email}</p>
-                <p><strong>Teléfono:</strong> {request.Phone ?? "No proporcionado"}</p>
+                <p><strong>Telefono:</strong> {request.Phone ?? "No proporcionado"}</p>
                 <p><strong>Mensaje:</strong></p>
                 <p>{request.Message}</p>
             ",
@@ -320,7 +320,7 @@ public ContactController(
 [HttpPost]
 public async Task<IActionResult> Post([FromBody] ContactRequest request)
 {
-    // ... validación ...
+    // ... validacion ...
 
     await _emailService.SendContactEmailAsync(request);
 
@@ -328,7 +328,7 @@ public async Task<IActionResult> Post([FromBody] ContactRequest request)
 }
 ```
 
-### Opción 2: SendGrid
+### Opcion 2: SendGrid
 
 ```bash
 dotnet add package SendGrid
@@ -357,7 +357,7 @@ public class SendGridEmailService : IEmailService
             <h2>Nuevo mensaje de contacto</h2>
             <p><strong>Nombre:</strong> {request.Name}</p>
             <p><strong>Email:</strong> {request.Email}</p>
-            <p><strong>Teléfono:</strong> {request.Phone ?? "No proporcionado"}</p>
+            <p><strong>Telefono:</strong> {request.Phone ?? "No proporcionado"}</p>
             <p><strong>Mensaje:</strong></p>
             <p>{request.Message}</p>
         ";
@@ -370,7 +370,7 @@ public class SendGridEmailService : IEmailService
 
 ---
 
-## 🗄️ Agregar Base de Datos (Opcional)
+## Agregar Base de Datos (Opcional)
 
 ### Entity Framework Core
 
@@ -428,7 +428,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 }
 ```
 
-Crear migración:
+Crear migracion:
 
 ```bash
 dotnet ef migrations add InitialCreate
@@ -437,7 +437,7 @@ dotnet ef database update
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Frontend (Vercel/Netlify)
 
@@ -450,44 +450,44 @@ VITE_USE_MOCK_API=false
 
 ### Backend (Azure/AWS)
 
-1. Publicar aplicación:
+1. Publicar aplicacion:
 
 ```bash
 dotnet publish -c Release
 ```
 
-2. Configurar CORS con dominio de producción
+2. Configurar CORS con dominio de produccion
 3. Configurar variables de entorno en el hosting
 4. Configurar SSL/HTTPS
 
 ---
 
-## 📚 Recursos
+## Recursos
 
-- [Documentación completa](./BACKEND-INTEGRATION.md)
+- [Documentacion completa](./BACKEND-INTEGRATION.md)
 - [ASP.NET Core Docs](https://docs.microsoft.com/aspnet/core)
 - [Entity Framework Core](https://docs.microsoft.com/ef/core)
 - [SendGrid Docs](https://docs.sendgrid.com)
 
 ---
 
-## 🆘 Troubleshooting
+## Troubleshooting
 
 **Error de CORS:**
 
-- Verificar que el origen esté en la lista de CORS
-- Verificar que `UseCors()` esté antes de `UseAuthorization()`
+- Verificar que el origen este en la lista de CORS
+- Verificar que `UseCors()` este antes de `UseAuthorization()`
 
 **Error 404:**
 
 - Verificar que la ruta sea `/api/contact`
-- Verificar que el backend esté corriendo
+- Verificar que el backend este corriendo
 
-**Error de validación:**
+**Error de validacion:**
 
 - Verificar que los campos cumplan las validaciones
 - Revisar logs del backend
 
 ---
 
-**Tiempo estimado:** 30-60 minutos para integración básica
+**Tiempo estimado:** 30-60 minutos para integracion basica

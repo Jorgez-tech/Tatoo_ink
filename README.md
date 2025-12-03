@@ -1,110 +1,229 @@
-# Ink Studio - Landing Page
+# Ink Studio - Landing Page Fullstack
 
-Landing page profesional para estudio de tatuajes, construida con React + TypeScript + Tailwind CSS.
+Landing page profesional para estudio de tatuajes con backend ASP.NET Core y frontend React + TypeScript.
 
-## Stack Tecnológico
+## Descripcion General
 
-- **Framework:** React 19 + Vite
-- **Lenguaje:** TypeScript
-- **Estilos:** Tailwind CSS v3 + utilidades personalizadas
-- **Componentes UI:** Radix UI + Lucide Icons
-- **Validación:** React Hook Form
-- **Iconos:** Lucide React
+Solucion fullstack completa que permite a los clientes enviar mensajes de contacto y solicitar citas a traves de un formulario web. El sistema persiste los datos en base de datos y envia notificaciones por correo electronico al estudio.
+
+**Stack Tecnologico:**
+- **Frontend:** React 18.0 + TypeScript 5.9 + Vite 7 + Tailwind CSS 3.4
+- **Backend:** ASP.NET Core Web API .NET 8.0
+- **Base de Datos:** SQLite (desarrollo) / SQL Server (produccion)
+- **Email:** SendGrid / SMTP
+- **Testing:** xUnit + Moq (39 pruebas unitarias)
 
 ## Requisitos Previos
 
-- Node.js 18 LTS o superior
-- npm 9+ (instalado junto con Node)
+- **.NET 8.0 SDK** - [Descargar aqui](https://dotnet.microsoft.com/download/dotnet/8.0)
+- **Node.js 18+** y npm - [Descargar aqui](https://nodejs.org/)
+- **Git** - [Descargar aqui](https://git-scm.com/)
+- **SQLite** (incluido con .NET)
+- **Cuenta de SendGrid** (opcional, para email en produccion)
 
-## Instalación
+## Instalacion y Configuracion
+
+### 1. Clonar el Repositorio
 
 ```bash
-npm install
+git clone https://github.com/Jorgez-tech/Tatoo_ink.git
+cd Tatoo_ink
 ```
 
-## Desarrollo
+### 2. Configurar Backend
 
 ```bash
+cd backend
+
+# Copiar archivo de configuracion de ejemplo
+cp appsettings.Development.json.example appsettings.Development.json
+
+# Editar appsettings.Development.json con tus valores
+# (ConnectionString, EmailSettings, etc.)
+
+# Aplicar migraciones de base de datos
+dotnet ef database update
+
+# Ejecutar backend
+dotnet run
+```
+
+El backend estara disponible en: `https://localhost:7000`
+
+### 3. Configurar Frontend
+
+```bash
+# Desde la raiz del proyecto
+npm install
+
+# Copiar archivo de variables de entorno
+cp .env.example .env
+
+# Editar .env con la URL del backend
+# VITE_API_BASE_URL=https://localhost:7000
+
+# Ejecutar frontend
 npm run dev
 ```
 
-Abre [http://localhost:5173](http://localhost:5173) para ver la aplicación en modo desarrollo.
+El frontend estara disponible en: `http://localhost:5173`
 
-## Build y Deploy
+## Ejecucion del Proyecto Completo
 
-```bash
-npm run build
-npm run preview
-```
+### Backend
 
-El directorio `dist/` contiene los artefactos listos para despliegue. En escenarios con backend ASP.NET Core, publica el contenido de `dist/` dentro de `wwwroot/` o configura proxy inverso según necesidades.
+1. Configurar `appsettings.Development.json` (ver `backend/README.md`)
+2. Aplicar migraciones:
+   ```bash
+   cd backend
+   dotnet ef database update
+   ```
+3. Ejecutar API:
+   ```bash
+   dotnet run --project backend
+   ```
+4. API disponible en: `https://localhost:7000`
+5. Swagger UI: `https://localhost:7000/swagger`
+
+### Frontend
+
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+2. Ejecutar en desarrollo:
+   ```bash
+   npm run dev
+   ```
+3. Frontend disponible en: `http://localhost:5173`
+
+### Comunicacion Frontend-Backend
+
+- El frontend llama al endpoint `POST /api/contact`
+- CORS configurado en backend para permitir `http://localhost:5173`
+- Variables de entorno en `.env` (ver `.env.example`)
 
 ## Estructura del Proyecto
 
-```text
-src/
-├── components/
-│   ├── layout/      # Navbar, Footer
-│   ├── sections/    # Hero, Services, Gallery, About, Contact
-│   ├── ui/          # Button, Card, Input, Textarea, Label, ImageWithFallback
-│   └── shared/      # Componentes compartidos futuros
-├── config/          # Configuración centralizada
-│   ├── business-info.ts    # Datos del negocio
-│   ├── content.ts          # Textos de secciones
-│   ├── images.ts           # Rutas de imágenes
-│   ├── navigation.ts       # Menú y navegación
-│   ├── services.ts         # Servicios ofrecidos
-│   └── api.ts              # Configuración de backend
-├── hooks/           # useActiveSection
-├── lib/             # utils.ts (cn helper)
-├── styles/          # globals.css
-└── types/           # index.ts (interfaces TypeScript)
+```
+Tatoo_ink/
+??? backend/                    # Backend ASP.NET Core
+?   ??? Controllers/           # Endpoints REST API
+?   ??? Services/              # Logica de negocio
+?   ??? Models/                # Entidades y DTOs
+?   ??? Data/                  # DbContext y migraciones
+?   ??? Validators/            # Validaciones FluentValidation
+?   ??? Middleware/            # Middleware personalizado
+?   ??? Utils/                 # Utilidades
+?   ??? Program.cs             # Configuracion de la app
+??? backend.Tests/             # Pruebas unitarias (39 tests)
+??? src/                       # Frontend React
+?   ??? components/            # Componentes React
+?   ?   ??? layout/           # Navbar, Footer
+?   ?   ??? sections/         # Hero, Services, Gallery, etc.
+?   ?   ??? ui/               # Componentes UI base
+?   ??? config/                # Configuracion centralizada
+?   ??? hooks/                 # Custom hooks
+?   ??? lib/                   # Utilidades
+?   ??? types/                 # Tipos TypeScript
+?   ??? styles/                # Estilos globales
+??? docs/                      # Documentacion del proyecto
+?   ??? NEXT-STEPS.md         # Proximos pasos y guia de trabajo
+?   ??? CUSTOMIZATION.md      # Guia de personalizacion
+?   ??? STRUCTURE.md          # Arquitectura tecnica
+?   ??? PERFORMANCE.md        # Metricas y optimizaciones
+?   ??? ACCESSIBILITY.md      # Cumplimiento WCAG AA
+?   ??? DEPLOYMENT.md         # Guia de despliegue
+??? public/                    # Assets estaticos
+??? .kiro/specs/              # Especificaciones tecnicas
+??? README.md                 # Este archivo
 ```
 
-Consulta `docs/STRUCTURE.md` para detalles completos.
+## Pruebas
 
-## Personalización
+### Backend - Pruebas Unitarias
 
-Para adaptar esta landing a un nuevo cliente:
+```bash
+cd backend.Tests
+dotnet test
 
-1. **Información del negocio:** Edita `src/config/business-info.ts`
-2. **Contenido de secciones:** Edita `src/config/content.ts`
-3. **Servicios:** Edita `src/config/services.ts`
-4. **Imágenes:** Actualiza rutas en `src/config/images.ts`
-5. **Colores y estilos:** Modifica variables CSS en `src/styles/globals.css`
+# Con detalles
+dotnet test --verbosity normal
 
-Ver `docs/CUSTOMIZATION.md` para guía detallada.
+# Con cobertura
+dotnet test --collect:"XPlat Code Coverage"
+```
 
-## Características
+**Estado actual:** 39 pruebas pasando (100% exito)
 
-- Diseño responsive (móvil, tablet, desktop)
-- Navegación con scroll spy (sección activa destacada)
-- Smooth scroll global
-- Lazy loading de imágenes con placeholders
-- Lightbox interactivo con navegación por teclado
-- Formulario validado con React Hook Form
-- Animaciones fadeIn/fadeInUp
-- Preparado para backend ASP.NET Core
-- Modo mock para desarrollo sin backend
-- Componentes documentados con JSDoc
+### Frontend - Linting
 
-## Contribución
+```bash
+npm run lint
+```
 
-1. Crea una rama feature desde `main` siguiendo el formato `feature/<nombre>`
-2. Usa commits convencionales (`feat:`, `fix:`, `docs:`, `refactor:`, etc.)
-3. Ejecuta `npm run build` antes de abrir un PR
+## Caracteristicas Principales
 
-## Documentación
+### Frontend
+- Diseno responsive completo (mobile-first)
+- Scroll spy en navegacion
+- Lazy loading de imagenes
+- Lightbox interactivo en galeria
+- Validacion de formularios
+- Animaciones optimizadas
+- Bundle optimizado (80KB gzipped)
+- Accesibilidad WCAG AA
+- SEO completo (Open Graph, Twitter Cards)
 
-- `docs/STRUCTURE.md` - Arquitectura del proyecto
-- `docs/CUSTOMIZATION.md` - Guía de personalización
-- `docs/BACKEND-INTEGRATION.md` - Integración con ASP.NET Core
-- `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
+### Backend
+- API RESTful con ASP.NET Core
+- Validacion robusta con FluentValidation
+- Persistencia en base de datos (SQLite/SQL Server)
+- Envio de emails (SendGrid/SMTP)
+- Logging estructurado con Serilog
+- Manejo global de excepciones
+- Rate limiting (10 req/min)
+- Sanitizacion de entrada (XSS prevention)
+- CORS configurado
+- Swagger UI para documentacion
 
-## Prohibición de emojis
+## Documentacion Adicional
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+- **Backend:** Ver `backend/README.md` para arquitectura y endpoints
+- **Personalizacion:** Ver `docs/CUSTOMIZATION.md`
+- **Arquitectura:** Ver `docs/STRUCTURE.md`
+- **Performance:** Ver `docs/PERFORMANCE.md`
+- **Accesibilidad:** Ver `docs/ACCESSIBILITY.md`
+- **Despliegue:** Ver `docs/DEPLOYMENT.md`
+- **Proximos Pasos:** Ver `docs/NEXT-STEPS.md`
+
+## Despliegue
+
+### Opciones de Hosting
+
+**Frontend:**
+- Vercel (recomendado)
+- Netlify
+- GitHub Pages
+- Cloudflare Pages
+
+**Backend:**
+- Azure App Service
+- AWS Elastic Beanstalk
+- Heroku
+- Railway
+- VPS (Linux + Nginx)
+
+Ver `docs/DEPLOYMENT.md` para guias detalladas.
 
 ## Licencia
 
-Este proyecto es un prototipo/demo para uso interno y clientes.
+Proyecto privado - Ink Studio
+
+## Soporte
+
+Para preguntas o issues, consulta la documentacion en `docs/` o contacta al equipo de desarrollo.
+
+---
+
+**Nota:** Este proyecto mantiene una politica estricta de no uso de emojis en codigo y documentacion para mantener un perfil profesional.

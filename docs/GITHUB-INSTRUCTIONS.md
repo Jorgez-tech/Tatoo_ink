@@ -1,17 +1,17 @@
 # Instrucciones GitHub - Contexto del Proyecto
 
-Este documento sirve como referencia rápida cada vez que retomemos el trabajo en el proyecto.
+Este documento sirve como referencia rapida cada vez que retomemos el trabajo en el proyecto.
 
-**NOTA:** Esta documentación no usa emoticones para mantener profesionalismo y compatibilidad con todos los sistemas. Los emojis están prohibidos en todo el proyecto y documentación.
+**NOTA:** Esta documentacion no usa emoticones para mantener profesionalismo y compatibilidad con todos los sistemas. Los emojis estan prohibidos en todo el proyecto y documentacion.
 
 ---
 
 ## Contexto del Proyecto
 
-### Descripción
+### Descripcion
 Landing page profesional para estudio de tatuajes "Ink Studio", construida como **prototipo reutilizable** para futuros clientes en Chile.
 
-### Stack Tecnológico
+### Stack Tecnologico
 - **Frontend:** React 19.1.1 + TypeScript 5.9.3
 - **Build Tool:** Vite 7.1.12
 - **Estilos:** Tailwind CSS 3.4.17
@@ -19,33 +19,33 @@ Landing page profesional para estudio de tatuajes "Ink Studio", construida como 
 - **Iconos:** Lucide React 0.552.0
 - **Backend (futuro):** ASP.NET Core
 
-### Origen del Diseño
+### Origen del Diseno
 - Exportado desde **Figma** sin modificaciones
-- Componentes adaptados de diseño visual a código React
+- Componentes adaptados de diseno visual a codigo React
 
 ---
 
-## Estructura de Documentación
+## Estructura de Documentacion
 
 ```
 docs/
-├── 00-PLAN-MAESTRO.md          # Plan general del proyecto (4 fases)
-├── 01-FASE-1-AUDITORIA.md      # Auditoría y limpieza de código
-├── 02-FASE-2-OPTIMIZACION.md   # Refactorización y separación de datos
-├── 03-FASE-3-DOCUMENTACION.md  # Documentación de código
-├── 04-FASE-4-FINALIZACION.md   # Performance, SEO y optimizaciones
-├── CHANGELOG.md                # Registro detallado de cambios
-├── STATUS.md                   # Estado actual del proyecto (LEER PRIMERO)
-└── GITHUB-INSTRUCTIONS.md      # Este archivo
+|-- 00-PLAN-MAESTRO.md          # Plan general del proyecto (4 fases)
+|-- 01-FASE-1-AUDITORIA.md      # Auditoria y limpieza de codigo
+|-- 02-FASE-2-OPTIMIZACION.md   # Refactorizacion y separacion de datos
+|-- 03-FASE-3-DOCUMENTACION.md  # Documentacion de codigo
+|-- 04-FASE-4-FINALIZACION.md   # Performance, SEO y optimizaciones
+|-- CHANGELOG.md                # Registro detallado de cambios
+|-- STATUS.md                   # Estado actual del proyecto (LEER PRIMERO)
++-- GITHUB-INSTRUCTIONS.md      # Este archivo
 ```
 
 ---
 
-## Inicio Rápido al Retomar el Trabajo
+## Inicio Rapido al Retomar el Trabajo
 
 ### 1. Leer Estado Actual
 ```bash
-# Archivo más importante para contexto rápido
+# Archivo mas importante para contexto rapido
 cat docs/STATUS.md
 ```
 
@@ -62,11 +62,11 @@ cat docs/01-FASE-1-AUDITORIA.md
 ```
 
 ### 4. Actualizar STATUS.md
-Siempre actualizar al terminar una sesión de trabajo con:
+Siempre actualizar al terminar una sesion de trabajo con:
 - Progreso de tareas completadas
 - Problemas encontrados
-- Próximos pasos
-- Fecha de última actualización
+- Proximos pasos
+- Fecha de ultima actualizacion
 
 ---
 
@@ -74,17 +74,17 @@ Siempre actualizar al terminar una sesión de trabajo con:
 
 ### Formato
 ```
-<tipo>(<alcance>): <descripción>
+<tipo>(<alcance>): <descripcion>
 
 [cuerpo opcional]
 ```
 
 ### Tipos de Commit
 - `feat` - Nueva funcionalidad
-- `fix` - Corrección de bug
-- `refactor` - Refactorización sin cambio funcional
+- `fix` - Correccion de bug
+- `refactor` - Refactorizacion sin cambio funcional
 - `style` - Cambios de formato/estilos
-- `docs` - Actualización de documentación
+- `docs` - Actualizacion de documentacion
 - `chore` - Tareas de mantenimiento
 - `perf` - Mejoras de performance
 - `test` - Agregar o modificar tests
@@ -101,58 +101,58 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ## Workflow de Trabajo
 
-### Al Iniciar Sesión
+### Al Iniciar Sesion
 1. `git pull origin main`
 2. Leer `docs/STATUS.md`
 3. Revisar documento de fase actual
-4. Identificar tarea específica a realizar
+4. Identificar tarea especifica a realizar
 
 ### Durante el Trabajo
 1. Commits frecuentes y descriptivos
-2. Actualizar documentación relevante
+2. Actualizar documentacion relevante
 3. Ejecutar `npm run dev` para verificar cambios
 4. Verificar que no hay errores: `npm run build`
 
-### Al Terminar Sesión
+### Al Terminar Sesion
 1. Actualizar `docs/STATUS.md` con:
    - Tareas completadas
    - Estado de progreso (%)
    - Problemas encontrados
-   - Próximos pasos
+   - Proximos pasos
 2. Actualizar `docs/CHANGELOG.md` si hay cambios significativos
-3. Commit de documentación: `docs: update session progress`
+3. Commit de documentacion: `docs: update session progress`
 4. Push a repositorio: `git push origin main`
 
 ---
 
 ## Estado por Fases
 
-### Fase 0: Configuración Inicial - COMPLETADA
+### Fase 0: Configuracion Inicial - COMPLETADA
 - Vite + React + TypeScript configurado
 - Dependencias instaladas
 - Tailwind CSS v3 funcionando
-- Página renderizando correctamente
+- Pagina renderizando correctamente
 
-### Fase 1: Auditoría y Limpieza - EN PROGRESO (5%)
-- [x] Auditoría de componentes UI
+### Fase 1: Auditoria y Limpieza - EN PROGRESO (5%)
+- [x] Auditoria de componentes UI
 - [ ] Eliminar 40 componentes no utilizados
 - [ ] Reorganizar estructura de carpetas
 - [ ] Optimizar estilos
 
-### Fase 2: Optimización - PENDIENTE
+### Fase 2: Optimizacion - PENDIENTE
 - Refactorizar 7 componentes principales
-- Crear archivos de configuración
-- Separar datos de presentación
+- Crear archivos de configuracion
+- Separar datos de presentacion
 - Mejorar tipos TypeScript
 
-### Fase 3: Documentación - PENDIENTE
+### Fase 3: Documentacion - PENDIENTE
 - JSDoc en componentes
 - README.md completo
-- Guía de customización
-- Documentación de estructura
+- Guia de customizacion
+- Documentacion de estructura
 
-### Fase 4: Finalización - PENDIENTE
-- Optimización de imágenes
+### Fase 4: Finalizacion - PENDIENTE
+- Optimizacion de imagenes
 - Performance y SEO
 - Accesibilidad (WCAG AA)
 - Sistema de temas
@@ -164,10 +164,10 @@ git commit -m "chore: remove unused UI components (40 files)"
 ### Corto Plazo (2-3 semanas)
 - Completar las 4 fases del plan
 - Tener template totalmente reutilizable
-- Documentación completa para customización
+- Documentacion completa para customizacion
 
 ### Mediano Plazo (1-2 meses)
-- Crear sistema de configuración centralizado
+- Crear sistema de configuracion centralizado
 - Integrar CMS headless (Strapi/Contentful)
 - Migrar 2-3 plantillas HTML existentes
 - Crear portfolio de demos
@@ -176,41 +176,41 @@ git commit -m "chore: remove unused UI components (40 files)"
 - Migrar las 10 plantillas HTML/CSS/JS existentes
 - Sistema multi-tenant para clientes
 - Deployment automatizado
-- Panel de administración
+- Panel de administracion
 
 ---
 
 ## Problemas Conocidos y Soluciones
 
 ### 1. Componentes UI No Utilizados
-**Problema:** 40 componentes shadcn/ui instalados pero no usados  
-**Impacto:** Bundle size inflado, código confuso  
-**Solución:** Fase 1.1 - Eliminar todos los componentes no utilizados  
+**Problema:** 40 componentes shadcn/ui instalados pero no usados
+**Impacto:** Bundle size inflado, codigo confuso
+**Solucion:** Fase 1.1 - Eliminar todos los componentes no utilizados
 **Estado:** Pendiente
 
-### 2. Imágenes Externas
-**Problema:** Todas las imágenes cargan desde Unsplash (URLs externas)  
-**Impacto:** Dependencia externa, posibles fallos, performance  
-**Solución:** Fase 4.1 - Descargar y optimizar localmente  
+### 2. Imagenes Externas
+**Problema:** Todas las imagenes cargan desde Unsplash (URLs externas)
+**Impacto:** Dependencia externa, posibles fallos, performance
+**Solucion:** Fase 4.1 - Descargar y optimizar localmente
 **Estado:** Pendiente
 
 ### 3. Formulario de Contacto
-**Problema:** No tiene backend funcional  
-**Impacto:** Formulario no envía emails realmente  
-**Solución:** Fase 2.1 - Preparar integración con backend/API  
+**Problema:** No tiene backend funcional
+**Impacto:** Formulario no envia emails realmente
+**Solucion:** Fase 2.1 - Preparar integracion con backend/API
 **Estado:** Pendiente
 
 ### 4. Warning de Fast Refresh
-**Problema:** `button.tsx` exporta componente + constante  
-**Impacto:** Warning en consola, no crítico  
-**Solución:** Separar exportaciones  
+**Problema:** `button.tsx` exporta componente + constante
+**Impacto:** Warning en consola, no critico
+**Solucion:** Separar exportaciones
 **Estado:** Bajo prioridad
 
 ---
 
-## Dependencias Críticas
+## Dependencias Criticas
 
-### Producción
+### Produccion
 ```json
 {
   "react": "^19.1.1",
@@ -236,12 +236,12 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ---
 
-## Comandos Útiles
+## Comandos Utiles
 
 ### Desarrollo
 ```bash
 npm run dev              # Servidor de desarrollo
-npm run build            # Build de producción
+npm run build            # Build de produccion
 npm run preview          # Preview del build
 npm run lint             # Linter
 ```
@@ -249,25 +249,25 @@ npm run lint             # Linter
 ### Git
 ```bash
 git status               # Ver cambios
-git log --oneline -10    # Últimos 10 commits
+git log --oneline -10    # Ultimos 10 commits
 git diff                 # Ver diferencias
 git add .                # Agregar todo
 git commit -m "mensaje"  # Commit
 git push origin main     # Push
 ```
 
-### Análisis
+### Analisis
 ```bash
 npm list --depth=0       # Ver dependencias instaladas
-du -sh node_modules      # Tamaño de node_modules (Linux/Mac)
-npm run build -- --analyze  # Analizar bundle (si está configurado)
+du -sh node_modules      # Tamano de node_modules (Linux/Mac)
+npm run build -- --analyze  # Analizar bundle (si esta configurado)
 ```
 
 ---
 
 ## Recursos y Referencias
 
-### Documentación Oficial
+### Documentacion Oficial
 - [React 19 Docs](https://react.dev/)
 - [TypeScript Docs](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Docs](https://tailwindcss.com/docs)
@@ -276,8 +276,8 @@ npm run build -- --analyze  # Analizar bundle (si está configurado)
 
 ### Proyecto
 - **Desarrollador:** Jorge
-- **Ubicación:** Chile
-- **Tipo:** Plantillas para profesionales y pequeños negocios
+- **Ubicacion:** Chile
+- **Tipo:** Plantillas para profesionales y pequenos negocios
 - **Portfolio:** 10 plantillas HTML/CSS/JS existentes
 
 ---
@@ -286,16 +286,16 @@ npm run build -- --analyze  # Analizar bundle (si está configurado)
 
 Antes de cada commit importante, verificar:
 
-- [ ] Código compila sin errores (`npm run build`)
+- [ ] Codigo compila sin errores (`npm run build`)
 - [ ] No hay errores de TypeScript
 - [ ] Servidor de desarrollo funciona (`npm run dev`)
-- [ ] Documentación actualizada si corresponde
+- [ ] Documentacion actualizada si corresponde
 - [ ] Commit message descriptivo y en formato correcto
-- [ ] `STATUS.md` actualizado si es final de sesión
+- [ ] `STATUS.md` actualizado si es final de sesion
 
 ---
 
-## Próxima Sesión
+## Proxima Sesion
 
 **Tarea Principal:** Completar Fase 1.1 - Eliminar componentes UI no utilizados
 
@@ -310,5 +310,5 @@ Antes de cada commit importante, verificar:
 
 ---
 
-_Última actualización: 2025-11-05_  
-_Próxima revisión: Al iniciar próxima sesión_
+_Ultima actualizacion: 2025-11-05_
+_Proxima revision: Al iniciar proxima sesion_

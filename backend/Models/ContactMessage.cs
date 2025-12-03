@@ -41,8 +41,7 @@ namespace backend.Models
         [Required]
         [MaxLength(1000)]
         public string Message { get; set; } = string.Empty;
-        [Required]
-        public bool WantsAppointment { get; set; }
+        public bool? WantsAppointment { get; set; }
     }
 
     public class ContactResponseDto

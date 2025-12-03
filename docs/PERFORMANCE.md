@@ -1,8 +1,8 @@
 # Performance - Ink Studio
 
-Documentación de optimizaciones de rendimiento implementadas en el proyecto.
+Documentacion de optimizaciones de rendimiento implementadas en el proyecto.
 
-## Métricas Objetivo
+## Metricas Objetivo
 
 ### Core Web Vitals
 
@@ -27,7 +27,7 @@ Documentación de optimizaciones de rendimiento implementadas en el proyecto.
 
 ## Optimizaciones Implementadas
 
-### 1. Optimización de Imágenes
+### 1. Optimizacion de Imagenes
 
 #### Hero Image
 
@@ -37,7 +37,7 @@ Documentación de optimizaciones de rendimiento implementadas en el proyecto.
   alt={heroImage.alt}
   loading="eager" // Carga inmediata (LCP)
   fetchPriority="high" // Prioridad alta
-  decoding="async" // Decodificación asíncrona
+  decoding="async" // Decodificacion asincrona
 />
 ```
 
@@ -75,7 +75,7 @@ Documentación de optimizaciones de rendimiento implementadas en el proyecto.
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 ```
 
-**Impacto:** Reduce latencia de red para imágenes externas.
+**Impacto:** Reduce latencia de red para imagenes externas.
 
 ### 3. Smooth Scroll Optimizado
 
@@ -120,7 +120,7 @@ html {
 
 ### 5. Code Splitting
 
-**Vite automático:**
+**Vite automatico:**
 
 - Chunks separados para vendor y app
 - Lazy loading de rutas (si se implementan)
@@ -128,24 +128,24 @@ html {
 **Bundle actual:**
 
 ```
-dist/assets/index-BHk0O8b-.js   231.25 kB │ gzip: 74.59 kB
-dist/assets/index-COVSvm1d.css   25.08 kB │ gzip:  5.73 kB
-dist/assets/api-BBOCQ1F-.js       0.35 kB │ gzip:  0.29 kB
+dist/assets/index-BHk0O8b-.js   231.25 kB | gzip: 74.59 kB
+dist/assets/index-COVSvm1d.css   25.08 kB | gzip:  5.73 kB
+dist/assets/api-BBOCQ1F-.js       0.35 kB | gzip:  0.29 kB
 ```
 
-**Total gzipped:** ~80KB ✅ (Excelente)
+**Total gzipped:** ~80KB [OK] (Excelente)
 
 ### 6. CSS Optimization
 
 **Tailwind CSS:**
 
-- Purge automático de clases no utilizadas
-- Minificación en producción
+- Purge automatico de clases no utilizadas
+- Minificacion en produccion
 - Variables CSS para temas
 
 **Resultado:**
 
-- CSS gzipped: 5.73 kB ✅
+- CSS gzipped: 5.73 kB [OK]
 
 ### 7. React Optimization
 
@@ -161,10 +161,10 @@ const navigatePrevious = useCallback(() => {
 }, []);
 ```
 
-**Prevención de re-renders innecesarios:**
+**Prevencion de re-renders innecesarios:**
 
 - Uso de `useCallback` en event handlers
-- Configuración estática importada (no en state)
+- Configuracion estatica importada (no en state)
 
 ### 8. Scroll Spy Optimizado
 
@@ -185,15 +185,15 @@ useEffect(() => {
 }, [sectionIds]);
 ```
 
-**Impacto:** Uso de IntersectionObserver (más eficiente que scroll events).
+**Impacto:** Uso de IntersectionObserver (mas eficiente que scroll events).
 
 ---
 
-## Análisis de Bundle
+## Analisis de Bundle
 
 ### Dependencias Principales
 
-**Producción:**
+**Produccion:**
 
 ```json
 {
@@ -207,20 +207,20 @@ useEffect(() => {
 }
 ```
 
-**Total estimado:** ~237KB (sin gzip) → ~75KB (gzipped) ✅
+**Total estimado:** ~237KB (sin gzip) -> ~75KB (gzipped) [OK]
 
-### Oportunidades de Optimización
+### Oportunidades de Optimizacion
 
 **Futuras mejoras:**
 
 1. **Lazy load de Gallery:** Cargar componente solo cuando sea visible
 2. **Optimizar Lucide Icons:** Importar solo iconos usados
-3. **Imágenes locales:** Mover de Unsplash a local + WebP/AVIF
-4. **Service Worker:** Cache de assets estáticos
+3. **Imagenes locales:** Mover de Unsplash a local + WebP/AVIF
+4. **Service Worker:** Cache de assets estaticos
 
 ---
 
-## Métricas Actuales
+## Metricas Actuales
 
 ### Build Stats
 
@@ -228,18 +228,18 @@ useEffect(() => {
 npm run build
 
 ✓ 1704 modules transformed.
-dist/index.html                    1.56 kB │ gzip:  0.71 kB
-dist/assets/index-COVSvm1d.css    25.08 kB │ gzip:  5.73 kB
-dist/assets/api-BBOCQ1F-.js        0.35 kB │ gzip:  0.29 kB
-dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
+dist/index.html                    1.56 kB | gzip:  0.71 kB
+dist/assets/index-COVSvm1d.css    25.08 kB | gzip:  5.73 kB
+dist/assets/api-BBOCQ1F-.js        0.35 kB | gzip:  0.29 kB
+dist/assets/index-BHk0O8b-.js    231.25 kB | gzip: 74.59 kB
 ✓ built in 6.96s
 ```
 
-**Análisis:**
+**Analisis:**
 
-- ✅ Bundle JS gzipped: 74.59 KB (Excelente)
-- ✅ Bundle CSS gzipped: 5.73 KB (Excelente)
-- ✅ Total: ~80 KB (Muy bueno)
+- [OK] Bundle JS gzipped: 74.59 KB (Excelente)
+- [OK] Bundle CSS gzipped: 5.73 KB (Excelente)
+- [OK] Total: ~80 KB (Muy bueno)
 
 ### Lighthouse (Estimado)
 
@@ -251,23 +251,23 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 **Accessibility:** 95-100
 
-- Contraste de colores: ✅
-- Navegación por teclado: ✅
-- ARIA labels: ✅
-- Alt text: ✅
+- Contraste de colores: [OK]
+- Navegacion por teclado: [OK]
+- ARIA labels: [OK]
+- Alt text: [OK]
 
 **Best Practices:** 90-95
 
-- HTTPS: ⚠️ (depende del hosting)
-- Console errors: ✅
-- Deprecated APIs: ✅
+- HTTPS: [WARNING] (depende del hosting)
+- Console errors: [OK]
+- Deprecated APIs: [OK]
 
 **SEO:** 90-100
 
-- Meta tags: ✅
-- Semantic HTML: ✅
-- Mobile-friendly: ✅
-- Structured data: ⚠️ (pendiente)
+- Meta tags: [OK]
+- Semantic HTML: [OK]
+- Mobile-friendly: [OK]
+- Structured data: [WARNING] (pendiente)
 
 ---
 
@@ -275,10 +275,10 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 ### Alta Prioridad
 
-1. **Imágenes Locales + WebP/AVIF**
+1. **Imagenes Locales + WebP/AVIF**
 
    ```bash
-   # Convertir imágenes
+   # Convertir imagenes
    npx @squoosh/cli --webp auto hero.jpg
    npx @squoosh/cli --avif auto hero.jpg
    ```
@@ -349,7 +349,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
    ```
 
 7. **Critical CSS Inline**
-   - Extraer CSS crítico del hero
+   - Extraer CSS critico del hero
    - Inline en `<head>`
 
 ---
@@ -367,7 +367,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 2. **WebPageTest**
 
    - https://www.webpagetest.org/
-   - Test desde múltiples ubicaciones
+   - Test desde multiples ubicaciones
 
 3. **Chrome DevTools Performance**
 
@@ -384,7 +384,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 - [ ] Lighthouse audit (Performance > 90)
 - [ ] WebPageTest (LCP < 2.5s)
 - [ ] Network throttling (3G, 4G)
-- [ ] Diferentes dispositivos (móvil, tablet, desktop)
+- [ ] Diferentes dispositivos (movil, tablet, desktop)
 - [ ] Diferentes navegadores (Chrome, Firefox, Safari)
 - [ ] Bundle size analysis
 
@@ -392,7 +392,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 
 ## Recursos
 
-### Guías
+### Guias
 
 - [Web.dev Performance](https://web.dev/performance/)
 - [Core Web Vitals](https://web.dev/vitals/)
@@ -403,7 +403,7 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse)
 - [WebPageTest](https://www.webpagetest.org/)
 - [Bundle Analyzer](https://www.npmjs.com/package/rollup-plugin-visualizer)
-- [Squoosh](https://squoosh.app/) - Optimización de imágenes
+- [Squoosh](https://squoosh.app/) - Optimizacion de imagenes
 
 ---
 
@@ -414,15 +414,15 @@ dist/assets/index-BHk0O8b-.js    231.25 kB │ gzip: 74.59 kB
 - Bundle size muy optimizado (80KB gzipped)
 - Lazy loading implementado
 - Animaciones optimizadas
-- Código limpio y eficiente
+- Codigo limpio y eficiente
 
-**Próximos pasos:**
+**Proximos pasos:**
 
-1. Migrar imágenes a local + WebP/AVIF
-2. Ejecutar auditoría completa con Lighthouse
-3. Implementar mejoras según resultados
-4. Documentar métricas reales
+1. Migrar imagenes a local + WebP/AVIF
+2. Ejecutar auditoria completa con Lighthouse
+3. Implementar mejoras segun resultados
+4. Documentar metricas reales
 
-## Prohibición de emojis
+## Prohibicion de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.

@@ -1,20 +1,20 @@
-# Guía de Personalización
+# Guia de Personalizacion
 
-Esta guía te ayudará a adaptar la landing page de Ink Studio para un nuevo cliente o negocio.
+Esta guia te ayudara a adaptar la landing page de Ink Studio para un nuevo cliente o negocio.
 
 ## Tabla de Contenidos
 
-1. Información del Negocio
+1. Informacion del Negocio
 2. Contenido de Secciones
 3. Servicios
-4. Imágenes
-5. Navegación
+4. Imagenes
+5. Navegacion
 6. Colores y Estilos
 7. Backend
 
 ---
 
-## Información del Negocio
+## Informacion del Negocio
 
 **Archivo:** `src/config/business-info.ts`
 
@@ -22,10 +22,10 @@ Esta guía te ayudará a adaptar la landing page de Ink Studio para un nuevo cli
 export const businessInfo = {
   name: "Tu Negocio", // Nombre del negocio
   tagline: "Tu Eslogan", // Eslogan corto
-  description: "Descripción...", // Descripción breve
+  description: "Descripcion...", // Descripcion breve
 
   contact: {
-    address: "Dirección completa",
+    address: "Direccion completa",
     phone: "+56 9 1234 5678",
     email: "contacto@tunegocio.cl",
     hours: "Lun - Vie: 9:00 - 18:00",
@@ -39,18 +39,18 @@ export const businessInfo = {
 
   stats: [
     { icon: Users, value: "500+", label: "Clientes" },
-    { icon: Award, value: "10+", label: "Años" },
+    { icon: Award, value: "10+", label: "Anos" },
     { icon: Star, value: "5.0", label: "Rating" },
   ],
 };
 ```
 
-**Qué cambiar:**
+**Que cambiar:**
 
 - Nombre y eslogan del negocio
-- Datos de contacto (dirección, teléfono, email, horarios)
-- Enlaces a redes sociales (dejar vacío `""` si no aplica)
-- Estadísticas destacadas (valores y etiquetas)
+- Datos de contacto (direccion, telefono, email, horarios)
+- Enlaces a redes sociales (dejar vacio `""` si no aplica)
+- Estadisticas destacadas (valores y etiquetas)
 
 ---
 
@@ -58,14 +58,14 @@ export const businessInfo = {
 
 **Archivo:** `src/config/content.ts`
 
-### Hero (Sección Principal)
+### Hero (Seccion Principal)
 
 ```typescript
 export const heroContent = {
-  title: "Tu Título Principal",
-  description: "Descripción que capte la atención...",
-  primaryButton: "Acción Principal",
-  secondaryButton: "Acción Secundaria",
+  title: "Tu Titulo Principal",
+  description: "Descripcion que capte la atencion...",
+  primaryButton: "Accion Principal",
+  secondaryButton: "Accion Secundaria",
 };
 ```
 
@@ -74,15 +74,15 @@ export const heroContent = {
 ```typescript
 export const servicesContent = {
   title: "Nuestros Servicios",
-  description: "Descripción de tus servicios...",
+  description: "Descripcion de tus servicios...",
 };
 ```
 
-### Gallery (Galería)
+### Gallery (Galeria)
 
 ```typescript
 export const galleryContent = {
-  title: "Galería",
+  title: "Galeria",
   description: "Muestra tu trabajo...",
 };
 ```
@@ -93,9 +93,9 @@ export const galleryContent = {
 export const aboutContent = {
   title: "Sobre Nosotros",
   paragraphs: [
-    "Primer párrafo de tu historia...",
-    "Segundo párrafo con más detalles...",
-    "Tercer párrafo con tu propuesta de valor...",
+    "Primer parrafo de tu historia...",
+    "Segundo parrafo con mas detalles...",
+    "Tercer parrafo con tu propuesta de valor...",
   ],
 };
 ```
@@ -104,18 +104,18 @@ export const aboutContent = {
 
 ```typescript
 export const contactContent = {
-  title: "Contáctanos",
-  description: "Estamos aquí para ayudarte...",
-  formTitle: "Envíanos un mensaje",
+  title: "Contactanos",
+  description: "Estamos aqui para ayudarte...",
+  formTitle: "Envianos un mensaje",
   formDescription: "Responderemos pronto...",
   formFields: {
     name: { label: "Nombre", placeholder: "Tu nombre" },
     email: { label: "Email", placeholder: "tu@email.com" },
-    phone: { label: "Teléfono", placeholder: "+56 9 1234 5678" },
-    message: { label: "Mensaje", placeholder: "Cuéntanos..." },
+    phone: { label: "Telefono", placeholder: "+56 9 1234 5678" },
+    message: { label: "Mensaje", placeholder: "Cuentanos..." },
   },
   submitButton: "Enviar Mensaje",
-  successMessage: "¡Mensaje enviado con éxito!",
+  successMessage: "Mensaje enviado con exito!",
 };
 ```
 
@@ -123,9 +123,9 @@ export const contactContent = {
 
 ```typescript
 export const footerContent = {
-  description: "Descripción breve para el footer...",
-  quickLinksTitle: "Enlaces Rápidos",
-  socialTitle: "Síguenos",
+  description: "Descripcion breve para el footer...",
+  quickLinksTitle: "Enlaces Rapidos",
+  socialTitle: "Siguenos",
 };
 ```
 
@@ -142,14 +142,14 @@ export const services = [
   {
     icon: Palette,
     title: "Servicio 1",
-    description: "Descripción del servicio...",
+    description: "Descripcion del servicio...",
   },
   {
     icon: Sparkles,
     title: "Servicio 2",
-    description: "Descripción del servicio...",
+    description: "Descripcion del servicio...",
   },
-  // Agrega más servicios según necesites
+  // Agrega mas servicios segun necesites
 ];
 ```
 
@@ -157,38 +157,38 @@ export const services = [
 
 ---
 
-## Imágenes
+## Imagenes
 
 **Archivo:** `src/config/images.ts`
 
 ```typescript
 export const heroImage = {
   src: "https://images.unsplash.com/photo-...",
-  alt: "Descripción de la imagen hero",
+  alt: "Descripcion de la imagen hero",
 };
 
 export const aboutImage = {
   src: "https://images.unsplash.com/photo-...",
-  alt: "Descripción de la imagen about",
+  alt: "Descripcion de la imagen about",
 };
 
 export const galleryImages = [
-  { src: "url-imagen-1", alt: "Descripción 1" },
-  { src: "url-imagen-2", alt: "Descripción 2" },
-  // Agrega más imágenes
+  { src: "url-imagen-1", alt: "Descripcion 1" },
+  { src: "url-imagen-2", alt: "Descripcion 2" },
+  // Agrega mas imagenes
 ];
 ```
 
 **Recomendaciones:**
 
-- Usa imágenes de alta calidad (mínimo 1920x1080 para hero)
-- Optimiza las imágenes antes de subirlas
-- Considera usar un CDN o servicio de imágenes
-- Para producción, mueve las imágenes a `/public/images/`
+- Usa imagenes de alta calidad (minimo 1920x1080 para hero)
+- Optimiza las imagenes antes de subirlas
+- Considera usar un CDN o servicio de imagenes
+- Para produccion, mueve las imagenes a `/public/images/`
 
-**Migrar a imágenes locales:**
+**Migrar a imagenes locales:**
 
-1. Coloca las imágenes en `/public/images/`
+1. Coloca las imagenes en `/public/images/`
 2. Actualiza las rutas:
    ```typescript
    src: "/images/hero.jpg";
@@ -196,7 +196,7 @@ export const galleryImages = [
 
 ---
 
-## Navegación
+## Navegacion
 
 **Archivo:** `src/config/navigation.ts`
 
@@ -204,7 +204,7 @@ export const galleryImages = [
 export const menuItems = [
   { label: "Inicio", href: "#home" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Galería", href: "#galeria" },
+  { label: "Galeria", href: "#galeria" },
   { label: "Nosotros", href: "#nosotros" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -287,7 +287,7 @@ module.exports = {
 export const USE_MOCK_API = true;
 ```
 
-### Modo Producción (Con backend ASP.NET Core)
+### Modo Produccion (Con backend ASP.NET Core)
 
 ```typescript
 export const USE_MOCK_API = false;
@@ -297,66 +297,66 @@ export const API_BASE_URL = "https://tu-api.com";
 // export const API_BASE_URL = "https://localhost:7001"
 ```
 
-Ver `docs/BACKEND-INTEGRATION.md` para detalles completos de integración.
+Ver `docs/BACKEND-INTEGRATION.md` para detalles completos de integracion.
 
 ---
 
-## 🚀 Checklist de Personalización
+## Checklist de Personalizacion
 
 Usa esta lista para asegurarte de personalizar todo:
 
 - [ ] Nombre del negocio en `business-info.ts`
-- [ ] Datos de contacto (dirección, teléfono, email)
+- [ ] Datos de contacto (direccion, telefono, email)
 - [ ] Enlaces de redes sociales
-- [ ] Estadísticas destacadas
-- [ ] Título y descripción del Hero
+- [ ] Estadisticas destacadas
+- [ ] Titulo y descripcion del Hero
 - [ ] Textos de todas las secciones
 - [ ] Lista de servicios con iconos
-- [ ] Imágenes (hero, about, galería)
-- [ ] Menú de navegación
+- [ ] Imagenes (hero, about, galeria)
+- [ ] Menu de navegacion
 - [ ] Colores y estilos en `globals.css`
-- [ ] Configuración de API/backend
-- [ ] Título y favicon en `index.html`
+- [ ] Configuracion de API/backend
+- [ ] Titulo y favicon en `index.html`
 - [ ] Manifest en `public/site.webmanifest`
 
 ---
 
-## 💡 Tips
+## Tips
 
-1. **Mantén la consistencia:** Usa el mismo tono de voz en todos los textos
-2. **Optimiza imágenes:** Comprime las imágenes antes de subirlas
-3. **Prueba responsive:** Verifica en móvil, tablet y desktop
-4. **Accesibilidad:** Asegúrate de que los textos alternativos sean descriptivos
+1. **Manten la consistencia:** Usa el mismo tono de voz en todos los textos
+2. **Optimiza imagenes:** Comprime las imagenes antes de subirlas
+3. **Prueba responsive:** Verifica en movil, tablet y desktop
+4. **Accesibilidad:** Asegurate de que los textos alternativos sean descriptivos
 5. **SEO:** Actualiza meta tags en `index.html`
 
 ---
 
-## 🆘 Problemas Comunes
+## Problemas Comunes
 
-**Las imágenes no cargan:**
+**Las imagenes no cargan:**
 
 - Verifica que las URLs sean correctas
-- Si usas imágenes locales, asegúrate de que estén en `/public/`
+- Si usas imagenes locales, asegurate de que esten en `/public/`
 
 **Los colores no cambian:**
 
-- Limpia la caché del navegador
+- Limpia la cache del navegador
 - Reinicia el servidor de desarrollo
 
-**El formulario no envía:**
+**El formulario no envia:**
 
-- Verifica la configuración en `api.ts`
+- Verifica la configuracion en `api.ts`
 - Revisa la consola del navegador para errores
 
 ---
 
-Para más ayuda, consulta:
+Para mas ayuda, consulta:
 
 - `docs/STRUCTURE.md` - Arquitectura del proyecto
-- `docs/BACKEND-INTEGRATION.md` - Integración con backend
+- `docs/BACKEND-INTEGRATION.md` - Integracion con backend
 
 ---
 
-## Prohibición de emojis
+## Prohibicion de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.

@@ -31,7 +31,7 @@ namespace backend.Services
                     Email = request.Email,
                     Phone = request.Phone,
                     Message = request.Message,
-                    WantsAppointment = request.WantsAppointment,
+                    WantsAppointment = request.WantsAppointment ?? false,
                     CreatedAt = DateTime.UtcNow,
                     EmailSent = false
                 };

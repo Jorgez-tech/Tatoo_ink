@@ -1,13 +1,13 @@
 # Estructura del Proyecto
 
-Documentación detallada de la arquitectura y organización del proyecto Ink Studio.
+Documentacion detallada de la arquitectura y organizacion del proyecto Ink Studio.
 
 ## Tabla de Contenidos
 
-1. [Visión General](#visión-general)
+1. [Vision General](#vision-general)
 2. [Estructura de Carpetas](#estructura-de-carpetas)
 3. [Componentes](#componentes)
-4. [Configuración](#configuración)
+4. [Configuracion](#configuracion)
 5. [Hooks](#hooks)
 6. [Utilidades](#utilidades)
 7. [Estilos](#estilos)
@@ -16,15 +16,15 @@ Documentación detallada de la arquitectura y organización del proyecto Ink Stu
 
 ---
 
-## Visión General
+## Vision General
 
-El proyecto sigue una arquitectura modular basada en componentes React con separación clara entre presentación y datos.
+El proyecto sigue una arquitectura modular basada en componentes React con separacion clara entre presentacion y datos.
 
-**Principios de diseño:**
+**Principios de diseno:**
 
-- Separación de datos y presentación
+- Separacion de datos y presentacion
 - Componentes reutilizables y documentados
-- Configuración centralizada
+- Configuracion centralizada
 - Type-safety con TypeScript
 - Responsive-first design
 
@@ -32,69 +32,69 @@ El proyecto sigue una arquitectura modular basada en componentes React con separ
 
 ## Estructura de Carpetas
 
-```
+```text
 tatoo_ink.client/
-├── docs/                           # Documentación del proyecto
-│   ├── 00-PLAN-MAESTRO.md
-│   ├── 01-FASE-1-AUDITORIA.md
-│   ├── 02-FASE-2-OPTIMIZACION.md
-│   ├── 03-FASE-3-DOCUMENTACION.md
-│   ├── 04-FASE-4-FINALIZACION.md
-│   ├── BACKEND-INTEGRATION.md
-│   ├── CHANGELOG.md
-│   ├── CUSTOMIZATION.md
-│   ├── STATUS.md
-│   └── STRUCTURE.md               # Este archivo
-├── public/                         # Archivos estáticos
-│   ├── site.webmanifest
-│   └── vite.svg
-├── src/
-│   ├── components/                 # Componentes React
-│   │   ├── layout/                 # Componentes de estructura
-│   │   │   ├── Navbar.tsx
-│   │   │   └── Footer.tsx
-│   │   ├── sections/               # Secciones de la landing
-│   │   │   ├── Hero.tsx
-│   │   │   ├── Services.tsx
-│   │   │   ├── Gallery.tsx
-│   │   │   ├── About.tsx
-│   │   │   └── Contact.tsx
-│   │   ├── ui/                     # Componentes UI base
-│   │   │   ├── button.tsx
-│   │   │   ├── card.tsx
-│   │   │   ├── input.tsx
-│   │   │   ├── textarea.tsx
-│   │   │   ├── label.tsx
-│   │   │   └── ImageWithFallback.tsx
-│   │   └── shared/                 # Componentes compartidos (futuro)
-│   ├── config/                     # Configuración centralizada
-│   │   ├── business-info.ts        # Datos del negocio
-│   │   ├── content.ts              # Textos de secciones
-│   │   ├── images.ts               # Rutas de imágenes
-│   │   ├── navigation.ts           # Menú y navegación
-│   │   ├── services.ts             # Servicios ofrecidos
-│   │   └── api.ts                  # Configuración de backend
-│   ├── hooks/                      # Custom hooks
-│   │   └── use-active-section.ts   # Scroll spy
-│   ├── lib/                        # Utilidades
-│   │   └── utils.ts                # Helpers (cn)
-│   ├── styles/                     # Estilos globales
-│   │   └── globals.css
-│   ├── types/                      # Tipos TypeScript
-│   │   └── index.ts
-│   ├── App.tsx                     # Componente raíz
-│   ├── main.tsx                    # Entry point
-│   └── index.css                   # Imports de Tailwind
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── tsconfig.app.json
-├── tsconfig.node.json
-└── vite.config.ts
+|-- docs/                           # Documentacion del proyecto
+|   |-- 00-PLAN-MAESTRO.md
+|   |-- 01-FASE-1-AUDITORIA.md
+|   |-- 02-FASE-2-OPTIMIZACION.md
+|   |-- 03-FASE-3-DOCUMENTACION.md
+|   |-- 04-FASE-4-FINALIZACION.md
+|   |-- BACKEND-INTEGRATION.md
+|   |-- CHANGELOG.md
+|   |-- CUSTOMIZATION.md
+|   |-- STATUS.md
+|   +-- STRUCTURE.md               # Este archivo
+|-- public/                         # Archivos estaticos
+|   |-- site.webmanifest
+|   +-- vite.svg
+|-- src/
+|   |-- components/                 # Componentes React
+|   |   |-- layout/                 # Componentes de estructura
+|   |   |   |-- Navbar.tsx
+|   |   |   +-- Footer.tsx
+|   |   |-- sections/               # Secciones de la landing
+|   |   |   |-- Hero.tsx
+|   |   |   |-- Services.tsx
+|   |   |   |-- Gallery.tsx
+|   |   |   |-- About.tsx
+|   |   |   +-- Contact.tsx
+|   |   |-- ui/                     # Componentes UI base
+|   |   |   |-- button.tsx
+|   |   |   |-- card.tsx
+|   |   |   |-- input.tsx
+|   |   |   |-- textarea.tsx
+|   |   |   |-- label.tsx
+|   |   |   +-- ImageWithFallback.tsx
+|   |   +-- shared/                 # Componentes compartidos (futuro)
+|   |-- config/                     # Configuracion centralizada
+|   |   |-- business-info.ts        # Datos del negocio
+|   |   |-- content.ts              # Textos de secciones
+|   |   |-- images.ts               # Rutas de imagenes
+|   |   |-- navigation.ts           # Menu y navegacion
+|   |   |-- services.ts             # Servicios ofrecidos
+|   |   +-- api.ts                  # Configuracion de backend
+|   |-- hooks/                      # Custom hooks
+|   |   +-- use-active-section.ts   # Scroll spy
+|   |-- lib/                        # Utilidades
+|   |   +-- utils.ts                # Helpers (cn)
+|   |-- styles/                     # Estilos globales
+|   |   +-- globals.css
+|   |-- types/                      # Tipos TypeScript
+|   |   +-- index.ts
+|   |-- App.tsx                     # Componente raiz
+|   |-- main.tsx                    # Entry point
+|   +-- index.css                   # Imports de Tailwind
+|-- .gitignore
+|-- eslint.config.js
+|-- index.html
+|-- package.json
+|-- postcss.config.js
+|-- tailwind.config.js
+|-- tsconfig.json
+|-- tsconfig.app.json
+|-- tsconfig.node.json
++-- vite.config.ts
 ```
 
 ---
@@ -103,38 +103,38 @@ tatoo_ink.client/
 
 ### Layout (`components/layout/`)
 
-Componentes estructurales que aparecen en todas las páginas.
+Componentes estructurales que aparecen en todas las paginas.
 
 #### Navbar.tsx
 
-- Navegación fija en la parte superior
-- Menú responsive (desktop/móvil)
-- Scroll spy (destaca sección activa)
+- Navegacion fija en la parte superior
+- Menu responsive (desktop/movil)
+- Scroll spy (destaca seccion activa)
 - Smooth scroll al hacer clic
 - Efecto de backdrop blur al hacer scroll
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
-- `config/navigation.ts` - Items del menú
+- `config/navigation.ts` - Items del menu
 - `config/business-info.ts` - Nombre del negocio
-- `hooks/use-active-section.ts` - Detección de sección activa
+- `hooks/use-active-section.ts` - Deteccion de seccion activa
 
 #### Footer.tsx
 
-- Pie de página con información del negocio
-- Enlaces rápidos
+- Pie de pagina con informacion del negocio
+- Enlaces rapidos
 - Redes sociales
-- Copyright dinámico
+- Copyright dinamico
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
 - `config/business-info.ts` - Datos del negocio
 - `config/content.ts` - Textos del footer
-- `config/navigation.ts` - Enlaces rápidos
+- `config/navigation.ts` - Enlaces rapidos
 
 ---
 
@@ -144,12 +144,12 @@ Secciones principales de la landing page.
 
 #### Hero.tsx
 
-- Sección principal con imagen de fondo
-- Título y descripción destacados
+- Seccion principal con imagen de fondo
+- Titulo y descripcion destacados
 - Botones de CTA (primario y secundario)
 - Indicador de scroll animado
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
@@ -159,73 +159,73 @@ Secciones principales de la landing page.
 #### Services.tsx
 
 - Grid de servicios ofrecidos
-- Tarjetas con icono, título y descripción
-- Responsive (1→2→4 columnas)
+- Tarjetas con icono, titulo y descripcion
+- Responsive (1->2->4 columnas)
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
 - `config/services.ts` - Lista de servicios
-- `config/content.ts` - Título y descripción de sección
+- `config/content.ts` - Titulo y descripcion de seccion
 
 #### Gallery.tsx
 
-- Grid de imágenes responsive
+- Grid de imagenes responsive
 - Lightbox interactivo
-- Navegación por teclado (flechas, ESC)
+- Navegacion por teclado (flechas, ESC)
 - Lazy loading con placeholders
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
-- `config/images.ts` - Imágenes de la galería
-- `config/content.ts` - Título y descripción
+- `config/images.ts` - Imagenes de la galeria
+- `config/content.ts` - Titulo y descripcion
 
-**Características:**
+**Caracteristicas:**
 
-- Navegación circular (primera ↔ última)
-- Contador de imágenes
+- Navegacion circular (primera <-> ultima)
+- Contador de imagenes
 - Cierre con backdrop o ESC
-- Prevención de scroll del body
+- Prevencion de scroll del body
 
 #### About.tsx
 
-- Información del estudio
-- Estadísticas destacadas
-- Imagen corporativa con decoración
+- Informacion del estudio
+- Estadisticas destacadas
+- Imagen corporativa con decoracion
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
 - `config/business-info.ts` - Stats y datos
-- `config/content.ts` - Textos de la sección
+- `config/content.ts` - Textos de la seccion
 - `config/images.ts` - Imagen about
 
 #### Contact.tsx
 
 - Formulario de contacto validado
-- Tarjetas con información de contacto
+- Tarjetas con informacion de contacto
 - Estados de loading/success/error
-- Integración con backend o modo mock
+- Integracion con backend o modo mock
 
-**Props:** Ninguna (usa configuración)
+**Props:** Ninguna (usa configuracion)
 
 **Dependencias:**
 
 - `config/business-info.ts` - Datos de contacto
 - `config/content.ts` - Textos del formulario
-- `config/api.ts` - Configuración de backend
-- `react-hook-form` - Validación
+- `config/api.ts` - Configuracion de backend
+- `react-hook-form` - Validacion
 
 **Validaciones:**
 
-- Nombre: mínimo 2 caracteres
-- Email: formato válido
-- Teléfono: formato numérico (opcional)
-- Mensaje: mínimo 10 caracteres
+- Nombre: minimo 2 caracteres
+- Email: formato valido
+- Telefono: formato numerico (opcional)
+- Mensaje: minimo 10 caracteres
 
 ---
 
@@ -236,13 +236,13 @@ Componentes base reutilizables con estilos consistentes.
 #### button.tsx
 
 - Variantes: default, destructive, outline, secondary, ghost, link
-- Tamaños: default, sm, lg, icon
+- Tamanos: default, sm, lg, icon
 - Soporte para `asChild` (Radix Slot)
 
 #### card.tsx
 
 - Componentes: Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction
-- Sistema de composición flexible
+- Sistema de composicion flexible
 
 #### input.tsx
 
@@ -259,24 +259,24 @@ Componentes base reutilizables con estilos consistentes.
 #### label.tsx
 
 - Label accesible basado en Radix UI
-- Asociación automática con inputs
+- Asociacion automatica con inputs
 
 #### ImageWithFallback.tsx
 
 - Lazy loading por defecto
 - Placeholder animado mientras carga
 - Fallback SVG en caso de error
-- Transición suave al cargar
+- Transicion suave al cargar
 
 ---
 
-## Configuración
+## Configuracion
 
-Archivos de configuración centralizados en `src/config/`.
+Archivos de configuracion centralizados en `src/config/`.
 
 ### business-info.ts
 
-Información del negocio y datos de contacto.
+Informacion del negocio y datos de contacto.
 
 ```typescript
 export const businessInfo = {
@@ -354,7 +354,7 @@ export const footerContent: {
 
 ### images.ts
 
-Rutas de todas las imágenes.
+Rutas de todas las imagenes.
 
 ```typescript
 export const heroImage: {
@@ -375,7 +375,7 @@ export const galleryImages: Array<{
 
 ### navigation.ts
 
-Estructura del menú de navegación.
+Estructura del menu de navegacion.
 
 ```typescript
 export const menuItems: Array<{
@@ -400,7 +400,7 @@ export const services: Array<{
 
 ### api.ts
 
-Configuración de backend y modo mock.
+Configuracion de backend y modo mock.
 
 ```typescript
 export const USE_MOCK_API: boolean;
@@ -419,7 +419,7 @@ export function mockApiCall(endpoint: string, data: any): Promise<Response>;
 
 ### use-active-section.ts
 
-Hook personalizado para detectar la sección activa durante el scroll.
+Hook personalizado para detectar la seccion activa durante el scroll.
 
 **Uso:**
 
@@ -430,8 +430,8 @@ const activeSection = useActiveSection(["home", "servicios", "galeria"]);
 **Funcionamiento:**
 
 - Usa `IntersectionObserver` para detectar secciones visibles
-- Actualiza el estado cuando una sección entra en el viewport
-- Threshold: 50% de la sección visible
+- Actualiza el estado cuando una seccion entra en el viewport
+- Threshold: 50% de la seccion visible
 
 ---
 
@@ -462,7 +462,7 @@ Estilos globales y variables CSS.
 
 - Variables CSS para tema (colores, bordes, etc.)
 - Animaciones personalizadas (fadeIn, fadeInUp)
-- Clases de utilidad (animation-delay-\*)
+- Clases de utilidad (animation-delay-*)
 - Smooth scroll global
 - Reset de estilos base
 
@@ -568,7 +568,7 @@ export interface ContactFormData {
 
 ## Flujo de Datos
 
-### 1. Configuración → Componentes
+### 1. Configuracion -> Componentes
 
 ```
 config/business-info.ts
@@ -576,58 +576,71 @@ config/content.ts
 config/images.ts
 config/navigation.ts
 config/services.ts
-    ↓
+    |
+    v
 components/sections/*
 components/layout/*
 ```
 
-Los componentes importan directamente desde los archivos de configuración.
+Los componentes importan directamente desde los archivos de configuracion.
 
 ### 2. Formulario de Contacto
 
 ```
 Usuario completa formulario
-    ↓
+    |
+    v
 react-hook-form valida datos
-    ↓
+    |
+    v
 onSubmit() en Contact.tsx
-    ↓
+    |
+    v
 config/api.ts (mock o real)
-    ↓
-Backend ASP.NET Core (producción)
-    ↓
-Respuesta → Estado (success/error)
+    |
+    v
+Backend ASP.NET Core (produccion)
+    |
+    v
+Respuesta -> Estado (success/error)
 ```
 
 ### 3. Scroll Spy
 
 ```
 Usuario hace scroll
-    ↓
+    |
+    v
 IntersectionObserver detecta secciones
-    ↓
+    |
+    v
 use-active-section actualiza estado
-    ↓
+    |
+    v
 Navbar destaca enlace activo
 ```
 
-### 4. Lightbox de Galería
+### 4. Lightbox de Galeria
 
 ```
 Usuario hace clic en imagen
-    ↓
+    |
+    v
 setSelectedImage(index)
-    ↓
+    |
+    v
 Modal se abre con imagen
-    ↓
-Navegación: flechas/teclado
-    ↓
-Cierre: ESC/backdrop/botón X
+    |
+    v
+Navegacion: flechas/teclado
+    |
+    v
+Cierre: ESC/backdrop/boton X
 ```
 
 ---
 
-## Configuración de Build
+## Configuracion de Build
 
 ### Vite (vite.config.ts)
 
@@ -663,7 +676,7 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // Configuración personalizada
+      // Configuracion personalizada
     },
   },
 };
@@ -673,12 +686,12 @@ module.exports = {
 
 ## Dependencias Principales
 
-**Producción:**
+**Produccion:**
 
 - `react` + `react-dom` - Framework
 - `@radix-ui/*` - Componentes UI accesibles
 - `lucide-react` - Iconos
-- `react-hook-form` - Validación de formularios
+- `react-hook-form` - Validacion de formularios
 - `class-variance-authority` - Variantes de componentes
 - `clsx` + `tailwind-merge` - Utilidades CSS
 
@@ -695,7 +708,7 @@ module.exports = {
 
 ```bash
 npm run dev      # Servidor de desarrollo
-npm run build    # Build de producción
+npm run build    # Build de produccion
 npm run preview  # Preview de build
 npm run lint     # Linting
 ```
@@ -707,7 +720,7 @@ npm run lint     # Linting
 ### Nombres de Archivos
 
 - Componentes: `PascalCase.tsx`
-- Configuración: `kebab-case.ts`
+- Configuracion: `kebab-case.ts`
 - Hooks: `use-kebab-case.ts`
 - Utilidades: `kebab-case.ts`
 
@@ -718,7 +731,7 @@ npm run lint     # Linting
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-// Configuración
+// Configuracion
 import { heroContent } from "@/config/content";
 
 // Tipos
@@ -734,12 +747,12 @@ import type { Service } from "@/types";
 
 ---
 
-Para más información, consulta:
+Para mas informacion, consulta:
 
-- `docs/CUSTOMIZATION.md` - Guía de personalización
-- `docs/BACKEND-INTEGRATION.md` - Integración con backend
+- `docs/CUSTOMIZATION.md` - Guia de personalizacion
+- `docs/BACKEND-INTEGRATION.md` - Integracion con backend
 - `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
 
-## Prohibición de emojis
+## Prohibicion de emojis
 
-**NOTA:** Por decisión de estilo y compatibilidad, los emojis están prohibidos en todo el proyecto y documentación. Utiliza solo texto plano y símbolos ASCII.
+**NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.

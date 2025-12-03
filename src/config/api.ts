@@ -7,14 +7,14 @@
  * Desarrollo: http://localhost:5000 o https://localhost:7001
  * Producción: configurar según el deployment
  */
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5177';
 
 /**
  * Endpoints de la API
  */
 export const API_ENDPOINTS = {
   contact: '/api/contact',
-  // Agregar más endpoints según se necesiten
+  gallery: '/api/gallery',
 } as const;
 
 /**

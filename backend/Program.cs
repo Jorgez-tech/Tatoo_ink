@@ -15,8 +15,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Validar configuración antes de construir la app
-ConfigurationValidator.Validate(builder.Configuration);
+// Validar configuración antes de construir la app (solo si no es entorno de Test)
+if (builder.Environment.EnvironmentName != "Test")
+{
+    ConfigurationValidator.Validate(builder.Configuration);
+}
 
 // Configurar Serilog
 builder.Host.UseSerilog((context, config) =>
@@ -140,3 +143,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+// Make Program class accessible for integration tests
+public partial class Program { }

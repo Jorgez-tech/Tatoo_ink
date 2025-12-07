@@ -1,0 +1,170 @@
+{
+  "info": {
+    "name": "Ink Studio API - Backend Testing",
+    "_postman_id": "tattoo-ink-studio-api",
+    "description": "Colección de Postman para probar la API del backend de Ink Studio. Incluye requests para validar funcionalidad, seguridad, y manejo de errores.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:7000",
+      "type": "string"
+    },
+    {
+      "key": "frontendUrl",
+      "value": "http://localhost:5173",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. POST Contact - Valid Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Origin",
+            "value": "{{frontendUrl}}",
+            "description": "CORS origin header"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Juan Pérez\",\n  \"email\": \"juan.perez@example.com\",\n  \"phone\": \"+56912345678\",\n  \"message\": \"Hola, me gustaría agendar una cita para un tatuaje\",\n  \"wantsAppointment\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact"]
+        },
+        "description": "Request válido con todos los campos requeridos. Debe retornar 200 OK y persistir en base de datos."
+      },
+      "response": []
+    },
+    {
+      "name": "2. POST Contact - Invalid Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"María González\",\n  \"email\": \"email-invalido\",\n  \"phone\": \"+56987654321\",\n  \"message\": \"Test con email inválido\",\n  \"wantsAppointment\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact"]
+        },
+        "description": "Request con email en formato incorrecto (sin @). Debe retornar 400 Bad Request con mensaje de validación."
+      },
+      "response": []
+    },
+    {
+      "name": "3. POST Contact - Missing Fields",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"email\": \"test@example.com\",\n  \"phone\": \"+56912345678\",\n  \"message\": \"Test sin nombre\",\n  \"wantsAppointment\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact"]
+        },
+        "description": "Request con campo Name vacío. Debe retornar 400 Bad Request indicando que el nombre es requerido."
+      },
+      "response": []
+    },
+    {
+      "name": "4. POST Contact - Large Payload (>10KB)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Usuario\",\n  \"email\": \"test@example.com\",\n  \"phone\": \"+56912345678\",\n  \"message\": \"{{$randomLoremParagraphs}}\",\n  \"wantsAppointment\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact"]
+        },
+        "description": "Request con payload mayor a 10KB. NOTA: Para probar correctamente, reemplazar el message con un texto de 11KB+. Debe retornar 413 Payload Too Large o 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "5. POST Contact - Rate Limiting Test",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Rate Limit Test\",\n  \"email\": \"ratelimit@example.com\",\n  \"phone\": \"+56912345678\",\n  \"message\": \"Test de rate limiting\",\n  \"wantsAppointment\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact"]
+        },
+        "description": "Para probar rate limiting: ejecutar este request 11 veces rápidamente (usando Runner de Postman con 11 iteraciones). Las últimas requests deben retornar 429 Too Many Requests."
+      },
+      "response": []
+    },
+    {
+      "name": "6. POST Contact - CORS Test (Invalid Origin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Origin",
+            "value": "http://malicious-site.com",
+            "description": "Origen no permitido"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"CORS Test\",\n  \"email\": \"cors@example.com\",\n  \"phone\": \"+56912345678\",\n  \"message\": \"Test de CORS con origen no permitido\",\n  \"wantsAppointment\": false\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contact",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "contact"]
+        },
+        "description": "Request con Origin no permitido. La respuesta NO debe incluir header Access-Control-Allow-Origin con el valor http://malicious-site.com."
+      },
+      "response": []
+    }
+  ]
+}

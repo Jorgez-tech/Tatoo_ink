@@ -131,6 +131,9 @@ app.UseAuthorization();
 app.UseIpRateLimiting();
 app.MapControllers();
 
+Console.WriteLine("[DEBUG] Inicializando base de datos...");
+// Inicializar base de datos
+using (var scope = app.Services.CreateScope())
 // Inicializar base de datos
 using (var scope = app.Services.CreateScope())
 {
@@ -148,6 +151,3 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
-
-// Make Program class accessible for integration tests
-public partial class Program { }

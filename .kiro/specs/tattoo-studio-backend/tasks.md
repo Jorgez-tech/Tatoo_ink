@@ -35,6 +35,6 @@
 - [x] 11.1 Escribir prueba de propiedad para validación de configuración al inicio
 - [x] 12. Crear documentación de configuración y despliegue
 - [x] 13. Checkpoint - Verificar que todas las pruebas pasen
-- [ ] 14. Crear pruebas de integración end-to-end
-- [ ] 15. Crear colección de Postman para pruebas manuales
-- [ ] 16. Checkpoint final - Verificar sistema completo
+- [x] 14. Crear pruebas de integración end-to-end (6 tests E2E implementados)
+- [x] 15. Crear colección de Postman para pruebas manuales (Colección completa con 6 requests)
+- [x] 16. Checkpoint final - Verificar sistema completo (57 tests totales pasando)

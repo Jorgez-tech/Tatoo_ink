@@ -61,7 +61,7 @@ Antes de desplegar, asegurate de:
 
 5. **Variables de Entorno**
    - Dashboard de Vercel > Settings > Environment Variables
-   - Agregar `VITE_API_URL` si usas backend
+   - Agregar `VITE_API_BASE_URL` si usas backend
 
 **Deploy desde GitHub:**
 
@@ -289,15 +289,13 @@ CNAME   www     inkstudio.cl        3600
 ### Desarrollo (.env.local)
 
 ```env
-VITE_API_URL=http://localhost:5177
-VITE_USE_MOCK_API=true
+VITE_API_BASE_URL=http://localhost:5177
 ```
 
 ### Produccion
 
 ```env
-VITE_API_URL=https://api.inkstudio.cl
-VITE_USE_MOCK_API=false
+VITE_API_BASE_URL=https://api.inkstudio.cl
 ```
 
 **Importante:** No commitear archivos `.env` con datos sensibles.
@@ -380,7 +378,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+               VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
@@ -433,7 +431,7 @@ jobs:
 API_URL=https://api.example.com
 
 # Correcto
-VITE_API_URL=https://api.example.com
+VITE_API_BASE_URL=https://api.example.com
 ```
 
 ### Problema: Build falla

@@ -12,12 +12,12 @@
 Landing page profesional para estudio de tatuajes "Ink Studio", construida como **prototipo reutilizable** para sistema de plantillas destinadas a pequeños negocios y profesionales en Chile.
 
 ### Stack Tecnológico
-- **Frontend:** React 19 + TypeScript 5.9.3
+- **Frontend:** React 18 + TypeScript 5.9.3
 - **Build Tool:** Vite 7.1.12  
 - **Estilos:** Tailwind CSS 3.4.17 (NO v4)
 - **UI Components:** shadcn/ui (6 componentes activos)
 - **Iconos:** Lucide React
-- **Backend (futuro):** ASP.NET Core + CMS headless
+- **Backend:** ASP.NET Core .NET 8 + EF Core (SQLite)
 
 ### Filosofía del Proyecto
 - ✅ **Simplicidad sobre complejidad:** Código entendible
@@ -34,10 +34,10 @@ Landing page profesional para estudio de tatuajes "Ink Studio", construida como 
 Antes de hacer cualquier cambio, lee estos archivos en orden:
 
 ```
-1. docs/STATUS.md           # Estado actual y progreso
-2. docs/00-PLAN-MAESTRO.md  # Visión general
-3. docs/[FASE-ACTUAL].md    # Documento de fase activa
-4. docs/CHANGELOG.md        # Últimos cambios
+1. docs/NEXT-STEPS.md       # Estado actual y próximos pasos
+2. docs/README.md           # Índice de documentación
+3. docs/STRUCTURE.md        # Arquitectura
+4. docs/DEPLOYMENT.md       # Despliegue
 ```
 
 ### 2. NO Hacer Sin Confirmación
@@ -51,7 +51,7 @@ Antes de hacer cualquier cambio, lee estos archivos en orden:
 
 ✅ **Puedes hacer directamente:**
 - Corregir errores de TypeScript/sintaxis
-- Actualizar documentación (STATUS.md, CHANGELOG.md)
+- Actualizar documentación (`docs/NEXT-STEPS.md`)
 - Pequeños ajustes de estilos
 - Agregar comentarios/JSDoc
 - Mejorar tipos existentes
@@ -276,9 +276,9 @@ Fase 4: Finalización       [..........] 0%  ⏳
 ## 📝 Workflow de Trabajo
 
 ### Inicio de Tarea
-1. Lee `docs/STATUS.md` para contexto
-2. Verifica la fase actual en `docs/00-PLAN-MAESTRO.md`
-3. Lee el documento de la fase (`docs/0X-FASE-X-XXX.md`)
+1. Lee `docs/NEXT-STEPS.md` para contexto y estado actual
+2. Revisa el índice en `docs/README.md`
+3. Lee el doc específico de la tarea (por ejemplo: `docs/STRUCTURE.md` o `docs/DEPLOYMENT.md`)
 4. Confirma la tarea específica con el usuario
 
 ### Durante el Trabajo
@@ -289,11 +289,11 @@ Fase 4: Finalización       [..........] 0%  ⏳
 
 ### Final de Tarea
 1. Verifica que `npm run build` pasa sin errores
-2. Actualiza `docs/STATUS.md` con:
+2. Actualiza `docs/NEXT-STEPS.md` con:
    - Tareas completadas con checkmarks
    - Problemas encontrados
    - Próximos pasos
-3. Actualiza `docs/CHANGELOG.md` si hay cambios significativos
+3. Si hubo un cambio importante de comportamiento, deja nota en `docs/NEXT-STEPS.md`
 4. Commit de documentación: `docs: actualiza progreso de [TAREA]`
 
 ---
@@ -385,9 +385,9 @@ npm run dev
 ## 📚 Recursos de Referencia
 
 ### Documentación del Proyecto
-- `docs/STATUS.md` - **LEE PRIMERO**
-- `docs/00-PLAN-MAESTRO.md` - Visión general
-- `docs/CHANGELOG.md` - Historial de cambios
+- `docs/NEXT-STEPS.md` - **LEE PRIMERO**
+- `docs/README.md` - Índice
+- `docs/STRUCTURE.md` - Arquitectura
 - `docs/BACKEND-INTEGRATION.md` - Plan de integración backend
 
 ### Documentación Externa
@@ -491,7 +491,7 @@ export function Hero() {
 ### Si Encuentras Código Legacy
 1. No lo elimines sin consultar
 2. Comenta con `// TODO: revisar si se usa` o `// LEGACY: razón`
-3. Reporta en siguiente actualización de STATUS.md
+3. Reporta en la siguiente actualización de `docs/NEXT-STEPS.md`
 
 ### Si el Build Falla
 1. Lee el error completo
@@ -509,7 +509,7 @@ export function Hero() {
 ## 📌 Recordatorios Finales
 
 1. ✅ **Commits en español** con conventional commits
-2. ✅ **Lee STATUS.md** antes de empezar
+2. ✅ **Lee `docs/NEXT-STEPS.md`** antes de empezar
 3. ✅ **Pregunta antes de cambios grandes**
 4. ✅ **Mantén el build funcionando**
 5. ✅ **Actualiza documentación**

@@ -18,7 +18,7 @@ Landing page fullstack para estudio de tatuajes "Ink Studio" con:
 
 ## ESTADO ACTUAL DEL BACKEND
 
-### Implementado y Validado (39 pruebas pasando)
+### Implementado y Validado (55 pruebas pasando)
 
 1. **Configuracion de proyecto** - ASP.NET Core Web API .NET 8.0
 2. **Modelos y DTOs** - ContactMessage, ServiceResult, Request/Response DTOs
@@ -92,7 +92,7 @@ backend/
     "SmtpPort": 587,
     "SmtpUsername": "",
     "SmtpPassword": "",
-    "StudioEmail": "studio@example.com",
+    "StudioEmail": "<CONFIGURAR_EMAIL_REAL>",
     "StudioName": "Ink Studio"
   },
   "CorsSettings": {
@@ -190,7 +190,7 @@ backend/
 **Ubicacion:** `backend/appsettings.Production.json.example`
 
 **Contenido:** Template para produccion con:
-- ConnectionStrings con SQL Server (no SQLite)
+- ConnectionStrings con SQLite
 - EmailSettings sin valores sensibles
 - CorsSettings con dominio de produccion
 - Logging configurado para archivo (no consola)
@@ -271,8 +271,8 @@ git push origin test/property-acceptance
 
 **Herramientas:**
 - WebApplicationFactory (Microsoft.AspNetCore.Mvc.Testing)
-- Base de datos en memoria (SQLite InMemory)
-- Mock del servicio de email
+- Base de datos SQLite real (archivo temporal por test run)
+- Email real via SMTP en modo pickup directory (genera archivos .eml; no requiere servicios externos)
 
 **Pruebas clave:**
 1. POST /api/contact con datos validos -> 200 OK + DB persistido

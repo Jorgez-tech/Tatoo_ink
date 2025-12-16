@@ -4,7 +4,7 @@ Landing page profesional para estudio de tatuajes, construida con React + TypeSc
 
 ## Stack Tecnologico
 
-- **Framework:** React 19 + Vite
+- **Framework:** React 18 + Vite
 - **Lenguaje:** TypeScript
 - **Estilos:** Tailwind CSS v3 + utilidades personalizadas
 - **Componentes UI:** Radix UI + Lucide Icons
@@ -85,7 +85,6 @@ Ver `docs/CUSTOMIZATION.md` para guia detallada.
 - Formulario validado con React Hook Form
 - Animaciones fadeIn/fadeInUp
 - Preparado para backend ASP.NET Core
-- Modo mock para desarrollo sin backend
 - Componentes documentados con JSDoc
 
 ## Contribucion
@@ -99,11 +98,11 @@ Ver `docs/CUSTOMIZATION.md` para guia detallada.
 - `docs/STRUCTURE.md` - Arquitectura del proyecto
 - `docs/CUSTOMIZATION.md` - Guia de personalizacion
 - `docs/BACKEND-INTEGRATION.md` - Integracion con ASP.NET Core
-- `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
+- `docs/NEXT-STEPS.md` - Estado actual y proximos pasos
 
 ## Prohibicion de emojis
 
-**NOTA IMPORTANTE:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII. Si encuentras algun emoji, eliminalo y reporta en `STATUS.md`.
+**NOTA IMPORTANTE:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII. Si encuentras algun emoji, eliminalo y registra el cambio en `docs/NEXT-STEPS.md`.
 
 ## Licencia
 

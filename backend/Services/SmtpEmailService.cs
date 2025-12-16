@@ -1,6 +1,7 @@
 using backend.Models;
 using System.Net;
 using System.Net.Mail;
+using System.IO;
 
 namespace backend.Services
 {
@@ -25,6 +26,7 @@ namespace backend.Services
                 var smtpPassword = _configuration["EmailSettings:SmtpPassword"];
                 var studioEmail = _configuration["EmailSettings:StudioEmail"];
                 var studioName = _configuration["EmailSettings:StudioName"];
+                var pickupDirectory = _configuration["EmailSettings:PickupDirectory"];
 
                 if (string.IsNullOrEmpty(smtpServer))
                 {
@@ -33,6 +35,13 @@ namespace backend.Services
                 }
 
                 using var smtpClient = new SmtpClient(smtpServer, smtpPort);
+
+                if (!string.IsNullOrWhiteSpace(pickupDirectory))
+                {
+                    Directory.CreateDirectory(pickupDirectory);
+                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                    smtpClient.PickupDirectoryLocation = pickupDirectory;
+                }
                 
                 // Configurar credenciales solo si están presentes
                 if (!string.IsNullOrEmpty(smtpUsername) && !string.IsNullOrEmpty(smtpPassword))

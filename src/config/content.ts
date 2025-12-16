@@ -64,6 +64,9 @@ export const contactContent = {
     message: {
       label: "Mensaje",
       placeholder: "Cuéntanos sobre tu idea de tatuaje..."
+    },
+    wantsAppointment: {
+      label: "Quiero agendar una cita"
     }
   },
   submitButton: "Enviar Mensaje",

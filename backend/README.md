@@ -14,7 +14,7 @@ Services (Business Logic)
 Data (Persistence Layer)
     |
     v
-Database (SQLite/SQL Server)
+Database (SQLite)
 ```
 
 ### Responsabilidades
@@ -146,10 +146,12 @@ Obtiene imagenes de la galeria del estudio.
 "DefaultConnection": "Data Source=TattooStudioDb.db"
 ```
 
-**Produccion (SQL Server):**
+**Produccion (SQLite):**
 ```json
-"DefaultConnection": "Server=tcp:tu-servidor.database.windows.net,1433;Initial Catalog=TattooStudioDb;Persist Security Info=False;User ID=tu-usuario;Password=tu-password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+"DefaultConnection": "Data Source=TattooStudioDb.db"
 ```
+
+Nota: en produccion se recomienda definir una ubicacion persistente del archivo `.db` y configurar backups.
 
 #### EmailSettings
 

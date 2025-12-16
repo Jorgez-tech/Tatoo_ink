@@ -72,9 +72,7 @@ Antes de hacer cualquier cambio, asegúrate de:
 ##  Enlaces Útiles
 
 ### Documentación del Proyecto
-- `docs/00-PLAN-MAESTRO.md` - Plan maestro del proyecto
-- `docs/STATUS.md` - Estado actual del proyecto
-- `docs/CHANGELOG.md` - Historial de cambios
+- `docs/NEXT-STEPS.md` - Estado actual y próximos pasos
 
 ### Configuración
 - `.github/` - Este directorio
@@ -87,7 +85,7 @@ Antes de hacer cualquier cambio, asegúrate de:
 
 - Todos los commits deben seguir la convención en español
 - Siempre crear rama para cambios relevantes
-- Actualizar `docs/STATUS.md` al completar tareas importantes
+- Actualizar `docs/NEXT-STEPS.md` al completar tareas importantes
 - Mantener consistencia con el código existente
 
 ---

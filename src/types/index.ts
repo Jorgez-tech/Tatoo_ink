@@ -107,14 +107,16 @@ export interface BusinessInfo {
  *
  * @property name Nombre completo del remitente (obligatorio).
  * @property email Correo electrónico válido.
- * @property phone Número telefónico opcional.
+ * @property phone Número telefónico requerido.
  * @property message Mensaje principal (mínimo 10 caracteres).
+ * @property wantsAppointment Indica si el cliente desea agendar una cita.
  */
 export interface ContactFormData {
   name: string;
   email: string;
   phone: string;
   message: string;
+  wantsAppointment: boolean;
 }
 
 /**

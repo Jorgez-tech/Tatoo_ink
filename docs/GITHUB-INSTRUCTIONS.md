@@ -12,7 +12,7 @@ Este documento sirve como referencia rapida cada vez que retomemos el trabajo en
 Landing page profesional para estudio de tatuajes "Ink Studio", construida como **prototipo reutilizable** para futuros clientes en Chile.
 
 ### Stack Tecnologico
-- **Frontend:** React 19.1.1 + TypeScript 5.9.3
+- **Frontend:** React 18 + TypeScript 5.9.3
 - **Build Tool:** Vite 7.1.12
 - **Estilos:** Tailwind CSS 3.4.17
 - **UI Components:** shadcn/ui (Radix UI)
@@ -29,13 +29,11 @@ Landing page profesional para estudio de tatuajes "Ink Studio", construida como 
 
 ```
 docs/
-|-- 00-PLAN-MAESTRO.md          # Plan general del proyecto (4 fases)
-|-- 01-FASE-1-AUDITORIA.md      # Auditoria y limpieza de codigo
-|-- 02-FASE-2-OPTIMIZACION.md   # Refactorizacion y separacion de datos
-|-- 03-FASE-3-DOCUMENTACION.md  # Documentacion de codigo
-|-- 04-FASE-4-FINALIZACION.md   # Performance, SEO y optimizaciones
-|-- CHANGELOG.md                # Registro detallado de cambios
-|-- STATUS.md                   # Estado actual del proyecto (LEER PRIMERO)
+|-- NEXT-STEPS.md               # Estado actual y guia de continuidad (LEER PRIMERO)
+|-- README.md                   # Indice de documentacion
+|-- STRUCTURE.md                # Arquitectura tecnica
+|-- CUSTOMIZATION.md            # Guia de personalizacion
+|-- DEPLOYMENT.md               # Guia de despliegue
 +-- GITHUB-INSTRUCTIONS.md      # Este archivo
 ```
 
@@ -46,7 +44,7 @@ docs/
 ### 1. Leer Estado Actual
 ```bash
 # Archivo mas importante para contexto rapido
-cat docs/STATUS.md
+cat docs/NEXT-STEPS.md
 ```
 
 ### 2. Verificar Cambios Pendientes
@@ -57,11 +55,11 @@ git log --oneline -10
 
 ### 3. Revisar Plan de Trabajo
 ```bash
-# Ver la fase actual
-cat docs/01-FASE-1-AUDITORIA.md
+# Revisa el estado y siguientes pasos
+cat docs/NEXT-STEPS.md
 ```
 
-### 4. Actualizar STATUS.md
+### 4. Actualizar docs/NEXT-STEPS.md
 Siempre actualizar al terminar una sesion de trabajo con:
 - Progreso de tareas completadas
 - Problemas encontrados
@@ -91,10 +89,10 @@ Siempre actualizar al terminar una sesion de trabajo con:
 
 ### Ejemplos
 ```bash
-git commit -m "feat(navbar): add sticky header on scroll"
-git commit -m "refactor(services): extract data to config file"
-git commit -m "docs: update STATUS.md with Phase 1 progress"
-git commit -m "chore: remove unused UI components (40 files)"
+git commit -m "feat(navbar): agrega header sticky en scroll"
+git commit -m "refactor(config): extrae datos a archivos de configuracion"
+git commit -m "docs: actualiza NEXT-STEPS con progreso de sesion"
+git commit -m "chore(ui): elimina componentes UI no usados"
 ```
 
 ---
@@ -103,7 +101,7 @@ git commit -m "chore: remove unused UI components (40 files)"
 
 ### Al Iniciar Sesion
 1. `git pull origin main`
-2. Leer `docs/STATUS.md`
+2. Leer `docs/NEXT-STEPS.md`
 3. Revisar documento de fase actual
 4. Identificar tarea especifica a realizar
 
@@ -114,13 +112,12 @@ git commit -m "chore: remove unused UI components (40 files)"
 4. Verificar que no hay errores: `npm run build`
 
 ### Al Terminar Sesion
-1. Actualizar `docs/STATUS.md` con:
+1. Actualizar `docs/NEXT-STEPS.md` con:
    - Tareas completadas
    - Estado de progreso (%)
    - Problemas encontrados
    - Proximos pasos
-2. Actualizar `docs/CHANGELOG.md` si hay cambios significativos
-3. Commit de documentacion: `docs: update session progress`
+2. Commit de documentacion: `docs: actualiza progreso de sesion`
 4. Push a repositorio: `git push origin main`
 
 ---
@@ -268,7 +265,7 @@ npm run build -- --analyze  # Analizar bundle (si esta configurado)
 ## Recursos y Referencias
 
 ### Documentacion Oficial
-- [React 19 Docs](https://react.dev/)
+- [React Docs](https://react.dev/)
 - [TypeScript Docs](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Docs](https://tailwindcss.com/docs)
 - [Vite Docs](https://vite.dev/)
@@ -291,22 +288,13 @@ Antes de cada commit importante, verificar:
 - [ ] Servidor de desarrollo funciona (`npm run dev`)
 - [ ] Documentacion actualizada si corresponde
 - [ ] Commit message descriptivo y en formato correcto
-- [ ] `STATUS.md` actualizado si es final de sesion
+- [ ] `docs/NEXT-STEPS.md` actualizado si es final de sesion
 
 ---
 
 ## Proxima Sesion
 
-**Tarea Principal:** Completar Fase 1.1 - Eliminar componentes UI no utilizados
-
-**Pasos:**
-1. Verificar lista de componentes a eliminar (docs/01-FASE-1-AUDITORIA.md)
-2. Eliminar archivos uno por uno o en batch
-3. Verificar que no hay imports rotos
-4. Commit: `chore: remove 40 unused UI components`
-5. Actualizar STATUS.md con progreso
-
-**Tiempo estimado:** 30-45 minutos
+Consulta `docs/NEXT-STEPS.md` para la tarea principal de la proxima sesion y el checklist de cierre.
 
 ---
 

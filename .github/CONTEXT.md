@@ -191,10 +191,8 @@ Actualmente hay **40 componentes UI no utilizados** de shadcn/ui que deben elimi
 ## Recursos Importantes
 
 ### Documentación del Proyecto
-- `docs/00-PLAN-MAESTRO.md` - Visión general y objetivos
-- `docs/01-FASE-1-AUDITORIA.md` - Fase actual de limpieza
-- `docs/STATUS.md` - Estado actualizado del proyecto
-- `docs/CHANGELOG.md` - Historial de cambios
+- `docs/NEXT-STEPS.md` - Estado actual y próximos pasos
+- `docs/README.md` - Índice de documentación
 
 ### Configuración
 - `tailwind.config.js` - Configuración de Tailwind CSS
@@ -216,7 +214,7 @@ Actualmente hay **40 componentes UI no utilizados** de shadcn/ui que deben elimi
 4. **SIEMPRE** actualizar documentación si cambia la estructura
 5. **NUNCA** eliminar código sin verificar que no se use
 6. **SIEMPRE** probar cambios localmente antes de commit
-7. **SIEMPRE** actualizar `docs/STATUS.md` al completar tareas importantes
+7. **SIEMPRE** actualizar `docs/NEXT-STEPS.md` al completar tareas importantes
 
 ---
 
@@ -228,8 +226,8 @@ Actualmente hay **40 componentes UI no utilizados** de shadcn/ui que deben elimi
 
 Para dudas sobre el proyecto, revisar primero:
 1. Este documento (`.github/CONTEXT.md`)
-2. `docs/STATUS.md`
-3. `docs/00-PLAN-MAESTRO.md`
+2. `docs/NEXT-STEPS.md`
+3. `docs/README.md`
 
 ---
 

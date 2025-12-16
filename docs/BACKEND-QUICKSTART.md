@@ -8,7 +8,7 @@ Antes de comenzar, asegurate de tener:
 
 - [ ] .NET 8.0 SDK instalado
 - [ ] Visual Studio 2022 o VS Code
-- [ ] SQL Server o base de datos configurada (opcional)
+- [ ] SQLite disponible (incluido con .NET via EF Core)
 - [ ] Cuenta de email service (SendGrid, SMTP, etc.) - opcional
 
 ---
@@ -27,7 +27,6 @@ Edita `.env`:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5177
-VITE_USE_MOCK_API=false
 ```
 
 ### 2. Crear Proyecto Backend
@@ -445,7 +444,6 @@ Configurar variable de entorno:
 
 ```
 VITE_API_BASE_URL=https://api.inkstudio.cl
-VITE_USE_MOCK_API=false
 ```
 
 ### Backend (Azure/AWS)

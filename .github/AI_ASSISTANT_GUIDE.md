@@ -7,7 +7,7 @@ Este documento es una guía rápida de referencia para modelos de asistencia de 
 ## ⚡ Inicio Rápido (30 segundos)
 
 1. **Lee [CONTEXT.md](./CONTEXT.md)** - Contexto completo del proyecto
-2. **Revisa [STATUS.md](../../docs/STATUS.md)** - Estado actual
+2. **Revisa [NEXT-STEPS.md](../../docs/NEXT-STEPS.md)** - Estado actual
 3. **Consulta [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md)** - Antes de commitear
 4. **Usa [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)** - Al crear ramas
 
@@ -18,7 +18,7 @@ Este documento es una guía rápida de referencia para modelos de asistencia de 
 ### ✅ SIEMPRE Hacer
 - ✅ Crear rama para cambios relevantes (`feature/`, `fix/`, `refactor/`, etc.)
 - ✅ Usar commits convencionales en español
-- ✅ Actualizar `docs/STATUS.md` al completar tareas importantes
+- ✅ Actualizar `docs/NEXT-STEPS.md` al completar tareas importantes
 - ✅ Seguir nomenclatura del proyecto (PascalCase para componentes)
 - ✅ Usar TypeScript con tipos explícitos
 - ✅ Usar Tailwind CSS (no archivos CSS adicionales)
@@ -34,8 +34,7 @@ Este documento es una guía rápida de referencia para modelos de asistencia de 
 
 ## 🎯 Estado Actual del Proyecto
 
-**Fase:** Fase 1 - Auditoría y Limpieza  
-**Progreso:** ~15%
+**Estado:** Ver `docs/NEXT-STEPS.md`
 
 ### En Progreso
 - ⏳ Eliminar 40 componentes UI no utilizados
@@ -119,8 +118,7 @@ src/components/
 | [WORKFLOW.md](./WORKFLOW.md) | Flujo de trabajo detallado |
 | [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md) | Convención de commits |
 | [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md) | Estrategia de ramas |
-| [../../docs/STATUS.md](../../docs/STATUS.md) | Estado actual del proyecto |
-| [../../docs/00-PLAN-MAESTRO.md](../../docs/00-PLAN-MAESTRO.md) | Plan maestro |
+| [../../docs/NEXT-STEPS.md](../../docs/NEXT-STEPS.md) | Estado actual y próximos pasos |
 
 ---
 
@@ -154,7 +152,7 @@ Ejemplo: `feat(contact): agregar validación de email`
 2. **Usar grep** para buscar referencias: `grep -r "ComponentName" src/`
 3. **Mantener consistencia** con el código existente
 4. **Documentar decisiones** importantes en los commits
-5. **Actualizar STATUS.md** al completar tareas de las fases
+5. **Actualizar docs/NEXT-STEPS.md** al completar tareas relevantes
 
 ---
 

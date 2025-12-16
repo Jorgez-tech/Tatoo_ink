@@ -33,18 +33,15 @@ El proyecto sigue una arquitectura modular basada en componentes React con separ
 ## Estructura de Carpetas
 
 ```text
-tatoo_ink.client/
+tatoo_ink/
 |-- docs/                           # Documentacion del proyecto
-|   |-- 00-PLAN-MAESTRO.md
-|   |-- 01-FASE-1-AUDITORIA.md
-|   |-- 02-FASE-2-OPTIMIZACION.md
-|   |-- 03-FASE-3-DOCUMENTACION.md
-|   |-- 04-FASE-4-FINALIZACION.md
-|   |-- BACKEND-INTEGRATION.md
-|   |-- CHANGELOG.md
+|   |-- NEXT-STEPS.md              # Estado actual y proximos pasos
+|   |-- README.md                  # Indice de documentacion
+|   |-- STRUCTURE.md               # Este archivo
 |   |-- CUSTOMIZATION.md
-|   |-- STATUS.md
-|   +-- STRUCTURE.md               # Este archivo
+|   |-- DEPLOYMENT.md
+|   |-- BACKEND-INTEGRATION.md
+|   +-- BACKEND-QUICKSTART.md
 |-- public/                         # Archivos estaticos
 |   |-- site.webmanifest
 |   +-- vite.svg
@@ -209,7 +206,7 @@ Secciones principales de la landing page.
 - Formulario de contacto validado
 - Tarjetas con informacion de contacto
 - Estados de loading/success/error
-- Integracion con backend o modo mock
+- Integracion con backend
 
 **Props:** Ninguna (usa configuracion)
 
@@ -224,8 +221,9 @@ Secciones principales de la landing page.
 
 - Nombre: minimo 2 caracteres
 - Email: formato valido
-- Telefono: formato numerico (opcional)
+- Telefono: requerido, formato numerico
 - Mensaje: minimo 10 caracteres
+- Solicitud de cita: checkbox (true/false)
 
 ---
 
@@ -400,17 +398,16 @@ export const services: Array<{
 
 ### api.ts
 
-Configuracion de backend y modo mock.
+Configuracion de backend.
 
 ```typescript
-export const USE_MOCK_API: boolean;
 export const API_BASE_URL: string;
 export const API_ENDPOINTS: {
   contact: string;
+  gallery: string;
 };
 
-export function getApiUrl(endpoint: string): string;
-export function mockApiCall(endpoint: string, data: any): Promise<Response>;
+export function getApiUrl(endpoint: keyof typeof API_ENDPOINTS): string;
 ```
 
 ---
@@ -429,9 +426,9 @@ const activeSection = useActiveSection(["home", "servicios", "galeria"]);
 
 **Funcionamiento:**
 
-- Usa `IntersectionObserver` para detectar secciones visibles
-- Actualiza el estado cuando una seccion entra en el viewport
-- Threshold: 50% de la seccion visible
+- Escucha el evento `scroll` del window
+- Calcula la posicion actual (`window.scrollY`) con un offset
+- Marca como activa la primera seccion cuyo rango vertical contenga el scroll
 
 ---
 
@@ -596,7 +593,8 @@ react-hook-form valida datos
 onSubmit() en Contact.tsx
     |
     v
-config/api.ts (mock o real)
+config/api.ts (URL base + endpoints)
+
     |
     v
 Backend ASP.NET Core (produccion)
@@ -611,7 +609,7 @@ Respuesta -> Estado (success/error)
 Usuario hace scroll
     |
     v
-IntersectionObserver detecta secciones
+window.scrollY + offset determina seccion
     |
     v
 use-active-section actualiza estado

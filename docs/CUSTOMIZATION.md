@@ -281,20 +281,16 @@ module.exports = {
 
 **Archivo:** `src/config/api.ts`
 
-### Modo Mock (Desarrollo sin backend)
+La URL del backend se configura con la variable de entorno `VITE_API_BASE_URL`.
 
-```typescript
-export const USE_MOCK_API = true;
-```
+Ejemplos:
 
-### Modo Produccion (Con backend ASP.NET Core)
+```env
+# Desarrollo
+VITE_API_BASE_URL=http://localhost:5177
 
-```typescript
-export const USE_MOCK_API = false;
-
-export const API_BASE_URL = "https://tu-api.com";
-// o para desarrollo local:
-// export const API_BASE_URL = "https://localhost:7001"
+# Produccion
+VITE_API_BASE_URL=https://tu-dominio-api.cl
 ```
 
 Ver `docs/BACKEND-INTEGRATION.md` para detalles completos de integracion.

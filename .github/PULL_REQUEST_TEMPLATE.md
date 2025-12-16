@@ -72,7 +72,7 @@ Antes de solicitar revisión, asegúrate de:
 - [ ] He probado los cambios localmente
 - [ ] No he introducido nuevos warnings o errores
 - [ ] He actualizado la documentación si es necesario
-- [ ] He actualizado `docs/STATUS.md` si hay cambios relevantes
+- [ ] He actualizado `docs/NEXT-STEPS.md` si hay cambios relevantes
 - [ ] El código está comentado donde es necesario
 - [ ] Los nombres de variables/funciones son descriptivos
 

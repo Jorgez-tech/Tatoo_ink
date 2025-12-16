@@ -42,6 +42,7 @@ export function Contact() {
       email: "",
       phone: "",
       message: "",
+      wantsAppointment: false,
     },
   });
 
@@ -175,6 +176,7 @@ export function Contact() {
                       type="tel"
                       placeholder={contactContent.formFields.phone.placeholder}
                       {...register("phone", {
+                        required: "El teléfono es obligatorio",
                         pattern: {
                           value: /^[\d\s\-+()]+$/,
                           message: "Formato de teléfono inválido",
@@ -209,6 +211,20 @@ export function Contact() {
                         {errors.message.message}
                       </p>
                     )}
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="wantsAppointment"
+                      type="checkbox"
+                      className="mt-1 h-4 w-4 rounded border border-gray-300 accent-black"
+                      {...register("wantsAppointment")}
+                    />
+                    <div className="space-y-1">
+                      <Label htmlFor="wantsAppointment">
+                        {contactContent.formFields.wantsAppointment.label}
+                      </Label>
+                    </div>
                   </div>
 
                   <Button

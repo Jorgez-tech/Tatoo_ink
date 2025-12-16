@@ -273,16 +273,16 @@ public class EmailService : IEmailService
     public async Task SendContactEmailAsync(ContactRequestDto request)
     {
         // Implementar logica de envio de email
-        // Usar SMTP, SendGrid, Azure Communication Services, etc.
+      // Usar SMTP o SendGrid segun configuracion del backend.
     }
 }
 ```
 
 ---
 
-## Base de Datos (Opcional)
+## Base de Datos (SQLite)
 
-Si necesitas guardar los mensajes en una base de datos:
+En este proyecto los mensajes se persisten en una base de datos SQLite via EF Core.
 
 ```csharp
 public class ContactMessage
@@ -290,10 +290,10 @@ public class ContactMessage
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-    public string? Phone { get; set; }
+  public string Phone { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;
+  public bool WantsAppointment { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public bool IsRead { get; set; } = false;
 }
 ```
 
@@ -305,8 +305,9 @@ El frontend ya incluye validacion, pero el backend tambien debe validar:
 
 - **Nombre:** Requerido, minimo 2 caracteres
 - **Email:** Requerido, formato valido
-- **Telefono:** Opcional, formato valido
+- **Telefono:** Requerido, formato valido
 - **Mensaje:** Requerido, minimo 10 caracteres
+- **Solicitud de cita:** Requerido (booleano true/false)
 
 ---
 
@@ -337,7 +338,7 @@ El frontend ya incluye validacion, pero el backend tambien debe validar:
 
 5. **Desplegar:**
    - Frontend: Vercel, Netlify, etc.
-   - Backend: Azure, AWS, etc.
+  - Backend: hosting para .NET (VPS, contenedor, u otra plataforma equivalente)
    - Actualizar `VITE_API_BASE_URL` en produccion
 
 ---
@@ -361,7 +362,8 @@ curl -X POST http://localhost:5000/api/contact \
     "name": "Test User",
     "email": "test@example.com",
     "phone": "+56 9 1234 5678",
-    "message": "Este es un mensaje de prueba"
+    "message": "Este es un mensaje de prueba",
+    "wantsAppointment": false
   }'
 ```
 

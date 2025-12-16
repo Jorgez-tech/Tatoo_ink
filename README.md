@@ -9,9 +9,9 @@ Solucion fullstack completa que permite a los clientes enviar mensajes de contac
 **Stack Tecnologico:**
 - **Frontend:** React 18.0 + TypeScript 5.9 + Vite 7 + Tailwind CSS 3.4
 - **Backend:** ASP.NET Core Web API .NET 8.0
-- **Base de Datos:** SQLite (desarrollo) / SQL Server (produccion)
+- **Base de Datos:** SQLite
 - **Email:** SendGrid / SMTP
-- **Testing:** xUnit + Moq (39 pruebas unitarias)
+- **Testing:** xUnit (55 pruebas)
 
 ## Requisitos Previos
 
@@ -116,7 +116,7 @@ Tatoo_ink/
 ?   ??? Middleware/            # Middleware personalizado
 ?   ??? Utils/                 # Utilidades
 ?   ??? Program.cs             # Configuracion de la app
-??? backend.Tests/             # Pruebas unitarias (39 tests)
+??? backend.Tests/             # Pruebas (55 tests)
 ??? src/                       # Frontend React
 ?   ??? components/            # Componentes React
 ?   ?   ??? layout/           # Navbar, Footer
@@ -154,7 +154,7 @@ dotnet test --verbosity normal
 dotnet test --collect:"XPlat Code Coverage"
 ```
 
-**Estado actual:** 39 pruebas pasando (100% exito)
+**Estado actual:** 55 pruebas pasando (100% exito)
 
 ### Frontend - Linting
 
@@ -178,7 +178,7 @@ npm run lint
 ### Backend
 - API RESTful con ASP.NET Core
 - Validacion robusta con FluentValidation
-- Persistencia en base de datos (SQLite/SQL Server)
+- Persistencia en base de datos (SQLite)
 - Envio de emails (SendGrid/SMTP)
 - Logging estructurado con Serilog
 - Manejo global de excepciones

@@ -42,11 +42,11 @@ El sistema sigue una arquitectura en capas (Layered Architecture) con tres capas
 
 - **Framework**: ASP.NET Core 8.0 (LTS)
 - **ORM**: Entity Framework Core 8.0
-- **Database**: SQL Server (desarrollo) / Azure SQL (producción)
+- **Database**: SQLite
 - **Email Provider**: SendGrid SDK o System.Net.Mail (SMTP)
 - **Validation**: FluentValidation
 - **Logging**: Serilog con sinks a archivo y consola
-- **Configuration**: appsettings.json + User Secrets (desarrollo) + Azure Key Vault (producción)
+- **Configuration**: appsettings.json + variables de entorno (opcional: User Secrets en desarrollo)
 
 ## Components and Interfaces
 
@@ -447,7 +447,7 @@ _For any_ error that occurs during request processing, the system should create 
 **Log Destinations**:
 
 - Development: Console + File (rolling)
-- Production: File (rolling) + Azure Application Insights (or similar)
+- Production: File (rolling) + APM/observabilidad del hosting (si aplica)
 
 ## Testing Strategy
 
@@ -456,8 +456,8 @@ _For any_ error that occurs during request processing, the system should create 
 **Components to Test**:
 
 - **ContactRequestValidator**: Test all validation rules with valid and invalid inputs
-- **ContactService**: Test business logic with mocked dependencies (repository, email service)
-- **EmailService**: Test email formatting and sending logic with mocked SMTP/SendGrid client
+- **ContactService**: Test business logic con dependencias reales (DbContext SQLite + email real via SMTP pickup directory)
+- **EmailService**: Test de formato y envio usando SMTP pickup directory (genera .eml) o un SMTP local
 - **ContactController**: Test HTTP request/response handling with mocked service
 
 **Testing Framework**: xUnit
@@ -510,9 +510,9 @@ Each property test must be tagged with a comment referencing the design document
 
 **Scope**: Test complete flow from HTTP request to database persistence and email sending
 
-**Test Database**: In-memory SQLite or SQL Server LocalDB
+**Test Database**: SQLite real (archivo temporal por suite de tests)
 
-**Email Testing**: Use mock SMTP server (e.g., smtp4dev) or SendGrid sandbox mode
+**Email Testing**: Usar un servidor SMTP local (por ejemplo smtp4dev) o SMTP en modo pickup directory para generar archivos .eml
 
 **Key Integration Tests**:
 
@@ -538,7 +538,7 @@ Each property test must be tagged with a comment referencing the design document
 **Test Environments**:
 
 - Local development (localhost)
-- Staging (Azure or similar)
+- Staging (hosting similar a produccion)
 - Production smoke tests (limited)
 
 ## Deployment Considerations
@@ -547,23 +547,23 @@ Each property test must be tagged with a comment referencing the design document
 
 **Development**:
 
-- SQL Server LocalDB or Docker SQL Server
-- SMTP4Dev for email testing
-- User Secrets for sensitive configuration
+- SQLite (archivo local)
+- SMTP local para pruebas de email (por ejemplo smtp4dev) o pickup directory
+- User Secrets / variables de entorno para configuración sensible
 - CORS: Allow localhost:5173 (Vite default)
 
 **Staging**:
 
-- Azure SQL Database (Basic tier)
-- SendGrid sandbox mode
-- Azure Key Vault for secrets
+- SQLite (archivo local con datos acotados)
+- SendGrid (si aplica) o SMTP
+- Variables de entorno / secret store del hosting
 - CORS: Allow staging frontend URL
 
 **Production**:
 
-- Azure SQL Database (Standard tier with backup)
-- SendGrid production account
-- Azure Key Vault for secrets
+- SQLite (archivo persistente con estrategia de backup)
+- SendGrid production account (si aplica) o SMTP
+- Variables de entorno / secret store del hosting
 - CORS: Allow production frontend domain only
 - Application Insights for monitoring
 - Rate limiting with distributed cache (Redis)
@@ -631,7 +631,7 @@ Each property test must be tagged with a comment referencing the design document
 
 - Never commit secrets to source control
 - Development: User Secrets or .env file (gitignored)
-- Production: Azure Key Vault or equivalent
+- Production: secret store del hosting o equivalente
 - Rotate email API keys quarterly
 
 ### HTTPS Enforcement
@@ -667,7 +667,7 @@ Each property test must be tagged with a comment referencing the design document
 **Email Sending**:
 
 - Fire-and-forget pattern (don't block response on email send)
-- Consider background job queue for high volume (Hangfire/Azure Functions)
+- Consider background job queue for high volume (Hangfire o funciones serverless)
 - Retry logic for transient email failures
 
 **Caching**:
@@ -699,7 +699,7 @@ Each property test must be tagged with a comment referencing the design document
 3. **File Uploads**:
 
    - Allow clients to upload reference images
-   - Store in Azure Blob Storage
+   - Store in object storage (por ejemplo S3/Blob Storage)
    - Include in email notification
 
 4. **Multi-language Support**:
@@ -722,8 +722,8 @@ Each property test must be tagged with a comment referencing the design document
 
 If traffic grows significantly:
 
-- Move email sending to Azure Functions/AWS Lambda
-- Implement message queue (Azure Service Bus/RabbitMQ)
+- Move email sending to funciones serverless (si aplica)
+- Implement message queue (RabbitMQ o equivalente)
 - Add Redis cache for rate limiting and configuration
 - Consider read replicas for database if admin dashboard added
 - Implement CDN for static assets

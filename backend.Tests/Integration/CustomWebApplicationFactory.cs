@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -7,42 +9,49 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using backend.Data;
 using backend.Services;
-using Moq;
 
 namespace backend.Tests.Integration;
 
 /// <summary>
-/// Factory base para crear instancias de la aplicación para pruebas de integración
-/// Configura base de datos en memoria y mock del servicio de email
+/// Factory base para crear instancias de la aplicacion para pruebas de integracion.
+///
+/// Usa SQLite real (archivo temporal) y envio de email via SMTP pickup directory
+/// (genera archivos .eml; no requiere servicios externos).
 /// </summary>
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
+    private string? _dbPath;
+    private string? _pickupDirectory;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        _dbPath ??= Path.Combine(Path.GetTempPath(), $"InkStudioTests_{Guid.NewGuid():N}.db");
+        _pickupDirectory ??= Path.Combine(Path.GetTempPath(), $"InkStudioEmails_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(_pickupDirectory);
+
         // Configurar ambiente como "Test" para deshabilitar ConfigurationValidator
         builder.UseEnvironment("Test");
 
         // Configurar appsettings de prueba
         builder.ConfigureAppConfiguration((context, config) =>
         {
-            // Limpiar configuración existente
+            // Limpiar configuraciï¿½n existente
             config.Sources.Clear();
 
-            // Agregar configuración de prueba en memoria
+            // Agregar configuraciï¿½n de prueba en memoria
             config.AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["ConnectionStrings:DefaultConnection"] = "DataSource=:memory:",
+                ["ConnectionStrings:DefaultConnection"] = $"Data Source={_dbPath}",
                 ["EmailSettings:Provider"] = "SMTP",
                 ["EmailSettings:SmtpServer"] = "localhost",
                 ["EmailSettings:SmtpPort"] = "25",
-                ["EmailSettings:SmtpUsername"] = "test@test.com",
-                ["EmailSettings:SmtpPassword"] = "testpassword",
-                ["EmailSettings:FromEmail"] = "test@test.com",
                 ["EmailSettings:StudioEmail"] = "studio@test.com",
+                ["EmailSettings:StudioName"] = "Ink Studio",
+                ["EmailSettings:PickupDirectory"] = _pickupDirectory,
                 ["RateLimiting:EnableEndpointRateLimiting"] = "true",
                 ["RateLimiting:GeneralRules:0:Endpoint"] = "*",
                 ["RateLimiting:GeneralRules:0:Period"] = "1m",
-                ["RateLimiting:GeneralRules:0:Limit"] = "1000",  // Límite muy alto para pruebas
+                ["RateLimiting:GeneralRules:0:Limit"] = "1000",  // Limite alto para pruebas
                 ["Security:MaxPayloadSizeKB"] = "10",
                 ["CorsSettings:AllowedOrigins:0"] = "http://localhost:5173"
             });
@@ -61,23 +70,16 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             // Agregar DbContext con base de datos en memoria
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseInMemoryDatabase("TestDatabase");
+                options.UseSqlite($"Data Source={_dbPath}");
             });
 
-            // Remover el servicio de email real y reemplazarlo con un mock
-            var emailDescriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(IEmailService));
+            // Asegurar que el servicio de email use SMTP (pickup directory) sin mocks
+            var emailDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(IEmailService));
             if (emailDescriptor != null)
             {
                 services.Remove(emailDescriptor);
             }
-
-            // Agregar mock del servicio de email que siempre retorna true
-            var mockEmailService = new Mock<IEmailService>();
-            mockEmailService
-                .Setup(x => x.SendContactNotificationAsync(It.IsAny<Models.ContactMessage>()))
-                .ReturnsAsync(true);
-            services.AddScoped(_ => mockEmailService.Object);
+            services.AddScoped<IEmailService, SmtpEmailService>();
 
             // Inicializar la base de datos
             var sp = services.BuildServiceProvider();
@@ -86,5 +88,23 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             var db = scopedServices.GetRequiredService<ApplicationDbContext>();
             db.Database.EnsureCreated();
         });
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            if (!string.IsNullOrWhiteSpace(_dbPath))
+            {
+                try { File.Delete(_dbPath); } catch { }
+            }
+
+            if (!string.IsNullOrWhiteSpace(_pickupDirectory))
+            {
+                try { Directory.Delete(_pickupDirectory, recursive: true); } catch { }
+            }
+        }
+
+        base.Dispose(disposing);
     }
 }

@@ -2,7 +2,6 @@ using backend.Models;
 using backend.Data;
 using backend.Services;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Xunit;
 using System.Threading.Tasks;
 using System.Linq;
@@ -20,19 +19,17 @@ namespace backend.Tests
                 .Options;
             using var context = new ApplicationDbContext(options);
 
-            var emailServiceMock = new Mock<IEmailService>();
-            bool emailCalled = false;
-            emailServiceMock.Setup(x => x.SendContactNotificationAsync(It.IsAny<ContactMessage>()))
-                .Callback<ContactMessage>(msg => {
-                    // Verificar que el mensaje ya está en la base de datos
-                    var exists = context.ContactMessages.ToList().Any(m => m.Id == msg.Id);
-                    Assert.True(exists);
-                    emailCalled = true;
-                })
-                .ReturnsAsync(true);
-            var loggerMock = new Mock<Microsoft.Extensions.Logging.ILogger<ContactService>>();
+            var emailService = new InspectingEmailService(msg =>
+            {
+                // Verificar que el mensaje ya estï¿½ en la base de datos
+                var exists = context.ContactMessages.ToList().Any(m => m.Id == msg.Id);
+                Assert.True(exists);
+                return Task.CompletedTask;
+            });
 
-            var service = new ContactService(context, emailServiceMock.Object, loggerMock.Object);
+            var logger = new TestLogger<ContactService>();
+
+            var service = new ContactService(context, emailService, logger);
             var dto = new ContactRequestDto
             {
                 Name = "Test",
@@ -42,7 +39,7 @@ namespace backend.Tests
                 WantsAppointment = true
             };
             var result = await service.ProcessContactMessageAsync(dto);
-            Assert.True(emailCalled);
+            Assert.True(emailService.Called);
         }
     }
 }

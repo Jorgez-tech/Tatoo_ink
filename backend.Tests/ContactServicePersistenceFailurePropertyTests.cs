@@ -2,7 +2,6 @@ using backend.Models;
 using backend.Data;
 using backend.Services;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Xunit;
 using System.Threading.Tasks;
 
@@ -17,20 +16,12 @@ namespace backend.Tests
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ContactServicePersistenceFailureTestDb")
                 .Options;
-            using var context = new ApplicationDbContext(options);
+            using var context = new ThrowingApplicationDbContext(options, new DbUpdateException("Simulated DB failure"));
 
-            // Simular fallo de persistencia
-            var contextMock = new Mock<ApplicationDbContext>(options);
-            contextMock.Setup(x => x.SaveChangesAsync(default)).ThrowsAsync(new DbUpdateException("Simulated DB failure"));
+            var emailService = new RecordingEmailService(result: true);
+            var logger = new TestLogger<ContactService>();
 
-            var emailServiceMock = new Mock<IEmailService>();
-            bool emailCalled = false;
-            emailServiceMock.Setup(x => x.SendContactNotificationAsync(It.IsAny<ContactMessage>()))
-                .Callback(() => emailCalled = true)
-                .ReturnsAsync(true);
-            var loggerMock = new Mock<Microsoft.Extensions.Logging.ILogger<ContactService>>();
-
-            var service = new ContactService(contextMock.Object, emailServiceMock.Object, loggerMock.Object);
+            var service = new ContactService(context, emailService, logger);
             var dto = new ContactRequestDto
             {
                 Name = "Test",
@@ -41,7 +32,7 @@ namespace backend.Tests
             };
             var result = await service.ProcessContactMessageAsync(dto);
             Assert.False(result.Success);
-            Assert.False(emailCalled);
+            Assert.Empty(emailService.SentMessages);
         }
     }
 }

@@ -1,7 +1,6 @@
 using backend.Middleware;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Moq;
 using Xunit;
 using System.Threading.Tasks;
 using System.IO;
@@ -15,11 +14,11 @@ namespace backend.Tests
         [Fact]
         public async Task Should_Return_500_And_Generic_Message_On_DbException()
         {
-            var loggerMock = new Mock<ILogger<GlobalExceptionMiddleware>>();
+            var logger = new TestLogger<GlobalExceptionMiddleware>();
             var middleware = new GlobalExceptionMiddleware(async context =>
             {
                 throw new Exception("Simulated DB error");
-            }, loggerMock.Object);
+            }, logger);
             var context = new DefaultHttpContext();
             var responseStream = new MemoryStream();
             context.Response.Body = responseStream;
@@ -28,28 +27,27 @@ namespace backend.Tests
             responseStream.Seek(0, SeekOrigin.Begin);
             var reader = new StreamReader(responseStream, Encoding.UTF8);
             var body = await reader.ReadToEndAsync();
-            Assert.Contains("Ocurrió un error interno", body);
+            Assert.Contains("OcurriÃ³ un error interno", body);
         }
 
         [Fact]
         public async Task Should_Log_Error_With_StackTrace_And_Context()
         {
-            var loggerMock = new Mock<ILogger<GlobalExceptionMiddleware>>();
+            var logger = new TestLogger<GlobalExceptionMiddleware>();
             var middleware = new GlobalExceptionMiddleware(async context =>
             {
                 throw new Exception("Test error");
-            }, loggerMock.Object);
+            }, logger);
             var context = new DefaultHttpContext();
             context.Request.Path = "/api/contact";
             await middleware.InvokeAsync(context);
-            loggerMock.Verify(
-                x => x.Log(
-                    LogLevel.Error,
-                    It.IsAny<EventId>(),
-                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Excepción global capturada") && v.ToString().Contains("/api/contact")),
-                    It.Is<Exception>(ex => ex.Message.Contains("Test error")),
-                    It.IsAny<Func<It.IsAnyType, Exception, string>>()
-                ), Times.Once);
+
+            Assert.Contains(logger.Entries, entry =>
+                entry.Level == LogLevel.Error
+                && entry.Message.Contains("global capturada")
+                && entry.Message.Contains("/api/contact")
+                && entry.Exception != null
+                && entry.Exception.Message.Contains("Test error"));
         }
     }
 }

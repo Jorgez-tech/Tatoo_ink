@@ -2,7 +2,6 @@ using backend.Models;
 using backend.Data;
 using backend.Services;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Xunit;
 using System.Threading.Tasks;
 using System;
@@ -18,10 +17,9 @@ namespace backend.Tests
                 .UseInMemoryDatabase(databaseName: "ContactServiceMapDtoTestDb")
                 .Options;
             using var context = new ApplicationDbContext(options);
-            var emailServiceMock = new Mock<IEmailService>();
-            emailServiceMock.Setup(x => x.SendContactNotificationAsync(It.IsAny<ContactMessage>())).ReturnsAsync(true);
-            var loggerMock = new Mock<Microsoft.Extensions.Logging.ILogger<ContactService>>();
-            var service = new ContactService(context, emailServiceMock.Object, loggerMock.Object);
+            var emailService = new RecordingEmailService(result: true);
+            var logger = new TestLogger<ContactService>();
+            var service = new ContactService(context, emailService, logger);
             var dto = new ContactRequestDto
             {
                 Name = "TestName",
@@ -45,11 +43,10 @@ namespace backend.Tests
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "ContactServiceDbExceptionTestDb")
                 .Options;
-            var contextMock = new Mock<ApplicationDbContext>(options);
-            contextMock.Setup(x => x.SaveChangesAsync(default)).ThrowsAsync(new DbUpdateException("Simulated DB error"));
-            var emailServiceMock = new Mock<IEmailService>();
-            var loggerMock = new Mock<Microsoft.Extensions.Logging.ILogger<ContactService>>();
-            var service = new ContactService(contextMock.Object, emailServiceMock.Object, loggerMock.Object);
+            using var context = new ThrowingApplicationDbContext(options, new DbUpdateException("Simulated DB error"));
+            var emailService = new RecordingEmailService(result: true);
+            var logger = new TestLogger<ContactService>();
+            var service = new ContactService(context, emailService, logger);
             var dto = new ContactRequestDto
             {
                 Name = "TestName",
@@ -60,7 +57,7 @@ namespace backend.Tests
             };
             var result = await service.ProcessContactMessageAsync(dto);
             Assert.False(result.Success);
-            Assert.True(result.Error.Contains("Error al guardar el mensaje") || result.Error.Contains("Ocurrió un error inesperado"));
+            Assert.True(result.Error.Contains("Error al guardar el mensaje") || result.Error.Contains("Ocurriï¿½ un error inesperado"));
         }
 
         [Fact]
@@ -70,10 +67,9 @@ namespace backend.Tests
                 .UseInMemoryDatabase(databaseName: "ContactServiceEmailExceptionTestDb")
                 .Options;
             using var context = new ApplicationDbContext(options);
-            var emailServiceMock = new Mock<IEmailService>();
-            emailServiceMock.Setup(x => x.SendContactNotificationAsync(It.IsAny<ContactMessage>())).ThrowsAsync(new Exception("Simulated email error"));
-            var loggerMock = new Mock<Microsoft.Extensions.Logging.ILogger<ContactService>>();
-            var service = new ContactService(context, emailServiceMock.Object, loggerMock.Object);
+            var emailService = new ThrowingEmailService(new Exception("Simulated email error"));
+            var logger = new TestLogger<ContactService>();
+            var service = new ContactService(context, emailService, logger);
             var dto = new ContactRequestDto
             {
                 Name = "TestName",

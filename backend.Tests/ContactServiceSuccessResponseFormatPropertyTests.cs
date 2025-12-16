@@ -2,7 +2,6 @@ using backend.Models;
 using backend.Data;
 using backend.Services;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Xunit;
 using System.Threading.Tasks;
 
@@ -19,11 +18,10 @@ namespace backend.Tests
                 .Options;
             using var context = new ApplicationDbContext(options);
 
-            var emailServiceMock = new Mock<IEmailService>();
-            emailServiceMock.Setup(x => x.SendContactNotificationAsync(It.IsAny<ContactMessage>())).ReturnsAsync(true);
-            var loggerMock = new Mock<Microsoft.Extensions.Logging.ILogger<ContactService>>();
+            var emailService = new RecordingEmailService(result: true);
+            var logger = new TestLogger<ContactService>();
 
-            var service = new ContactService(context, emailServiceMock.Object, loggerMock.Object);
+            var service = new ContactService(context, emailService, logger);
             var dto = new ContactRequestDto
             {
                 Name = "Test",

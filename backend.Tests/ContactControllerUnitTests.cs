@@ -3,10 +3,8 @@ using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Moq;
 using Xunit;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace backend.Tests
 {
@@ -15,11 +13,9 @@ namespace backend.Tests
         [Fact]
         public async Task Post_Should_Return_200_On_Valid_Input()
         {
-            var serviceMock = new Mock<IContactService>();
-            serviceMock.Setup(x => x.ProcessContactMessageAsync(It.IsAny<ContactRequestDto>()))
-                .ReturnsAsync(new ServiceResult { Success = true, Id = 1 });
-            var loggerMock = new Mock<ILogger<ContactController>>();
-            var controller = new ContactController(serviceMock.Object, loggerMock.Object);
+            var service = new FixedResultContactService(_ => Task.FromResult(new ServiceResult { Success = true, Id = 1 }));
+            var logger = new TestLogger<ContactController>();
+            var controller = new ContactController(service, logger);
             var dto = new ContactRequestDto
             {
                 Name = "Test",
@@ -38,26 +34,24 @@ namespace backend.Tests
         [Fact]
         public async Task Post_Should_Return_400_On_Invalid_Model()
         {
-            var serviceMock = new Mock<IContactService>();
-            var loggerMock = new Mock<ILogger<ContactController>>();
-            var controller = new ContactController(serviceMock.Object, loggerMock.Object);
+            var service = new FixedResultContactService(_ => Task.FromResult(new ServiceResult { Success = true, Id = 1 }));
+            var logger = new TestLogger<ContactController>();
+            var controller = new ContactController(service, logger);
             controller.ModelState.AddModelError("Name", "El nombre es requerido");
             var dto = new ContactRequestDto();
             var result = await controller.Post(dto);
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
             var response = Assert.IsType<ContactResponseDto>(badRequest.Value);
             Assert.False(response.Success);
-            Assert.Equal("Datos de entrada inv·lidos", response.Message);
+            Assert.Equal("Datos de entrada inv√°lidos", response.Message);
         }
 
         [Fact]
         public async Task Post_Should_Return_500_On_Service_Failure()
         {
-            var serviceMock = new Mock<IContactService>();
-            serviceMock.Setup(x => x.ProcessContactMessageAsync(It.IsAny<ContactRequestDto>()))
-                .ReturnsAsync(new ServiceResult { Success = false, Error = "Error interno" });
-            var loggerMock = new Mock<ILogger<ContactController>>();
-            var controller = new ContactController(serviceMock.Object, loggerMock.Object);
+            var service = new FixedResultContactService(_ => Task.FromResult(new ServiceResult { Success = false, Error = "Error interno" }));
+            var logger = new TestLogger<ContactController>();
+            var controller = new ContactController(service, logger);
             var dto = new ContactRequestDto
             {
                 Name = "Test",

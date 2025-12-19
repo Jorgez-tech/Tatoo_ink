@@ -49,12 +49,18 @@ export interface Stat {
 /**
  * Imagen renderizada dentro de la galería interactiva.
  *
- * @property src Ruta o URL de la imagen.
+ * @property src Ruta o URL de la imagen principal (WebP preferido).
+ * @property fallback Ruta opcional de imagen fallback (JPG para compatibilidad).
  * @property alt Texto alternativo accesible.
+ * @property width Ancho de la imagen (opcional, mejora CLS).
+ * @property height Alto de la imagen (opcional, mejora CLS).
  */
 export interface GalleryImage {
   src: string;
+  fallback?: string;
   alt: string;
+  width?: number;
+  height?: number;
 }
 
 /**

@@ -21,7 +21,10 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src={heroImage.src}
+          fallback={heroImage.fallback}
           alt={heroImage.alt}
+          width={heroImage.width}
+          height={heroImage.height}
           className="w-full h-full object-cover"
           loading="eager"
           decoding="async"

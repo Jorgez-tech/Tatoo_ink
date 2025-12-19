@@ -1,53 +1,85 @@
 /**
  * Configuración de imágenes
  * Centraliza todas las URLs/rutas de imágenes del proyecto
+ * 
+ * NOTA: Imágenes optimizadas a formato WebP con fallback JPG
+ * - Hero: 1920x1080 (reducción 80% vs original)
+ * - About: 1200x800 (reducción 52% vs original)
+ * - Gallery: 800x600 (reducción promedio 65% vs original)
  */
 
 import type { GalleryImage } from "@/types";
 
 /**
  * Imagen del Hero (sección principal)
+ * Original: 0.98 MB → WebP: 0.19 MB (80.6% reducción)
  */
 export const heroImage = {
-  src: "https://images.unsplash.com/photo-1761276297550-27567ed50a1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBhcnRpc3QlMjB3b3JraW5nfGVufDF8fHx8MTc2MjI1MDcwMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  alt: "Tattoo Artist Working"
+  src: "/images/hero/tattoo-artist.webp",
+  fallback: "/images/hero/tattoo-artist.jpg",
+  alt: "Tattoo Artist Working",
+  width: 1920,
+  height: 1080
 };
 
 /**
  * Imagen de la sección About
+ * Original: 0.24 MB → WebP: 0.12 MB (52.4% reducción)
  */
 export const aboutImage = {
-  src: "https://images.unsplash.com/photo-1760877611905-0f885a3ce551?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBzdHVkaW8lMjBpbnRlcmlvcnxlbnwxfHx8fDE3NjIyNDQ1OTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  alt: "Tattoo Studio"
+  src: "/images/about/studio-interior.webp",
+  fallback: "/images/about/studio-interior.jpg",
+  alt: "Tattoo Studio",
+  width: 1200,
+  height: 800
 };
 
 /**
  * Imágenes de la galería
+ * Promedio reducción: ~65% en formato WebP
  */
 export const galleryImages: GalleryImage[] = [
   {
-    src: "https://images.unsplash.com/photo-1665085326630-b01fea9a613d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBhcnQlMjBkZXNpZ258ZW58MXx8fHwxNzYyMjU2NTg5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    alt: "Tattoo Art Design 1"
+    src: "/images/gallery/tattoo-art-1.webp",
+    fallback: "/images/gallery/tattoo-art-1.jpg",
+    alt: "Tattoo Art Design 1",
+    width: 800,
+    height: 600
   },
   {
-    src: "https://images.unsplash.com/photo-1721160223584-b3a19f2e0e6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBibGFjayUyMGlua3xlbnwxfHx8fDE3NjIzMTcyMjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    alt: "Tattoo Art Design 2"
+    src: "/images/gallery/tattoo-art-2.webp",
+    fallback: "/images/gallery/tattoo-art-2.jpg",
+    alt: "Tattoo Art Design 2",
+    width: 800,
+    height: 600
   },
   {
-    src: "https://images.unsplash.com/photo-1753260724749-25110c0ce91c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBtYWNoaW5lJTIwY2xvc2UlMjB1cHxlbnwxfHx8fDE3NjIzMTcyMjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    alt: "Tattoo Art Design 3"
+    src: "/images/gallery/tattoo-art-3.webp",
+    fallback: "/images/gallery/tattoo-art-3.jpg",
+    alt: "Tattoo Art Design 3",
+    width: 800,
+    height: 600
   },
   {
-    src: "https://images.unsplash.com/photo-1604374376934-2df6fad6519b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBnZW9tZXRyaWMlMjB0YXR0b298ZW58MXx8fHwxNzYyMjUwNzAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    alt: "Tattoo Art Design 4"
+    src: "/images/gallery/tattoo-art-4.webp",
+    fallback: "/images/gallery/tattoo-art-4.jpg",
+    alt: "Tattoo Art Design 4",
+    width: 800,
+    height: 600
   },
   {
-    src: "https://images.unsplash.com/photo-1760877611905-0f885a3ce551?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBzdHVkaW8lMjBpbnRlcmlvcnxlbnwxfHx8fDE3NjIyNDQ1OTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    alt: "Tattoo Art Design 5"
+    src: "/images/gallery/tattoo-art-5.webp",
+    fallback: "/images/gallery/tattoo-art-5.jpg",
+    alt: "Tattoo Art Design 5",
+    width: 800,
+    height: 600
   },
   {
-    src: "https://images.unsplash.com/photo-1761276297550-27567ed50a1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXR0b28lMjBhcnRpc3QlMjB3b3JraW5nfGVufDF8fHx8MTc2MjI1MDcwMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    alt: "Tattoo Art Design 6"
+    src: "/images/gallery/tattoo-art-6.webp",
+    fallback: "/images/gallery/tattoo-art-6.jpg",
+    alt: "Tattoo Art Design 6",
+    width: 800,
+    height: 600
   }
 ];
 

@@ -49,7 +49,10 @@ export function About() {
             <div className="aspect-square rounded-lg overflow-hidden">
               <ImageWithFallback
                 src={aboutImage.src}
+                fallback={aboutImage.fallback}
                 alt={aboutImage.alt}
+                width={aboutImage.width}
+                height={aboutImage.height}
                 className="w-full h-full object-cover"
                 decoding="async"
                 sizes="(min-width:1024px) 50vw, 100vw"

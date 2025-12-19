@@ -327,7 +327,7 @@ Documentación técnica base (completados):
 
 **Archivos:**
 - tatus (raíz) - Output accidental de comando "less" (325 líneas) - ELIMINAR
-- MERGE-TO-MASTER.md (raíz) - Checkpoint del 02/12/2025, información migrada a NEXT-STEPS.md - ARCHIVAR o ELIMINAR
+- MERGE-TO-MASTER.md (raíz) - Checkpoint del 02/12/2025, info migrada a NEXT-STEPS.md - ARCHIVAR
 
 **Tiempo estimado:** 15 minutos
 

@@ -145,7 +145,30 @@ Todas las tareas de documentación completadas:
 
 ## COMPLETADO RECIENTEMENTE
 
-### Optimización de imágenes (2025-12-19)
+### Restauración de Plan Original (2025-12-19 17:20)
+
+**Decisión crítica:**
+- Plan original especifica Gallery dinámica desde `/api/gallery`
+- NO se implementan alternativas, hardcodes o simplificaciones
+- Única fuente de verdad: `docs/API-REST.md`
+
+**Acciones realizadas:**
+- [x] Gallery.tsx: restaurado a consumir `galleryService.getAll()`
+- [x] config/images.ts: SOLO Hero y About (no Gallery hardcodeada)
+- [x] Estados loading/error restaurados en Gallery
+- [x] Eliminado fallback/width/height de tipo GalleryImage (vienen de API)
+- [x] Creado: docs/DEVELOPMENT-RULES.md (restricciones NO negociables)
+- [x] Build: compilando sin errores
+
+**Reglas establecidas:**
+```
+❌ NO: Hardcodes, mocks, alternativas, simplificaciones
+✅ SÍ: Plan documentado, API dinámicas, DB coherente
+```
+
+**Próxima validación:**
+- Verificar que backend alimenta correctamente BD
+- Probar flujo completo: GET /api/gallery → 6 imágenes
 
 **Acciones realizadas:**
 - [x] Estructura de carpetas creada: public/images/{hero,about,gallery}/

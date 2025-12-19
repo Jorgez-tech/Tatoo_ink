@@ -252,8 +252,9 @@ Documentación técnica base (completados):
 **Descripción:** Eliminar packages @radix-ui no utilizados
 
 **Análisis actual:**
-- Instalados: 25+ packages @radix-ui
-- En uso: 6 componentes UI activos
+- Instalados: 27 packages @radix-ui
+- En uso directo: 2 packages (@radix-ui/react-slot, @radix-ui/react-label)
+- Componentes UI activos: 6
 - Impacto: Bundle size inflado
 
 **Tareas específicas:**
@@ -322,11 +323,11 @@ Documentación técnica base (completados):
 
 #### 9. Limpiar archivos auxiliares
 
-**Descripción:** Documentar o eliminar archivos ambiguos
+**Descripción:** Eliminar archivos temporales y obsoletos
 
 **Archivos:**
-- tatus (raíz) - Propósito desconocido
-- MERGE-TO-MASTER.md (raíz) - Verificar relevancia
+- tatus (raíz) - Output accidental de comando "less" (325 líneas) - ELIMINAR
+- MERGE-TO-MASTER.md (raíz) - Checkpoint del 02/12/2025, información migrada a NEXT-STEPS.md - ARCHIVAR o ELIMINAR
 
 **Tiempo estimado:** 15 minutos
 

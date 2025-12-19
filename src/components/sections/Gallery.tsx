@@ -5,6 +5,34 @@ import { ChevronLeft, ChevronRight, X, Loader2 } from "lucide-react";
 import { galleryService } from "@/services/gallery";
 import type { GalleryImage } from "@/types";
 
+/**
+ * Galería de imágenes con lightbox interactivo y navegación por teclado.
+ *
+ * Consume imágenes desde el backend API (/api/gallery) y las muestra en una grid
+ * responsive. Al hacer clic en una imagen, abre un lightbox modal con navegación
+ * mediante botones, flechas del teclado (← →) o cierre con ESC.
+ *
+ * Gestiona tres estados principales:
+ * - `loading`: Cargando imágenes desde la API
+ * - `error`: Falló la carga, muestra mensaje de error
+ * - `images`: Imágenes cargadas exitosamente
+ *
+ * El lightbox implementa:
+ * - Navegación circular (última → primera imagen y viceversa)
+ * - Bloqueo de scroll del body mientras está abierto
+ * - Cierre al hacer clic en el overlay oscuro
+ * - Lazy loading de imágenes con placeholder animado
+ *
+ * @component
+ * @example
+ * return (
+ *   <Gallery />
+ * );
+ *
+ * @see {@link config/content.ts} - Configuración de títulos y subtítulos
+ * @see {@link services/gallery.ts} - Servicio de API para obtener imágenes
+ * @see {@link types/index.ts} - Tipo GalleryImage
+ */
 export function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [images, setImages] = useState<GalleryImage[]>([]);

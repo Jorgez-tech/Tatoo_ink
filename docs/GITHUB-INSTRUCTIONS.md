@@ -1,74 +1,73 @@
-# Instrucciones GitHub - Contexto del Proyecto
+# Instrucciones de Trabajo (Git / GitHub)
 
-Este documento sirve como referencia rapida cada vez que retomemos el trabajo en el proyecto.
-
-**NOTA:** Esta documentacion no usa emoticones para mantener profesionalismo y compatibilidad con todos los sistemas. Los emojis estan prohibidos en todo el proyecto y documentacion.
+Este documento sirve como referencia rápida para retomar el trabajo y mantener un flujo consistente.
 
 ---
 
-## Contexto del Proyecto
+## Contexto del proyecto
 
-### Descripcion
+### Descripción
 Landing page profesional para estudio de tatuajes "Ink Studio", construida como **prototipo reutilizable** para futuros clientes en Chile.
 
-### Stack Tecnologico
-- **Frontend:** React 18 + TypeScript 5.9.3
-- **Build Tool:** Vite 7.1.12
-- **Estilos:** Tailwind CSS 3.4.17
-- **UI Components:** shadcn/ui (Radix UI)
-- **Iconos:** Lucide React 0.552.0
-- **Backend (futuro):** ASP.NET Core
+### Stack
 
-### Origen del Diseno
-- Exportado desde **Figma** sin modificaciones
-- Componentes adaptados de diseno visual a codigo React
+- Frontend: React + TypeScript + Vite + Tailwind CSS v3
+- Backend: ASP.NET Core (.NET 8) + SQLite (EF Core)
+
+### Fuente de diseño
+
+- Diseño exportado desde Figma y adaptado a React
 
 ---
 
-## Estructura de Documentacion
+## Documentación (qué leer)
 
 ```
 docs/
-|-- NEXT-STEPS.md               # Estado actual y guia de continuidad (LEER PRIMERO)
-|-- README.md                   # Indice de documentacion
-|-- STRUCTURE.md                # Arquitectura tecnica
-|-- CUSTOMIZATION.md            # Guia de personalizacion
-|-- DEPLOYMENT.md               # Guia de despliegue
+|-- README.md                   # Índice de documentación
+|-- NEXT-STEPS.md               # Estado actual y trabajo pendiente
+|-- ARCHITECTURE.md             # Arquitectura (fuente de verdad)
+|-- API-REST.md                 # API REST (fuente de verdad)
+|-- SECURITY.md                 # Seguridad (fuente de verdad)
+|-- QA.md                       # QA y testing (fuente de verdad)
+|-- CUSTOMIZATION.md            # Personalización
+|-- DEPLOYMENT.md               # Despliegue
+|-- PERFORMANCE.md              # Performance
+|-- ACCESSIBILITY.md            # Accesibilidad
+|-- STRUCTURE.md                # Estructura frontend (detalle)
+|-- BACKEND-QUICKSTART.md       # Arranque local backend
+|-- BACKEND-INTEGRATION.md      # Integración frontend-backend
+|-- CHECKPOINT-FINAL.md         # Checklist / release notes
 +-- GITHUB-INSTRUCTIONS.md      # Este archivo
 ```
 
 ---
 
-## Inicio Rapido al Retomar el Trabajo
+## Inicio rápido al retomar
 
-### 1. Leer Estado Actual
-```bash
-# Archivo mas importante para contexto rapido
-cat docs/NEXT-STEPS.md
-```
+1. Leer `docs/README.md` y `docs/NEXT-STEPS.md`.
 
-### 2. Verificar Cambios Pendientes
+2. Revisar estado de git:
+
 ```bash
 git status
 git log --oneline -10
 ```
 
-### 3. Revisar Plan de Trabajo
-```bash
-# Revisa el estado y siguientes pasos
-cat docs/NEXT-STEPS.md
-```
+3. Elegir tarea y mantener cambios pequeños.
 
-### 4. Actualizar docs/NEXT-STEPS.md
-Siempre actualizar al terminar una sesion de trabajo con:
-- Progreso de tareas completadas
-- Problemas encontrados
-- Proximos pasos
-- Fecha de ultima actualizacion
+## Cierre de sesión
+
+Actualizar `docs/NEXT-STEPS.md` con:
+
+- Qué se completó
+- Qué quedó pendiente
+- Qué riesgos o decisiones se tomaron
+- Fecha de actualización
 
 ---
 
-## Convenciones de Commits
+## Convenciones de commits
 
 ### Formato
 ```
@@ -77,7 +76,7 @@ Siempre actualizar al terminar una sesion de trabajo con:
 [cuerpo opcional]
 ```
 
-### Tipos de Commit
+### Tipos
 - `feat` - Nueva funcionalidad
 - `fix` - Correccion de bug
 - `refactor` - Refactorizacion sin cambio funcional
@@ -97,7 +96,7 @@ git commit -m "chore(ui): elimina componentes UI no usados"
 
 ---
 
-## Workflow de Trabajo
+## Workflow
 
 ### Al Iniciar Sesion
 1. `git pull origin main`
@@ -105,11 +104,14 @@ git commit -m "chore(ui): elimina componentes UI no usados"
 3. Revisar documento de fase actual
 4. Identificar tarea especifica a realizar
 
-### Durante el Trabajo
+### Durante el trabajo
 1. Commits frecuentes y descriptivos
 2. Actualizar documentacion relevante
 3. Ejecutar `npm run dev` para verificar cambios
-4. Verificar que no hay errores: `npm run build`
+4. Verificar calidad:
+
+- Frontend: `npm run build`
+- Backend: `dotnet test backend.Tests/backend.Tests.csproj`
 
 ### Al Terminar Sesion
 1. Actualizar `docs/NEXT-STEPS.md` con:
@@ -122,37 +124,11 @@ git commit -m "chore(ui): elimina componentes UI no usados"
 
 ---
 
-## Estado por Fases
+## Estado actual
 
-### Fase 0: Configuracion Inicial - COMPLETADA
-- Vite + React + TypeScript configurado
-- Dependencias instaladas
-- Tailwind CSS v3 funcionando
-- Pagina renderizando correctamente
-
-### Fase 1: Auditoria y Limpieza - EN PROGRESO (5%)
-- [x] Auditoria de componentes UI
-- [ ] Eliminar 40 componentes no utilizados
-- [ ] Reorganizar estructura de carpetas
-- [ ] Optimizar estilos
-
-### Fase 2: Optimizacion - PENDIENTE
-- Refactorizar 7 componentes principales
-- Crear archivos de configuracion
-- Separar datos de presentacion
-- Mejorar tipos TypeScript
-
-### Fase 3: Documentacion - PENDIENTE
-- JSDoc en componentes
-- README.md completo
-- Guia de customizacion
-- Documentacion de estructura
-
-### Fase 4: Finalizacion - PENDIENTE
-- Optimizacion de imagenes
-- Performance y SEO
-- Accesibilidad (WCAG AA)
-- Sistema de temas
+- Frontend: estable y completo como template
+- Backend: estable y probado
+- Documentación: en proceso de consolidación (ver `docs/NEXT-STEPS.md`)
 
 ---
 
@@ -177,63 +153,22 @@ git commit -m "chore(ui): elimina componentes UI no usados"
 
 ---
 
-## Problemas Conocidos y Soluciones
+## Problemas conocidos
 
-### 1. Componentes UI No Utilizados
-**Problema:** 40 componentes shadcn/ui instalados pero no usados
-**Impacto:** Bundle size inflado, codigo confuso
-**Solucion:** Fase 1.1 - Eliminar todos los componentes no utilizados
-**Estado:** Pendiente
-
-### 2. Imagenes Externas
+### Imágenes externas
 **Problema:** Todas las imagenes cargan desde Unsplash (URLs externas)
 **Impacto:** Dependencia externa, posibles fallos, performance
-**Solucion:** Fase 4.1 - Descargar y optimizar localmente
-**Estado:** Pendiente
-
-### 3. Formulario de Contacto
-**Problema:** No tiene backend funcional
-**Impacto:** Formulario no envia emails realmente
-**Solucion:** Fase 2.1 - Preparar integracion con backend/API
-**Estado:** Pendiente
-
-### 4. Warning de Fast Refresh
-**Problema:** `button.tsx` exporta componente + constante
-**Impacto:** Warning en consola, no critico
-**Solucion:** Separar exportaciones
-**Estado:** Bajo prioridad
+**Solución recomendada:** descargar y optimizar localmente (WebP/AVIF) para producción.
 
 ---
 
-## Dependencias Criticas
+## Dependencias
 
-### Produccion
-```json
-{
-  "react": "^19.1.1",
-  "react-dom": "^19.1.1",
-  "lucide-react": "^0.552.0",
-  "tailwindcss": "3.4.17",
-  "class-variance-authority": "^0.7.1",
-  "clsx": "^2.1.1",
-  "tailwind-merge": "^3.3.1"
-}
-```
-
-### Desarrollo
-```json
-{
-  "@vitejs/plugin-react": "^4.3.4",
-  "typescript": "~5.9.3",
-  "vite": "^7.1.12",
-  "autoprefixer": "^10.4.20",
-  "postcss": "^8.4.49"
-}
-```
+Ver `package.json` para la lista actual.
 
 ---
 
-## Comandos Utiles
+## Comandos útiles
 
 ### Desarrollo
 ```bash

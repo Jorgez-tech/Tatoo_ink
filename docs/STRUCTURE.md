@@ -745,11 +745,12 @@ import type { Service } from "@/types";
 
 ---
 
-Para mas informacion, consulta:
+Para más información, consulta:
 
-- `docs/CUSTOMIZATION.md` - Guia de personalizacion
-- `docs/BACKEND-INTEGRATION.md` - Integracion con backend
-- `docs/00-PLAN-MAESTRO.md` - Plan general del proyecto
+- `docs/README.md` - Índice de documentación
+- `docs/ARCHITECTURE.md` - Arquitectura del sistema
+- `docs/CUSTOMIZATION.md` - Guía de personalización
+- `docs/BACKEND-INTEGRATION.md` - Integración con backend
 
 ## Prohibicion de emojis
 

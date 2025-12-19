@@ -1,267 +1,68 @@
-# Backend Integration - Quick Start
+# Backend - Quick Start (Local)
 
-Guia rapida para integrar el backend ASP.NET Core con el frontend React.
+Guía rápida para ejecutar el backend actual de Ink Studio en desarrollo local y conectarlo con el frontend.
 
-## Checklist Pre-Integracion
+## Requisitos
 
-Antes de comenzar, asegurate de tener:
+- .NET SDK 8
+- (Opcional) `dotnet-ef` si quieres ejecutar migraciones manualmente
 
-- [ ] .NET 8.0 SDK instalado
-- [ ] Visual Studio 2022 o VS Code
-- [ ] SQLite disponible (incluido con .NET via EF Core)
-- [ ] Cuenta de email service (SendGrid, SMTP, etc.) - opcional
+## 1) Configurar appsettings (desarrollo)
 
----
+En `backend/` existe un ejemplo. Crea el archivo real para tu entorno de desarrollo:
 
-## Inicio Rapido (5 minutos)
+- Copiar `backend/appsettings.Development.json.example` a `backend/appsettings.Development.json`
+- Completar valores (EmailSettings, CorsSettings, etc.)
 
-### 1. Configurar Variables de Entorno
+Nota: la validación de configuración se ejecuta al inicio (excepto en ambiente `Test`).
 
-Copia `.env.example` a `.env`:
+## 2) Ejecutar backend
 
-```bash
-cp .env.example .env
-```
-
-Edita `.env`:
-
-```env
-VITE_API_BASE_URL=http://localhost:5177
-```
-
-### 2. Crear Proyecto Backend
+Desde la raíz del repo:
 
 ```bash
-# Crear solucion y proyecto API
-dotnet new webapi -n InkStudio.Api
-cd InkStudio.Api
-
-# Agregar paquetes necesarios
-dotnet add package Microsoft.AspNetCore.Cors
-dotnet add package FluentValidation.AspNetCore
+dotnet run --project backend
 ```
 
-### 3. Crear Endpoint de Contacto
+En desarrollo, Swagger suele estar disponible en `/swagger`.
 
-**Models/ContactRequest.cs:**
+## 3) Base de datos
 
-```csharp
-using System.ComponentModel.DataAnnotations;
+El backend usa SQLite. En el arranque:
 
-namespace InkStudio.Api.Models;
+- Crea la base si no existe.
+- Inicializa imágenes de ejemplo para la galería si está vacía.
 
-public class ContactRequest
-{
-    [Required(ErrorMessage = "El nombre es obligatorio")]
-    [MinLength(2, ErrorMessage = "El nombre debe tener al menos 2 caracteres")]
-    public string Name { get; set; } = string.Empty;
+Si prefieres administrar migraciones manualmente, revisa `backend/README.md`.
 
-    [Required(ErrorMessage = "El email es obligatorio")]
-    [EmailAddress(ErrorMessage = "Email invalido")]
-    public string Email { get; set; } = string.Empty;
+## 4) Conectar frontend con backend
 
-    [Phone(ErrorMessage = "Formato de telefono invalido")]
-    public string? Phone { get; set; }
+En la raíz del repo, configura el frontend con `.env`:
 
-    [Required(ErrorMessage = "El mensaje es obligatorio")]
-    [MinLength(10, ErrorMessage = "El mensaje debe tener al menos 10 caracteres")]
-    public string Message { get; set; } = string.Empty;
-}
+- `VITE_API_BASE_URL` debe apuntar al host/puerto del backend.
 
-public class ContactResponse
-{
-    public bool Success { get; set; }
-    public string Message { get; set; } = string.Empty;
-}
-```
-
-**Controllers/ContactController.cs:**
-
-```csharp
-using Microsoft.AspNetCore.Mvc;
-using InkStudio.Api.Models;
-
-namespace InkStudio.Api.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class ContactController : ControllerBase
-{
-    private readonly ILogger<ContactController> _logger;
-
-    public ContactController(ILogger<ContactController> logger)
-    {
-        _logger = logger;
-    }
-
-    [HttpPost]
-    public IActionResult Post([FromBody] ContactRequest request)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(new ContactResponse
-            {
-                Success = false,
-                Message = "Datos invalidos"
-            });
-        }
-
-        try
-        {
-            // TODO: Implementar logica de negocio
-            // - Enviar email
-            // - Guardar en base de datos
-            // - Notificar administrador
-
-            _logger.LogInformation(
-                "Contacto recibido de {Name} ({Email})",
-                request.Name,
-                request.Email
-            );
-
-            return Ok(new ContactResponse
-            {
-                Success = true,
-                Message = "Mensaje recibido correctamente"
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error al procesar contacto");
-            return StatusCode(500, new ContactResponse
-            {
-                Success = false,
-                Message = "Error al procesar el mensaje"
-            });
-        }
-    }
-}
-```
-
-### 4. Configurar CORS
-
-**Program.cs:**
-
-```csharp
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// CORS Configuration
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy.WithOrigins(
-            "http://localhost:5173",  // Vite dev server
-            "https://inkstudio.cl"    // Production
-        )
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-    });
-});
-
-var app = builder.Build();
-
-// Configure pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseCors("AllowFrontend");
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-
-app.Run();
-```
-
-### 5. Ejecutar Backend
-
-```bash
-dotnet run
-```
-
-El backend estara disponible en `http://localhost:5177`
-
-### 6. Probar Integracion
-
-En otra terminal, ejecuta el frontend:
+Luego ejecuta:
 
 ```bash
 npm run dev
 ```
 
-Abre `http://localhost:5173` y prueba el formulario de contacto.
+## 5) Verificación rápida
 
----
+- Probar `POST /api/contact` (ver `API-REST.md`).
+- Probar `GET /api/gallery`.
 
-## Testing
-
-### Test con curl
+## 6) Ejecutar pruebas del backend
 
 ```bash
-curl -X POST http://localhost:5177/api/contact \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Test User",
-    "email": "test@example.com",
-    "phone": "+56 9 1234 5678",
-    "message": "Este es un mensaje de prueba"
-  }'
+dotnet test backend.Tests/backend.Tests.csproj
 ```
 
-### Test con Swagger
+## Referencias
 
-Abre `http://localhost:5177/swagger` y prueba el endpoint desde la UI.
-
----
-
-## Agregar Envio de Emails (Opcional)
-
-### Opcion 1: SMTP
-
-**appsettings.json:**
-
-```json
-{
-  "EmailSettings": {
-    "SmtpServer": "smtp.gmail.com",
-    "SmtpPort": 587,
-    "SenderEmail": "noreply@inkstudio.cl",
-    "SenderName": "Ink Studio",
-    "Username": "your-email@gmail.com",
-    "Password": "your-app-password"
-  }
-}
-```
-
-**Services/EmailService.cs:**
-
-```csharp
-using System.Net;
-using System.Net.Mail;
-
-public interface IEmailService
-{
-    Task SendContactEmailAsync(ContactRequest request);
-}
-
-public class EmailService : IEmailService
-{
-    private readonly IConfiguration _config;
-
-    public EmailService(IConfiguration config)
-    {
-        _config = config;
-    }
-
-    public async Task SendContactEmailAsync(ContactRequest request)
+- API: `API-REST.md`
+- Integración: `BACKEND-INTEGRATION.md`
+- Backend (operación/configuración): `backend/README.md`
     {
         var settings = _config.GetSection("EmailSettings");
 

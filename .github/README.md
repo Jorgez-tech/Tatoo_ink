@@ -49,9 +49,10 @@ Este directorio contiene toda la documentación y configuración relacionada con
 Si eres un modelo de asistencia de código, **empieza aquí**:
 
 1. **Lee [CONTEXT.md](./CONTEXT.md)** para entender el proyecto
-2. **Revisa [WORKFLOW.md](./WORKFLOW.md)** para entender el flujo de trabajo
-3. **Consulta [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md)** antes de hacer commits
-4. **Revisa [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)** antes de crear ramas
+2. **Consulta specs:** `../.kiro/specs/tattoo-studio-backend/` - Requisitos y diseño técnico original
+3. **Revisa [WORKFLOW.md](./WORKFLOW.md)** para entender el flujo de trabajo
+4. **Consulta [COMMIT_CONVENTION.md](./COMMIT_CONVENTION.md)** antes de hacer commits
+5. **Revisa [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)** antes de crear ramas
 
 ---
 

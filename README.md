@@ -189,13 +189,17 @@ npm run lint
 
 ## Documentacion Adicional
 
-- **Backend:** Ver `backend/README.md` para arquitectura y endpoints
-- **Personalizacion:** Ver `docs/CUSTOMIZATION.md`
-- **Arquitectura:** Ver `docs/STRUCTURE.md`
-- **Performance:** Ver `docs/PERFORMANCE.md`
-- **Accesibilidad:** Ver `docs/ACCESSIBILITY.md`
-- **Despliegue:** Ver `docs/DEPLOYMENT.md`
-- **Proximos Pasos:** Ver `docs/NEXT-STEPS.md`
+- Indice: `docs/README.md`
+- Arquitectura: `docs/ARCHITECTURE.md`
+- API REST: `docs/API-REST.md`
+- Seguridad: `docs/SECURITY.md`
+- QA y testing: `docs/QA.md`
+- Backend: `backend/README.md`
+- Despliegue: `docs/DEPLOYMENT.md`
+- Personalización: `docs/CUSTOMIZATION.md`
+- Performance: `docs/PERFORMANCE.md`
+- Accesibilidad: `docs/ACCESSIBILITY.md`
+- Estado y próximos pasos: `docs/NEXT-STEPS.md`
 
 ## Despliegue
 

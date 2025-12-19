@@ -71,6 +71,10 @@ Envia un mensaje de contacto y opcionalmente solicita una cita.
 
 Obtiene imagenes de la galeria del estudio.
 
+Nota: existe un endpoint `GET /api/gallery` en el backend actual. La etiqueta "(Futuro)" se mantiene solo si se planea ampliar su funcionalidad (CRUD, categorías, administración).
+
+Referencia API: ver `docs/API-REST.md`.
+
 ## Configuracion de appsettings.json
 
 ### Estructura Completa
@@ -182,6 +186,13 @@ Lista de origenes permitidos para CORS.
 #### Security
 
 - `MaxPayloadSizeKB`: Tamano maximo de payload (default: 10 KB)
+
+## Documentación técnica
+
+- Arquitectura: `docs/ARCHITECTURE.md`
+- API: `docs/API-REST.md`
+- Seguridad: `docs/SECURITY.md`
+- QA: `docs/QA.md`
 
 ## Comandos Utiles
 

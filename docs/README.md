@@ -1,109 +1,58 @@
-# Ink Studio - Landing Page
+# Documentacion - Ink Studio
 
-Landing page profesional para estudio de tatuajes, construida con React + TypeScript + Tailwind CSS.
+Esta carpeta contiene la documentacion tecnica y operativa del proyecto Ink Studio. El objetivo es que cualquier persona pueda:
 
-## Stack Tecnologico
+- Entender la arquitectura (frontend + backend)
+- Integrar y consumir la API
+- Ejecutar pruebas y validar calidad
+- Desplegar a produccion
+- Personalizar el template para nuevos clientes
 
-- **Framework:** React 18 + Vite
-- **Lenguaje:** TypeScript
-- **Estilos:** Tailwind CSS v3 + utilidades personalizadas
-- **Componentes UI:** Radix UI + Lucide Icons
-- **Validacion:** React Hook Form
-- **Iconos:** Lucide React
+## Indice
 
-## Requisitos Previos
+### Entrada rapida
 
-- Node.js 18 LTS o superior
-- npm 9+ (instalado junto con Node)
+- Estado y trabajo activo: `NEXT-STEPS.md`
+- Despliegue: `DEPLOYMENT.md`
+- Personalizacion: `CUSTOMIZATION.md`
 
-## Instalacion
+### Documentacion tecnica (fuente de verdad)
 
-```bash
-npm install
-```
+- Arquitectura: `ARCHITECTURE.md`
+- API REST: `API-REST.md`
+- Seguridad: `SECURITY.md`
+- QA y testing: `QA.md`
 
-## Desarrollo
+### Guías específicas
 
-```bash
-npm run dev
-```
+- Estructura del frontend: `STRUCTURE.md`
+- Integracion frontend-backend: `BACKEND-INTEGRATION.md`
+- Inicio rapido del backend (local): `BACKEND-QUICKSTART.md`
+- Performance: `PERFORMANCE.md`
+- Accesibilidad: `ACCESSIBILITY.md`
+- Checklist de release: `CHECKPOINT-FINAL.md`
 
-Abre [http://localhost:5173](http://localhost:5173) para ver la aplicacion en modo desarrollo.
+### Operacion y reglas de trabajo
 
-## Build y Deploy
+- Flujo de trabajo y Git: `GITHUB-INSTRUCTIONS.md`
+- Lineamientos de codigo y PRs: `GUIDELINES.md`
 
-```bash
-npm run build
-npm run preview
-```
+### Legal
 
-El directorio `dist/` contiene los artefactos listos para despliegue. En escenarios con backend ASP.NET Core, publica el contenido de `dist/` dentro de `wwwroot/` o configura proxy inverso segun necesidades.
+- Atribuciones: `ATTRIBUTIONS.md`
 
-## Estructura del Proyecto
+### Especificaciones tecnicas originales
 
-```text
-src/
-|-- components/
-|   |-- layout/      # Navbar, Footer
-|   |-- sections/    # Hero, Services, Gallery, About, Contact
-|   |-- ui/          # Button, Card, Input, Textarea, Label, ImageWithFallback
-|   +-- shared/      # Componentes compartidos futuros
-|-- config/          # Configuracion centralizada
-|   |-- business-info.ts    # Datos del negocio
-|   |-- content.ts          # Textos de secciones
-|   |-- images.ts           # Rutas de imagenes
-|   |-- navigation.ts       # Menu y navegacion
-|   |-- services.ts         # Servicios ofrecidos
-|   +-- api.ts              # Configuracion de backend
-|-- hooks/           # useActiveSection
-|-- lib/             # utils.ts (cn helper)
-|-- styles/          # globals.css
-+-- types/           # index.ts (interfaces TypeScript)
-```
+Para consultar las especificaciones que guiaron la implementacion del backend:
 
-Consulta `docs/STRUCTURE.md` para detalles completos.
+- `.kiro/specs/tattoo-studio-backend/design.md` - Arquitectura en capas, componentes e interfaces
+- `.kiro/specs/tattoo-studio-backend/requirements.md` - Requisitos funcionales con criterios de aceptacion
+- `.kiro/specs/tattoo-studio-backend/tasks.md` - Plan de implementacion (completado)
 
-## Personalizacion
+Nota: Estos archivos representan el diseño original. Para la documentación actualizada del backend consultar `ARCHITECTURE.md`, `API-REST.md` y `SECURITY.md`.
 
-Para adaptar esta landing a un nuevo cliente:
+## Principios de mantenimiento
 
-1. **Informacion del negocio:** Edita `src/config/business-info.ts`
-2. **Contenido de secciones:** Edita `src/config/content.ts`
-3. **Servicios:** Edita `src/config/services.ts`
-4. **Imagenes:** Actualiza rutas en `src/config/images.ts`
-5. **Colores y estilos:** Modifica variables CSS en `src/styles/globals.css`
-
-Ver `docs/CUSTOMIZATION.md` para guia detallada.
-
-## Caracteristicas
-
-- Diseno responsive (movil, tablet, desktop)
-- Navegacion con scroll spy (seccion activa destacada)
-- Smooth scroll global
-- Lazy loading de imagenes con placeholders
-- Lightbox interactivo con navegacion por teclado
-- Formulario validado con React Hook Form
-- Animaciones fadeIn/fadeInUp
-- Preparado para backend ASP.NET Core
-- Componentes documentados con JSDoc
-
-## Contribucion
-
-1. Crea una rama feature desde `main` siguiendo el formato `feature/<nombre>`
-2. Usa commits convencionales (`feat:`, `fix:`, `docs:`, `refactor:`, etc.)
-3. Ejecuta `npm run build` antes de abrir un PR
-
-## Documentacion
-
-- `docs/STRUCTURE.md` - Arquitectura del proyecto
-- `docs/CUSTOMIZATION.md` - Guia de personalizacion
-- `docs/BACKEND-INTEGRATION.md` - Integracion con ASP.NET Core
-- `docs/NEXT-STEPS.md` - Estado actual y proximos pasos
-
-## Prohibicion de emojis
-
-**NOTA IMPORTANTE:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII. Si encuentras algun emoji, eliminalo y registra el cambio en `docs/NEXT-STEPS.md`.
-
-## Licencia
-
-Este proyecto es un prototipo/demo para uso interno y clientes.
+- Evitar duplicacion: si una regla vive en un doc tecnico, los demas deben enlazarla.
+- Preferir comandos y ejemplos reproducibles.
+- Mantener el tono profesional y consistente.

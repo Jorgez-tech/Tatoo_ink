@@ -1,26 +1,32 @@
 import { ImageWithFallback } from "../ui/ImageWithFallback";
 import { useState, useEffect, useCallback } from "react";
 import { galleryContent } from "@/config/content";
-import { galleryImages } from "@/config/images";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Loader2 } from "lucide-react";
+import { galleryService } from "@/services/gallery";
 import type { GalleryImage } from "@/types";
 
 /**
  * Galería de imágenes con lightbox interactivo y navegación por teclado.
  *
- * Muestra imágenes locales optimizadas (WebP con fallback JPG) desde config/images.ts
- * en una grid responsive. Al hacer clic en una imagen, abre un lightbox modal con
- * navegación mediante botones, flechas del teclado (← →) o cierre con ESC.
+ * PLAN ORIGINAL: Consume imágenes desde backend API (/api/gallery).
+ * Las imágenes están en BD SQLite alimentadas por DbInitializer.cs
  *
- * Gestiona un estado principal:
- * - `selectedImage`: Índice de la imagen actualmente seleccionada en el lightbox
+ * NO USAR hardcodes de config/images.ts - eso es solo para Hero y About.
+ * Gallery DEBE obtener datos desde /api/gallery endpoint.
+ *
+ * Muestra imágenes en grid responsive. Al hacer clic, abre lightbox modal
+ * con navegación mediante botones, flechas del teclado (← →) o cierre con ESC.
+ *
+ * Gestiona tres estados:
+ * - `loading`: Cargando imágenes desde la API
+ * - `error`: Falló la carga, muestra mensaje de error
+ * - `images`: Imágenes cargadas exitosamente desde /api/gallery
  *
  * El lightbox implementa:
  * - Navegación circular (última → primera imagen y viceversa)
  * - Bloqueo de scroll del body mientras está abierto
  * - Cierre al hacer clic en el overlay oscuro
  * - Lazy loading de imágenes con placeholder animado
- * - Soporte WebP con fallback JPG automático
  *
  * @component
  * @example
@@ -29,12 +35,34 @@ import type { GalleryImage } from "@/types";
  * );
  *
  * @see {@link config/content.ts} - Configuración de títulos y subtítulos
- * @see {@link config/images.ts} - Imágenes locales optimizadas
+ * @see {@link services/gallery.ts} - Servicio de API para obtener imágenes
+ * @see {@link backend/Controllers/GalleryController.cs} - Endpoint GET /api/gallery
+ * @see {@link backend/Data/DbInitializer.cs} - Seed de imágenes de ejemplo
  * @see {@link types/index.ts} - Tipo GalleryImage
  */
 export function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const images: GalleryImage[] = galleryImages;
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Cargar imágenes desde backend API (plan original)
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const data = await galleryService.getAll();
+        setImages(data);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch gallery images:", err);
+        setError("No se pudieron cargar las imágenes. Por favor, intenta más tarde.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   const navigatePrevious = useCallback(() => {
     setSelectedImage((current) => {
@@ -98,6 +126,24 @@ export function Gallery() {
     }
   };
 
+  // Estado: Cargando
+  if (loading) {
+    return (
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white min-h-[400px] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </section>
+    );
+  }
+
+  // Estado: Error
+  if (error) {
+    return (
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white text-center">
+        <p className="text-red-500">{error}</p>
+      </section>
+    );
+  }
+
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -117,10 +163,7 @@ export function Gallery() {
             >
               <ImageWithFallback
                 src={image.src}
-                fallback={image.fallback}
                 alt={image.alt}
-                width={image.width}
-                height={image.height}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 decoding="async"
                 sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
@@ -185,10 +228,7 @@ export function Gallery() {
             <div className="relative max-w-full max-h-full">
               <ImageWithFallback
                 src={images[selectedImage].src}
-                fallback={images[selectedImage].fallback}
                 alt={images[selectedImage].alt}
-                width={images[selectedImage].width}
-                height={images[selectedImage].height}
                 className="max-w-full max-h-[90vh] object-contain"
                 decoding="async"
                 sizes="100vw"

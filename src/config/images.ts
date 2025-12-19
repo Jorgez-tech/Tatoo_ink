@@ -1,14 +1,14 @@
 /**
- * Configuración de imágenes
- * Centraliza todas las URLs/rutas de imágenes del proyecto
+ * Configuración de imágenes - SOLO PARA HERO Y ABOUT
  * 
- * NOTA: Imágenes optimizadas a formato WebP con fallback JPG
- * - Hero: 1920x1080 (reducción 80% vs original)
- * - About: 1200x800 (reducción 52% vs original)
- * - Gallery: 800x600 (reducción promedio 65% vs original)
+ * IMPORTANTE: Las imágenes están HARDCODEADAS solo aquí (Hero y About).
+ * Gallery DEBE consumir desde /api/gallery endpoint (plan original).
+ * 
+ * NO agregar galleryImages aquí - debe venir desde BD via backend.
+ * Imágenes optimizadas a formato WebP con fallback JPG:
+ * - Hero: 1920x1080 (80% reducción vs original)
+ * - About: 1200x800 (52% reducción vs original)
  */
-
-import type { GalleryImage } from "@/types";
 
 /**
  * Imagen del Hero (sección principal)
@@ -33,53 +33,4 @@ export const aboutImage = {
   width: 1200,
   height: 800
 };
-
-/**
- * Imágenes de la galería
- * Promedio reducción: ~65% en formato WebP
- */
-export const galleryImages: GalleryImage[] = [
-  {
-    src: "/images/gallery/tattoo-art-1.webp",
-    fallback: "/images/gallery/tattoo-art-1.jpg",
-    alt: "Tattoo Art Design 1",
-    width: 800,
-    height: 600
-  },
-  {
-    src: "/images/gallery/tattoo-art-2.webp",
-    fallback: "/images/gallery/tattoo-art-2.jpg",
-    alt: "Tattoo Art Design 2",
-    width: 800,
-    height: 600
-  },
-  {
-    src: "/images/gallery/tattoo-art-3.webp",
-    fallback: "/images/gallery/tattoo-art-3.jpg",
-    alt: "Tattoo Art Design 3",
-    width: 800,
-    height: 600
-  },
-  {
-    src: "/images/gallery/tattoo-art-4.webp",
-    fallback: "/images/gallery/tattoo-art-4.jpg",
-    alt: "Tattoo Art Design 4",
-    width: 800,
-    height: 600
-  },
-  {
-    src: "/images/gallery/tattoo-art-5.webp",
-    fallback: "/images/gallery/tattoo-art-5.jpg",
-    alt: "Tattoo Art Design 5",
-    width: 800,
-    height: 600
-  },
-  {
-    src: "/images/gallery/tattoo-art-6.webp",
-    fallback: "/images/gallery/tattoo-art-6.jpg",
-    alt: "Tattoo Art Design 6",
-    width: 800,
-    height: 600
-  }
-];
 

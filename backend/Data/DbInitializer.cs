@@ -8,13 +8,8 @@ namespace backend.Data
         {
             context.Database.EnsureCreated();
 
-            // Look for any gallery images.
-            if (context.GalleryImages.Any())
-            {
-                return;   // DB has been seeded
-            }
-
-            var images = new GalleryImage[]
+            // Definir las imágenes de galería con URLs locales optimizadas
+            var seedImages = new[]
             {
                 new GalleryImage
                 {
@@ -66,10 +61,43 @@ namespace backend.Data
                 }
             };
 
-            foreach (var i in images)
+            // Obtener imágenes existentes en la BD
+            var existingImages = context.GalleryImages.ToList();
+
+            if (existingImages.Count == 0)
             {
-                context.GalleryImages.Add(i);
+                // BD vacía: insertar nuevas imágenes
+                foreach (var img in seedImages)
+                {
+                    context.GalleryImages.Add(img);
+                }
             }
+            else
+            {
+                // BD tiene datos: actualizar con URLs locales
+                for (int i = 0; i < Math.Min(existingImages.Count, seedImages.Length); i++)
+                {
+                    var existing = existingImages[i];
+                    var seed = seedImages[i];
+
+                    // Actualizar con URLs locales optimizadas
+                    existing.Src = seed.Src;
+                    existing.Fallback = seed.Fallback;
+                    existing.Alt = seed.Alt;
+                    existing.Category = seed.Category;
+                    existing.Photographer = seed.Photographer;
+                }
+
+                // Si hay menos imágenes en BD que en seed, agregar las faltantes
+                if (seedImages.Length > existingImages.Count)
+                {
+                    for (int i = existingImages.Count; i < seedImages.Length; i++)
+                    {
+                        context.GalleryImages.Add(seedImages[i]);
+                    }
+                }
+            }
+
             context.SaveChanges();
         }
     }

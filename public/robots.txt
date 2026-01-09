@@ -2,9 +2,10 @@
 
 User-agent: *
 Allow: /
+Disallow: /node_modules/
 
 # Sitemap
-Sitemap: /sitemap.xml
+Sitemap: https://inkstudio.com/sitemap.xml
 
 # Crawl-delay (opcional, ajustar según necesidad)
 # Crawl-delay: 10

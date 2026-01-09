@@ -7,6 +7,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using AspNetCoreRateLimit;
 using Ganss.Xss;
@@ -68,6 +69,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IHtmlSanitizer, HtmlSanitizer>();
 
+// Health checks: base de datos y configuracion critica
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<ApplicationDbContext>("database");
+
 var app = builder.Build();
 
 // Middleware de manejo global de excepciones
@@ -121,14 +126,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Solo usar HTTPS redirect en producción
+// Seguridad adicional solo en producción
 if (!app.Environment.IsDevelopment())
 {
+    // HSTS ayuda a forzar HTTPS en clientes una vez que se ha establecido
+    app.UseHsts();
     app.UseHttpsRedirection();
 }
 
 app.UseAuthorization();
 app.UseIpRateLimiting();
+
+// Endpoint de health check sencillo para monitorización (DB + configuración)
+app.MapHealthChecks("/health");
+
 app.MapControllers();
 
 // Inicializar base de datos

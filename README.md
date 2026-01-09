@@ -2,26 +2,42 @@
 
 Landing page profesional para estudio de tatuajes con backend ASP.NET Core y frontend React + TypeScript.
 
+**🎉 Estado:** 🔄 En desarrollo activo (70% completado) | [Ver estado detallado](docs/NEXT-STEPS.md)
+
 ## Descripcion General
 
-Solucion fullstack completa que permite a los clientes enviar mensajes de contacto y solicitar citas a traves de un formulario web. El sistema persiste los datos en base de datos y envia notificaciones por correo electronico al estudio.
+Solución fullstack completa que permite a los clientes enviar mensajes de contacto y solicitar citas a través de un formulario web. El sistema persiste los datos en base de datos y envía notificaciones por correo electrónico al estudio.
 
-**Stack Tecnologico:**
+**Stack Tecnológico:**
 - **Frontend:** React 18.0 + TypeScript 5.9 + Vite 7 + Tailwind CSS 3.4
 - **Backend:** ASP.NET Core Web API .NET 8.0
 - **Base de Datos:** SQLite
 - **Email:** SendGrid / SMTP
-- **Testing:** xUnit (55 pruebas)
+- **Testing:** xUnit (55 pruebas pasando)
+- **Bundle:** 75.14 KB gzipped (optimizado)
+
+## Características Destacadas
+
+✅ Backend API REST funcional (2 endpoints)  
+✅ Frontend React + TypeScript optimizado (75KB gzipped)  
+✅ Formulario de contacto con validación  
+✅ Imágenes optimizadas (WebP + fallback JPG)  
+✅ 55 tests unitarios y de integración pasando  
+✅ Rate limiting y seguridad implementada  
+✅ Documentación exhaustiva (17+ documentos)  
+✅ Responsive design mobile-first  
+⚠️ Gallery: Requiere validación BD (URLs Unsplash vs locales)  
+⚠️ Integración end-to-end: Pendiente de testing completo  
 
 ## Requisitos Previos
 
-- **.NET 8.0 SDK** - [Descargar aqui](https://dotnet.microsoft.com/download/dotnet/8.0)
-- **Node.js 18+** y npm - [Descargar aqui](https://nodejs.org/)
-- **Git** - [Descargar aqui](https://git-scm.com/)
+- **.NET 8.0 SDK** - [Descargar aquí](https://dotnet.microsoft.com/download/dotnet/8.0)
+- **Node.js 18+** y npm - [Descargar aquí](https://nodejs.org/)
+- **Git** - [Descargar aquí](https://git-scm.com/)
 - **SQLite** (incluido con .NET)
-- **Cuenta de SendGrid** (opcional, para email en produccion)
+- **Cuenta de SendGrid** (opcional, para email en producción)
 
-## Instalacion y Configuracion
+## 🚀 Inicio Rápido
 
 ### 1. Clonar el Repositorio
 
@@ -35,48 +51,34 @@ cd Tatoo_ink
 ```bash
 cd backend
 
-# Copiar archivo de configuracion de ejemplo
-cp appsettings.Development.json.example appsettings.Development.json
-
-# Editar appsettings.Development.json con tus valores
-# (ConnectionString, EmailSettings, etc.)
-
-# Aplicar migraciones de base de datos
-dotnet ef database update
-
-# Ejecutar backend
-dotnet run
+# La BD se crea automáticamente al ejecutar
+dotnet run --launch-profile http
 ```
 
-El backend estara disponible en: `https://localhost:7000`
+El backend estará disponible en: `http://localhost:5177`  
+Swagger UI: `http://localhost:5177/swagger`
 
 ### 3. Configurar Frontend
 
 ```bash
-# Desde la raiz del proyecto
+# Desde la raíz del proyecto
 npm install
-
-# Copiar archivo de variables de entorno
-cp .env.example .env
-
-# Editar .env con la URL del backend
-# VITE_API_BASE_URL=https://localhost:7000
 
 # Ejecutar frontend
 npm run dev
 ```
 
-El frontend estara disponible en: `http://localhost:5173`
+El frontend estará disponible en: `http://localhost:5173`
 
-## Ejecucion del Proyecto Completo
+## Ejecución del Proyecto Completo
 
 ### Backend
 
-1. Configurar `appsettings.Development.json` (ver `backend/README.md`)
-2. Aplicar migraciones:
+1. La base de datos se inicializa automáticamente con DbInitializer
+2. Ejecutar:
    ```bash
    cd backend
-   dotnet ef database update
+   dotnet run --launch-profile http
    ```
 3. Ejecutar API:
    ```bash

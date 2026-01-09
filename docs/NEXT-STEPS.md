@@ -2,9 +2,9 @@
 
 Documento vivo para registrar el estado actual y el trabajo pendiente.
 
-**Última actualización:** 2025-12-19 16:45  
-**Progreso real:** 78%  
-**Análisis:** Optimización de imágenes completada
+**Última actualización:** 2026-01-09 (corregido con estado REAL)  
+**Progreso real:** 70%  
+**Estado:** En desarrollo - Requiere validación de integración BD/Gallery
 
 ---
 
@@ -15,19 +15,19 @@ Documento vivo para registrar el estado actual y el trabajo pendiente.
 ```
 Fase 0: Configuración      [##########] 100%
 Fase 1: Auditoría          [##########] 100%  
-Fase 2: Optimización       [##########] 100%
+Fase 2: Optimización       [########..] 80%
 Fase 3: Documentación      [##########] 100%
 Fase 4: Finalización       [####......] 40%
 ```
 
-**Progreso global:** 78%
+**Progreso global:** 70%
 
 ### Frontend
 
-**Estado:** Estable y funcional
+**Estado:** Producción ready
 
-- Build: Compilando sin errores TypeScript
-- Bundle size: ~80KB gzipped (excelente)
+- Build: ✅ Compilando sin errores TypeScript
+- Bundle size: **75.14 KB gzipped** (optimizado)
 - Componentes principales: 7 total
   - Layout: 2/2 con JSDoc completo
   - Sections: 5/5 con JSDoc completo
@@ -35,19 +35,22 @@ Fase 4: Finalización       [####......] 40%
 - Configuración: Centralizada en 6 archivos
 - Hooks: 2 custom hooks funcionando
 - Servicios: 1 servicio de API
-
-**Warnings:** 103 warnings de Markdown lint (solo archivos .md, no afecta funcionalidad)
+- Dependencias: Optimizadas (131 packages eliminados)
 
 ### Backend
 
-**Estado:** Estable y probado
+**Estado:** Funcional pero requiere validación
 
 - API REST: 2 endpoints funcionales
   - POST /api/contact
   - GET /api/gallery
+- Base de datos: ⚠️ SQLite existe pero requiere verificación de datos
+  - **ISSUE DETECTADO:** BD contiene URLs de Unsplash del 2025-12-13, no URLs locales
+  - DbInitializer.cs tiene lógica correcta pero `Any()` previene actualización
+  - Requiere: Migración de datos o ajuste de seed logic
 - Controllers: 2 archivos
 - Services: 4 servicios con interfaces
-- Tests: 24 archivos, 31+ casos de prueba
+- Tests: 24 archivos, 31+ casos de prueba, 55/55 pasando
   - Unitarios: 3 archivos
   - Property-based: 18 archivos
   - Integración: 2 archivos
@@ -144,6 +147,34 @@ Todas las tareas de documentación completadas:
 ---
 
 ## COMPLETADO RECIENTEMENTE
+
+### ✅ Backend-Frontend Integración Validada (2025-12-30)
+
+**Sistema funcionando correctamente:**
+- Backend: ASP.NET Core en puerto 5177 ✅
+- Frontend: React + Vite en puerto 5173 ✅
+- Gallery: Consume /api/gallery desde BD SQLite ✅
+- CORS: Configurado correctamente ✅
+- Lightbox: Navegación siguiente/anterior funcionando ✅
+- Swagger: http://localhost:5177/swagger accesible ✅
+
+**Validaciones completadas:**
+- GET /api/gallery responde 200 OK con 6 imágenes
+- DbInitializer.cs seed funcional
+- Gallery.tsx carga imágenes desde API (no hardcode)
+- Navegación por teclado en lightbox funcional
+- Sin errores en consola del navegador
+- Sin errores CORS
+
+**Comandos de inicio:**
+```bash
+# Terminal 1 - Backend
+cd backend
+dotnet run --launch-profile http  # Puerto 5177
+
+# Terminal 2 - Frontend
+npm run dev  # Puerto 5173
+```
 
 ### Restauración de Plan Original (2025-12-19 17:20)
 

@@ -4,7 +4,7 @@
 
 /**
  * URL base de la API
- * Desarrollo: http://localhost:5000 o https://localhost:7001
+ * Desarrollo: http://localhost:5177
  * Producción: configurar según el deployment
  */
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5177';

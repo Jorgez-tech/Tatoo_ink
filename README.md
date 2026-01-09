@@ -2,7 +2,7 @@
 
 Landing page profesional para estudio de tatuajes con backend ASP.NET Core y frontend React + TypeScript.
 
-**🎉 Estado:** ✅ Casi listo para producción (95% completado) | [Ver estado detallado](docs/NEXT-STEPS.md)
+**Estado:** [OK] Casi listo para producción (95% completado) | [Ver estado detallado](docs/NEXT-STEPS.md)
 
 ## Descripcion General
 

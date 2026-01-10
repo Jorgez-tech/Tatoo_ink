@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 
 const ERROR_IMG_SRC =
   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg=='
@@ -23,26 +23,29 @@ interface ImageWithFallbackProps extends Omit<React.ImgHTMLAttributes<HTMLImageE
  * Utiliza elemento `<picture>` para servir WebP con fallback JPG automático.
  * Mantiene compatibilidad con props estándar de `<img>`.
  *
+ * Performance: Memoized to prevent unnecessary re-renders in lists (e.g., Gallery grid)
+ * when parent state changes but image props remain stable.
+ *
  * @component
  * @example
  * ```tsx
  * // Con WebP y fallback JPG
- * <ImageWithFallback 
- *   src="/images/hero.webp" 
+ * <ImageWithFallback
+ *   src="/images/hero.webp"
  *   fallback="/images/hero.jpg"
- *   alt="Hero" 
+ *   alt="Hero"
  *   width={1920}
  *   height={1080}
- *   className="h-64" 
+ *   className="h-64"
  * />
- * 
+ *
  * // Solo imagen estándar
  * <ImageWithFallback src="/hero.jpg" alt="Hero" />
  * ```
- * 
+ *
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture}
  */
-export function ImageWithFallback(props: ImageWithFallbackProps) {
+export const ImageWithFallback = memo(function ImageWithFallback(props: ImageWithFallbackProps) {
   const [didError, setDidError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -116,4 +119,4 @@ export function ImageWithFallback(props: ImageWithFallbackProps) {
       />
     </div>
   )
-}
+});

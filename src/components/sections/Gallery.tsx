@@ -156,10 +156,12 @@ export function Gallery() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {images.map((image, index) => (
-            <div
+            <button
               key={index}
-              className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
+              type="button"
+              className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group w-full p-0 border-0 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               onClick={() => setSelectedImage(index)}
+              aria-label={`Ver imagen ${index + 1}: ${image.alt}`}
             >
               <ImageWithFallback
                 src={image.src}
@@ -171,7 +173,7 @@ export function Gallery() {
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <span className="text-white">Ver más</span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 

@@ -78,6 +78,12 @@ namespace backend.Services
                 ? "<span style='background-color: #10b981; color: white; padding: 4px 12px; border-radius: 4px; font-size: 14px;'>✓ Solicita Cita</span>"
                 : "<span style='background-color: #6b7280; color: white; padding: 4px 12px; border-radius: 4px; font-size: 14px;'>Sin cita</span>";
 
+            // Encode user input to prevent HTML Injection / XSS
+            var encodedName = WebUtility.HtmlEncode(message.Name);
+            var encodedEmail = WebUtility.HtmlEncode(message.Email);
+            var encodedPhone = WebUtility.HtmlEncode(message.Phone);
+            var encodedMessage = WebUtility.HtmlEncode(message.Message);
+
             return $@"
 <!DOCTYPE html>
 <html>
@@ -106,22 +112,22 @@ namespace backend.Services
             
             <div class='field'>
                 <div class='label'>Nombre:</div>
-                <div class='value'>{message.Name}</div>
+                <div class='value'>{encodedName}</div>
             </div>
             
             <div class='field'>
                 <div class='label'>Email:</div>
-                <div class='value'>{message.Email}</div>
+                <div class='value'>{encodedEmail}</div>
             </div>
             
             <div class='field'>
                 <div class='label'>Teléfono:</div>
-                <div class='value'>{message.Phone}</div>
+                <div class='value'>{encodedPhone}</div>
             </div>
             
             <div class='field'>
                 <div class='label'>Mensaje:</div>
-                <div class='value'>{message.Message}</div>
+                <div class='value'>{encodedMessage}</div>
             </div>
             
             <div class='field'>

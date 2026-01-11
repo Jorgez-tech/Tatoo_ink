@@ -78,6 +78,21 @@ var app = builder.Build();
 // Middleware de manejo global de excepciones
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
+app.UseCors(policy =>
+{
+    var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+    policy.WithOrigins(allowedOrigins)
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+});
+
+// Validar si Rate Limiting está habilitado (por defecto true)
+var enableRateLimiting = builder.Configuration.GetValue<bool>("RateLimiting:EnableRateLimiting", true);
+if (enableRateLimiting)
+{
+    app.UseIpRateLimiting();
+}
+
 // Middleware de validación de tamaño de payload
 app.Use(async (context, next) =>
 {
@@ -111,14 +126,6 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.UseCors(policy =>
-{
-    var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
-    policy.WithOrigins(allowedOrigins)
-        .AllowAnyHeader()
-        .AllowAnyMethod();
-});
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -135,7 +142,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-app.UseIpRateLimiting();
 
 // Endpoint de health check sencillo para monitorización (DB + configuración)
 app.MapHealthChecks("/health");

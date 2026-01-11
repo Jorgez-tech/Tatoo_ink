@@ -88,6 +88,9 @@ export function Navbar() {
           <button
             className="md:hidden text-white"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Cerrar menú principal" : "Abrir menú principal"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -95,10 +98,12 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         <div
+          id="mobile-menu"
           className={cn(
             "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
             isOpen ? "max-h-96 py-4 border-t border-white/10" : "max-h-0"
           )}
+          aria-hidden={!isOpen}
         >
           <div className="flex flex-col gap-4">
             {menuItems.map((item, index) => {

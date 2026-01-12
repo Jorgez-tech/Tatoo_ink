@@ -5,6 +5,7 @@ import { Gallery } from "./components/sections/Gallery";
 import { About } from "./components/sections/About";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/layout/Footer";
+import { LazyLoad } from "./components/ui/LazyLoad";
 
 export default function App() {
   return (
@@ -15,13 +16,19 @@ export default function App() {
         <Services />
       </div>
       <div id="galeria">
-        <Gallery />
+        {/* Lazy load Gallery to delay API call and heavy image rendering until in view */}
+        <LazyLoad minHeight="500px">
+          <Gallery />
+        </LazyLoad>
       </div>
       <div id="nosotros">
         <About />
       </div>
       <div id="contacto">
-        <Contact />
+        {/* Contact section is at the bottom, safe to lazy load */}
+        <LazyLoad minHeight="400px">
+          <Contact />
+        </LazyLoad>
       </div>
       <Footer />
     </div>

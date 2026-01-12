@@ -178,10 +178,29 @@ Lista de origenes permitidos para CORS.
 **Desarrollo:** `http://localhost:5173`, `http://localhost:3000`  
 **Produccion:** URL de tu frontend desplegado
 
-#### RateLimiting
+#### IpRateLimiting
 
-- `MaxRequestsPerMinute`: Maximo de requests por IP (default: 10)
-- `EnableRateLimiting`: `true` para activar
+Configuración de `AspNetCoreRateLimit` para prevenir ataques de denegación de servicio (DoS).
+
+```json
+"IpRateLimiting": {
+  "EnableEndpointRateLimiting": false,
+  "StackBlockedRequests": false,
+  "RealIpHeader": "X-Real-IP",
+  "ClientIdHeader": "X-ClientId",
+  "HttpStatusCode": 429,
+  "GeneralRules": [
+    {
+      "Endpoint": "*",
+      "Period": "1m",
+      "Limit": 10
+    }
+  ]
+}
+```
+
+- `Period`: Periodo de tiempo (ej. "1m", "1h")
+- `Limit`: Número máximo de requests permitidos en el periodo
 
 #### Security
 

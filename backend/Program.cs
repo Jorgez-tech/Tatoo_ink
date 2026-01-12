@@ -59,7 +59,7 @@ builder.Services.AddScoped<IGalleryService, GalleryService>();
 
 // Configuración de rate limiting
 builder.Services.AddMemoryCache();
-builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("RateLimiting"));
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
 builder.Services.AddInMemoryRateLimiting();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
@@ -77,6 +77,8 @@ var app = builder.Build();
 
 // Middleware de manejo global de excepciones
 app.UseMiddleware<GlobalExceptionMiddleware>();
+
+app.UseIpRateLimiting();
 
 // Middleware de validación de tamaño de payload
 app.Use(async (context, next) =>
@@ -135,7 +137,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-app.UseIpRateLimiting();
 
 // Endpoint de health check sencillo para monitorización (DB + configuración)
 app.MapHealthChecks("/health");

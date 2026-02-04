@@ -2,19 +2,25 @@
 
 Landing page profesional para estudio de tatuajes con backend ASP.NET Core y frontend React + TypeScript.
 
-**Estado:** [OK] Casi listo para producción (95% completado) | [Ver estado detallado](docs/NEXT-STEPS.md)
+**Versión:** 0.95.0 - Release Candidate  
+**Estado:** Producción Ready (95% completado)  
+**Changelog:** [Ver historial completo](docs/CHANGELOG.md)
 
-## Descripcion General
+---
 
-Solución fullstack completa que permite a los clientes enviar mensajes de contacto y solicitar citas a través de un formulario web. El sistema persiste los datos en base de datos y envía notificaciones por correo electrónico al estudio.
+## Descripción General
 
-**Stack Tecnológico:**
+Solución fullstack completa que permite a los clientes enviar mensajes de contacto y solicitar citas a través de un formulario web. El sistema persiste los datos en base de datos SQLite y envía notificaciones por correo electrónico al estudio.
+
+### Stack Tecnológico
+
 - **Frontend:** React 18.0 + TypeScript 5.9 + Vite 7 + Tailwind CSS 3.4
 - **Backend:** ASP.NET Core Web API .NET 8.0
-- **Base de Datos:** SQLite
-- **Email:** SendGrid / SMTP
-- **Testing:** xUnit (55 pruebas pasando)
+- **Base de Datos:** SQLite + Entity Framework Core
+- **Email:** SendGrid / SMTP (dual service)
+- **Testing:** xUnit + FsCheck (55 pruebas pasando, 100%)
 - **Bundle:** 75.14 KB gzipped (optimizado)
+- **Performance:** Lighthouse 100 (Performance), 100 (SEO)
 
 ## Características Destacadas
 
@@ -72,40 +78,46 @@ npm run dev
 
 El frontend estará disponible en: `http://localhost:5173`
 
-## Ejecución del Proyecto Completo
+## Ejecución Rápida
 
 ### Backend
 
-1. La base de datos se inicializa automáticamente con DbInitializer
-2. Ejecutar:
-   ```bash
-   cd backend
-   dotnet run --launch-profile http
-   ```
-3. Ejecutar API:
-   ```bash
-   dotnet run --project backend
-   ```
-4. API disponible en: `https://localhost:7000`
-5. Swagger UI: `https://localhost:7000/swagger`
+```bash
+cd backend
+dotnet run --launch-profile http
+```
+
+- API disponible en: `http://localhost:5177`
+- Swagger UI: `http://localhost:5177/swagger`
+- Health check: `http://localhost:5177/health`
 
 ### Frontend
 
-1. Instalar dependencias:
-   ```bash
-   npm install
-   ```
-2. Ejecutar en desarrollo:
-   ```bash
-   npm run dev
-   ```
-3. Frontend disponible en: `http://localhost:5173`
+```bash
+npm install
+npm run dev
+```
 
-### Comunicacion Frontend-Backend
+- App disponible en: `http://localhost:5173`
+- Hot reload habilitado
 
-- El frontend llama al endpoint `POST /api/contact`
-- CORS configurado en backend para permitir `http://localhost:5173`
-- Variables de entorno en `.env` (ver `.env.example`)
+### Verificación
+
+**Backend:**
+
+```bash
+cd backend.Tests
+dotnet test
+```
+
+**Frontend:**
+
+```bash
+npm run build
+npm run lint
+```
+
+**Para más detalles:** Ver [Getting Started](docs/GETTING-STARTED.md)
 
 ## Estructura del Proyecto
 
@@ -191,19 +203,33 @@ npm run lint
 - CORS configurado
 - Swagger UI para documentacion
 
-## Documentacion Adicional
+## Documentación
 
-- Indice: `docs/README.md`
-- Arquitectura: `docs/ARCHITECTURE.md`
-- API REST: `docs/API-REST.md`
-- Seguridad: `docs/SECURITY.md`
-- QA y testing: `docs/QA.md`
-- Backend: `backend/README.md`
-- Despliegue: `docs/DEPLOYMENT.md`
-- Personalización: `docs/CUSTOMIZATION.md`
-- Performance: `docs/PERFORMANCE.md`
-- Accesibilidad: `docs/ACCESSIBILITY.md`
-- Estado y próximos pasos: `docs/NEXT-STEPS.md`
+### Primeros Pasos
+
+- **[Getting Started](docs/GETTING-STARTED.md)** - Setup inicial completo
+- **[Architecture](docs/ARCHITECTURE.md)** - Arquitectura del sistema
+- **[Development Guide](docs/DEVELOPMENT-GUIDE.md)** - Convenciones y testing
+
+### Referencia Técnica
+
+- **[API Reference](docs/API-REFERENCE.md)** - Especificación de endpoints
+- **[Security](docs/SECURITY.md)** - Controles de seguridad
+- **[Performance](docs/PERFORMANCE.md)** - Optimizaciones
+- **[Accessibility](docs/ACCESSIBILITY.md)** - Cumplimiento WCAG AA
+
+### Operaciones
+
+- **[Deployment](docs/DEPLOYMENT.md)** - Guías de despliegue
+- **[Customization](docs/CUSTOMIZATION.md)** - Personalización del template
+- **[Changelog](docs/CHANGELOG.md)** - Historial de cambios
+
+### READMEs Específicos
+
+- **[Backend README](backend/README.md)** - Configuración del backend
+- **[Frontend README](src/README.md)** - Configuración del frontend
+
+**Índice completo:** [docs/README.md](docs/README.md)
 
 ## Despliegue
 

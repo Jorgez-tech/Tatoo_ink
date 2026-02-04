@@ -1,10 +1,19 @@
 # Frontend - Ink Studio
 
-Este directorio contiene el frontend (React + TypeScript + Vite).
+Frontend de la landing page de Ink Studio, construido con React 18 + TypeScript + Vite.
+
+**Versión:** 0.95.0  
+**Estado:** Producción Ready  
+**Bundle:** 75.14 KB gzipped  
+**Performance:** Lighthouse 100
+
+---
 
 ## Requisitos
 
-- Node.js 18+
+- Node.js 18+ y npm
+
+---
 
 ## Desarrollo
 
@@ -15,12 +24,21 @@ npm install
 npm run dev
 ```
 
+La aplicación estará disponible en: `http://localhost:5173`
+
+---
+
 ## Build
 
 ```bash
+# Build de producción
 npm run build
+
+# Preview del build
 npm run preview
 ```
+
+---
 
 ## Lint
 
@@ -28,13 +46,36 @@ npm run preview
 npm run lint
 ```
 
+---
+
 ## Configuración
 
-El frontend consume el backend usando:
+El frontend consume el backend usando variable de entorno:
 
-- `VITE_API_BASE_URL`
+```env
+VITE_API_BASE_URL=http://localhost:5177
+```
 
-Ver:
+Crear archivo `.env` en la raíz del proyecto con la URL del backend.
 
-- `docs/BACKEND-INTEGRATION.md`
-- `docs/API-REST.md`
+---
+
+## Estructura
+
+Ver documentación completa en:
+
+- [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md) - Arquitectura del sistema
+- [docs/DEVELOPMENT-GUIDE.md](../docs/DEVELOPMENT-GUIDE.md) - Convenciones y testing
+
+---
+
+## Documentación Adicional
+
+- **Setup inicial:** [docs/GETTING-STARTED.md](../docs/GETTING-STARTED.md)
+- **API Reference:** [docs/API-REFERENCE.md](../docs/API-REFERENCE.md)
+- **Personalización:** [docs/CUSTOMIZATION.md](../docs/CUSTOMIZATION.md)
+- **Índice completo:** [docs/README.md](../docs/README.md)
+
+---
+
+**Última actualización:** 2025-01-09

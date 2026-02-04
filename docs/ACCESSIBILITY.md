@@ -327,3 +327,55 @@ useEffect(() => {
 ## Prohibicion de emojis
 
 **NOTA:** Por decision de estilo y compatibilidad, los emojis estan prohibidos en todo el proyecto y documentacion. Utiliza solo texto plano y simbolos ASCII.
+
+---
+
+## Lecciones Aprendidas
+
+### Keyboard Accessibility en Gallery (2024-05-22)
+
+**Problema Detectado:**  
+Usar elementos `<div>` interactivos con solo `onClick` bloquea completamente el acceso a usuarios que navegan por teclado. En el lightbox de galería, esto impedía la navegación entre imágenes para usuarios sin mouse.
+
+**Solución Implementada:**  
+- Usar siempre `<button>` para elementos que trigger acciones
+- Si no es posible usar `<button>` semánticamente, agregar:
+  - `role="button"` para indicar que es interactivo
+  - `tabIndex={0}` para hacerlo alcanzable con teclado
+  - Handler `onKeyDown` para responder a Enter y Space
+
+**Código Correcto:**
+
+```tsx
+// ? CORRECTO: Usar button semántico
+<button
+  onClick={() => handleNext()}
+  aria-label="Imagen siguiente"
+>
+  <ChevronRight />
+</button>
+
+// ? ALTERNATIVA: Si div es necesario
+<div
+  role="button"
+  tabIndex={0}
+  onClick={() => handleNext()}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleNext();
+    }
+  }}
+  aria-label="Imagen siguiente"
+>
+  <ChevronRight />
+</div>
+```
+
+**Impacto:**  
+Esta mejora permitió que usuarios que navegan por teclado puedan:
+- Abrir el lightbox presionando Enter en las miniaturas
+- Navegar entre imágenes con las flechas del teclado
+- Cerrar el lightbox con Escape
+
+**Referencia:** [MDN - Making clickable elements accessible](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets)

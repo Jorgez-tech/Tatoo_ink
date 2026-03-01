@@ -1,0 +1,59 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=tcp:YOUR-SERVER.database.windows.net,1433;Initial Catalog=TattooStudioDb;Persist Security Info=False;User ID=YOUR-USERNAME;Password=YOUR-PASSWORD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  },
+  "EmailSettings": {
+    "Provider": "SendGrid",
+    "SendGridApiKey": "",
+    "SmtpServer": "",
+    "SmtpPort": 587,
+    "SmtpUsername": "",
+    "SmtpPassword": "",
+    "StudioEmail": "studio@yourdomain.com",
+    "StudioName": "Ink Studio"
+  },
+  "CorsSettings": {
+    "AllowedOrigins": [
+      "https://yourdomain.com",
+      "https://www.yourdomain.com"
+    ]
+  },
+  "RateLimiting": {
+    "MaxRequestsPerMinute": 10,
+    "EnableRateLimiting": true
+  },
+  "Security": {
+    "MaxPayloadSizeKB": 10
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Warning",
+      "Override": {
+        "Microsoft": "Error",
+        "System": "Error"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "path": "/var/log/tattoo-studio/log-.txt",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": 30
+        }
+      }
+    ],
+    "Enrich": ["FromLogContext"],
+    "Properties": {
+      "Application": "TattooStudioBackend",
+      "Environment": "Production"
+    }
+  }
+}

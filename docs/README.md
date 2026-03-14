@@ -55,6 +55,10 @@ Esta documentación está diseñada para que cualquier desarrollador pueda:
 | [**ACCESSIBILITY.md**](ACCESSIBILITY.md) | Cumplimiento WCAG AA, accesibilidad |
 | [**ATTRIBUTIONS.md**](ATTRIBUTIONS.md) | Créditos, licencias, atribuciones |
 
+### Especificacion Funcional
+
+- [**functional-spec/00-README.md**](functional-spec/00-README.md) - Paquete conceptual del producto unico (vision, alcance, casos de uso, permisos, datos, API y roadmap)
+
 ### READMEs Específicos
 
 - **[README.md](../README.md)** (raíz) - Visión general del proyecto

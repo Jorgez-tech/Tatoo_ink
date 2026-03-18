@@ -31,6 +31,8 @@
   },
   "Security": {
     "MaxPayloadSizeKB": 10,
+    "AccessTokenSecret": "replace-with-secure-secret-min-32-chars",
+    "AccessTokenMinutes": 15,
     "SeedDefaultAdmin": false,
     "DefaultAdminEmail": "",
     "DefaultAdminPasswordHash": ""

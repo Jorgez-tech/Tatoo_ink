@@ -31,6 +31,8 @@
   },
   "Security": {
     "MaxPayloadSizeKB": 10,
+    "AccessTokenSecret": "dev-secret-change-this-key-with-at-least-32-chars",
+    "AccessTokenMinutes": 15,
     "SeedDefaultAdmin": false,
     "DefaultAdminEmail": "",
     "DefaultAdminPasswordHash": ""

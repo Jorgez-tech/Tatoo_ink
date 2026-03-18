@@ -63,6 +63,15 @@ namespace backend.Utils
                 if (string.IsNullOrWhiteSpace(defaultAdminPasswordHash))
                     throw new Exception("Falta Security:DefaultAdminPasswordHash con SeedDefaultAdmin habilitado.");
             }
+
+            // Validar configuración de token de acceso
+            var accessTokenSecret = config["Security:AccessTokenSecret"];
+            if (string.IsNullOrWhiteSpace(accessTokenSecret) || accessTokenSecret.Length < 32)
+                throw new Exception("Falta Security:AccessTokenSecret o es demasiado corto (minimo 32 caracteres).");
+
+            var accessTokenMinutes = config.GetValue<int>("Security:AccessTokenMinutes", 0);
+            if (accessTokenMinutes <= 0)
+                throw new Exception("Security:AccessTokenMinutes debe ser mayor que 0.");
         }
     }
 }

@@ -16,7 +16,9 @@ namespace backend.Tests
                 {"EmailSettings:Provider", "sendgrid"},
                 {"EmailSettings:SendGridApiKey", "key"},
                 {"EmailSettings:StudioEmail", "studio@email.com"},
-                {"CorsSettings:AllowedOrigins:0", "http://localhost"}
+                {"CorsSettings:AllowedOrigins:0", "http://localhost"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "15"}
             };
             var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
             Assert.Throws<Exception>(() => ConfigurationValidator.Validate(config));
@@ -30,7 +32,9 @@ namespace backend.Tests
                 {"ConnectionStrings:DefaultConnection", "conn"},
                 {"EmailSettings:Provider", "sendgrid"},
                 {"EmailSettings:StudioEmail", "studio@email.com"},
-                {"CorsSettings:AllowedOrigins:0", "http://localhost"}
+                {"CorsSettings:AllowedOrigins:0", "http://localhost"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "15"}
             };
             var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
             Assert.Throws<Exception>(() => ConfigurationValidator.Validate(config));
@@ -44,7 +48,9 @@ namespace backend.Tests
                 {"ConnectionStrings:DefaultConnection", "conn"},
                 {"EmailSettings:Provider", "sendgrid"},
                 {"EmailSettings:SendGridApiKey", "key"},
-                {"EmailSettings:StudioEmail", "studio@email.com"}
+                {"EmailSettings:StudioEmail", "studio@email.com"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "15"}
             };
             var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
             Assert.Throws<Exception>(() => ConfigurationValidator.Validate(config));
@@ -59,7 +65,9 @@ namespace backend.Tests
                 {"EmailSettings:Provider", "sendgrid"},
                 {"EmailSettings:SendGridApiKey", "key"},
                 {"EmailSettings:StudioEmail", "studio@email.com"},
-                {"CorsSettings:AllowedOrigins:0", "http://localhost"}
+                {"CorsSettings:AllowedOrigins:0", "http://localhost"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "15"}
             };
             var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
             ConfigurationValidator.Validate(config);
@@ -75,7 +83,9 @@ namespace backend.Tests
                 {"EmailSettings:SendGridApiKey", "key"},
                 {"EmailSettings:StudioEmail", "studio@email.com"},
                 {"CorsSettings:AllowedOrigins:0", "http://localhost"},
-                {"Security:SeedDefaultAdmin", "true"}
+                {"Security:SeedDefaultAdmin", "true"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "15"}
             };
 
             var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
@@ -94,11 +104,48 @@ namespace backend.Tests
                 {"CorsSettings:AllowedOrigins:0", "http://localhost"},
                 {"Security:SeedDefaultAdmin", "true"},
                 {"Security:DefaultAdminEmail", "admin@inkstudio.cl"},
-                {"Security:DefaultAdminPasswordHash", "HASH_PLACEHOLDER"}
+                {"Security:DefaultAdminPasswordHash", "HASH_PLACEHOLDER"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "15"}
             };
 
             var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
             ConfigurationValidator.Validate(config);
+        }
+
+        [Fact]
+        public void Should_Throw_If_AccessTokenSecret_Missing()
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"ConnectionStrings:DefaultConnection", "conn"},
+                {"EmailSettings:Provider", "sendgrid"},
+                {"EmailSettings:SendGridApiKey", "key"},
+                {"EmailSettings:StudioEmail", "studio@email.com"},
+                {"CorsSettings:AllowedOrigins:0", "http://localhost"},
+                {"Security:AccessTokenMinutes", "15"}
+            };
+
+            var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
+            Assert.Throws<Exception>(() => ConfigurationValidator.Validate(config));
+        }
+
+        [Fact]
+        public void Should_Throw_If_AccessTokenMinutes_Invalid()
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"ConnectionStrings:DefaultConnection", "conn"},
+                {"EmailSettings:Provider", "sendgrid"},
+                {"EmailSettings:SendGridApiKey", "key"},
+                {"EmailSettings:StudioEmail", "studio@email.com"},
+                {"CorsSettings:AllowedOrigins:0", "http://localhost"},
+                {"Security:AccessTokenSecret", "12345678901234567890123456789012"},
+                {"Security:AccessTokenMinutes", "0"}
+            };
+
+            var config = new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
+            Assert.Throws<Exception>(() => ConfigurationValidator.Validate(config));
         }
     }
 }

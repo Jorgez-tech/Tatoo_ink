@@ -56,6 +56,9 @@ else
 // Registrar servicio de contacto
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IGalleryService, GalleryService>();
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Configuración de rate limiting
 builder.Services.AddMemoryCache();

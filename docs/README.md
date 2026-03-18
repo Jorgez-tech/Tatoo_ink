@@ -58,6 +58,7 @@ Esta documentación está diseñada para que cualquier desarrollador pueda:
 ### Especificacion Funcional
 
 - [**functional-spec/00-README.md**](functional-spec/00-README.md) - Paquete conceptual del producto unico (vision, alcance, casos de uso, permisos, datos, API y roadmap)
+- [**functional-spec/11-convenciones-transversales-csharp-js.md**](functional-spec/11-convenciones-transversales-csharp-js.md) - Convenciones de nombres, tipado y compatibilidad C# <-> JavaScript
 
 ### READMEs Específicos
 

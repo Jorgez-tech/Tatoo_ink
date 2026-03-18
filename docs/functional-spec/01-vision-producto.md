@@ -13,7 +13,7 @@ El producto nace para operar un negocio real (no template multiproposito). La pa
 ## Propuesta de valor
 
 - Experiencia publica clara para mostrar servicios y convertir visitas en solicitudes.
-- Backoffice simple para administrar mensajes y seguimiento.
+- Backoffice simple para administrar mensajes, portafolio (galeria) y datos del negocio.
 - Flujo confiable de captura, registro y gestion de contactos.
 
 ## Objetivos de negocio
@@ -21,6 +21,13 @@ El producto nace para operar un negocio real (no template multiproposito). La pa
 - Aumentar conversion de visitante a contacto.
 - Reducir tiempo de respuesta inicial.
 - Asegurar que ninguna solicitud valida se pierda.
+- Permitir autonomia operativa del tatuador sin depender de cambios manuales en codigo.
+
+## Alcance operativo minimo del producto
+
+- Gestion de contactos (seguimiento comercial).
+- Gestion de galeria (crear, editar y desactivar trabajos publicados).
+- Gestion de informacion del negocio (telefono, horario, direccion, redes y textos base).
 
 ## Principios del producto
 

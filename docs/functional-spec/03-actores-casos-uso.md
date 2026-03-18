@@ -19,8 +19,13 @@
 2. Listar solicitudes por estado.
 3. Ver detalle de una solicitud.
 4. Cambiar estado de solicitud.
-5. Agregar notas internas.
-6. Asignar responsable (admin).
+5. Asignar responsable (admin).
+6. Crear imagen de galeria (admin, artista).
+7. Editar metadata de imagen (admin, artista).
+8. Activar o desactivar imagen en galeria (admin, artista).
+9. Reordenar imagenes destacadas (admin).
+10. Editar perfil del negocio (admin).
+11. Crear usuario interno inicial (bootstrap admin).
 
 ## Flujo principal de conversion
 
@@ -29,3 +34,10 @@
 3. Sistema valida y registra la solicitud.
 4. Equipo interno revisa la solicitud.
 5. Equipo avanza estado segun contacto real con cliente.
+
+## Flujo principal de mantenimiento de portafolio
+
+1. Usuario interno inicia sesion.
+2. Carga una nueva imagen de trabajo terminado.
+3. Completa metadata minima (alt, categoria, estado activo).
+4. Publica y valida visualizacion en landing.

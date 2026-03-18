@@ -28,3 +28,20 @@
 - Endpoints publicos separados de internos.
 - Validacion de sesion en todas las rutas internas.
 - Verificacion de rol previa a cada operacion sensible.
+
+## Requisitos minimos de autenticacion
+
+- Debe existir endpoint de login para zona interna.
+- Debe existir mecanismo de bootstrap para crear el primer admin.
+- Las credenciales no se almacenan en texto plano.
+
+## Matriz operativa extendida
+
+| Accion | Visitante | Artista | Admin |
+|---|---|---|---|
+| Crear imagen de galeria | No | Si | Si |
+| Editar imagen de galeria | No | Si | Si |
+| Activar/desactivar imagen de galeria | No | Si | Si |
+| Reordenar galeria | No | No | Si |
+| Editar perfil del negocio | No | No | Si |
+| Crear primer usuario admin (bootstrap) | No | No | Si |

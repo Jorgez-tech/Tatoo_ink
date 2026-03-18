@@ -37,6 +37,7 @@ Este paquete define la vision funcional del producto para un solo negocio, sin i
 - `08-roadmap-fases.md`
 - `09-criterios-exito.md`
 - `10-acta-fase-0.md`
+- `11-convenciones-transversales-csharp-js.md`
 
 ## Regla operativa
 

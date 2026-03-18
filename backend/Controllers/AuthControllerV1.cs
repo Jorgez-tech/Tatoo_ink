@@ -34,5 +34,43 @@ namespace backend.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshRequestDto request)
+        {
+            var result = await _authService.RefreshAsync(request);
+            if (result == null)
+            {
+                return Unauthorized(new AuthErrorResponseDto
+                {
+                    Error = new AuthErrorDto
+                    {
+                        Code = "REFRESH_TOKEN_INVALID",
+                        Message = "Refresh token invalido o expirado"
+                    }
+                });
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] LogoutRequestDto request)
+        {
+            var revoked = await _authService.LogoutAsync(request);
+            if (!revoked)
+            {
+                return Unauthorized(new AuthErrorResponseDto
+                {
+                    Error = new AuthErrorDto
+                    {
+                        Code = "REFRESH_TOKEN_INVALID",
+                        Message = "Refresh token invalido o expirado"
+                    }
+                });
+            }
+
+            return NoContent();
+        }
     }
 }

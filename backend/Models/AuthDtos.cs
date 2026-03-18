@@ -39,4 +39,22 @@ namespace backend.Models
     {
         public AuthErrorDto Error { get; set; } = new();
     }
+
+    public class RefreshRequestDto
+    {
+        [Required]
+        public string RefreshToken { get; set; } = string.Empty;
+    }
+
+    public class RefreshResponseDto
+    {
+        public string Token { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
+    }
+
+    public class LogoutRequestDto
+    {
+        [Required]
+        public string RefreshToken { get; set; } = string.Empty;
+    }
 }

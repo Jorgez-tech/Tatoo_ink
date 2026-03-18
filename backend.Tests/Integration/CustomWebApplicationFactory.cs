@@ -53,6 +53,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 ["RateLimiting:GeneralRules:0:Period"] = "1m",
                 ["RateLimiting:GeneralRules:0:Limit"] = "1000",  // Limite alto para pruebas
                 ["Security:MaxPayloadSizeKB"] = "10",
+                ["Security:SeedDefaultAdmin"] = "false",
                 ["CorsSettings:AllowedOrigins:0"] = "http://localhost:5173"
             });
         });

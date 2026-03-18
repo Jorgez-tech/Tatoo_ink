@@ -1,10 +1,11 @@
 using backend.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace backend.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(ApplicationDbContext context)
+        public static void Initialize(ApplicationDbContext context, IConfiguration? configuration = null)
         {
             context.Database.EnsureCreated();
 
@@ -98,6 +99,53 @@ namespace backend.Data
                 }
             }
 
+            context.SaveChanges();
+
+            SeedBootstrapAdmin(context, configuration);
+        }
+
+        private static void SeedBootstrapAdmin(ApplicationDbContext context, IConfiguration? configuration)
+        {
+            var enabled = configuration?.GetValue<bool>("Security:SeedDefaultAdmin") ?? false;
+            if (!enabled)
+            {
+                return;
+            }
+
+            var email = configuration?["Security:DefaultAdminEmail"]?.Trim().ToLowerInvariant();
+            var passwordHash = configuration?["Security:DefaultAdminPasswordHash"]?.Trim();
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(passwordHash))
+            {
+                throw new InvalidOperationException(
+                    "SeedDefaultAdmin esta habilitado, pero faltan Security:DefaultAdminEmail o Security:DefaultAdminPasswordHash.");
+            }
+
+            var existingUser = context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
+            {
+                if (!string.Equals(existingUser.Role, "admin", StringComparison.OrdinalIgnoreCase) || !existingUser.IsActive)
+                {
+                    existingUser.Role = "admin";
+                    existingUser.IsActive = true;
+                    existingUser.UpdatedAt = DateTime.UtcNow;
+                    context.SaveChanges();
+                }
+
+                return;
+            }
+
+            var adminUser = new User
+            {
+                Email = email,
+                PasswordHash = passwordHash,
+                Role = "admin",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            context.Users.Add(adminUser);
             context.SaveChanges();
         }
     }

@@ -149,7 +149,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        DbInitializer.Initialize(context);
+        DbInitializer.Initialize(context, builder.Configuration);
     }
     catch (Exception ex)
     {

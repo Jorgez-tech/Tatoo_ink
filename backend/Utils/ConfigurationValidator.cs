@@ -49,6 +49,20 @@ namespace backend.Utils
             var cors = config.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
             if (cors == null || !cors.Any())
                 throw new Exception("Falta la configuracion de CORS (AllowedOrigins).");
+
+            // Validar bootstrap de admin cuando esta habilitado
+            var seedDefaultAdmin = config.GetValue<bool>("Security:SeedDefaultAdmin");
+            if (seedDefaultAdmin)
+            {
+                var defaultAdminEmail = config["Security:DefaultAdminEmail"];
+                var defaultAdminPasswordHash = config["Security:DefaultAdminPasswordHash"];
+
+                if (string.IsNullOrWhiteSpace(defaultAdminEmail))
+                    throw new Exception("Falta Security:DefaultAdminEmail con SeedDefaultAdmin habilitado.");
+
+                if (string.IsNullOrWhiteSpace(defaultAdminPasswordHash))
+                    throw new Exception("Falta Security:DefaultAdminPasswordHash con SeedDefaultAdmin habilitado.");
+            }
         }
     }
 }

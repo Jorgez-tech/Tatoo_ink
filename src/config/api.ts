@@ -13,8 +13,9 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localho
  * Endpoints de la API
  */
 export const API_ENDPOINTS = {
-  contact: '/api/contact',
-  gallery: '/api/gallery',
+  contact: '/api/v1/contact',
+  gallery: '/api/v1/gallery',
+  auth: '/api/v1/auth',
 } as const;
 
 /**

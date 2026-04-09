@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/contact")]
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;

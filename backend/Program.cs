@@ -56,6 +56,9 @@ else
 // Registrar servicio de contacto
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IGalleryService, GalleryService>();
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Configuración de rate limiting
 builder.Services.AddMemoryCache();
@@ -68,6 +71,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IHtmlSanitizer, HtmlSanitizer>();
+
+// Configurar Autenticación
+builder.Services.AddAuthentication("Custom")
+    .AddCookie("Custom"); // Necesario para que [Authorize] no falle si no hay esquema por defecto
 
 // Health checks: base de datos y configuracion critica
 builder.Services.AddHealthChecks()
@@ -134,6 +141,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+// Middleware de autorización personalizado para validar tokens JWT en cada solicitud
+app.UseMiddleware<AuthorizationMiddleware>();
+
 app.UseAuthorization();
 app.UseIpRateLimiting();
 
@@ -149,7 +159,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        DbInitializer.Initialize(context);
+        DbInitializer.Initialize(context, builder.Configuration);
     }
     catch (Exception ex)
     {

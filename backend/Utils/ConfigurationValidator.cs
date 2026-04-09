@@ -49,6 +49,30 @@ namespace backend.Utils
             var cors = config.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
             if (cors == null || !cors.Any())
                 throw new Exception("Falta la configuracion de CORS (AllowedOrigins).");
+
+            // Validar bootstrap de admin cuando esta habilitado
+            var seedDefaultAdmin = config.GetValue<bool>("Security:SeedDefaultAdmin");
+            if (seedDefaultAdmin)
+            {
+                var defaultAdminEmail = config["Security:DefaultAdminEmail"];
+                var defaultAdminPasswordHash = config["Security:DefaultAdminPasswordHash"];
+                var defaultAdminPassword = config["Security:DefaultAdminPassword"];
+
+                if (string.IsNullOrWhiteSpace(defaultAdminEmail))
+                    throw new Exception("Falta Security:DefaultAdminEmail con SeedDefaultAdmin habilitado.");
+
+                if (string.IsNullOrWhiteSpace(defaultAdminPasswordHash) && string.IsNullOrWhiteSpace(defaultAdminPassword))
+                    throw new Exception("Falta Security:DefaultAdminPassword o DefaultAdminPasswordHash con SeedDefaultAdmin habilitado.");
+            }
+
+            // Validar configuracion de token de acceso
+            var accessTokenSecret = config["Security:AccessTokenSecret"];
+            if (string.IsNullOrWhiteSpace(accessTokenSecret) || accessTokenSecret.Length < 32)
+                throw new Exception("Falta Security:AccessTokenSecret o es demasiado corto (minimo 32 caracteres).");
+
+            var accessTokenMinutes = config.GetValue<int>("Security:AccessTokenMinutes", 0);
+            if (accessTokenMinutes <= 0)
+                throw new Exception("Security:AccessTokenMinutes debe ser mayor que 0.");
         }
     }
 }

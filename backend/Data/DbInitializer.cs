@@ -1,10 +1,11 @@
 using backend.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace backend.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(ApplicationDbContext context)
+        public static void Initialize(ApplicationDbContext context, IConfiguration? configuration = null)
         {
             context.Database.EnsureCreated();
 
@@ -17,7 +18,8 @@ namespace backend.Data
                     Fallback = "/images/gallery/tattoo-art-1.jpg",
                     Alt = "Diseño de tatuaje artístico estilo tradicional",
                     Category = "Art",
-                    Photographer = "Unsplash"
+                    Photographer = "Unsplash",
+                    Description = "Trabajo artístico detallado con estilo neotradicional."
                 },
                 new GalleryImage
                 {
@@ -25,7 +27,8 @@ namespace backend.Data
                     Fallback = "/images/gallery/tattoo-art-2.jpg",
                     Alt = "Tatuaje en tinta negra con detalles finos",
                     Category = "Black Ink",
-                    Photographer = "Unsplash"
+                    Photographer = "Unsplash",
+                    Description = "Líneas finas y sombreado suave en tinta negra."
                 },
                 new GalleryImage
                 {
@@ -33,7 +36,8 @@ namespace backend.Data
                     Fallback = "/images/gallery/tattoo-art-3.jpg",
                     Alt = "Máquina de tatuar en primer plano",
                     Category = "Machine",
-                    Photographer = "Unsplash"
+                    Photographer = "Unsplash",
+                    Description = "Primer plano de máquina profesional de alta precisión."
                 },
                 new GalleryImage
                 {
@@ -41,7 +45,8 @@ namespace backend.Data
                     Fallback = "/images/gallery/tattoo-art-4.jpg",
                     Alt = "Tatuaje geométrico con líneas precisas",
                     Category = "Geometric",
-                    Photographer = "Unsplash"
+                    Photographer = "Unsplash",
+                    Description = "Composición geométrica simétrica con alto contraste."
                 },
                 new GalleryImage
                 {
@@ -49,7 +54,8 @@ namespace backend.Data
                     Fallback = "/images/gallery/tattoo-art-5.jpg",
                     Alt = "Interior del estudio de tatuajes profesional",
                     Category = "Studio",
-                    Photographer = "Unsplash"
+                    Photographer = "Unsplash",
+                    Description = "Nuestras instalaciones modernas y seguras."
                 },
                 new GalleryImage
                 {
@@ -57,7 +63,8 @@ namespace backend.Data
                     Fallback = "/images/gallery/tattoo-art-6.jpg",
                     Alt = "Artista tatuador trabajando en cliente",
                     Category = "Artist",
-                    Photographer = "Unsplash"
+                    Photographer = "Unsplash",
+                    Description = "Nuestros artistas brindan una experiencia personalizada y profesional."
                 }
             };
 
@@ -86,6 +93,8 @@ namespace backend.Data
                     existing.Alt = seed.Alt;
                     existing.Category = seed.Category;
                     existing.Photographer = seed.Photographer;
+                    existing.Description = seed.Description;
+                    existing.IsPublic = seed.IsPublic;
                 }
 
                 // Si hay menos imágenes en BD que en seed, agregar las faltantes
@@ -98,6 +107,53 @@ namespace backend.Data
                 }
             }
 
+            context.SaveChanges();
+
+            SeedBootstrapAdmin(context, configuration);
+        }
+
+        private static void SeedBootstrapAdmin(ApplicationDbContext context, IConfiguration? configuration)
+        {
+            var enabled = configuration?.GetValue<bool>("Security:SeedDefaultAdmin") ?? false;
+            if (!enabled)
+            {
+                return;
+            }
+
+            var email = configuration?["Security:DefaultAdminEmail"]?.Trim().ToLowerInvariant();
+            var passwordHash = configuration?["Security:DefaultAdminPasswordHash"]?.Trim();
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(passwordHash))
+            {
+                throw new InvalidOperationException(
+                    "SeedDefaultAdmin esta habilitado, pero faltan Security:DefaultAdminEmail o Security:DefaultAdminPasswordHash.");
+            }
+
+            var existingUser = context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser != null)
+            {
+                if (!string.Equals(existingUser.Role, "admin", StringComparison.OrdinalIgnoreCase) || !existingUser.IsActive)
+                {
+                    existingUser.Role = "admin";
+                    existingUser.IsActive = true;
+                    existingUser.UpdatedAt = DateTime.UtcNow;
+                    context.SaveChanges();
+                }
+
+                return;
+            }
+
+            var adminUser = new User
+            {
+                Email = email,
+                PasswordHash = passwordHash,
+                Role = "admin",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            context.Users.Add(adminUser);
             context.SaveChanges();
         }
     }

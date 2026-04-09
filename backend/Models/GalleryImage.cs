@@ -23,6 +23,11 @@ namespace backend.Models
         [MaxLength(100)]
         public string? Photographer { get; set; }
 
+        [MaxLength(1000)]
+        public string? Description { get; set; }
+
+        public bool IsPublic { get; set; } = true;
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

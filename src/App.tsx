@@ -1,29 +1,24 @@
-import { Navbar } from "./components/layout/Navbar";
-import { Hero } from "./components/sections/Hero";
-import { Services } from "./components/sections/Services";
-import { Gallery } from "./components/sections/Gallery";
-import { About } from "./components/sections/About";
-import { Contact } from "./components/sections/Contact";
-import { Footer } from "./components/layout/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/admin/Login";
+import Dashboard from "./pages/admin/Dashboard";
+import { ProtectedRoute } from "./components/shared/ProtectedRoute";
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <div id="servicios">
-        <Services />
-      </div>
-      <div id="galeria">
-        <Gallery />
-      </div>
-      <div id="nosotros">
-        <About />
-      </div>
-      <div id="contacto">
-        <Contact />
-      </div>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }

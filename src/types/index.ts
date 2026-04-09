@@ -56,11 +56,35 @@ export interface Stat {
  * @property height Alto de la imagen (opcional, mejora CLS).
  */
 export interface GalleryImage {
+  id?: number;
   src: string;
   fallback?: string;
   alt: string;
+  category?: string;
+  photographer?: string;
+  description?: string;
+  isPublic?: boolean;
   width?: number;
   height?: number;
+  createdAt?: string;
+}
+
+/**
+ * Datos de usuario autenticado.
+ */
+export interface User {
+  id: number;
+  email: string;
+  role: string;
+}
+
+/**
+ * Respuesta de login del backend.
+ */
+export interface LoginResponse {
+  token: string;
+  refreshToken: string;
+  user: User;
 }
 
 /**

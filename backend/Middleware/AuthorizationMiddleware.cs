@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Text.Json;
 using backend.Models;
@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace backend.Middleware
 {
@@ -44,7 +44,6 @@ namespace backend.Middleware
                         {
                             context.Items["User"] = user;
 
-                            // Establecer ClaimsPrincipal para que [Authorize] funcione
                             var claims = new[]
                             {
                                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
@@ -83,8 +82,28 @@ namespace backend.Middleware
                 {
                     return null;
                 }
-                var unsigned = $"{parts[0]}.{parts[1]}";
-                var signature = parts[2];
+
+                var secret = _configuration["Security:AccessTokenSecret"];
+                if (string.IsNullOrWhiteSpace(secret))
+                {
+                    _logger.LogError("Security:AccessTokenSecret no configurado");
+                    return null;
+                }
+
+                var unsigned = "{parts[0]}.{parts[1]}";
+                var providedSignature = parts[2];
+
+                using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+                {
+                    var expectedSignature = Base64UrlEncode(hmac.ComputeHash(Encoding.UTF8.GetBytes(unsigned)));
+                    
+                    if (!providedSignature.Equals(expectedSignature, StringComparison.Ordinal))
+                    {
+                        _logger.LogWarning("Firma JWT inválida");
+                        return null;
+                    }
+                }
+
                 var payloadJson = Base64UrlDecode(parts[1]);
                 using (var doc = JsonDocument.Parse(payloadJson))
                 {
@@ -123,6 +142,12 @@ namespace backend.Middleware
             }
 
             return Encoding.UTF8.GetString(Convert.FromBase64String(value));
+        }
+
+        private static string Base64UrlEncode(byte[] input)
+        {
+            var output = Convert.ToBase64String(input);
+            return output.Replace('+', '-').Replace('/', '_').TrimEnd('=');
         }
     }
 }

@@ -29,17 +29,6 @@ namespace backend.Models
         public LoginUserDto User { get; set; } = new();
     }
 
-    public class AuthErrorDto
-    {
-        public string Code { get; set; } = string.Empty;
-        public string Message { get; set; } = string.Empty;
-    }
-
-    public class AuthErrorResponseDto
-    {
-        public AuthErrorDto Error { get; set; } = new();
-    }
-
     public class RefreshRequestDto
     {
         [Required]

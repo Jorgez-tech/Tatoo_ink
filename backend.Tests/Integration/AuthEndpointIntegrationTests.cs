@@ -82,9 +82,9 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
 
-        var body = await response.Content.ReadFromJsonAsync<AuthErrorResponseDto>();
+        var body = await response.Content.ReadFromJsonAsync<Microsoft.AspNetCore.Mvc.ProblemDetails>();
         Assert.NotNull(body);
-        Assert.Equal("INVALID_CREDENTIALS", body!.Error.Code);
+        Assert.Equal(401, body!.Status);
     }
 
     [Fact]

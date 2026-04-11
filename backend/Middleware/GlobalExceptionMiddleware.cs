@@ -35,12 +35,12 @@ namespace backend.Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Excepción global capturada no controlada. Path: {Path}", context.Request.Path);
-                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, "Ocurrió un error interno. Por favor, intenta nuevamente.", null);
+                _logger.LogError(ex, "Excepciï¿½n global capturada no controlada. Path: {Path}", context.Request.Path);
+                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, "Ocurriï¿½ un error interno. Por favor, intenta nuevamente.", null);
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, int statusCode, string title, object errors)
+        private static Task HandleExceptionAsync(HttpContext context, int statusCode, string title, object? errors)
         {
             context.Response.ContentType = "application/problem+json";
             context.Response.StatusCode = statusCode;

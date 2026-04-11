@@ -50,7 +50,7 @@ public class ContactEndpointIntegrationTests : IClassFixture<CustomWebApplicatio
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/contact", request);
+        var response = await client.PostAsJsonAsync("/api/v1/contact", request);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -94,7 +94,7 @@ public class ContactEndpointIntegrationTests : IClassFixture<CustomWebApplicatio
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/contact", request);
+        var response = await client.PostAsJsonAsync("/api/v1/contact", request);
 
         // Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -126,7 +126,7 @@ public class ContactEndpointIntegrationTests : IClassFixture<CustomWebApplicatio
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/contact", request);
+        var response = await client.PostAsJsonAsync("/api/v1/contact", request);
 
         // Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -157,7 +157,7 @@ public class ContactEndpointIntegrationTests : IClassFixture<CustomWebApplicatio
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
         // Act
-        var response = await client.PostAsync("/api/contact", content);
+        var response = await client.PostAsync("/api/v1/contact", content);
 
         // Assert
         // El middleware debería rechazar el payload antes de llegar al controlador
@@ -193,7 +193,7 @@ public class ContactEndpointIntegrationTests : IClassFixture<CustomWebApplicatio
         var responses = new List<HttpStatusCode>();
         for (int i = 0; i < 15; i++)
         {
-            var response = await client.PostAsJsonAsync("/api/contact", request);
+            var response = await client.PostAsJsonAsync("/api/v1/contact", request);
             responses.Add(response.StatusCode);
         }
 
@@ -229,7 +229,7 @@ public class ContactEndpointIntegrationTests : IClassFixture<CustomWebApplicatio
         clientWithOrigin.DefaultRequestHeaders.Add("Origin", "http://malicious-site.com");
 
         // Act
-        var response = await clientWithOrigin.PostAsJsonAsync("/api/contact", request);
+        var response = await clientWithOrigin.PostAsJsonAsync("/api/v1/contact", request);
 
         // Assert
         // Si CORS está configurado correctamente, no debe haber header Access-Control-Allow-Origin

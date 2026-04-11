@@ -3,6 +3,7 @@ using backend.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Xunit;
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

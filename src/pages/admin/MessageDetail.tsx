@@ -44,8 +44,8 @@ export default function MessageDetail() {
     <div className="min-h-screen bg-zinc-950 text-white p-6">
       <header className="max-w-2xl mx-auto flex justify-between items-center mb-10">
         <h1 className="text-3xl font-bold tracking-tight">Detalle de Mensaje</h1>
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           onClick={() => navigate("/admin/messages")}
           className="border-zinc-800 text-zinc-400 hover:text-white"
         >
@@ -88,7 +88,7 @@ export default function MessageDetail() {
               <div className="bg-zinc-950 p-4 rounded-md border border-zinc-800/50 text-zinc-300 leading-relaxed whitespace-pre-wrap">
                 {msg.message}
               </div>
-              
+
               <div className="mt-8 pt-6 border-t border-zinc-800 flex justify-between items-center">
                 <div className="text-sm text-zinc-500">
                   Notificación por correo: {msg.emailSent ? <span className="text-green-400">Enviada al artista</span> : <span className="text-yellow-500">No enviada</span>}

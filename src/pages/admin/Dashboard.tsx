@@ -56,13 +56,13 @@ export default function Dashboard() {
         <h1 className="text-3xl font-bold tracking-tight">Panel de Administración</h1>
         <div className="flex gap-4">
           <Button
-            variant="outline"            onClick={() => navigate("/admin/messages")}
+            variant="outline" onClick={() => navigate("/admin/messages")}
             className="border-zinc-800 text-zinc-400 hover:text-white"
           >
             Ver Mensajes
           </Button>
-          <Button 
-            variant="outline"             onClick={() => navigate("/")}
+          <Button
+            variant="outline" onClick={() => navigate("/")}
             className="border-zinc-800 text-zinc-400 hover:text-white"
           >
             Ver Sitio

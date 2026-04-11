@@ -37,3 +37,4 @@ Se ha estandarizado el enfoque tï¿½cnico para iniciar el desarrollo del Backend 
 - [x] Tarea 6: Construir UI Administrativa del Dashboard de la Galería (FE-05 a FE-08) y soportar cookies HttpOnly de JWT.
 - [x] Tarea 7: Validación de Backwards-Compatibility y Fixes Menores de Frontend.
 - [x] Tarea 8: Implementar UI de Bandeja de Mensajes de Contacto (FE-12, FE-13)
+- [x] Tarea 9: Agregar pruebas de flujo para login y CRUD en panel (FE-14)

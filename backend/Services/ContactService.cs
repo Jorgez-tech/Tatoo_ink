@@ -92,5 +92,40 @@ namespace backend.Services
                 };
             }
         }
+        public async Task<IEnumerable<ContactMessageDto>> GetAllMessagesAsync()
+        {
+            return await _context.ContactMessages
+                .OrderByDescending(m => m.CreatedAt)
+                .Select(m => new ContactMessageDto
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    Email = m.Email,
+                    Phone = m.Phone,
+                    Message = m.Message,
+                    WantsAppointment = m.WantsAppointment,
+                    CreatedAt = m.CreatedAt,
+                    EmailSent = m.EmailSent
+                })
+                .ToListAsync();
+        }
+
+        public async Task<ContactMessageDto?> GetMessageByIdAsync(int id)
+        {
+            var m = await _context.ContactMessages.FindAsync(id);
+            if (m == null) return null;
+
+            return new ContactMessageDto
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Email = m.Email,
+                Phone = m.Phone,
+                Message = m.Message,
+                WantsAppointment = m.WantsAppointment,
+                CreatedAt = m.CreatedAt,
+                EmailSent = m.EmailSent
+            };
+        }
     }
 }

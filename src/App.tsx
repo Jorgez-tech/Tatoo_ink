@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import GalleryForm from "./pages/admin/GalleryForm";
+import Messages from "./pages/admin/Messages";
+import MessageDetail from "./pages/admin/MessageDetail";
 import { ProtectedRoute } from "./components/shared/ProtectedRoute";
 
 export default function App() {
@@ -32,6 +34,22 @@ export default function App() {
           element={
             <ProtectedRoute>
               <GalleryForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/messages"
+          element={
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/messages/:id"
+          element={
+            <ProtectedRoute>
+              <MessageDetail />
             </ProtectedRoute>
           }
         />

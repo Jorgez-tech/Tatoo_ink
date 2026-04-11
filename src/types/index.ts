@@ -162,3 +162,14 @@ export interface ContactResponse {
   errors?: Record<string, string[]>;
 }
 
+
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  wantsAppointment: boolean;
+  createdAt: string;
+  emailSent: boolean;
+}

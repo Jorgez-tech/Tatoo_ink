@@ -33,3 +33,7 @@ Se ha estandarizado el enfoque tï¿½cnico para iniciar el desarrollo del Backend 
 - [x] Tarea 3: Generar el DTO y Controlador de Login con generaciï¿½n estructural de Token JWT (BE-03).
 - [x] Tarea 4: Implementar CRUD de GalerÃ­a y protecciÃ³n de endpoints (BE-05 a BE-11).
 - [x] Tarea 5: Configurar rutas del Panel Admin en Frontend e implementar Login (FE-01 a FE-04).
+
+- [x] Tarea 6: Construir UI Administrativa del Dashboard de la Galería (FE-05 a FE-08) y soportar cookies HttpOnly de JWT.
+- [x] Tarea 7: Validación de Backwards-Compatibility y Fixes Menores de Frontend.
+- [x] Tarea 8: Implementar UI de Bandeja de Mensajes de Contacto (FE-12, FE-13)

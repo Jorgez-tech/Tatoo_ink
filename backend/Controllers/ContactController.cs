@@ -1,5 +1,6 @@
 using backend.Models;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -71,6 +72,27 @@ namespace backend.Controllers
                     Message = "Ocurrió un error al procesar tu mensaje. Por favor, intenta nuevamente."
                 });
             }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(typeof(IEnumerable<ContactMessageDto>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAll()
+        {
+            var messages = await _contactService.GetAllMessagesAsync();
+            return Ok(messages);
+        }
+
+        [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(typeof(ContactMessageDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var message = await _contactService.GetMessageByIdAsync(id);
+            if (message == null) return NotFound();
+            
+            return Ok(message);
         }
     }
 }

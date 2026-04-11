@@ -1,42 +1,48 @@
-import { API_BASE_URL, API_ENDPOINTS } from "@/config/api";
+import { API_BASE_URL } from "@/config/api";
 import type { LoginResponse, User } from "@/types";
 
 const TOKEN_KEY = "ink_studio_token";
-const REFRESH_TOKEN_KEY = "ink_studio_refresh_token";
 const USER_KEY = "ink_studio_user";
 
 export const authService = {
   login: async (email: string, password: string): Promise<LoginResponse> => {
-    const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.auth}/login`, {
+    const response = await fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.title || "Error al iniciar sesión");
+      throw new Error(errorData.title || "Error al iniciar sesi�n");
     }
 
     const data: LoginResponse = await response.json();
     localStorage.setItem(TOKEN_KEY, data.token);
-    localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
     localStorage.setItem(USER_KEY, JSON.stringify(data.user));
 
     return data;
   },
 
-  logout: () => {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
+  logout: async () => {
+    try {
+      await fetch(`${API_BASE_URL}/logout`, {
+        method: "POST",
+        credentials: "include"
+      });
+    } catch {
+      // Ignoramos el error, borramos token de todas formas
+    } finally {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+      window.location.href = "/admin/login";
+    }
   },
 
   getToken: () => localStorage.getItem(TOKEN_KEY),
-
-  getRefreshToken: () => localStorage.getItem(REFRESH_TOKEN_KEY),
 
   getUser: (): User | null => {
     const userStr = localStorage.getItem(USER_KEY);
@@ -48,5 +54,23 @@ export const authService = {
   getAuthHeader: (): Record<string, string> => {
     const token = localStorage.getItem(TOKEN_KEY);
     return token ? { Authorization: `Bearer ${token}` } : {};
+  },
+
+  refresh: async (): Promise<boolean> => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/refresh`, {
+        method: "POST",
+        credentials: "include"
+      });
+
+      if (!response.ok) {
+        return false;
+      }
+      const data = await response.json();
+      localStorage.setItem(TOKEN_KEY, data.token);
+      return true;
+    } catch {
+      return false;
+    }
   }
 };

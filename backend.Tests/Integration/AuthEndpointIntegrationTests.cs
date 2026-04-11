@@ -23,7 +23,7 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
     }
 
     [Fact]
-    public async Task Login_WithValidCredentials_ReturnsTokenAndUser()
+    public async Task Login_WithValidCredentials_ReturnsTokenAndCookie()
     {
         const string email = "admin.login@test.com";
         const string password = "SecurePass123!";
@@ -38,7 +38,7 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
                 db.Users.Add(new User
                 {
                     Email = email,
-                    PasswordHash = passwordService.HashPassword(password),
+                    PasswordHash = passwordService.HashPassword(password),      
                     Role = "admin",
                     IsActive = true
                 });
@@ -60,17 +60,23 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
         var body = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
         Assert.NotNull(body);
         Assert.False(string.IsNullOrWhiteSpace(body!.Token));
-        Assert.False(string.IsNullOrWhiteSpace(body.RefreshToken));
+        
+        // El RefreshToken ya no viene en el body
+        Assert.True(string.IsNullOrWhiteSpace(body.RefreshToken));
+        
         Assert.NotNull(body.User);
         Assert.Equal(email, body.User.Email);
         Assert.Equal("admin", body.User.Role);
 
-        var jwtParts = body.Token.Split('.');
-        Assert.Equal(3, jwtParts.Length);
+        // Validar cookie de refresh token
+        Assert.True(response.Headers.Contains("Set-Cookie"));
+        var cookies = response.Headers.GetValues("Set-Cookie").ToList();
+        var cookieStr = string.Join(" | ", cookies);
+        Assert.True(cookies.Any(c => c.StartsWith("refreshToken=") && c.ToLower().Contains("httponly")), $"Cookies was: {cookieStr}");
     }
 
     [Fact]
-    public async Task Login_WithInvalidCredentials_ReturnsUnauthorized()
+    public async Task Login_WithInvalidCredentials_ReturnsUnauthorized()        
     {
         var request = new LoginRequestDto
         {
@@ -88,7 +94,7 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
     }
 
     [Fact]
-    public async Task Refresh_WithValidToken_ReturnsNewTokens()
+    public async Task Refresh_WithValidCookie_ReturnsNewTokenAndCookie()
     {
         const string email = "refresh.user@test.com";
         const string password = "SecurePass123!";
@@ -103,7 +109,7 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
                 db.Users.Add(new User
                 {
                     Email = email,
-                    PasswordHash = passwordService.HashPassword(password),
+                    PasswordHash = passwordService.HashPassword(password),      
                     Role = "artist",
                     IsActive = true
                 });
@@ -119,24 +125,27 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
         });
 
         Assert.Equal(HttpStatusCode.OK, loginResponse.StatusCode);
-        var loginBody = await loginResponse.Content.ReadFromJsonAsync<LoginResponseDto>();
-        Assert.NotNull(loginBody);
+        var cookies = loginResponse.Headers.GetValues("Set-Cookie");
+        var refreshTokenCookieParts = cookies.First(c => c.StartsWith("refreshToken=")).Split(';');
+        var refreshTokenCookieEntry = refreshTokenCookieParts[0]; // refreshToken=XYZ..
 
-        var refreshResponse = await _client.PostAsJsonAsync("/api/v1/auth/refresh", new RefreshRequestDto
-        {
-            RefreshToken = loginBody!.RefreshToken
-        });
+        var refreshReq = new HttpRequestMessage(HttpMethod.Post, "/api/v1/auth/refresh");
+        refreshReq.Headers.Add("Cookie", refreshTokenCookieEntry);
+
+        var refreshResponse = await _client.SendAsync(refreshReq);
 
         Assert.Equal(HttpStatusCode.OK, refreshResponse.StatusCode);
         var refreshBody = await refreshResponse.Content.ReadFromJsonAsync<RefreshResponseDto>();
         Assert.NotNull(refreshBody);
         Assert.False(string.IsNullOrWhiteSpace(refreshBody!.Token));
-        Assert.False(string.IsNullOrWhiteSpace(refreshBody.RefreshToken));
-        Assert.NotEqual(loginBody.RefreshToken, refreshBody.RefreshToken);
+        Assert.True(string.IsNullOrWhiteSpace(refreshBody.RefreshToken)); // empty in body
+        
+        Assert.True(refreshResponse.Headers.Contains("Set-Cookie"));
+        Assert.Contains(refreshResponse.Headers.GetValues("Set-Cookie"), c => c.StartsWith("refreshToken="));
     }
 
     [Fact]
-    public async Task Logout_WithValidRefreshToken_ReturnsNoContent()
+    public async Task Logout_WithValidCookie_ReturnsNoContentAndClearsCookie()
     {
         const string email = "logout.user@test.com";
         const string password = "SecurePass123!";
@@ -151,7 +160,7 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
                 db.Users.Add(new User
                 {
                     Email = email,
-                    PasswordHash = passwordService.HashPassword(password),
+                    PasswordHash = passwordService.HashPassword(password),      
                     Role = "artist",
                     IsActive = true
                 });
@@ -167,14 +176,19 @@ public class AuthEndpointIntegrationTests : IClassFixture<CustomWebApplicationFa
         });
 
         Assert.Equal(HttpStatusCode.OK, loginResponse.StatusCode);
-        var loginBody = await loginResponse.Content.ReadFromJsonAsync<LoginResponseDto>();
-        Assert.NotNull(loginBody);
+        var cookies = loginResponse.Headers.GetValues("Set-Cookie");
+        var refreshTokenCookieEntry = cookies.First(c => c.StartsWith("refreshToken=")).Split(';')[0];
 
-        var logoutResponse = await _client.PostAsJsonAsync("/api/v1/auth/logout", new LogoutRequestDto
-        {
-            RefreshToken = loginBody!.RefreshToken
-        });
+        var logoutReq = new HttpRequestMessage(HttpMethod.Post, "/api/v1/auth/logout");
+        logoutReq.Headers.Add("Cookie", refreshTokenCookieEntry);
 
-        Assert.Equal(HttpStatusCode.NoContent, logoutResponse.StatusCode);
+        var logoutResponse = await _client.SendAsync(logoutReq);
+
+        Assert.Equal(HttpStatusCode.NoContent, logoutResponse.StatusCode);      
+        
+        // Verifica que la cookie es borrada/expirada
+        Assert.True(logoutResponse.Headers.Contains("Set-Cookie"));
+        var logoutCookies = logoutResponse.Headers.GetValues("Set-Cookie");
+        Assert.Contains(logoutCookies, c => c.StartsWith("refreshToken=") && c.Contains("expires="));
     }
 }

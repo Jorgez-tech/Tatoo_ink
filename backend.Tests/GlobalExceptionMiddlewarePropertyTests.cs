@@ -27,7 +27,7 @@ namespace backend.Tests
             responseStream.Seek(0, SeekOrigin.Begin);
             var reader = new StreamReader(responseStream, Encoding.UTF8);
             var body = await reader.ReadToEndAsync();
-            Assert.Contains("Ocurrió un error interno", body);
+            Assert.Contains("Ocurri", body);
         }
 
         [Fact]

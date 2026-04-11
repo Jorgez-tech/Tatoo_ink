@@ -42,7 +42,7 @@ namespace backend.Middleware
 
         private static Task HandleExceptionAsync(HttpContext context, int statusCode, string title, object? errors)
         {
-            context.Response.ContentType = "application/problem+json";
+            context.Response.ContentType = "application/problem+json; charset=utf-8";
             context.Response.StatusCode = statusCode;
 
             var problemDetails = new ProblemDetails

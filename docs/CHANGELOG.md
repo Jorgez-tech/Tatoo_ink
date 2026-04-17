@@ -10,8 +10,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### En Progreso
 
-- Consolidaci髇 de documentaci髇 (reducci髇 de 19 a 8 archivos core)
-- Estandarizaci髇 de READMEs (ra韟, backend, frontend)
+- Consolidaci贸n de documentaci贸n (reducci贸n de 19 a 8 archivos core)
+- Estandarizaci贸n de READMEs (ra铆z, backend, frontend)
 
 ---
 
@@ -20,58 +20,58 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Estado General
 
 - **Progreso:** 95% completado
-- **Backend:** Producci髇 ready
-- **Frontend:** Producci髇 ready
-- **Documentaci髇:** 100% completa (pre-consolidaci髇)
+- **Backend:** Producci贸n ready
+- **Frontend:** Producci贸n ready
+- **Documentaci贸n:** 100% completa (pre-consolidaci贸n)
 - **Tests:** 55/55 pasando (100%)
 
 ### Added
 
 - **Backend:**
   - Endpoint `POST /api/contact` completamente funcional
-  - Endpoint `GET /api/gallery` retornando im醙enes desde BD
-  - Base de datos SQLite con DbInitializer para seed autom醫ico
-  - 55 tests (unitarios, property-based, integraci髇) - 100% pasando
+  - Endpoint `GET /api/gallery` retornando im谩genes desde BD
+  - Base de datos SQLite con DbInitializer para seed autom谩tico
+  - 55 tests (unitarios, property-based, integraci贸n) - 100% pasando
   - Rate limiting (10 req/min por IP)
-  - Sanitizaci髇 de entrada HTML
+  - Sanitizaci贸n de entrada HTML
   - Logging estructurado con Serilog
   - Health checks en `/health`
   - Dual email service (SendGrid + SMTP)
-  - Validaci髇 con FluentValidation
+  - Validaci贸n con FluentValidation
   - Middleware de manejo global de excepciones
-  - Colecci髇 de Postman con 6 requests
+  - Colecci贸n de Postman con 6 requests
 
 - **Frontend:**
-  - Gallery din醡ica consumiendo API (`/api/gallery`)
+  - Gallery din谩mica consumiendo API (`/api/gallery`)
   - Formulario de contacto end-to-end funcional
-  - Im醙enes locales optimizadas (WebP + JPG fallback)
+  - Im谩genes locales optimizadas (WebP + JPG fallback)
   - Lazy loading con placeholders
-  - Lightbox interactivo con navegaci髇 por teclado
+  - Lightbox interactivo con navegaci贸n por teclado
   - Scroll spy en Navbar
   - Smooth scroll global
   - Responsive design mobile-first
   - Bundle optimizado: 75.14 KB gzipped
   - SEO completo (Open Graph, Twitter Cards)
-  - PWA manifest b醩ico
+  - PWA manifest b谩sico
 
-- **Documentaci髇:**
-  - 19 documentos t閏nicos completos
-  - 3 READMEs espec韋icos (ra韟, backend, frontend)
+- **Documentaci锟絥:**
+  - 19 documentos t茅cnicos completos
+  - 3 READMEs espec铆ficos (ra铆z, backend, frontend)
   - JSDoc completo en 7 componentes principales
-  - Gu韆s de deployment, customization, performance, accessibility
+  - Gu铆as de deployment, customization, performance, accessibility
 
 ### Changed
 
 - Backend: DbInitializer actualizado para UPDATE de registros existentes
 - Frontend: Gallery usa URLs locales (`/images/gallery/...`)
-- Im醙enes: Migradas de Unsplash a assets locales (reducci髇 de 66% en peso)
-- Configuraci髇: CORS actualizado para incluir puertos de desarrollo
+- Im谩genes: Migradas de Unsplash a assets locales (reducci贸n de 66% en peso)
+- Configuraci贸n: CORS actualizado para incluir puertos de desarrollo
 
 ### Fixed
 
-- Gallery: Navegaci髇 siguiente/anterior en lightbox funcionando
+- Gallery: Navegaci贸n siguiente/anterior en lightbox funcionando
 - Contact: Persistencia en BD antes de enviar email (no se pierde data)
-- CORS: Configurado correctamente para desarrollo y producci髇
+- CORS: Configurado correctamente para desarrollo y producci贸n
 - Rate limiting: Funcionando sin bloquear tests
 
 ### Performance
@@ -82,7 +82,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Best Practices: 92
   - SEO: 100
 - **Bundle size:** 75.14 KB gzipped (optimizado)
-- **Im醙enes:** WebP con fallback JPG (65% reducci髇 de peso)
+- **Im谩genes:** WebP con fallback JPG (65% reducci贸n de peso)
 - **LCP:** Mejorado con eager loading y fetchPriority
 
 ---
@@ -91,9 +91,9 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Estado
 
-- **Fase 3 (Documentaci髇):** 100% completada
+- **Fase 3 (Documentaci贸n):** 100% completada
 - JSDoc en todos los componentes principales (7/7)
-- Documentaci髇 t閏nica exhaustiva
+- Documentaci贸n t茅cnica exhaustiva
 
 ### Added
 
@@ -106,22 +106,22 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - About.tsx
   - Contact.tsx
 
-- **Documentaci髇 t閏nica:**
+- **Documentaci贸n t茅cnica:**
   - ARCHITECTURE.md - Arquitectura completa
-  - API-REST.md - Especificaci髇 de endpoints
+  - API-REST.md - Especificaci贸n de endpoints
   - SECURITY.md - Controles de seguridad
   - QA.md - Testing y calidad
-  - DEPLOYMENT.md - Gu韆s de despliegue
-  - CUSTOMIZATION.md - Personalizaci髇
+  - DEPLOYMENT.md - Gu铆as de despliegue
+  - CUSTOMIZATION.md - Personalizaci贸n
   - PERFORMANCE.md - Optimizaciones
   - ACCESSIBILITY.md - WCAG AA
   - STRUCTURE.md - Estructura detallada
-  - BACKEND-QUICKSTART.md - Inicio r醦ido backend
-  - BACKEND-INTEGRATION.md - Integraci髇 frontend-backend
+  - BACKEND-QUICKSTART.md - Inicio r谩pido backend
+  - BACKEND-INTEGRATION.md - Integraci贸n frontend-backend
   - CHECKPOINT-FINAL.md - Checklist de release
   - GITHUB-INSTRUCTIONS.md - Workflow de Git
   - GUIDELINES.md - Lineamientos del proyecto
-  - IMAGE-OPTIMIZATION-GUIDE.md - Gu韆 de optimizaci髇
+  - IMAGE-OPTIMIZATION-GUIDE.md - Gu铆a de optimizaci贸n
 
 ---
 
@@ -129,31 +129,31 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Estado
 
-- **Fase 2 (Optimizaci髇):** 100% completada
+- **Fase 2 (Optimizaci贸n):** 100% completada
 - Performance mejorado significativamente
 - Responsive optimizado en todos los componentes
 
 ### Added
 
-- Scroll spy en Navbar con detecci髇 activa
-- Lazy loading de im醙enes con placeholders animados
-- Lightbox de Gallery con navegaci髇 por teclado (flechas, ESC)
+- Scroll spy en Navbar con detecci贸n activa
+- Lazy loading de im谩genes con placeholders animados
+- Lightbox de Gallery con navegaci贸n por teclado (flechas, ESC)
 - Smooth scroll global
 - Mejoras de performance (LCP, CLS, eager loading, fetchPriority)
-- SEO b醩ico (meta tags OG/Twitter/description)
-- PWA manifest m韓imo
+- SEO b谩sico (meta tags OG/Twitter/description)
+- PWA manifest m铆nimo
 
 ### Changed
 
 - Navbar: Efecto backdrop blur en scroll
-- Gallery: Navegaci髇 circular (primera ? 鷏tima)
+- Gallery: Navegaci贸n circular (primera ? 煤ltima)
 - Hero: fetchPriority="high" en imagen principal
 - About: Lazy loading optimizado
 
 ### Performance
 
 - LCP reducido con eager loading en Hero
-- CLS mejorado con dimensiones expl韈itas en im醙enes
+- CLS mejorado con dimensiones expl铆citas en im谩genes
 - Bundle optimizado con tree-shaking
 
 ---
@@ -162,7 +162,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Estado
 
-- **Fase 1 (Auditor韆 y limpieza):** 100% completada
+- **Fase 1 (Auditor铆a y limpieza):** 100% completada
 - Estructura reorganizada y optimizada
 
 ### Added
@@ -171,7 +171,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `components/layout/` - Navbar, Footer
   - `components/sections/` - Hero, Services, Gallery, About, Contact
   - `components/ui/` - 6 componentes activos
-  - `config/` - Configuraci髇 centralizada (6 archivos)
+  - `config/` - Configuraci贸n centralizada (6 archivos)
   - `hooks/` - Custom hooks (2)
   - `lib/` - Utilidades
   - `types/` - Tipos TypeScript
@@ -180,11 +180,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **40 componentes UI no utilizados** de shadcn/ui
 - Dependencias innecesarias
-- C骴igo duplicado
+- C贸digo duplicado
 
 ### Changed
 
-- Configuraci髇 centralizada en `config/`
+- Configuraci贸n centralizada en `config/`
 - Importaciones con path alias `@/`
 - Tipos unificados en `types/index.ts`
 
@@ -194,15 +194,15 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Estado
 
-- **Fase 0 (Configuraci髇):** 100% completada
+- **Fase 0 (Configuraci贸n):** 100% completada
 - Proyecto base funcional
 
 ### Added
 
 - **Backend ASP.NET Core .NET 8:**
-  - API REST b醩ica
+  - API REST b谩sica
   - Entity Framework Core + SQLite
-  - Validaci髇 con FluentValidation
+  - Validaci贸n con FluentValidation
   - Email service (SendGrid + SMTP)
   - Rate limiting
   - Logging con Serilog
@@ -222,25 +222,25 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Contact form
   - Footer
 
-- **Configuraci髇:**
+- **Configuraci贸n:**
   - ESLint configurado
   - TypeScript strict mode
-  - Git conventional commits en espa駉l
-  - Estructura base de documentaci髇
+  - Git conventional commits en espa帽ol
+  - Estructura base de documentaci贸n
 
 ---
 
 ## Convenciones de Commits
 
-El proyecto sigue [Conventional Commits](https://www.conventionalcommits.org/) en espa駉l:
+El proyecto sigue [Conventional Commits](https://www.conventionalcommits.org/) en espa帽ol:
 
 ### Tipos
 
 - `feat` - Nueva funcionalidad
-- `fix` - Correcci髇 de bug
-- `refactor` - Refactorizaci髇 sin cambio funcional
+- `fix` - Correcci贸n de bug
+- `refactor` - Refactorizaci贸n sin cambio funcional
 - `style` - Cambios de estilos visuales
-- `docs` - Documentaci髇
+- `docs` - Documentaci贸n
 - `chore` - Mantenimiento
 - `perf` - Performance
 - `test` - Tests
@@ -248,17 +248,17 @@ El proyecto sigue [Conventional Commits](https://www.conventionalcommits.org/) e
 ### Ejemplos
 
 ```bash
-feat(navbar): a馻de detecci髇 de scroll
+feat(navbar): a帽ade detecci贸n de scroll
 fix(hero): corrige fetchPriority en imagen
 docs: actualiza STATUS con progreso de Fase 2
-refactor(gallery): mejora navegaci髇 del lightbox
+refactor(gallery): mejora navegaci贸n del lightbox
 perf(img): implementa lazy loading
 chore: elimina componentes UI no utilizados
 ```
 
 ---
 
-## Stack Tecnol骻ico
+## Stack Tecnol锟絞ico
 
 ### Frontend
 
@@ -291,18 +291,18 @@ chore: elimina componentes UI no utilizados
 
 - Git (control de versiones)
 - Postman (testing API)
-- Squoosh / Sharp (optimizaci髇 de im醙enes)
+- Squoosh / Sharp (optimizaci贸n de im谩genes)
 - Lighthouse (performance audit)
 
 ---
 
-## M閠ricas de Calidad
+## M锟絫ricas de Calidad
 
 ### Tests
 
 - **Total:** 55 tests
 - **Unitarios:** 49
-- **Integraci髇:** 6
+- **Integraci贸n:** 6
 - **Estado:** 100% pasando
 
 ### Performance (Lighthouse)
@@ -315,14 +315,14 @@ chore: elimina componentes UI no utilizados
 ### Bundle
 
 - **Size:** 75.14 KB gzipped
-- **Optimizaci髇:** Tree-shaking, code splitting
-- **Im醙enes:** WebP + JPG fallback (65% reducci髇)
+- **Optimizaci贸n:** Tree-shaking, code splitting
+- **Im谩genes:** WebP + JPG fallback (65% reducci贸n)
 
 ### Code Quality
 
 - **TypeScript:** Strict mode, 0 errores
 - **ESLint:** 0 errores (103 warnings en .md - formateo)
-- **Documentaci髇:** 100% de componentes con JSDoc
+- **Documentaci贸n:** 100% de componentes con JSDoc
 
 ---
 
@@ -330,26 +330,26 @@ chore: elimina componentes UI no utilizados
 
 ### Corto Plazo
 
-- [ ] Consolidar documentaci髇 (19 ? 8 archivos)
+- [ ] Consolidar documentaci贸n (19 ? 8 archivos)
 - [ ] Performance audit completo
-- [ ] Pruebas de integraci髇 frontend-backend
+- [ ] Pruebas de integraci贸n frontend-backend
 - [ ] Limpieza de dependencias no utilizadas
 - [ ] Accesibilidad audit (WCAG AA)
 
 ### Mediano Plazo
 
 - [ ] Dashboard admin para mensajes de contacto
-- [ ] CRUD de galer韆 desde admin
+- [ ] CRUD de galer铆a desde admin
 - [ ] CI/CD pipeline (GitHub Actions)
 - [ ] Docker containerization
 - [ ] Deploy en staging
 
 ### Largo Plazo
 
-- [ ] Sistema de autenticaci髇
-- [ ] Multi-tenant para m鷏tiples clientes
+- [ ] Sistema de autenticaci贸n
+- [ ] Multi-tenant para m煤ltiples clientes
 - [ ] CMS headless (Strapi/Contentful)
-- [ ] Internacionalizaci髇 (i18n)
+- [ ] Internacionalizaci贸n (i18n)
 - [ ] Analytics avanzado
 
 ---
@@ -367,5 +367,5 @@ Proyecto privado - Ink Studio
 
 ---
 
-**趌tima actualizaci髇:** 2025-01-09  
-**Pr髕ima revisi髇:** Al completar consolidaci髇 de documentaci髇
+**煤ltima actualizaci贸n:** 2025-01-09  
+**Pr贸xima revisi贸n:** Al completar consolidaci贸n de documentaci贸n

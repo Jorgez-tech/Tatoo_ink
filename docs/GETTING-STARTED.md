@@ -1,17 +1,17 @@
 # Getting Started - Ink Studio
 
-Guía de inicio rápido para configurar y ejecutar el proyecto Ink Studio (frontend + backend) en entorno de desarrollo local.
+GuÃ­a de inicio rÃ¡pido para configurar y ejecutar el proyecto Ink Studio (frontend + backend) en entorno de desarrollo local.
 
 ## Tabla de Contenidos
 
 1. [Requisitos Previos](#requisitos-previos)
-2. [Instalación](#instalacion)
-3. [Configuración Backend](#configuracion-backend)
-4. [Configuración Frontend](#configuracion-frontend)
-5. [Ejecución del Proyecto](#ejecucion-del-proyecto)
-6. [Verificación](#verificacion)
+2. [InstalaciÃ³n](#instalacion)
+3. [ConfiguraciÃ³n Backend](#configuracion-backend)
+4. [ConfiguraciÃ³n Frontend](#configuracion-frontend)
+5. [EjecuciÃ³n del Proyecto](#ejecucion-del-proyecto)
+6. [VerificaciÃ³n](#verificacion)
 7. [Troubleshooting](#troubleshooting)
-8. [Próximos Pasos](#proximos-pasos)
+8. [PrÃ³ximos Pasos](#proximos-pasos)
 
 ---
 
@@ -19,10 +19,10 @@ Guía de inicio rápido para configurar y ejecutar el proyecto Ink Studio (fronten
 
 ### Software necesario
 
-- **.NET SDK 8.0** - [Descargar aquí](https://dotnet.microsoft.com/download/dotnet/8.0)
-- **Node.js 18+** y npm - [Descargar aquí](https://nodejs.org/)
-- **Git** - [Descargar aquí](https://git-scm.com/)
-- **Editor de código** - Visual Studio Code (recomendado) o Visual Studio 2022
+- **.NET SDK 8.0** - [Descargar aquÃ­](https://dotnet.microsoft.com/download/dotnet/8.0)
+- **Node.js 18+** y npm - [Descargar aquÃ­](https://nodejs.org/)
+- **Git** - [Descargar aquÃ­](https://git-scm.com/)
+- **Editor de cï¿½digo** - Visual Studio Code (recomendado) o Visual Studio 2022
 
 ### Herramientas opcionales
 
@@ -31,7 +31,7 @@ Guía de inicio rápido para configurar y ejecutar el proyecto Ink Studio (fronten
 
 ---
 
-## Instalación
+## InstalaciÃ³n
 
 ### 1. Clonar el repositorio
 
@@ -46,7 +46,7 @@ cd Tatoo_ink
 npm install
 ```
 
-### 3. Verificar instalación del backend
+### 3. Verificar instalaciï¿½n del backend
 
 ```bash
 cd backend
@@ -57,23 +57,23 @@ cd ..
 
 ---
 
-## Configuración Backend
+## ConfiguraciÃ³n Backend
 
 ### 1. Base de datos
 
-El proyecto usa **SQLite** por defecto. La base de datos se crea automáticamente en el primer arranque con datos de ejemplo.
+El proyecto usa **SQLite** por defecto. La base de datos se crea automï¿½ticamente en el primer arranque con datos de ejemplo.
 
-**Ubicación:** `backend/inkstudio.db`
+**UbicaciÃ³n:** `backend/inkstudio.db`
 
-### 2. Configuración de appsettings
+### 2. ConfiguraciÃ³n de appsettings
 
-El backend incluye archivos de configuración base:
+El backend incluye archivos de configuraciÃ³n base:
 
-- `appsettings.json` - Configuración común
+- `appsettings.json` - ConfiguraciÃ³n comÃºn
 - `appsettings.Development.json` - Desarrollo local
-- `appsettings.Production.json` - Producción
+- `appsettings.Production.json` - ProducciÃ³n
 
-**Configuración mínima para desarrollo:**
+**ConfiguraciÃ³n mÃ­nima para desarrollo:**
 
 ```json
 {
@@ -101,9 +101,9 @@ El backend incluye archivos de configuración base:
 
 **Nota:** En desarrollo, los emails se guardan en la carpeta `./emails` en lugar de enviarse realmente.
 
-### 3. Configuración de email (opcional para producción)
+### 3. Configuraciï¿½n de email (opcional para producciï¿½n)
 
-**Opción A: SendGrid (recomendado para producción)**
+**OpciÃ³n A: SendGrid (recomendado para producciï¿½n)**
 
 1. Crear cuenta en [SendGrid](https://sendgrid.com/)
 2. Obtener API Key desde Settings ? API Keys
@@ -120,11 +120,11 @@ El backend incluye archivos de configuración base:
 }
 ```
 
-**Opción B: SMTP (Gmail u otro proveedor)**
+**OpciÃ³n B: SMTP (Gmail u otro proveedor)**
 
-1. Habilitar autenticación de 2 factores en Gmail
-2. Generar contraseña de aplicación
-3. Actualizar configuración:
+1. Habilitar autenticaciÃ³n de 2 factores en Gmail
+2. Generar contraseÃ±a de aplicaciÃ³n
+3. Actualizar configuraciÃ³n:
 
 ```json
 {
@@ -142,7 +142,7 @@ El backend incluye archivos de configuración base:
 
 ### 4. Variables de entorno (alternativa a appsettings)
 
-Para producción, se recomienda usar variables de entorno:
+Para producciÃ³n, se recomienda usar variables de entorno:
 
 ```bash
 # Linux/macOS
@@ -156,19 +156,19 @@ $env:EmailSettings__SendGridApiKey="tu-api-key"
 
 ---
 
-## Configuración Frontend
+## Configuraciï¿½n Frontend
 
 ### 1. Variables de entorno
 
-Crear archivo `.env` en la raíz del proyecto:
+Crear archivo `.env` en la raÃ­z del proyecto:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5177
 ```
 
-**Nota:** El puerto `5177` es el puerto por defecto del backend en modo HTTP. Ajustar según tu configuración.
+**Nota:** El puerto `5177` es el puerto por defecto del backend en modo HTTP. Ajustar segÃºn tu configuraciÃ³n.
 
-### 2. Verificar configuración
+### 2. Verificar configuraciÃ³n
 
 El archivo `src/config/api.ts` usa la variable de entorno:
 
@@ -178,24 +178,24 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localho
 
 ---
 
-## Ejecución del Proyecto
+## Ejecuciï¿½n del Proyecto
 
 ### 1. Iniciar el Backend
 
-**Opción A: Desde la raíz del proyecto**
+**OpciÃ³n A: Desde la raÃ­z del proyecto**
 
 ```bash
 cd backend
 dotnet run --launch-profile http
 ```
 
-**Opción B: Con Visual Studio**
+**OpciÃ³n B: Con Visual Studio**
 
 1. Abrir `backend/backend.csproj`
 2. Seleccionar perfil "http"
 3. Presionar F5 o "Run"
 
-El backend estará disponible en:
+El backend estarÃ¡ disponible en:
 - API: `http://localhost:5177`
 - Swagger UI: `http://localhost:5177/swagger`
 
@@ -216,7 +216,7 @@ info: Microsoft.Hosting.Lifetime[0]
 npm run dev
 ```
 
-El frontend estará disponible en: `http://localhost:5173`
+El frontend estarÃ³ disponible en: `http://localhost:5173`
 
 **Salida esperada:**
 
@@ -229,7 +229,7 @@ VITE v7.1.12  ready in 523 ms
 
 ---
 
-## Verificación
+## VerificaciÃ³n
 
 ### 1. Health Check del Backend
 
@@ -245,29 +245,29 @@ curl http://localhost:5177/health
 
 Abrir en el navegador: `http://localhost:5177/swagger`
 
-Deberías ver la documentación interactiva de la API con 2 endpoints:
+DeberÃ­as ver la documentaciÃ³n interactiva de la API con 2 endpoints:
 - `POST /api/contact`
 - `GET /api/gallery`
 
-### 3. Frontend - Página principal
+### 3. Frontend - PÃ¡gina principal
 
 Abrir en el navegador: `http://localhost:5173`
 
-Deberías ver la landing page con:
+DeberÃ­as ver la landing page con:
 - Hero section con imagen de fondo
 - Servicios
-- Galería de imágenes
-- Sección Acerca de
+- GalerÃ­a de imÃ¡genes
+- SecciÃ³n Acerca de
 - Formulario de contacto
 - Footer
 
-### 4. Probar integración Frontend-Backend
+### 4. Probar integraciÃ³n Frontend-Backend
 
-**Probar galería:**
+**Probar galerÃ­a:**
 
 1. Abrir `http://localhost:5173`
-2. Scroll hasta la sección "Galería"
-3. Verificar que se cargan 6 imágenes
+2. Scroll hasta la secciÃ³n "GalerÃ­a"
+3. Verificar que se cargan 6 imÃ¡genes
 
 **Consola del navegador esperada:**
 ```
@@ -279,14 +279,14 @@ Gallery images loaded: 6
 
 1. Scroll hasta "Contacto"
 2. Llenar el formulario:
-   - Nombre: "Juan Pérez"
+   - Nombre: "Juan PÃ©rez"
    - Email: "juan@test.com"
-   - Teléfono: "+56912345678"
+   - TelÃ©fono: "+56912345678"
    - Mensaje: "Prueba de contacto"
 3. Click en "Enviar mensaje"
 
 **Resultado esperado:**
-- Mensaje de éxito en el frontend
+- Mensaje de Ã©xito en el frontend
 - Log en el backend: `Mensaje de contacto guardado exitosamente. ID: 1`
 - Email guardado en `backend/emails/` (desarrollo)
 
@@ -309,14 +309,14 @@ SELECT * FROM GalleryImages;
 
 ### Error: "No se puede conectar al backend"
 
-**Síntomas:** 
+**SÃ­ntomas:** 
 - Error de red en el formulario de contacto
-- Galería no carga imágenes
+- GalerÃ­a no carga imÃ¡genes
 - Console error: `Failed to fetch`
 
 **Soluciones:**
 
-1. Verificar que el backend esté corriendo:
+1. Verificar que el backend estÃ¡ corriendo:
    ```bash
    curl http://localhost:5177/health
    ```
@@ -337,13 +337,13 @@ SELECT * FROM GalleryImages;
 
 ### Error: "CORS policy blocked"
 
-**Síntomas:**
+**SÃ­ntomas:**
 ```
 Access to fetch at 'http://localhost:5177/api/contact' from origin 'http://localhost:5173' 
 has been blocked by CORS policy
 ```
 
-**Solución:**
+**SoluciÃ³n:**
 
 1. Abrir `backend/appsettings.Development.json`
 2. Agregar el origen del frontend a `AllowedOrigins`:
@@ -359,49 +359,49 @@ has been blocked by CORS policy
 
 ### Error: "Database locked"
 
-**Síntomas:**
+**SÃ­ntomas:**
 ```
 Microsoft.Data.Sqlite.SqliteException: database is locked
 ```
 
-**Solución:**
+**SoluciÃ³n:**
 
 1. Cerrar todas las conexiones a la base de datos
-2. Eliminar archivo `inkstudio.db` y reiniciar el backend (se recreará automáticamente)
-3. Si persiste, verificar que no haya múltiples instancias del backend corriendo
+2. Eliminar archivo `inkstudio.db` y reiniciar el backend (se recrearÃ¡ automÃ¡ticamente)
+3. Si persiste, verificar que no haya mÃºltiples instancias del backend corriendo
 
 ### Error: "Email failed to send"
 
-**Síntomas:**
+**SÃ­ntomas:**
 - Log: `No se pudo enviar el email para el contacto {ContactId}, pero el mensaje fue guardado`
 
-**Solución:**
+**SoluciÃ³n:**
 
 1. En desarrollo, verificar que exista la carpeta `backend/emails/`
-2. Para producción, verificar credenciales en `EmailSettings`
+2. Para producciÃ³n, verificar credenciales en `EmailSettings`
 3. El mensaje se guarda en BD aunque falle el email
 
 ### Error: "Rate limit exceeded"
 
-**Síntomas:**
+**SÃ­ntomas:**
 ```json
 {
   "error": "Rate limit exceeded. Please try again later."
 }
 ```
 
-**Solución:**
+**SoluciÃ³n:**
 - Esperar 1 minuto antes de reintentar
 - En desarrollo, ajustar `RateLimiting:MaxRequestsPerMinute` en appsettings
 
 ### Puerto 5177 ya en uso
 
-**Síntomas:**
+**SÃ­ntomas:**
 ```
 Unable to bind to http://localhost:5177 on the IPv4 loopback interface: 'Address already in use'.
 ```
 
-**Solución:**
+**SoluciÃ³n:**
 
 1. Cambiar puerto en `backend/Properties/launchSettings.json`:
    ```json
@@ -415,14 +415,14 @@ Unable to bind to http://localhost:5177 on the IPv4 loopback interface: 'Address
 
 ---
 
-## Próximos Pasos
+## PrÃ³ximos Pasos
 
 ### Desarrollo
 
-- **Personalización:** Ver [CUSTOMIZATION.md](CUSTOMIZATION.md)
+- **PersonalizaciÃ³n:** Ver [CUSTOMIZATION.md](CUSTOMIZATION.md)
 - **Arquitectura:** Ver [ARCHITECTURE.md](ARCHITECTURE.md)
 - **API Reference:** Ver [API-REFERENCE.md](API-REFERENCE.md)
-- **Guía de desarrollo:** Ver [DEVELOPMENT-GUIDE.md](DEVELOPMENT-GUIDE.md)
+- **GuÃ­a de desarrollo:** Ver [DEVELOPMENT-GUIDE.md](DEVELOPMENT-GUIDE.md)
 
 ### Testing
 
@@ -437,11 +437,11 @@ npm run lint
 
 ### Despliegue
 
-Ver [DEPLOYMENT.md](DEPLOYMENT.md) para guías de despliegue en:
+Ver [DEPLOYMENT.md](DEPLOYMENT.md) para guÃ­as de despliegue en:
 - Vercel/Netlify (frontend)
 - Azure/AWS/Railway (backend)
 
-### Personalización
+### PersonalizaciÃ³n
 
 Ver [CUSTOMIZATION.md](CUSTOMIZATION.md) para:
 - Cambiar colores y estilos
@@ -453,23 +453,23 @@ Ver [CUSTOMIZATION.md](CUSTOMIZATION.md) para:
 
 ## Recursos Adicionales
 
-### Documentación del proyecto
+### DocumentaciÃ³n del proyecto
 
-- [Índice de documentación](README.md)
+- [Ã­ndice de documentaciÃ³n](README.md)
 - [Arquitectura completa](ARCHITECTURE.md)
 - [Referencia API REST](API-REFERENCE.md)
-- [Guía de personalización](CUSTOMIZATION.md)
+- [GuÃ­a de personalizaciÃ³n](CUSTOMIZATION.md)
 
-### Herramientas útiles
+### Herramientas Ãºtiles
 
 - **Swagger UI:** `http://localhost:5177/swagger`
 - **SQLite Browser:** [DB Browser for SQLite](https://sqlitebrowser.org/)
-- **Postman:** [Colección de API](../backend/Postman/)
+- **Postman:** [ColecciÃ³n de API](../backend/Postman/)
 
 ### Soporte
 
 - Issues del proyecto: GitHub Issues
-- Documentación técnica: [docs/](.)
+- DocumentaciÃ³n tÃ©cnica: [docs/](.)
 - Backend README: [backend/README.md](../backend/README.md)
 - Frontend README: [src/README.md](../src/README.md)
 
@@ -477,4 +477,4 @@ Ver [CUSTOMIZATION.md](CUSTOMIZATION.md) para:
 
 **Tiempo estimado de setup:** 15-30 minutos
 
-**Última actualización:** 2025-01-09
+**Ãºltima actualizaciÃ³n:** 2025-01-09

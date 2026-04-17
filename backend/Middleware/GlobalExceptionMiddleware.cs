@@ -35,8 +35,8 @@ namespace backend.Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Excepción global capturada no controlada. Path: {Path}", context.Request.Path);
-                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, "Ocurrió un error interno. Por favor, intenta nuevamente.", null);
+                _logger.LogError(ex, "ExcepciÃ³n global capturada no controlada. Path: {Path}", context.Request.Path);
+                await HandleExceptionAsync(context, StatusCodes.Status500InternalServerError, "OcurriÃ³ un error interno. Por favor, intenta nuevamente.", null);
             }
         }
 

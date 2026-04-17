@@ -1,45 +1,45 @@
 # Development Guide - Ink Studio
 
-Guía completa de desarrollo, testing, calidad y convenciones del proyecto Ink Studio.
+GuÃ­a completa de desarrollo, testing, calidad y convenciones del proyecto Ink Studio.
 
 ## Tabla de Contenidos
 
-1. [Filosofía y Objetivos](#filosofia-y-objetivos)
-2. [Convenciones de Código](#convenciones-de-codigo)
+1. [FilosofÃ­a y Objetivos](#filosofia-y-objetivos)
+2. [Convenciones de CÃ³digo](#convenciones-de-codigo)
 3. [Estructura del Proyecto](#estructura-del-proyecto)
 4. [Testing y QA](#testing-y-qa)
 5. [Git Workflow](#git-workflow)
-6. [Optimización de Imágenes](#optimizacion-de-imagenes)
+6. [OptimizaciÃ³n de Imï¿½genes](#optimizacion-de-imagenes)
 7. [Code Review](#code-review)
 8. [Troubleshooting](#troubleshooting)
 
 ---
 
-## Filosofía y Objetivos
+## Filosofï¿½a y Objetivos
 
 ### Principios del Proyecto
 
-- **Simplicidad sobre complejidad:** Código entendible por cualquier desarrollador
-- **Reutilización:** Template base adaptable para múltiples clientes
+- **Simplicidad sobre complejidad:** CÃ³digo entendible por cualquier desarrollador
+- **ReutilizaciÃ³n:** Template base adaptable para mÃºltiples clientes
 - **Type-safety:** TypeScript estricto sin `any`
-- **Configuración centralizada:** Separar datos de presentación
-- **Convencionalidad:** Estructura predecible y commits en español
+- **ConfiguraciÃ³n centralizada:** Separar datos de presentaciÃ³n
+- **Convencionalidad:** Estructura predecible y commits en espaÃ±ol
 
 ### Objetivos de Calidad
 
 - **Frontend:** Build sin errores TypeScript, bundle < 80KB gzipped
-- **Backend:** 100% tests pasando, sin errores de compilación
-- **Documentación:** Actualizada y sincronizada con el código
-- **Performance:** Lighthouse > 90 en todas las métricas
+- **Backend:** 100% tests pasando, sin errores de compilaciÃ³n
+- **DocumentaciÃ³n:** Actualizada y sincronizada con el cÃ³digo
+- **Performance:** Lighthouse > 90 en todas las mÃ©tricas
 - **Accesibilidad:** WCAG AA compliance
 
 ---
 
-## Convenciones de Código
+## Convenciones de Cï¿½digo
 
 ### TypeScript
 
-**Tipos explícitos:**
+**Tipos explÃ­citos:**
 
 ```typescript
 // ? CORRECTO
@@ -90,13 +90,13 @@ export function ComponentName() { }
 export default function ComponentName() { }
 ```
 
-**Documentación con JSDoc:**
+**Documentaciï¿½n con JSDoc:**
 
 ```typescript
 /**
- * Componente Hero - Sección principal de la landing page
+ * Componente Hero - SecciÃ³n principal de la landing page
  * 
- * Muestra título, descripción y CTA con imagen de fondo.
+ * Muestra tÃ­tulo, descripciÃ³n y CTA con imagen de fondo.
  * Incluye optimizaciones de LCP (eager loading, fetchPriority).
  * 
  * @component
@@ -144,11 +144,11 @@ className="text-base        /* Base = mobile */
 **Convenciones de nombres:**
 
 ```csharp
-// PascalCase para clases, métodos, propiedades
+// PascalCase para clases, mÃ©todos, propiedades
 public class ContactService { }
 public async Task<ServiceResult> ProcessMessageAsync() { }
 
-// camelCase para parámetros y variables locales
+// camelCase para parÃ¡metros y variables locales
 public void Method(string userName) {
     var localVariable = "value";
 }
@@ -157,7 +157,7 @@ public void Method(string userName) {
 **Async/Await:**
 
 ```csharp
-// ? Siempre usar await con operaciones asíncronas
+// ? Siempre usar await con operaciones asÃ­ncronas
 var result = await _service.ProcessAsync();
 
 // ? NO bloquear con .Result o .Wait()
@@ -189,7 +189,7 @@ public class ContactService : IContactService
 
 ### Frontend (src/)
 
-**Estructura fija (NO modificar sin coordinación):**
+**Estructura fija (NO modificar sin coordinaciÃ³n):**
 
 ```
 src/
@@ -197,8 +197,8 @@ src/
 ?   ??? layout/           # Navbar, Footer
 ?   ??? sections/         # Hero, Services, Gallery, About, Contact
 ?   ??? ui/               # Solo 6 componentes activos
-?   ??? shared/           # (vacía, reservada)
-??? config/               # Configuración centralizada
+?   ??? shared/           # (vacÃ­a, reservada)
+??? config/               # ConfiguraciÃ³n centralizada
 ?   ??? business-info.ts
 ?   ??? content.ts
 ?   ??? images.ts
@@ -212,7 +212,7 @@ src/
 ??? styles/               # Estilos globales
 ```
 
-### Componentes UI Activos (únicos permitidos)
+### Componentes UI Activos (ï¿½nicos permitidos)
 
 1. `button.tsx`
 2. `card.tsx`
@@ -221,7 +221,7 @@ src/
 5. `label.tsx`
 6. `ImageWithFallback.tsx`
 
-**Importante:** No agregar componentes de shadcn/ui sin coordinación. Los 40+ restantes fueron eliminados en Fase 1.
+**Importante:** No agregar componentes de shadcn/ui sin coordinaciÃ³n. Los 40+ restantes fueron eliminados en Fase 1.
 
 ### Importaciones
 
@@ -238,7 +238,7 @@ import { Button } from "../../../components/ui/button";
 import { heroContent } from "../../config/content";
 ```
 
-### Configuración Centralizada
+### Configuraciï¿½n Centralizada
 
 **Todos los datos van en `config/`:**
 
@@ -246,7 +246,7 @@ import { heroContent } from "../../config/content";
 // ? INCORRECTO - hardcodear en componente
 <h1>Ink Studio</h1>
 
-// ? CORRECTO - usar configuración
+// ? CORRECTO - usar configuraciÃ³n
 import { businessInfo } from "@/config/business-info";
 <h1>{businessInfo.name}</h1>
 ```
@@ -256,20 +256,20 @@ import { businessInfo } from "@/config/business-info";
 ```
 backend/
 ??? Controllers/          # Endpoints REST API
-??? Services/             # Lógica de negocio
+??? Services/             # LÃ³gica de negocio
 ??? Models/               # Entidades y DTOs
 ??? Data/                 # DbContext y migraciones
 ??? Validators/           # FluentValidation
 ??? Middleware/           # Middleware personalizado
 ??? Utils/                # Utilidades
-??? Program.cs            # Configuración
+??? Program.cs            # ConfiguraciÃ³n
 ```
 
 ---
 
 ## Testing y QA
 
-### Backend - Tests Unitarios y de Integración
+### Backend - Tests Unitarios y de Integraciï¿½n
 
 **Ejecutar todos los tests:**
 
@@ -293,9 +293,9 @@ dotnet test backend.Tests/backend.Tests.csproj --collect:"XPlat Code Coverage"
 
 **Tipos de pruebas:**
 
-- Unitarias: Validación, sanitización, servicios
+- Unitarias: ValidaciÃ³n, sanitizaciÃ³n, servicios
 - Property-based: FsCheck para casos edge
-- Integración: WebApplicationFactory para E2E
+- IntegraciÃ³n: WebApplicationFactory para E2E
 
 ### Frontend - Build y Lint
 
@@ -305,7 +305,7 @@ dotnet test backend.Tests/backend.Tests.csproj --collect:"XPlat Code Coverage"
 npm run build
 ```
 
-**Debe pasar sin errores TypeScript ni de compilación.**
+**Debe pasar sin errores TypeScript ni de compilaciÃ³n.**
 
 **Lint:**
 
@@ -319,44 +319,44 @@ npm run lint
 
 **Smoke test checklist:**
 
-- [ ] Navegación responsive (mobile/tablet/desktop)
+- [ ] NavegaciÃ³n responsive (mobile/tablet/desktop)
 - [ ] Scroll spy en Navbar
-- [ ] Lazy loading de imágenes
+- [ ] Lazy loading de imÃ¡genes
 - [ ] Lightbox de Gallery con teclado (flechas, ESC)
 - [ ] Formulario de contacto:
-  - [ ] Validación de campos
+  - [ ] ValidaciÃ³n de campos
   - [ ] Estado de loading
-  - [ ] Mensaje de éxito
+  - [ ] Mensaje de Ã©xito
   - [ ] Manejo de errores
-- [ ] Smooth scroll al hacer clic en navegación
+- [ ] Smooth scroll al hacer clic en navegaciÃ³n
 
 ### Checklist Pre-Release
 
-Antes de publicar a producción:
+Antes de publicar a producciÃ³n:
 
 - [ ] `npm run build` (sin errores)
 - [ ] `npm run lint` (sin errores)
 - [ ] `dotnet build backend/backend.csproj` (sin errores)
 - [ ] `dotnet test backend.Tests/backend.Tests.csproj` (55/55 ok)
 - [ ] Variables de entorno configuradas
-- [ ] CORS configurado para dominio de producción
+- [ ] CORS configurado para dominio de producciÃ³n
 - [ ] SSL/TLS configurado
 - [ ] Rate limiting validado
-- [ ] Lighthouse audit > 90 en todas las métricas
-- [ ] Documentación actualizada
+- [ ] Lighthouse audit > 90 en todas las mï¿½tricas
+- [ ] DocumentaciÃ³n actualizada
 
 ---
 
 ## Git Workflow
 
-### Inicio de Sesión
+### Inicio de SesiÃ³n
 
 1. Pull del remoto:
    ```bash
    git pull origin master
    ```
 
-2. Leer documentación:
+2. Leer documentaciÃ³n:
    - `docs/NEXT-STEPS.md` - Estado actual
    - Documento de la fase/tarea actual
 
@@ -372,7 +372,7 @@ Antes de publicar a producción:
 
 ```bash
 git add .
-git commit -m "feat(navbar): añade detección de scroll"
+git commit -m "feat(navbar): aÃ±ade detecciÃ³n de scroll"
 ```
 
 **Verificar calidad antes de cada commit:**
@@ -385,22 +385,22 @@ npm run build
 dotnet test backend.Tests/backend.Tests.csproj
 ```
 
-### Conventional Commits (Español)
+### Conventional Commits (EspaÃ±ol)
 
 **Formato:**
 ```
-<tipo>(<alcance>): <descripción>
+<tipo>(<alcance>): <descripciÃ³n>
 
 [cuerpo opcional]
 ```
 
-**Tipos válidos:**
+**Tipos vÃ¡lidos:**
 
 - `feat` - Nueva funcionalidad
-- `fix` - Corrección de bug  
-- `refactor` - Refactorización sin cambio funcional
+- `fix` - CorrecciÃ³n de bug  
+- `refactor` - RefactorizaciÃ³n sin cambio funcional
 - `style` - Cambios de estilos visuales
-- `docs` - Documentación
+- `docs` - DocumentaciÃ³n
 - `chore` - Mantenimiento
 - `perf` - Performance
 - `test` - Tests
@@ -414,26 +414,26 @@ dotnet test backend.Tests/backend.Tests.csproj
 **Ejemplos:**
 
 ```bash
-feat(navbar): añade detección de scroll
+feat(navbar): aÃ±ade detecciÃ³n de scroll
 fix(hero): corrige fetchPriority en imagen
 docs: actualiza STATUS con progreso de Fase 2
-refactor(gallery): mejora navegación del lightbox
+refactor(gallery): mejora navegaciÃ³n del lightbox
 perf(img): implementa lazy loading
 chore: elimina componentes UI no utilizados
 ```
 
-### Final de Sesión
+### Final de SesiÃ³n
 
 1. **Actualizar `docs/NEXT-STEPS.md`:**
    - Tareas completadas con checkmarks
    - Progreso actualizado (%)
    - Problemas encontrados
-   - Próximos pasos
+   - PrÃ³ximos pasos
 
-2. **Commit de documentación:**
+2. **Commit de documentaciÃ³n:**
    ```bash
    git add docs/NEXT-STEPS.md
-   git commit -m "docs: actualiza progreso de sesión"
+   git commit -m "docs: actualiza progreso de sesiÃ³n"
    ```
 
 3. **Push al remoto:**
@@ -456,7 +456,7 @@ git commit -m "feat: implementa nueva funcionalidad"
 # Push del branch
 git push origin feature/nueva-funcionalidad
 
-# Merge a master (después de revisar)
+# Merge a master (despuÃ©s de revisar)
 git checkout master
 git merge feature/nueva-funcionalidad
 git push origin master
@@ -464,11 +464,11 @@ git push origin master
 
 ---
 
-## Optimización de Imágenes
+## OptimizaciÃ³n de ImÃ¡genes
 
 ### Proceso Manual con Squoosh
 
-1. **Descargar imágenes originales** (si son externas)
+1. **Descargar imÃ¡genes originales** (si son externas)
 
 2. **Optimizar en Squoosh:**
    - Ir a https://squoosh.app/
@@ -497,13 +497,13 @@ git push origin master
    export const heroImage = {
      src: "/images/hero/imagen.webp",
      fallback: "/images/hero/imagen.jpg",
-     alt: "Descripción",
+     alt: "DescripciÃ³n",
      width: 1920,
      height: 1080
    };
    ```
 
-### Proceso Automático con Sharp (Node.js)
+### Proceso AutomÃ¡tico con Sharp (Node.js)
 
 **Crear script `scripts/optimize-images.mjs`:**
 
@@ -545,7 +545,7 @@ for (const img of images) {
 node scripts/optimize-images.mjs
 ```
 
-### Tamaños Recomendados
+### Tamaï¿½os Recomendados
 
 | Tipo | Ancho | Alto | Formato | Calidad |
 |------|-------|------|---------|---------|
@@ -561,7 +561,7 @@ El componente soporta WebP con fallback a JPG:
 <ImageWithFallback
   src="/images/hero/imagen.webp"
   fallback="/images/hero/imagen.jpg"
-  alt="Descripción"
+  alt="DescripciÃ³n"
   width={1920}
   height={1080}
   className="..."
@@ -572,16 +572,16 @@ El componente soporta WebP con fallback a JPG:
 
 ## Code Review
 
-### Checklist de Revisión
+### Checklist de RevisiÃ³n
 
-**Código:**
+**Cï¿½digo:**
 
 - [ ] TypeScript sin errores ni `any`
 - [ ] Props tipadas correctamente
 - [ ] Imports con alias `@/`
 - [ ] Componentes documentados con JSDoc
-- [ ] Sin código duplicado
-- [ ] Configuración centralizada (no hardcode)
+- [ ] Sin cÃ³digo duplicado
+- [ ] ConfiguraciÃ³n centralizada (no hardcode)
 
 **Estilos:**
 
@@ -592,16 +592,16 @@ El componente soporta WebP con fallback a JPG:
 
 **Performance:**
 
-- [ ] Imágenes optimizadas (WebP + fallback)
+- [ ] ImÃ¡genes optimizadas (WebP + fallback)
 - [ ] Lazy loading donde corresponda
 - [ ] Sin re-renders innecesarios
 - [ ] Bundle size razonable
 
 **Accesibilidad:**
 
-- [ ] Alt text en imágenes
+- [ ] Alt text en imÃ¡genes
 - [ ] Labels asociados a inputs
-- [ ] Navegación por teclado funcional
+- [ ] NavegaciÃ³n por teclado funcional
 - [ ] Contraste de colores adecuado
 
 **Testing:**
@@ -610,11 +610,11 @@ El componente soporta WebP con fallback a JPG:
 - [ ] Build del frontend exitoso
 - [ ] Smoke test manual completado
 
-**Documentación:**
+**DocumentaciÃ³n:**
 
 - [ ] `docs/NEXT-STEPS.md` actualizado
 - [ ] README actualizado si corresponde
-- [ ] Comentarios en código complejo
+- [ ] Comentarios en cÃ³digo complejo
 
 ---
 
@@ -652,7 +652,7 @@ const data: ResponseType = await fetch(...);
 
 **Error: "Database locked"**
 
-Cerrar conexiones y eliminar `inkstudio.db`, se recreará automáticamente.
+Cerrar conexiones y eliminar `inkstudio.db`, se recrearÃ¡ automÃ¡ticamente.
 
 **Error: "Nullable reference warnings"**
 
@@ -676,26 +676,26 @@ Verificar `CorsSettings` en `appsettings.json`:
 
 **Error: "Rate limit exceeded"**
 
-Esperar 1 minuto o ajustar límite en `appsettings.json`.
+Esperar 1 minuto o ajustar lÃ­mite en `appsettings.json`.
 
 ---
 
 ## Recursos Adicionales
 
-### Documentación del Proyecto
+### DocumentaciÃ³n del Proyecto
 
 - [Getting Started](GETTING-STARTED.md) - Setup inicial
 - [Architecture](ARCHITECTURE.md) - Arquitectura completa
-- [API Reference](API-REFERENCE.md) - Especificación API
-- [Customization](CUSTOMIZATION.md) - Personalización
+- [API Reference](API-REFERENCE.md) - EspecificaciÃ³n API
+- [Customization](CUSTOMIZATION.md) - PersonalizaciÃ³n
 
 ### Herramientas
 
-- **Squoosh:** https://squoosh.app/ (optimización de imágenes)
+- **Squoosh:** https://squoosh.app/ (optimizaciÃ³n de imÃ¡genes)
 - **Lighthouse:** Chrome DevTools (performance audit)
 - **axe DevTools:** https://www.deque.com/axe/ (accesibilidad)
 
-### Documentación Externa
+### DocumentaciÃ³n Externa
 
 - [React 19 Docs](https://react.dev/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
@@ -706,5 +706,5 @@ Esperar 1 minuto o ajustar límite en `appsettings.json`.
 
 ---
 
-**Última actualización:** 2025-01-09  
-**Próxima revisión:** Al completar consolidación de documentación
+**Ãºltima actualizaciÃ³n:** 2025-01-09  
+**PrÃ³xima revisiÃ³n:** Al completar consolidaciÃ³n de documentaciÃ³n

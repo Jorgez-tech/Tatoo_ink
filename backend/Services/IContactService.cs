@@ -6,6 +6,6 @@ namespace backend.Services
     {
         Task<ContactMessage> ProcessContactMessageAsync(ContactRequestDto request);
         Task<IEnumerable<ContactMessageDto>> GetAllMessagesAsync();
-        Task<ContactMessageDto?> GetMessageByIdAsync(int id);
+        Task<ContactMessageDto> GetMessageByIdAsync(int id);
     }
 }

@@ -77,12 +77,6 @@ namespace backend.Controllers
         {
             _logger.LogInformation("GetById: Admin consultando mensaje ID {MessageId}", id);
             var message = await _contactService.GetMessageByIdAsync(id);
-            if (message == null)
-            {
-                _logger.LogWarning("GetById: Mensaje ID {MessageId} no encontrado", id);
-                return NotFound();
-            }
-            
             return Ok(message);
         }
     }

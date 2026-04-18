@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services
@@ -92,14 +93,14 @@ namespace backend.Services
                 .ToListAsync();
         }
 
-        public async Task<ContactMessageDto?> GetMessageByIdAsync(int id)
+        public async Task<ContactMessageDto> GetMessageByIdAsync(int id)
         {
             _logger.LogInformation("GetMessageByIdAsync: Consultando mensaje ID {MessageId}", id);
             var m = await _context.ContactMessages.FindAsync(id);
             if (m == null)
             {
                 _logger.LogWarning("GetMessageByIdAsync: Mensaje ID {MessageId} no encontrado", id);
-                return null;
+                throw new NotFoundException($"Mensaje de contacto con ID {id} no encontrado");
             }
 
             return new ContactMessageDto

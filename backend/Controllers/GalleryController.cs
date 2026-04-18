@@ -91,11 +91,6 @@ namespace backend.Controllers
 
             _logger.LogInformation("Update: Admin actualizando imagen ID {ImageId}", id);
             var image = await _galleryService.UpdateImageAsync(id, request);
-            if (image == null)
-            {
-                _logger.LogWarning("Update: Imagen ID {ImageId} no encontrada", id);
-                return NotFound();
-            }
             return Ok(image);
         }
 
@@ -112,12 +107,7 @@ namespace backend.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             _logger.LogInformation("Delete: Admin eliminando imagen ID {ImageId}", id);
-            var success = await _galleryService.DeleteImageAsync(id);
-            if (!success)
-            {
-                _logger.LogWarning("Delete: Imagen ID {ImageId} no encontrada", id);
-                return NotFound();
-            }
+            await _galleryService.DeleteImageAsync(id);
             return NoContent();
         }
     }

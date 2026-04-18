@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services
@@ -30,10 +31,16 @@ namespace backend.Services
                 .ToListAsync();
         }
 
-        public async Task<GalleryImage?> GetImageByIdAsync(int id)
+        public async Task<GalleryImage> GetImageByIdAsync(int id)
         {
             _logger.LogInformation("GetImageByIdAsync: Consultando imagen ID {ImageId}", id);
-            return await _context.GalleryImages.FindAsync(id);
+            var image = await _context.GalleryImages.FindAsync(id);
+            if (image == null)
+            {
+                _logger.LogWarning("GetImageByIdAsync: Imagen ID {ImageId} no encontrada", id);
+                throw new NotFoundException($"Imagen con ID {id} no encontrada");
+            }
+            return image;
         }
 
         public async Task<GalleryImage> CreateImageAsync(GalleryImageCreateDto dto)
@@ -57,14 +64,14 @@ namespace backend.Services
             return image;
         }
 
-        public async Task<GalleryImage?> UpdateImageAsync(int id, GalleryImageUpdateDto dto)
+        public async Task<GalleryImage> UpdateImageAsync(int id, GalleryImageUpdateDto dto)
         {
             _logger.LogInformation("UpdateImageAsync: Actualizando imagen ID {ImageId}", id);
             var image = await _context.GalleryImages.FindAsync(id);
             if (image == null)
             {
                 _logger.LogWarning("UpdateImageAsync: Imagen ID {ImageId} no encontrada", id);
-                return null;
+                throw new NotFoundException($"Imagen con ID {id} no encontrada");
             }
 
             if (dto.Src != null) image.Src = dto.Src;
@@ -80,20 +87,19 @@ namespace backend.Services
             return image;
         }
 
-        public async Task<bool> DeleteImageAsync(int id)
+        public async Task DeleteImageAsync(int id)
         {
             _logger.LogInformation("DeleteImageAsync: Eliminando imagen ID {ImageId}", id);
             var image = await _context.GalleryImages.FindAsync(id);
             if (image == null)
             {
                 _logger.LogWarning("DeleteImageAsync: Imagen ID {ImageId} no encontrada", id);
-                return false;
+                throw new NotFoundException($"Imagen con ID {id} no encontrada");
             }
 
             _context.GalleryImages.Remove(image);
             await _context.SaveChangesAsync();
             _logger.LogInformation("DeleteImageAsync: Imagen ID {ImageId} eliminada", id);
-            return true;
         }
     }
 }

@@ -33,8 +33,13 @@ namespace backend.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<UserResponseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetAll()
         {
+            _logger.LogInformation("GetAll: Admin consultando todos los usuarios");
             var users = await _context.Users
                 .Select(u => new UserResponseDto
                 {
@@ -51,12 +56,19 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(UserResponseDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<UserResponseDto>> GetById(int id)
         {
+            _logger.LogInformation("GetById: Admin consultando usuario ID {UserId}", id);
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound(new { message = "Usuario no encontrado" });
+                _logger.LogWarning("GetById: Usuario ID {UserId} no encontrado", id);
+                return NotFound();
             }
 
             return Ok(new UserResponseDto
@@ -71,11 +83,23 @@ namespace backend.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(UserResponseDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<UserResponseDto>> Create([FromBody] UserCreateDto request)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Create: Solicitud con datos inválidos");
+                return BadRequest();
+            }
+
             if (await _context.Users.AnyAsync(u => u.Email == request.Email.ToLower()))
             {
-                return BadRequest(new { message = "El email ya está registrado" });
+                _logger.LogWarning("Create: Intento de crear usuario con email duplicado {Email}", request.Email);
+                return BadRequest();
             }
 
             var user = new User
@@ -91,7 +115,7 @@ namespace backend.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation("Usuario admin creó nuevo usuario: {Email} con rol {Role}", user.Email, user.Role);
+            _logger.LogInformation("Create: Nuevo usuario creado {Email} con rol {Role}", user.Email, user.Role);
 
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, new UserResponseDto
             {
@@ -105,12 +129,25 @@ namespace backend.Controllers
         }
 
         [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto request)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Update: Solicitud con datos inválidos para usuario ID {UserId}", id);
+                return BadRequest();
+            }
+
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound(new { message = "Usuario no encontrado" });
+                _logger.LogWarning("Update: Usuario ID {UserId} no encontrado", id);
+                return NotFound();
             }
 
             if (request.Email != null)
@@ -118,7 +155,8 @@ namespace backend.Controllers
                 var emailLower = request.Email.ToLower();
                 if (emailLower != user.Email && await _context.Users.AnyAsync(u => u.Email == emailLower))
                 {
-                    return BadRequest(new { message = "El email ya está registrado" });
+                    _logger.LogWarning("Update: Intento de cambiar email a uno duplicado {Email} para usuario ID {UserId}", request.Email, id);
+                    return BadRequest();
                 }
                 user.Email = emailLower;
             }
@@ -141,31 +179,45 @@ namespace backend.Controllers
             user.UpdatedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation("Usuario admin actualizó usuario ID: {UserId}", user.Id);
+            _logger.LogInformation("Update: Usuario ID {UserId} actualizado correctamente", user.Id);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound(new { message = "Usuario no encontrado" });
+                _logger.LogWarning("Delete: Intento de eliminar usuario ID {UserId} inexistente", id);
+                return NotFound();
             }
 
             // No permitir auto-eliminación por seguridad
             var currentUserIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if (int.TryParse(currentUserIdStr, out var currentUserId) && currentUserId == id)
             {
-                return BadRequest(new { message = "No puedes eliminar tu propio usuario administrador" });
+                _logger.LogWarning("Delete: Admin {UserId} intentó auto-eliminarse", id);
+                return BadRequest(new ProblemDetails
+                {
+                    Type = "https://example.com/errors/self-deletion-prevented",
+                    Title = "Self Deletion Not Allowed",
+                    Status = StatusCodes.Status400BadRequest,
+                    Detail = "No puedes eliminar tu propio usuario administrador"
+                });
             }
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation("Usuario admin eliminó usuario ID: {UserId}", id);
+            _logger.LogInformation("Delete: Usuario ID {UserId} eliminado correctamente", id);
 
             return NoContent();
         }

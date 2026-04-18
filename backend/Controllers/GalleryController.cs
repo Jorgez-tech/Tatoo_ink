@@ -23,8 +23,10 @@ namespace backend.Controllers
         /// </summary>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<GalleryImage>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Get: Consultando galería pública");
             var images = await _galleryService.GetAllImagesAsync(onlyPublic: true);
             return Ok(images);
         }
@@ -35,8 +37,12 @@ namespace backend.Controllers
         [HttpGet("admin")]
         [Authorize(Roles = "admin,artist")]
         [ProducesResponseType(typeof(IEnumerable<GalleryImage>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAdmin()
         {
+            _logger.LogInformation("GetAdmin: Admin consultando galería completa");
             var images = await _galleryService.GetAllImagesAsync(onlyPublic: false);
             return Ok(images);
         }
@@ -46,8 +52,20 @@ namespace backend.Controllers
         /// </summary>
         [HttpPost("admin")]
         [Authorize(Roles = "admin,artist")]
+        [ProducesResponseType(typeof(GalleryImage), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] GalleryImageCreateDto request)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Create: Solicitud con datos inválidos");
+                return BadRequest();
+            }
+
+            _logger.LogInformation("Create: Admin creando nueva imagen en galería");
             var image = await _galleryService.CreateImageAsync(request);
             return CreatedAtAction(nameof(Get), new { id = image.Id }, image);
         }
@@ -57,10 +75,27 @@ namespace backend.Controllers
         /// </summary>
         [HttpPatch("admin/{id}")]
         [Authorize(Roles = "admin,artist")]
+        [ProducesResponseType(typeof(GalleryImage), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(int id, [FromBody] GalleryImageUpdateDto request)
         {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogWarning("Update: Solicitud con datos inválidos para imagen ID {ImageId}", id);
+                return BadRequest();
+            }
+
+            _logger.LogInformation("Update: Admin actualizando imagen ID {ImageId}", id);
             var image = await _galleryService.UpdateImageAsync(id, request);
-            if (image == null) return NotFound();
+            if (image == null)
+            {
+                _logger.LogWarning("Update: Imagen ID {ImageId} no encontrada", id);
+                return NotFound();
+            }
             return Ok(image);
         }
 
@@ -69,10 +104,20 @@ namespace backend.Controllers
         /// </summary>
         [HttpDelete("admin/{id}")]
         [Authorize(Roles = "admin")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
+            _logger.LogInformation("Delete: Admin eliminando imagen ID {ImageId}", id);
             var success = await _galleryService.DeleteImageAsync(id);
-            if (!success) return NotFound();
+            if (!success)
+            {
+                _logger.LogWarning("Delete: Imagen ID {ImageId} no encontrada", id);
+                return NotFound();
+            }
             return NoContent();
         }
     }

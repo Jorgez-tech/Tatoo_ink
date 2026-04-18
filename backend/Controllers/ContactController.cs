@@ -25,11 +25,10 @@ namespace backend.Controllers
         /// <returns>Respuesta indicando si el mensaje fue procesado exitosamente</returns>
         [HttpPost]
         [ProducesResponseType(typeof(ContactResponseDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ContactResponseDto), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ContactResponseDto), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] ContactRequestDto request)
         {
-            // Validar modelo (FluentValidation se ejecuta automáticamente)
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values
@@ -37,24 +36,17 @@ namespace backend.Controllers
                     .Select(e => e.ErrorMessage)
                     .ToList();
 
-                _logger.LogWarning("Validación fallida para mensaje de contacto. Errores: {Errors}", string.Join(", ", errors));
-
-                return BadRequest(new ContactResponseDto
-                {
-                    Success = false,
-                    Message = "Datos de entrada inválidos"
-                });
+                _logger.LogWarning("Post: Validación fallida. Errores: {Errors}", string.Join(", ", errors));
+                return BadRequest();
             }
 
-            _logger.LogInformation("Procesando mensaje de contacto de {Email}", request.Email);
+            _logger.LogInformation("Post: Procesando mensaje de contacto de {Email}", request.Email);
 
-            // Procesar mensaje
             var result = await _contactService.ProcessContactMessageAsync(request);
 
             if (result.Success)
             {
-                _logger.LogInformation("Mensaje de contacto procesado exitosamente. ID: {ContactId}", result.Id);
-
+                _logger.LogInformation("Post: Mensaje procesado exitosamente. ID: {ContactId}", result.Id);
                 return Ok(new ContactResponseDto
                 {
                     Success = true,
@@ -64,21 +56,20 @@ namespace backend.Controllers
             }
             else
             {
-                _logger.LogError("Error al procesar mensaje de contacto: {Error}", result.Error);
-
-                return StatusCode(500, new ContactResponseDto
-                {
-                    Success = false,
-                    Message = "Ocurrió un error al procesar tu mensaje. Por favor, intenta nuevamente."
-                });
+                _logger.LogError("Post: Error al procesar mensaje: {Error}", result.Error);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(IEnumerable<ContactMessageDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
+            _logger.LogInformation("GetAll: Admin consultando todos los mensajes de contacto");
             var messages = await _contactService.GetAllMessagesAsync();
             return Ok(messages);
         }
@@ -86,11 +77,19 @@ namespace backend.Controllers
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(ContactMessageDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetById(int id)
         {
+            _logger.LogInformation("GetById: Admin consultando mensaje ID {MessageId}", id);
             var message = await _contactService.GetMessageByIdAsync(id);
-            if (message == null) return NotFound();
+            if (message == null)
+            {
+                _logger.LogWarning("GetById: Mensaje ID {MessageId} no encontrado", id);
+                return NotFound();
+            }
             
             return Ok(message);
         }

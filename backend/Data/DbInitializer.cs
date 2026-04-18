@@ -1,13 +1,16 @@
 using backend.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace backend.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(ApplicationDbContext context, IConfiguration? configuration = null)
+        public static void Initialize(ApplicationDbContext context, IConfiguration? configuration, ILogger<Program>? logger = null)
         {
+            logger?.LogInformation("Iniciando DbInitializer: creando BD si es necesaria");
             context.Database.EnsureCreated();
+            logger?.LogInformation("Base de datos verificada/creada exitosamente");
 
             // Definir las imágenes de galería con URLs locales optimizadas
             var seedImages = new[]
@@ -70,9 +73,11 @@ namespace backend.Data
 
             // Obtener imágenes existentes en la BD
             var existingImages = context.GalleryImages.ToList();
+            logger?.LogInformation("Galería actual contiene {ImageCount} imágenes", existingImages.Count);
 
             if (existingImages.Count == 0)
             {
+                logger?.LogInformation("BD vacía: insertando {SeedCount} imágenes iniciales", seedImages.Length);
                 // BD vacía: insertar nuevas imágenes
                 foreach (var img in seedImages)
                 {
@@ -107,25 +112,30 @@ namespace backend.Data
                 }
             }
 
+            logger?.LogInformation("Guardando cambios de galería en BD");
             context.SaveChanges();
+            logger?.LogInformation("Imágenes de galería sincronizadas exitosamente");
 
-            SeedBootstrapAdmin(context, configuration);
-            SeedBusinessSettings(context);
+            SeedBootstrapAdmin(context, configuration, logger);
+            SeedBusinessSettings(context, logger);
         }
 
-        private static void SeedBootstrapAdmin(ApplicationDbContext context, IConfiguration? configuration)
+        private static void SeedBootstrapAdmin(ApplicationDbContext context, IConfiguration? configuration, ILogger<Program>? logger = null)
         {
             var enabled = configuration?.GetValue<bool>("Security:SeedDefaultAdmin") ?? false;
             if (!enabled)
             {
+                logger?.LogInformation("SeedDefaultAdmin deshabilitado - omitiendo creación de usuario admin bootstrap");
                 return;
             }
 
+            logger?.LogInformation("SeedDefaultAdmin habilitado - verificando credenciales en configuración");
             var email = configuration?["Security:DefaultAdminEmail"]?.Trim().ToLowerInvariant();
             var passwordHash = configuration?["Security:DefaultAdminPasswordHash"]?.Trim();
 
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(passwordHash))
             {
+                logger?.LogError("SeedDefaultAdmin habilitado pero faltan credenciales en configuración");
                 throw new InvalidOperationException(
                     "SeedDefaultAdmin esta habilitado, pero faltan Security:DefaultAdminEmail o Security:DefaultAdminPasswordHash.");
             }
@@ -133,8 +143,10 @@ namespace backend.Data
             var existingUser = context.Users.FirstOrDefault(u => u.Email == email);
             if (existingUser != null)
             {
+                logger?.LogInformation("Usuario admin {Email} ya existe", email);
                 if (!string.Equals(existingUser.Role, "admin", StringComparison.OrdinalIgnoreCase) || !existingUser.IsActive)
                 {
+                    logger?.LogInformation("Actualizando usuario {Email}: role=admin, isActive=true", email);
                     existingUser.Role = "admin";
                     existingUser.IsActive = true;
                     existingUser.UpdatedAt = DateTime.UtcNow;
@@ -144,6 +156,7 @@ namespace backend.Data
                 return;
             }
 
+            logger?.LogInformation("Creando usuario admin bootstrap con email {Email}", email);
             var adminUser = new User
             {
                 Email = email,
@@ -155,17 +168,21 @@ namespace backend.Data
             };
 
             context.Users.Add(adminUser);
+            logger?.LogInformation("Guardando usuario admin en BD");
             context.SaveChanges();
+            logger?.LogInformation("Usuario admin {Email} creado exitosamente", email);
         }
 
-        private static void SeedBusinessSettings(ApplicationDbContext context)
+        private static void SeedBusinessSettings(ApplicationDbContext context, ILogger<Program>? logger = null)
         {
             var existing = context.BusinessSettings.FirstOrDefault();
             if (existing != null)
             {
+                logger?.LogInformation("BusinessSettings ya existen - omitiendo seed");
                 return;
             }
 
+            logger?.LogInformation("Creando BusinessSettings iniciales");
             var settings = new BusinessSettings
             {
                 BusinessName = "Ink Studio",
@@ -183,7 +200,9 @@ namespace backend.Data
             };
 
             context.BusinessSettings.Add(settings);
+            logger?.LogInformation("Guardando BusinessSettings en BD");
             context.SaveChanges();
+            logger?.LogInformation("BusinessSettings creadas exitosamente");
         }
     }
 }

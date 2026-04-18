@@ -40,10 +40,9 @@ namespace backend.Tests
             controller.ModelState.AddModelError("Name", "El nombre es requerido");
             var dto = new ContactRequestDto();
             var result = await controller.Post(dto);
-            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
-            var response = Assert.IsType<ContactResponseDto>(badRequest.Value);
-            Assert.False(response.Success);
-            Assert.Equal("Datos de entrada inválidos", response.Message);
+            // El middleware ahora retorna BadRequestResult (sin body)
+            var badRequest = Assert.IsType<BadRequestResult>(result);
+            Assert.Equal(400, badRequest.StatusCode);
         }
 
         [Fact]
@@ -61,11 +60,9 @@ namespace backend.Tests
                 WantsAppointment = true
             };
             var result = await controller.Post(dto);
-            var errorResult = Assert.IsType<ObjectResult>(result);
+            // El middleware ahora retorna StatusCodeResult (sin body custom)
+            var errorResult = Assert.IsType<StatusCodeResult>(result);
             Assert.Equal(500, errorResult.StatusCode);
-            var response = Assert.IsType<ContactResponseDto>(errorResult.Value);
-            Assert.False(response.Success);
-            Assert.Contains("error", response.Message.ToLower());
         }
     }
 }

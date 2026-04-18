@@ -110,6 +110,7 @@ namespace backend.Data
             context.SaveChanges();
 
             SeedBootstrapAdmin(context, configuration);
+            SeedBusinessSettings(context);
         }
 
         private static void SeedBootstrapAdmin(ApplicationDbContext context, IConfiguration? configuration)
@@ -154,6 +155,34 @@ namespace backend.Data
             };
 
             context.Users.Add(adminUser);
+            context.SaveChanges();
+        }
+
+        private static void SeedBusinessSettings(ApplicationDbContext context)
+        {
+            var existing = context.BusinessSettings.FirstOrDefault();
+            if (existing != null)
+            {
+                return;
+            }
+
+            var settings = new BusinessSettings
+            {
+                BusinessName = "Ink Studio",
+                BusinessTagline = "Arte en tu Piel",
+                BusinessDescription = "Transformamos tus ideas en obras de arte permanentes. Más de 10 años de experiencia creando tatuajes únicos y personalizados.",
+                PhoneNumber = "+34 123 456 789",
+                EmailAddress = "info@tattoostudio.com",
+                Address = "Calle Principal 123, Ciudad",
+                InstagramUrl = "#",
+                FacebookUrl = "#",
+                TwitterUrl = "#",
+                Schedule = "Lun - Sáb: 10:00 - 20:00",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            context.BusinessSettings.Add(settings);
             context.SaveChanges();
         }
     }

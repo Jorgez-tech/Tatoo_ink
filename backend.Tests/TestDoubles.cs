@@ -120,5 +120,15 @@ namespace backend.Tests
         {
             return _handler(request);
         }
+
+        public Task<IEnumerable<ContactMessageDto>> GetAllMessagesAsync()
+        {
+            return Task.FromResult<IEnumerable<ContactMessageDto>>(Array.Empty<ContactMessageDto>());
+        }
+
+        public Task<ContactMessageDto?> GetMessageByIdAsync(int id)
+        {
+            return Task.FromResult<ContactMessageDto?>(null);
+        }
     }
 }

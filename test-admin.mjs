@@ -76,8 +76,43 @@ async function testAdmin() {
                         await page.screenshot({ path: 'test-results/14-admin-message-detail.png' });
                     }
                 }
+
+                // 6. Navegación a Configuración y guardado
+                console.log('\n⚙️ Probando edición de Configuración del Negocio...');
+                await page.goto('http://localhost:5173/admin', { waitUntil: 'networkidle' });
+                const btnSettings = page.locator('button', { hasText: 'Configuración' });
+                if (await btnSettings.count() > 0) {
+                    await btnSettings.click();
+                    await page.waitForTimeout(900);
+                    await page.screenshot({ path: 'test-results/15-admin-settings.png' });
+
+                    const phoneInput = page.locator('#phoneNumber');
+                    if (await phoneInput.count() > 0) {
+                        const originalPhone = await phoneInput.inputValue();
+                        const testPhone = '+34 111 222 333';
+                        await phoneInput.fill(testPhone);
+                        await page.click('button[type="submit"]');
+                        await page.waitForTimeout(1200);
+
+                        const successMessage = page.locator('text=Información del negocio actualizada correctamente.');
+                        if (await successMessage.count() > 0) {
+                            console.log('   ✅ Guardado de configuración verificado');
+                            await page.screenshot({ path: 'test-results/16-admin-settings-saved.png' });
+                        } else {
+                            console.log('   ⚠️ No se detectó mensaje de éxito en configuración');
+                        }
+
+                        // Restaurar valor original para evitar dejar datos de prueba.
+                        await phoneInput.fill(originalPhone);
+                        await page.click('button[type="submit"]');
+                        await page.waitForTimeout(900);
+                        console.log('   ✅ Valor original restaurado');
+                    }
+                } else {
+                    console.log('   ⚠️ No se encontró botón Configuración');
+                }
                 
-                // 6. Probar Logout
+                // 7. Probar Logout
                 console.log('\n👋 Cerrando sesión...');
                 await page.goto('http://localhost:5173/admin', { waitUntil: 'networkidle' });
                 const btnLogout = page.locator('button', { hasText: 'Cerrar Sesión' });

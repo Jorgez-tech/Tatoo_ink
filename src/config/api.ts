@@ -16,6 +16,8 @@ export const API_ENDPOINTS = {
   contact: '/api/v1/contact',
   gallery: '/api/v1/gallery',
   auth: '/api/v1/auth',
+  businessSettings: '/api/v1/business-settings',
+  internalBusinessSettings: '/api/v1/internal/business-settings',
 } as const;
 
 /**

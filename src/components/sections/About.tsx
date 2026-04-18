@@ -1,7 +1,8 @@
 import { ImageWithFallback } from "../ui/ImageWithFallback";
-import { businessInfo } from "@/config/business-info";
+import { toBusinessInfo } from "@/config/business-info";
 import { aboutContent } from "@/config/content";
 import { aboutImage } from "@/config/images";
+import { useBusinessSettings } from "@/hooks/use-business-settings";
 
 /**
  * Sección "Sobre nosotros" que combina storytelling con métricas del negocio.
@@ -17,6 +18,8 @@ import { aboutImage } from "@/config/images";
  * );
  */
 export function About() {
+  const { settings } = useBusinessSettings();
+  const businessInfo = toBusinessInfo(settings);
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">

@@ -1,7 +1,8 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
-import { businessInfo } from "@/config/business-info";
+import { toBusinessInfo } from "@/config/business-info";
 import { footerContent } from "@/config/content";
 import { menuItems } from "@/config/navigation";
+import { useBusinessSettings } from "@/hooks/use-business-settings";
 
 /**
  * Pie de página con enlaces rápidos y redes sociales basadas en configuración.
@@ -17,6 +18,8 @@ import { menuItems } from "@/config/navigation";
  * );
  */
 export function Footer() {
+  const { settings } = useBusinessSettings();
+  const businessInfo = toBusinessInfo(settings);
   const currentYear = new Date().getFullYear();
 
   return (

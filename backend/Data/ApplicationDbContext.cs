@@ -12,6 +12,7 @@ namespace backend.Data
         public DbSet<GalleryImage> GalleryImages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<BusinessSettings> BusinessSettings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,6 +63,24 @@ namespace backend.Data
                     .WithMany()
                     .HasForeignKey(e => e.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<BusinessSettings>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.BusinessName).IsRequired().HasMaxLength(120);
+                entity.Property(e => e.BusinessTagline).IsRequired().HasMaxLength(180);
+                entity.Property(e => e.BusinessDescription).IsRequired().HasMaxLength(2000);
+                entity.Property(e => e.PhoneNumber).IsRequired().HasMaxLength(30);
+                entity.Property(e => e.EmailAddress).IsRequired().HasMaxLength(120);
+                entity.Property(e => e.Address).IsRequired().HasMaxLength(250);
+                entity.Property(e => e.InstagramUrl).HasMaxLength(300);
+                entity.Property(e => e.FacebookUrl).HasMaxLength(300);
+                entity.Property(e => e.TwitterUrl).HasMaxLength(300);
+                entity.Property(e => e.Schedule).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.HasIndex(e => e.EmailAddress);
             });
         }
     }

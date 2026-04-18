@@ -8,7 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:landing": "node test-landing.mjs",
+    "test:interactions": "node test-interactions.mjs",
+    "test:admin-ui": "node test-admin.mjs"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [

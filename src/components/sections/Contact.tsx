@@ -5,8 +5,9 @@ import { Label } from "../ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { contactInfo } from "@/config/business-info";
+import { toContactInfo } from "@/config/business-info";
 import { contactContent } from "@/config/content";
+import { useBusinessSettings } from "@/hooks/use-business-settings";
 import type { ContactFormData } from "@/types";
 
 /**
@@ -28,6 +29,8 @@ type FormStatus = "idle" | "loading" | "success" | "error";
  * );
  */
 export function Contact() {
+  const { settings } = useBusinessSettings();
+  const contactInfo = toContactInfo(settings);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
 

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using AspNetCoreRateLimit;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,7 @@ else
 
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IGalleryService, GalleryService>();
+builder.Services.AddScoped<IBusinessSettingsService, BusinessSettingsService>();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -63,7 +65,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication("Custom")
-    .AddCookie("Custom");
+    .AddCookie("Custom", options =>
+    {
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return Task.CompletedTask;
+            },
+            OnRedirectToAccessDenied = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 builder.Services.AddHealthChecks()
     .AddDbContextCheck<ApplicationDbContext>("database");
@@ -106,6 +123,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseIpRateLimiting();
 app.UseMiddleware<AuthorizationMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapHealthChecks("/health");

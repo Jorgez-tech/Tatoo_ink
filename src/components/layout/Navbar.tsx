@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { menuItems, navbarCtaText } from "@/config/navigation";
-import { businessInfo } from "@/config/business-info";
+import { toBusinessInfo } from "@/config/business-info";
 import { useActiveSection } from "@/hooks/use-active-section";
+import { useBusinessSettings } from "@/hooks/use-business-settings";
 import { cn } from "@/lib/utils";
 
 /**
@@ -21,6 +22,8 @@ import { cn } from "@/lib/utils";
  */
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { settings } = useBusinessSettings();
+  const businessInfo = toBusinessInfo(settings);
   const sectionIds = menuItems.map(item => item.href.replace('#', ''));
   const activeSection = useActiveSection(sectionIds);
 

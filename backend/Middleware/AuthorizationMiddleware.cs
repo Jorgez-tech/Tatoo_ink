@@ -90,7 +90,7 @@ namespace backend.Middleware
                     return null;
                 }
 
-                var unsigned = "{parts[0]}.{parts[1]}";
+                var unsigned = $"{parts[0]}.{parts[1]}";
                 var providedSignature = parts[2];
 
                 using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))

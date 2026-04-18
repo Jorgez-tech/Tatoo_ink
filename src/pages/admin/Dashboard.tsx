@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     try {
       const data = await galleryService.getAdminAll();
       setImages(data);
@@ -24,7 +24,7 @@ export default function Dashboard() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [navigate]);
 
   useEffect(() => {
     if (!authService.isAuthenticated()) {
@@ -32,7 +32,7 @@ export default function Dashboard() {
     } else {
       fetchImages();
     }
-  }, [navigate]);
+  }, [fetchImages, navigate]);
 
   const handleLogout = async () => {
     await authService.logout();
@@ -45,7 +45,7 @@ export default function Dashboard() {
     try {
       await galleryService.delete(id);
       fetchImages(); // Recargar la lista
-    } catch (err) {
+    } catch {
       alert("Error al eliminar la imagen");
     }
   };
@@ -60,6 +60,12 @@ export default function Dashboard() {
             className="border-zinc-800 text-zinc-400 hover:text-white"
           >
             Ver Mensajes
+          </Button>
+          <Button
+            variant="outline" onClick={() => navigate("/admin/settings")}
+            className="border-zinc-800 text-zinc-400 hover:text-white"
+          >
+            Configuración
           </Button>
           <Button
             variant="outline" onClick={() => navigate("/")}

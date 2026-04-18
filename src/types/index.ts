@@ -20,6 +20,21 @@ export interface ContactInfo {
   value: string;
 }
 
+export interface BusinessSettings {
+  id?: number;
+  businessName: string;
+  businessTagline: string;
+  businessDescription: string;
+  phoneNumber: string;
+  emailAddress: string;
+  address: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  twitterUrl?: string;
+  schedule: string;
+  updatedAt?: string;
+}
+
 /**
  * Servicio destacado del estudio de tatuajes.
  *

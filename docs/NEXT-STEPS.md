@@ -50,30 +50,40 @@ Se ha estandarizado el enfoque técnico para iniciar el desarrollo del Backend s
 
 ---
 
-## Estado Actual (18 Abril 2026)
+## Estado Actual (18 Abril 2026 - Fase Final)
 
 ### ✅ Completado Esta Sesión
 - **Arquitectura de Excepciones:** Completamente centralizada en GlobalExceptionMiddleware
 - **Services Refactorizados:** ContactService, GalleryService, SmtpEmailService, SendGridEmailService
+- **Patrón NotFoundException:** Implementado en GalleryService y ContactService
+  - GetImageByIdAsync, UpdateImageAsync, DeleteImageAsync lanzan NotFoundException
+  - GetMessageByIdAsync lanza NotFoundException
+  - Controllers simplificados sin chequeos null
 - **Tests:** 69/69 pasando sin errores
 - **Build:** Limpio y sin warnings de compilación
-- **Commits:** 8 nuevos commits atómicos con conventional commits en español
+- **Commits:** 15 nuevos commits atómicos con conventional commits en español
 
 ### 📊 Métricas Actuales
-- **Rama:** feat/backend-auth (10 commits adelante de master)
+- **Rama:** feat/backend-auth (15 commits adelante de master)
 - **Controllers:** 5/5 completos con logging y ProblemDetails
 - **Services:** 7/7 principales cumpliendo arquitectura centralizada
 - **Tests Unitarios:** 69/69 pasando
 - **Coverage:** Controllers y Services validados
 - **Endpoint Status:** Todos protegidos con [Authorize] donde corresponde
+- **Excepciones:** UnauthorizedException, NotFoundException, CustomValidationException activas
 
 ### 🎯 Próximas Tareas (Prioridad Alta)
-1. **Validación de Integración:** 
+1. **Refactor Pendiente (Opcional):**
+   - [ ] Crear UserService para encapsular lógica de InternalUserController
+   - [ ] Lanzar NotFoundException en métodos de búsqueda de usuarios
+   - [ ] Simplificar InternalUserController
+
+2. **Validación de Integración:** 
    - [ ] Ejecutar tests de integración end-to-end
    - [ ] Verificar flujos completos de API (Login → CRUD Gallery → Contact Form)
    - [ ] Pruebas de manejo de errores en middleware
 
-2. **Deployment Preparation:**
+3. **Deployment Preparation:**
    - [ ] Configurar variables de entorno para producción
    - [ ] Setup de CI/CD (GitHub Actions o similar)
    - [ ] Documentar deployment steps

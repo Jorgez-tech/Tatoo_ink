@@ -30,8 +30,8 @@ namespace backend.Tests
                 Message = "Mensaje de prueba",
                 WantsAppointment = true
             };
-            var result = await service.ProcessContactMessageAsync(dto);
-            Assert.False(result.Success);
+            // Ahora lanza la excepción en lugar de retornar Success=false
+            await Assert.ThrowsAsync<DbUpdateException>(() => service.ProcessContactMessageAsync(dto));
             Assert.Empty(emailService.SentMessages);
         }
     }

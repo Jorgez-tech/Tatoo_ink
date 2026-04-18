@@ -4,7 +4,7 @@ namespace backend.Services
 {
     public interface IContactService
     {
-        Task<ServiceResult> ProcessContactMessageAsync(ContactRequestDto request);
+        Task<ContactMessage> ProcessContactMessageAsync(ContactRequestDto request);
         Task<IEnumerable<ContactMessageDto>> GetAllMessagesAsync();
         Task<ContactMessageDto?> GetMessageByIdAsync(int id);
     }

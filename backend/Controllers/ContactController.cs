@@ -42,23 +42,15 @@ namespace backend.Controllers
 
             _logger.LogInformation("Post: Procesando mensaje de contacto de {Email}", request.Email);
 
-            var result = await _contactService.ProcessContactMessageAsync(request);
+            var contactMessage = await _contactService.ProcessContactMessageAsync(request);
 
-            if (result.Success)
+            _logger.LogInformation("Post: Mensaje procesado exitosamente. ID: {ContactId}", contactMessage.Id);
+            return Ok(new ContactResponseDto
             {
-                _logger.LogInformation("Post: Mensaje procesado exitosamente. ID: {ContactId}", result.Id);
-                return Ok(new ContactResponseDto
-                {
-                    Success = true,
-                    Message = "Mensaje recibido correctamente. Nos pondremos en contacto contigo pronto.",
-                    Id = result.Id
-                });
-            }
-            else
-            {
-                _logger.LogError("Post: Error al procesar mensaje: {Error}", result.Error);
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+                Success = true,
+                Message = "Mensaje recibido correctamente. Nos pondremos en contacto contigo pronto.",
+                Id = contactMessage.Id
+            });
         }
 
         [HttpGet]

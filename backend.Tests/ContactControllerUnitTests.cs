@@ -4,6 +4,7 @@ using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xunit;
+using System;
 using System.Threading.Tasks;
 
 namespace backend.Tests
@@ -13,7 +14,18 @@ namespace backend.Tests
         [Fact]
         public async Task Post_Should_Return_200_On_Valid_Input()
         {
-            var service = new FixedResultContactService(_ => Task.FromResult(new ServiceResult { Success = true, Id = 1 }));
+            var message = new ContactMessage
+            {
+                Id = 1,
+                Name = "Test",
+                Email = "test@email.com",
+                Phone = "123456",
+                Message = "Mensaje de prueba",
+                WantsAppointment = true,
+                CreatedAt = DateTime.UtcNow,
+                EmailSent = false
+            };
+            var service = new FixedResultContactService(_ => Task.FromResult(message));
             var logger = new TestLogger<ContactController>();
             var controller = new ContactController(service, logger);
             var dto = new ContactRequestDto
@@ -34,7 +46,18 @@ namespace backend.Tests
         [Fact]
         public async Task Post_Should_Return_400_On_Invalid_Model()
         {
-            var service = new FixedResultContactService(_ => Task.FromResult(new ServiceResult { Success = true, Id = 1 }));
+            var message = new ContactMessage
+            {
+                Id = 1,
+                Name = "Test",
+                Email = "test@email.com",
+                Phone = "123456",
+                Message = "Mensaje de prueba",
+                WantsAppointment = true,
+                CreatedAt = DateTime.UtcNow,
+                EmailSent = false
+            };
+            var service = new FixedResultContactService(_ => Task.FromResult(message));
             var logger = new TestLogger<ContactController>();
             var controller = new ContactController(service, logger);
             controller.ModelState.AddModelError("Name", "El nombre es requerido");
@@ -48,7 +71,7 @@ namespace backend.Tests
         [Fact]
         public async Task Post_Should_Return_500_On_Service_Failure()
         {
-            var service = new FixedResultContactService(_ => Task.FromResult(new ServiceResult { Success = false, Error = "Error interno" }));
+            var service = new FixedResultContactService(_ => throw new InvalidOperationException("Error interno"));
             var logger = new TestLogger<ContactController>();
             var controller = new ContactController(service, logger);
             var dto = new ContactRequestDto
@@ -59,10 +82,9 @@ namespace backend.Tests
                 Message = "Mensaje de prueba",
                 WantsAppointment = true
             };
-            var result = await controller.Post(dto);
-            // El middleware ahora retorna StatusCodeResult (sin body custom)
-            var errorResult = Assert.IsType<StatusCodeResult>(result);
-            Assert.Equal(500, errorResult.StatusCode);
+            // La excepción ahora se lanza y el middleware en producción la convierte a 500
+            // En el test unitario, simplemente verificamos que se lanza
+            await Assert.ThrowsAsync<InvalidOperationException>(() => controller.Post(dto));
         }
     }
 }

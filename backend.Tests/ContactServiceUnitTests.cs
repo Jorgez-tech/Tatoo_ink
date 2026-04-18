@@ -55,9 +55,9 @@ namespace backend.Tests
                 Message = "Mensaje de prueba",
                 WantsAppointment = true
             };
-            var result = await service.ProcessContactMessageAsync(dto);
-            Assert.False(result.Success);
-            Assert.True(result.Error.Contains("Error al guardar el mensaje") || result.Error.Contains("Ocurri� un error inesperado"));
+            
+            // Ahora debe lanzar la excepción
+            await Assert.ThrowsAsync<DbUpdateException>(() => service.ProcessContactMessageAsync(dto));
         }
 
         [Fact]
@@ -78,9 +78,12 @@ namespace backend.Tests
                 Message = "Mensaje de prueba",
                 WantsAppointment = true
             };
+            
+            // Debe retornar el mensaje guardado aunque email falle (fire-and-forget)
             var result = await service.ProcessContactMessageAsync(dto);
-            Assert.True(result.Success);
-            Assert.NotNull(result.Id);
+            Assert.NotNull(result);
+            Assert.Equal("TestName", result.Name);
+            Assert.Equal("test@email.com", result.Email);
         }
     }
 }

@@ -31,8 +31,9 @@ namespace backend.Tests
                 WantsAppointment = true
             };
             var result = await service.ProcessContactMessageAsync(dto);
-            Assert.True(result.Success);
-            Assert.NotNull(result.Id);
+            Assert.NotNull(result);
+            Assert.Equal("Test", result.Name);
+            Assert.Equal("test@test.com", result.Email);
         }
     }
 }

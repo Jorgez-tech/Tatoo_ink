@@ -109,14 +109,14 @@ namespace backend.Tests
 
     public sealed class FixedResultContactService : IContactService
     {
-        private readonly Func<ContactRequestDto, Task<ServiceResult>> _handler;
+        private readonly Func<ContactRequestDto, Task<ContactMessage>> _handler;
 
-        public FixedResultContactService(Func<ContactRequestDto, Task<ServiceResult>> handler)
+        public FixedResultContactService(Func<ContactRequestDto, Task<ContactMessage>> handler)
         {
             _handler = handler;
         }
 
-        public Task<ServiceResult> ProcessContactMessageAsync(ContactRequestDto request)
+        public Task<ContactMessage> ProcessContactMessageAsync(ContactRequestDto request)
         {
             return _handler(request);
         }

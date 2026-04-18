@@ -17,33 +17,28 @@ namespace backend.Services
 
         public async Task<IEnumerable<GalleryImage>> GetAllImagesAsync(bool onlyPublic = true)
         {
-            try
-            {
-                var query = _context.GalleryImages.AsQueryable();
+            _logger.LogInformation("GetAllImagesAsync: Consultando galería {Type}", onlyPublic ? "pública" : "completa");
+            var query = _context.GalleryImages.AsQueryable();
 
-                if (onlyPublic)
-                {
-                    query = query.Where(i => i.IsPublic);
-                }
-
-                return await query
-                    .OrderByDescending(i => i.CreatedAt)
-                    .ToListAsync();
-            }
-            catch (Exception ex)
+            if (onlyPublic)
             {
-                _logger.LogError(ex, "Error retrieving gallery images");
-                return Enumerable.Empty<GalleryImage>();
+                query = query.Where(i => i.IsPublic);
             }
+
+            return await query
+                .OrderByDescending(i => i.CreatedAt)
+                .ToListAsync();
         }
 
         public async Task<GalleryImage?> GetImageByIdAsync(int id)
         {
+            _logger.LogInformation("GetImageByIdAsync: Consultando imagen ID {ImageId}", id);
             return await _context.GalleryImages.FindAsync(id);
         }
 
         public async Task<GalleryImage> CreateImageAsync(GalleryImageCreateDto dto)
         {
+            _logger.LogInformation("CreateImageAsync: Creando nueva imagen");
             var image = new GalleryImage
             {
                 Src = dto.Src,
@@ -58,13 +53,19 @@ namespace backend.Services
 
             _context.GalleryImages.Add(image);
             await _context.SaveChangesAsync();
+            _logger.LogInformation("CreateImageAsync: Imagen creada. ID: {ImageId}", image.Id);
             return image;
         }
 
         public async Task<GalleryImage?> UpdateImageAsync(int id, GalleryImageUpdateDto dto)
         {
+            _logger.LogInformation("UpdateImageAsync: Actualizando imagen ID {ImageId}", id);
             var image = await _context.GalleryImages.FindAsync(id);
-            if (image == null) return null;
+            if (image == null)
+            {
+                _logger.LogWarning("UpdateImageAsync: Imagen ID {ImageId} no encontrada", id);
+                return null;
+            }
 
             if (dto.Src != null) image.Src = dto.Src;
             if (dto.Fallback != null) image.Fallback = dto.Fallback;
@@ -75,16 +76,23 @@ namespace backend.Services
             if (dto.IsPublic.HasValue) image.IsPublic = dto.IsPublic.Value;
 
             await _context.SaveChangesAsync();
+            _logger.LogInformation("UpdateImageAsync: Imagen ID {ImageId} actualizada", id);
             return image;
         }
 
         public async Task<bool> DeleteImageAsync(int id)
         {
+            _logger.LogInformation("DeleteImageAsync: Eliminando imagen ID {ImageId}", id);
             var image = await _context.GalleryImages.FindAsync(id);
-            if (image == null) return false;
+            if (image == null)
+            {
+                _logger.LogWarning("DeleteImageAsync: Imagen ID {ImageId} no encontrada", id);
+                return false;
+            }
 
             _context.GalleryImages.Remove(image);
             await _context.SaveChangesAsync();
+            _logger.LogInformation("DeleteImageAsync: Imagen ID {ImageId} eliminada", id);
             return true;
         }
     }

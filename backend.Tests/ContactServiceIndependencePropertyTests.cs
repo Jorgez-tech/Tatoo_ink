@@ -33,8 +33,8 @@ namespace backend.Tests
                 WantsAppointment = wantsAppointment
             };
             var result = await service.ProcessContactMessageAsync(dto);
-            Assert.True(result.Success);
-            Assert.NotNull(result.Id);
+            Assert.NotNull(result);
+            Assert.Equal(wantsAppointment, result.WantsAppointment);
             var persisted = await context.ContactMessages.FindAsync(result.Id);
             Assert.Equal(wantsAppointment, persisted.WantsAppointment);
         }

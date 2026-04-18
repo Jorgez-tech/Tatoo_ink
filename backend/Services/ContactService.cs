@@ -20,80 +20,62 @@ namespace backend.Services
             _logger = logger;
         }
 
-        public async Task<ServiceResult> ProcessContactMessageAsync(ContactRequestDto request)
+        public async Task<ContactMessage> ProcessContactMessageAsync(ContactRequestDto request)
+        {
+            _logger.LogInformation("ProcessContactMessageAsync: Procesando mensaje de {Email}", request.Email);
+
+            // Mapear DTO a entidad
+            var contactMessage = new ContactMessage
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Phone = request.Phone,
+                Message = request.Message,
+                WantsAppointment = request.WantsAppointment ?? false,
+                CreatedAt = DateTime.UtcNow,
+                EmailSent = false
+            };
+
+            // Persistir en base de datos - dejar que lance excepción si falla
+            _context.ContactMessages.Add(contactMessage);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("ProcessContactMessageAsync: Mensaje guardado. ID: {ContactId}", contactMessage.Id);
+
+            // Intentar enviar email de forma asincrónica (fire-and-forget)
+            // Si falla, el mensaje ya está guardado en la BD
+            _ = SendEmailAsync(contactMessage);
+
+            return contactMessage;
+        }
+
+        private async Task SendEmailAsync(ContactMessage contactMessage)
         {
             try
             {
-                // Mapear DTO a entidad
-                var contactMessage = new ContactMessage
+                var emailSent = await _emailService.SendContactNotificationAsync(contactMessage);
+                
+                if (emailSent)
                 {
-                    Name = request.Name,
-                    Email = request.Email,
-                    Phone = request.Phone,
-                    Message = request.Message,
-                    WantsAppointment = request.WantsAppointment ?? false,
-                    CreatedAt = DateTime.UtcNow,
-                    EmailSent = false
-                };
-
-                // Persistir en base de datos
-                _context.ContactMessages.Add(contactMessage);
-                await _context.SaveChangesAsync();
-
-                _logger.LogInformation("Mensaje de contacto guardado exitosamente. ID: {ContactId}", contactMessage.Id);
-
-                // Intentar enviar email
-                try
-                {
-                    var emailSent = await _emailService.SendContactNotificationAsync(contactMessage);
-                    
-                    if (emailSent)
-                    {
-                        // Actualizar estado de email enviado
-                        contactMessage.EmailSent = true;
-                        contactMessage.EmailSentAt = DateTime.UtcNow;
-                        await _context.SaveChangesAsync();
-                        
-                        _logger.LogInformation("Email enviado exitosamente para el contacto {ContactId}", contactMessage.Id);
-                    }
-                    else
-                    {
-                        _logger.LogWarning("No se pudo enviar el email para el contacto {ContactId}, pero el mensaje fue guardado", contactMessage.Id);
-                    }
+                    contactMessage.EmailSent = true;
+                    contactMessage.EmailSentAt = DateTime.UtcNow;
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("SendEmailAsync: Email enviado para contacto {ContactId}", contactMessage.Id);
                 }
-                catch (Exception emailEx)
+                else
                 {
-                    // Registrar error de email pero retornar éxito (mensaje ya guardado)
-                    _logger.LogError(emailEx, "Error al enviar email para el contacto {ContactId}, pero el mensaje fue guardado", contactMessage.Id);
+                    _logger.LogWarning("SendEmailAsync: No se pudo enviar email para contacto {ContactId}", contactMessage.Id);
                 }
-
-                return new ServiceResult
-                {
-                    Success = true,
-                    Id = contactMessage.Id
-                };
-            }
-            catch (DbUpdateException dbEx)
-            {
-                _logger.LogError(dbEx, "Error de base de datos al guardar mensaje de contacto");
-                return new ServiceResult
-                {
-                    Success = false,
-                    Error = "Error al guardar el mensaje. Por favor, intente nuevamente."
-                };
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error inesperado al procesar mensaje de contacto");
-                return new ServiceResult
-                {
-                    Success = false,
-                    Error = "Ocurrió un error inesperado. Por favor, intente nuevamente."
-                };
+                _logger.LogError(ex, "SendEmailAsync: Error al enviar email para contacto {ContactId}", contactMessage.Id);
+                // No relanzar excepción - el mensaje ya está guardado
             }
         }
         public async Task<IEnumerable<ContactMessageDto>> GetAllMessagesAsync()
         {
+            _logger.LogInformation("GetAllMessagesAsync: Consultando todos los mensajes de contacto");
             return await _context.ContactMessages
                 .OrderByDescending(m => m.CreatedAt)
                 .Select(m => new ContactMessageDto
@@ -112,8 +94,13 @@ namespace backend.Services
 
         public async Task<ContactMessageDto?> GetMessageByIdAsync(int id)
         {
+            _logger.LogInformation("GetMessageByIdAsync: Consultando mensaje ID {MessageId}", id);
             var m = await _context.ContactMessages.FindAsync(id);
-            if (m == null) return null;
+            if (m == null)
+            {
+                _logger.LogWarning("GetMessageByIdAsync: Mensaje ID {MessageId} no encontrado", id);
+                return null;
+            }
 
             return new ContactMessageDto
             {

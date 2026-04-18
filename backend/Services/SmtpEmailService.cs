@@ -18,58 +18,52 @@ namespace backend.Services
 
         public async Task<bool> SendContactNotificationAsync(ContactMessage message)
         {
-            try
+            _logger.LogInformation("SendContactNotificationAsync: Enviando email para contacto {ContactId}", message.Id);
+            
+            var smtpServer = _configuration["EmailSettings:SmtpServer"];
+            var smtpPort = int.Parse(_configuration["EmailSettings:SmtpPort"] ?? "587");
+            var smtpUsername = _configuration["EmailSettings:SmtpUsername"];
+            var smtpPassword = _configuration["EmailSettings:SmtpPassword"];
+            var studioEmail = _configuration["EmailSettings:StudioEmail"];
+            var studioName = _configuration["EmailSettings:StudioName"];
+            var pickupDirectory = _configuration["EmailSettings:PickupDirectory"];
+
+            if (string.IsNullOrEmpty(smtpServer))
             {
-                var smtpServer = _configuration["EmailSettings:SmtpServer"];
-                var smtpPort = int.Parse(_configuration["EmailSettings:SmtpPort"] ?? "587");
-                var smtpUsername = _configuration["EmailSettings:SmtpUsername"];
-                var smtpPassword = _configuration["EmailSettings:SmtpPassword"];
-                var studioEmail = _configuration["EmailSettings:StudioEmail"];
-                var studioName = _configuration["EmailSettings:StudioName"];
-                var pickupDirectory = _configuration["EmailSettings:PickupDirectory"];
-
-                if (string.IsNullOrEmpty(smtpServer))
-                {
-                    _logger.LogError("SMTP Server no está configurado");
-                    return false;
-                }
-
-                using var smtpClient = new SmtpClient(smtpServer, smtpPort);
-
-                if (!string.IsNullOrWhiteSpace(pickupDirectory))
-                {
-                    Directory.CreateDirectory(pickupDirectory);
-                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtpClient.PickupDirectoryLocation = pickupDirectory;
-                }
-                
-                // Configurar credenciales solo si están presentes
-                if (!string.IsNullOrEmpty(smtpUsername) && !string.IsNullOrEmpty(smtpPassword))
-                {
-                    smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-                    smtpClient.EnableSsl = true;
-                }
-
-                var mailMessage = new MailMessage
-                {
-                    From = new MailAddress(studioEmail ?? "noreply@tattoo-studio.local", studioName),
-                    Subject = $"Nuevo mensaje de contacto - {message.Name}",
-                    Body = GenerateEmailTemplate(message),
-                    IsBodyHtml = true
-                };
-
-                mailMessage.To.Add(new MailAddress(studioEmail ?? "studio@tattoo-studio.local"));
-
-                await smtpClient.SendMailAsync(mailMessage);
-                
-                _logger.LogInformation("Email enviado exitosamente para el contacto {ContactId}", message.Id);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Excepción al enviar email para el contacto {ContactId}", message.Id);
+                _logger.LogError("SendContactNotificationAsync: SMTP Server no está configurado");
                 return false;
             }
+
+            using var smtpClient = new SmtpClient(smtpServer, smtpPort);
+
+            if (!string.IsNullOrWhiteSpace(pickupDirectory))
+            {
+                Directory.CreateDirectory(pickupDirectory);
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                smtpClient.PickupDirectoryLocation = pickupDirectory;
+            }
+            
+            // Configurar credenciales solo si están presentes
+            if (!string.IsNullOrEmpty(smtpUsername) && !string.IsNullOrEmpty(smtpPassword))
+            {
+                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                smtpClient.EnableSsl = true;
+            }
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(studioEmail ?? "noreply@tattoo-studio.local", studioName),
+                Subject = $"Nuevo mensaje de contacto - {message.Name}",
+                Body = GenerateEmailTemplate(message),
+                IsBodyHtml = true
+            };
+
+            mailMessage.To.Add(new MailAddress(studioEmail ?? "studio@tattoo-studio.local"));
+
+            await smtpClient.SendMailAsync(mailMessage);
+            
+            _logger.LogInformation("SendContactNotificationAsync: Email enviado exitosamente para contacto {ContactId}", message.Id);
+            return true;
         }
 
         private string GenerateEmailTemplate(ContactMessage message)

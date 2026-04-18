@@ -18,43 +18,37 @@ namespace backend.Services
 
         public async Task<bool> SendContactNotificationAsync(ContactMessage message)
         {
-            try
+            _logger.LogInformation("SendContactNotificationAsync: Enviando email para contacto {ContactId}", message.Id);
+            
+            var apiKey = _configuration["EmailSettings:SendGridApiKey"];
+            var studioEmail = _configuration["EmailSettings:StudioEmail"];
+            var studioName = _configuration["EmailSettings:StudioName"];
+
+            if (string.IsNullOrEmpty(apiKey))
             {
-                var apiKey = _configuration["EmailSettings:SendGridApiKey"];
-                var studioEmail = _configuration["EmailSettings:StudioEmail"];
-                var studioName = _configuration["EmailSettings:StudioName"];
-
-                if (string.IsNullOrEmpty(apiKey))
-                {
-                    _logger.LogError("SendGrid API Key no está configurada");
-                    return false;
-                }
-
-                var client = new SendGridClient(apiKey);
-                var from = new EmailAddress(studioEmail, studioName);
-                var to = new EmailAddress(studioEmail, studioName);
-                var subject = $"Nuevo mensaje de contacto - {message.Name}";
-                
-                var htmlContent = GenerateEmailTemplate(message);
-                
-                var msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlContent);
-                var response = await client.SendEmailAsync(msg);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    _logger.LogInformation("Email enviado exitosamente para el contacto {ContactId}", message.Id);
-                    return true;
-                }
-                else
-                {
-                    _logger.LogError("Error al enviar email. Status: {StatusCode}", response.StatusCode);
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Excepción al enviar email para el contacto {ContactId}", message.Id);
+                _logger.LogError("SendContactNotificationAsync: SendGrid API Key no está configurada");
                 return false;
+            }
+
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(studioEmail, studioName);
+            var to = new EmailAddress(studioEmail, studioName);
+            var subject = $"Nuevo mensaje de contacto - {message.Name}";
+            
+            var htmlContent = GenerateEmailTemplate(message);
+            
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, null, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("SendContactNotificationAsync: Email enviado exitosamente para contacto {ContactId}", message.Id);
+                return true;
+            }
+            else
+            {
+                _logger.LogError("SendContactNotificationAsync: Error al enviar email. Status: {StatusCode}", response.StatusCode);
+                throw new InvalidOperationException($"Failed to send email via SendGrid. Status: {response.StatusCode}");
             }
         }
 

@@ -1,4 +1,5 @@
 using backend.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -8,9 +9,9 @@ namespace backend.Data
     {
         public static void Initialize(ApplicationDbContext context, IConfiguration? configuration, ILogger<Program>? logger = null)
         {
-            logger?.LogInformation("Iniciando DbInitializer: creando BD si es necesaria");
-            context.Database.EnsureCreated();
-            logger?.LogInformation("Base de datos verificada/creada exitosamente");
+            logger?.LogInformation("Iniciando DbInitializer: aplicando migraciones pendientes");
+            context.Database.Migrate();
+            logger?.LogInformation("Migraciones aplicadas exitosamente");
 
             // Definir las imágenes de galería con URLs locales optimizadas
             var seedImages = new[]

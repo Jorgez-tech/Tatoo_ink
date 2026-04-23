@@ -32,6 +32,20 @@ namespace backend.Controllers
         }
 
         /// <summary>
+        /// Obtiene una imagen pública por su ID
+        /// </summary>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(GalleryImage), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            _logger.LogInformation("GetById: Consultando imagen pública ID {ImageId}", id);
+            var image = await _galleryService.GetImageByIdAsync(id);
+            return Ok(image);
+        }
+
+        /// <summary>
         /// Obtiene todas las imágenes (incluyendo ocultas) para administración
         /// </summary>
         [HttpGet("admin")]
@@ -67,7 +81,7 @@ namespace backend.Controllers
 
             _logger.LogInformation("Create: Admin creando nueva imagen en galería");
             var image = await _galleryService.CreateImageAsync(request);
-            return CreatedAtAction(nameof(Get), new { id = image.Id }, image);
+            return CreatedAtAction(nameof(GetById), new { id = image.Id }, image);
         }
 
         /// <summary>

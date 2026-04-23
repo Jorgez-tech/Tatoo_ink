@@ -24,6 +24,16 @@ export const galleryService = {
         return response.json();
     },
 
+    getById: async (id: number): Promise<GalleryImage> => {
+        const response = await fetch(`${getApiUrl("gallery")}/${id}`, {
+            headers: { ...authService.getAuthHeader() },
+        });
+        if (!response.ok) {
+            throw new Error(`Error fetching image ${id}: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+    },
+
     create: async (image: Partial<GalleryImage>): Promise<GalleryImage> => {
         const response = await fetch(`${getApiUrl("gallery")}/admin`, {
             method: "POST",

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,7 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { defaultBusinessSettings } from "@/config/business-info";
 import { businessSettingsService } from "@/services/business-settings";
-import { authService } from "@/services/auth";
 import type { BusinessSettings } from "@/types";
 
 export default function BusinessSettingsPage() {
@@ -19,11 +17,7 @@ export default function BusinessSettingsPage() {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    if (!authService.isAuthenticated()) {
-      navigate("/admin/login");
-      return;
-    }
-
+    document.title = "Configuración — Admin | Ink Studio";
     const loadSettings = async () => {
       try {
         const data = await businessSettingsService.getInternal();
@@ -34,9 +28,8 @@ export default function BusinessSettingsPage() {
         setIsLoading(false);
       }
     };
-
     loadSettings();
-  }, [navigate]);
+  }, []);
 
   const updateField = (field: keyof BusinessSettings, value: string) => {
     setSettings(prev => ({ ...prev, [field]: value }));
@@ -63,14 +56,12 @@ export default function BusinessSettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white p-6">
-      <div className="max-w-4xl mx-auto">
-        <header className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold">Configuración del Negocio</h1>
-          <Button variant="outline" onClick={() => navigate("/admin")} className="border-zinc-700 text-zinc-200">
-            Volver al panel
-          </Button>
-        </header>
+    <div>
+      <div className="max-w-4xl">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold tracking-tight">Configuración del Negocio</h1>
+          <p className="text-zinc-400 text-sm mt-1">Edita la información pública del estudio</p>
+        </div>
 
         <Card className="bg-zinc-900 border-zinc-800">
           <CardHeader>

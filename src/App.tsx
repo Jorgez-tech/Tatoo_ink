@@ -6,62 +6,27 @@ import GalleryForm from "./pages/admin/GalleryForm";
 import Messages from "./pages/admin/Messages";
 import MessageDetail from "./pages/admin/MessageDetail";
 import BusinessSettingsPage from "./pages/admin/BusinessSettings";
-import { ProtectedRoute } from "./components/shared/ProtectedRoute";
+import AdminLayout from "./components/layout/AdminLayout";
 
 export default function App() {
   return (
     <Router>
       <Routes>
+        {/* Sitio público */}
         <Route path="/" element={<Home />} />
+
+        {/* Login (sin layout) */}
         <Route path="/admin/login" element={<Login />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/gallery/new"
-          element={
-            <ProtectedRoute>
-              <GalleryForm />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/gallery/edit/:id"
-          element={
-            <ProtectedRoute>
-              <GalleryForm />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/messages"
-          element={
-            <ProtectedRoute>
-              <Messages />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/messages/:id"
-          element={
-            <ProtectedRoute>
-              <MessageDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/settings"
-          element={
-            <ProtectedRoute>
-              <BusinessSettingsPage />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Panel admin — todas las rutas hijas usan AdminLayout */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="gallery/new" element={<GalleryForm />} />
+          <Route path="gallery/edit/:id" element={<GalleryForm />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="messages/:id" element={<MessageDetail />} />
+          <Route path="settings" element={<BusinessSettingsPage />} />
+        </Route>
       </Routes>
     </Router>
   );

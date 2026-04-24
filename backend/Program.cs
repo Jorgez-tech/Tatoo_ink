@@ -106,7 +106,8 @@ app.UseCors(policy =>
     var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
     policy.WithOrigins(allowedOrigins)
         .AllowAnyHeader()
-        .AllowAnyMethod();
+        .AllowAnyMethod()
+        .AllowCredentials(); // Required for credentials: "include" (refresh token cookie)
 });
 
 if (app.Environment.IsDevelopment())

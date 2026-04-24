@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "@/config/api";
+import { API_BASE_URL, getApiUrl } from "@/config/api";
 import type { LoginResponse, User } from "@/types";
 
 const TOKEN_KEY = "ink_studio_token";
@@ -6,7 +6,7 @@ const USER_KEY = "ink_studio_user";
 
 export const authService = {
   login: async (email: string, password: string): Promise<LoginResponse> => {
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`${getApiUrl("auth")}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const authService = {
 
   logout: async () => {
     try {
-      await fetch(`${API_BASE_URL}/logout`, {
+      await fetch(`${getApiUrl("auth")}/logout`, {
         method: "POST",
         credentials: "include"
       });
@@ -58,7 +58,7 @@ export const authService = {
 
   refresh: async (): Promise<boolean> => {
     try {
-      const response = await fetch(`${API_BASE_URL}/refresh`, {
+      const response = await fetch(`${getApiUrl("auth")}/refresh`, {
         method: "POST",
         credentials: "include"
       });

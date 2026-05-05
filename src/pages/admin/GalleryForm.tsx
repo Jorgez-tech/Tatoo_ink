@@ -13,7 +13,7 @@ export default function GalleryForm() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<Partial<GalleryImage>>({
-    src: "", // Fake file input URL o input default (para props)
+    src: "", // URL externa: Cloudinary, CDN, S3, etc.
     alt: "",
     category: "",
     photographer: "",
@@ -62,7 +62,7 @@ export default function GalleryForm() {
       if (isEditing && id) {
         await galleryService.update(Number(id), formData);
       } else {
-        await galleryService.create({ ...formData, src: formData.src || "/placeholder.jpg" });
+        await galleryService.create(formData);
       }
       navigate("/admin");
     } catch (err) {
@@ -96,13 +96,13 @@ export default function GalleryForm() {
 
         <form onSubmit={handleSubmit} className="space-y-6 bg-zinc-900 p-6 rounded border border-zinc-800">
           <div className="space-y-2">
-            <Label htmlFor="src">URL de la Imagen (temporal)</Label>
+            <Label htmlFor="src">URL de la Imagen (Cloudinary, CDN, S3...)</Label>
             <Input
               id="src"
               name="src"
               value={formData.src || ""}
               onChange={handleChange}
-              placeholder="/images/tattoos/mi-tattoo.jpg"
+              placeholder="https://res.cloudinary.com/tu-cuenta/image/upload/tattoo.webp"
               className="bg-zinc-800 border-zinc-700 text-white"
               required
             />
@@ -186,3 +186,4 @@ export default function GalleryForm() {
     </div>
   );
 }
+

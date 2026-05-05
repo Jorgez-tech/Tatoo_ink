@@ -11,7 +11,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 using AspNetCoreRateLimit;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,23 +64,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// La autenticación real es manejada por AuthorizationMiddleware (JWT custom con HMACSHA256).
+// Este esquema es necesario para que [Authorize(Roles = "..")] de ASP.NET funcione
+// contra los Claims que el middleware custom ya inyecta en context.User.
 builder.Services.AddAuthentication("Custom")
-    .AddCookie("Custom", options =>
-    {
-        options.Events = new CookieAuthenticationEvents
-        {
-            OnRedirectToLogin = context =>
-            {
-                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                return Task.CompletedTask;
-            },
-            OnRedirectToAccessDenied = context =>
-            {
-                context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                return Task.CompletedTask;
-            }
-        };
-    });
+    .AddScheme<AuthenticationSchemeOptions, NoOpAuthenticationHandler>("Custom", _ => { });
 
 builder.Services.AddHealthChecks()
     .AddDbContextCheck<ApplicationDbContext>("database");

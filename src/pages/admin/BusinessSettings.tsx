@@ -9,7 +9,6 @@ import { businessSettingsService } from "@/services/business-settings";
 import type { BusinessSettings } from "@/types";
 
 export default function BusinessSettingsPage() {
-  const navigate = useNavigate();
   const [settings, setSettings] = useState<BusinessSettings>(defaultBusinessSettings);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

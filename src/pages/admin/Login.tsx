@@ -47,7 +47,7 @@ export default function Login() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@tattoo-studio.local"
+                placeholder="admin@inkstudio.local"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-zinc-800 border-zinc-700 text-white"
